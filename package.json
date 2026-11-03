@@ -1,0 +1,25 @@
+{
+  "name": "asanja-africa-next",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "snapshot:prepare": "node tools/prepare-snapshot.mjs",
+    "seo:audit": "node tools/seo-audit.mjs",
+    "assets:check": "node tools/check-assets.mjs",
+    "links:check": "node tools/check-links.mjs"
+  },
+  "dependencies": {
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "typescript": "latest"
+  }
+}

@@ -1,0 +1,256 @@
+/* Small compatibility fixes layered on top of the original WordPress styles. */
+img,
+svg,
+video,
+iframe {
+  max-width: 100%;
+}
+
+body.page-id-414 .elementor-widget-text-editor a {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Keep the itinerary titles visually identical after their SEO heading upgrade. */
+body.single-asanja_safaris .elementor-2090 h1.elementor-heading-title {
+  color: #515159;
+  font-family: Commissioner, sans-serif;
+  font-size: 29px;
+  font-weight: 300;
+  line-height: 29px;
+  text-transform: uppercase;
+}
+
+body.single-asanja_safaris .elementor-2090 h2.elementor-heading-title {
+  color: #515159;
+  font-family: Commissioner, sans-serif;
+  font-size: 19px;
+  font-weight: 300;
+  line-height: 24px;
+  text-transform: uppercase;
+}
+
+@media (max-width: 767px) {
+  input,
+  select,
+  textarea,
+  button {
+    max-width: 100%;
+  }
+
+  body.single-asanja_safaris .elementor-2090 .elementor-element.elementor-element-a71862c {
+    --flex-direction: column;
+    --gap: 0px;
+    --padding-top: 24px;
+    --padding-right: 20px;
+    --padding-bottom: 24px;
+    --padding-left: 20px;
+    width: 100%;
+  }
+
+  body.single-asanja_safaris .elementor-2090 .elementor-element.elementor-element-5d98a39,
+  body.single-asanja_safaris .elementor-2090 .elementor-element.elementor-element-1915e49,
+  body.single-asanja_safaris .elementor-2090 .elementor-element.elementor-element-9a0809e {
+    --width: 100%;
+    width: 100%;
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+
+  body.single-asanja_safaris .elementor-2090 .elementor-element.elementor-element-5d98a39 {
+    --padding-top: 34px;
+    --padding-right: 28px;
+    --padding-bottom: 34px;
+    --padding-left: 28px;
+  }
+
+  body.single-asanja_safaris .elementor-2090 .elementor-heading-title {
+    overflow-wrap: anywhere;
+  }
+
+}
+
+html.asanja-menu-open,
+html.asanja-menu-open body {
+  overflow: hidden;
+}
+
+.asanja-menu-overlay[hidden],
+.asanja-menu-submenu[hidden] {
+  display: none !important;
+}
+
+.asanja-menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000000;
+  display: grid;
+  grid-template-columns: 35% 30% 35%;
+  background: #fff;
+  color: #777;
+  font-family: Raleway, sans-serif;
+}
+
+.asanja-menu-art {
+  background: #e8e8e8 center / cover no-repeat;
+  transition: background-image 180ms ease-in-out;
+}
+
+.asanja-menu-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 42px;
+  padding: 48px;
+  background: #f3efe8;
+}
+
+.asanja-menu-brand img {
+  display: block;
+  width: min(220px, 72%);
+  height: auto;
+  margin: auto;
+}
+
+.asanja-menu-book {
+  border: 1px solid #777;
+  padding: 13px 30px;
+  color: #666;
+  font-size: 16px;
+  line-height: 1;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.asanja-menu-nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 22px;
+  padding: 90px 48px 48px 70px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.asanja-menu-nav > a,
+.asanja-menu-camps {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  border: 0;
+  padding: 0;
+  background: transparent !important;
+  color: #777 !important;
+  font: inherit;
+  font-size: clamp(22px, 2vw, 31px);
+  font-weight: 400;
+  line-height: 1.18;
+  text-align: left;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.asanja-menu-nav a:hover,
+.asanja-menu-nav a:focus-visible,
+.asanja-menu-camps:hover,
+.asanja-menu-camps:focus-visible {
+  color: #56664f;
+}
+
+.asanja-menu-chevron {
+  color: #111;
+  font-size: 28px;
+}
+
+.asanja-menu-submenu {
+  display: grid;
+  gap: 9px;
+  padding: 15px 0 0 18px;
+}
+
+.asanja-menu-submenu a {
+  color: #777;
+  font-size: 15px;
+  line-height: 1.35;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.asanja-menu-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 64px;
+  height: 64px;
+  border: 0 !important;
+  background: #ba8a5c !important;
+  color: #fff !important;
+  font-family: Arial, sans-serif;
+  font-size: 43px;
+  font-weight: 200;
+  line-height: 1;
+  cursor: pointer;
+}
+
+@media (max-width: 767px) {
+  .asanja-menu-overlay {
+    display: block;
+    min-height: 100dvh;
+    background: #f3efe8;
+  }
+
+  .asanja-menu-art {
+    position: absolute;
+    inset: 0;
+    opacity: 0.14;
+  }
+
+  .asanja-menu-brand {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    min-height: 150px;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 78px 18px 24px;
+    background: transparent;
+  }
+
+  .asanja-menu-brand a:first-child {
+    width: 88px;
+  }
+
+  .asanja-menu-brand img {
+    width: 88px;
+  }
+
+  .asanja-menu-book {
+    padding: 11px 15px;
+    font-size: 12px;
+  }
+
+  .asanja-menu-nav {
+    position: relative;
+    z-index: 1;
+    max-height: calc(100dvh - 150px);
+    justify-content: flex-start;
+    gap: 16px;
+    padding: 26px 30px 42px;
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .asanja-menu-nav > a,
+  .asanja-menu-camps {
+    font-size: clamp(21px, 7vw, 28px);
+  }
+
+  .asanja-menu-close {
+    z-index: 2;
+    width: 58px;
+    height: 58px;
+  }
+}

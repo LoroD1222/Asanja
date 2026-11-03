@@ -1,0 +1,14 @@
+node_modules/
+.next/
+.local-mariadb/
+wordpress-source/
+wordpress-runtime/
+site-snapshot/
+public/legacy-before-seo/
+public/legacy-broken/
+public/legacy-broken2/
+public/legacy-pre-clean/
+public/legacy-pre-final/
+.env*
+!.env.example
+

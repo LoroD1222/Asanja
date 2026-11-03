@@ -1,0 +1,213 @@
+.elementor-kit-11{--e-global-color-text:#7A7A7A;--e-global-color-primary:#F3F0EC;--e-global-color-secondary:#55664C;--e-global-color-accent:#B88D60;--e-global-color-d5351c3:#515159;--e-global-color-9f61675:#DAD8D6;--e-global-color-35f7c406:#FFF;--e-global-color-1cc03a9:#55664C;--e-global-typography-primary-font-family:"Unna";--e-global-typography-primary-font-weight:600;--e-global-typography-secondary-font-family:"Roboto Slab";--e-global-typography-secondary-font-weight:400;--e-global-typography-text-font-family:"Roboto";--e-global-typography-text-font-weight:400;--e-global-typography-accent-font-family:"Roboto";--e-global-typography-accent-font-weight:500;background-color:var( --e-global-color-primary );color:var( --e-global-color-text );font-family:"Raleway", Sans-serif;font-size:15px;}.elementor-kit-11 button,.elementor-kit-11 input[type="button"],.elementor-kit-11 input[type="submit"],.elementor-kit-11 .elementor-button{background-color:var( --e-global-color-secondary );font-family:"Castoro Titling", Sans-serif;font-size:15px;text-transform:uppercase;letter-spacing:0.3px;color:var( --e-global-color-primary );border-style:solid;border-width:1px 1px 1px 1px;border-color:var( --e-global-color-secondary );border-radius:0px 0px 0px 0px;padding:14px 20px 10px 20px;}.elementor-kit-11 button:hover,.elementor-kit-11 button:focus,.elementor-kit-11 input[type="button"]:hover,.elementor-kit-11 input[type="button"]:focus,.elementor-kit-11 input[type="submit"]:hover,.elementor-kit-11 input[type="submit"]:focus,.elementor-kit-11 .elementor-button:hover,.elementor-kit-11 .elementor-button:focus{background-color:var( --e-global-color-secondary );color:var( --e-global-color-primary );border-style:solid;border-width:1px 1px 1px 1px;border-color:var( --e-global-color-secondary );border-radius:0px 0px 0px 0px;}.elementor-kit-11 e-page-transition{background-color:#FFBC7D;}.elementor-kit-11 a{color:var( --e-global-color-text );}.elementor-kit-11 a:hover{color:var( --e-global-color-accent );}.elementor-kit-11 h1{color:var( --e-global-color-secondary );font-family:"Castoro Titling", Sans-serif;font-size:72px;font-weight:600;text-transform:uppercase;}.elementor-kit-11 h2{color:var( --e-global-color-d5351c3 );font-family:"Castoro Titling", Sans-serif;font-size:46px;font-weight:normal;text-transform:uppercase;font-style:normal;}.elementor-kit-11 h3{color:var( --e-global-color-d5351c3 );font-family:"Commissioner", Sans-serif;font-size:37px;font-weight:300;text-transform:uppercase;}.elementor-kit-11 h4{color:var( --e-global-color-d5351c3 );font-family:"Commissioner", Sans-serif;font-size:29px;font-weight:300;text-transform:uppercase;}.elementor-kit-11 h5{color:var( --e-global-color-d5351c3 );font-family:"Commissioner", Sans-serif;font-size:24px;font-weight:300;text-transform:uppercase;}.elementor-kit-11 h6{color:var( --e-global-color-d5351c3 );font-family:"Commissioner", Sans-serif;font-size:19px;font-weight:300;text-transform:uppercase;line-height:24px;letter-spacing:2.2px;}.elementor-section.elementor-section-boxed > .elementor-container{max-width:1400px;}.e-con{--container-max-width:1400px;--container-default-padding-top:0px;--container-default-padding-right:0px;--container-default-padding-bottom:0px;--container-default-padding-left:0px;}.elementor-widget:not(:last-child){margin-block-end:15px;}.elementor-element{--widgets-spacing:15px 15px;--widgets-spacing-row:15px;--widgets-spacing-column:15px;}{}h1.entry-title{display:var(--page-title-display);}@media(max-width:1024px){.elementor-section.elementor-section-boxed > .elementor-container{max-width:1024px;}.e-con{--container-max-width:1024px;--container-default-padding-top:0px;--container-default-padding-right:30px;--container-default-padding-bottom:0px;--container-default-padding-left:30px;}}@media(max-width:767px){.elementor-kit-11 h1{font-size:3.05rem;}.elementor-kit-11 h2{font-size:1.95rem;}.elementor-kit-11 h3{font-size:1.25rem;}.elementor-section.elementor-section-boxed > .elementor-container{max-width:767px;}.e-con{--container-max-width:767px;--container-default-padding-top:0px;--container-default-padding-right:15px;--container-default-padding-bottom:0px;--container-default-padding-left:15px;}}/* Start custom CSS *//* Hide caption on carousels lightbox ----------------*/
+.elementor-slideshow__title {
+    display: none;
+}
+
+
+/* ----------------------------------
+:: RESPONSIVE UTILITES
+---------------------------------- */
+/* HIDE - On Tablet and lower ---------------- */
+@media (max-width: 1024px) {
+    .hide-tablet { display: none; }
+}
+
+/* HIDE - On Mobile ---------------- */
+@media (max-width: 480px) {
+    .hide-mobile { display: none; }
+}
+
+@media (min-width: 1024px) {
+    .hide-belle { border: 5px solid pink; }
+}
+
+/* Hex Code P ----------------*/
+.colour-swatch-hex {
+    position: relative;
+    background-color: black;
+    color: white;
+    padding: 0px 5px;
+    width: fit-content;
+    text-transform: uppercase;
+    pointer-events: none;
+}
+
+
+
+/* ----------------------------------
+:: DARK THEME
+---------------------------------- */
+
+/* Headings ---------------- */
+.theme-dark h1 { color: white; }
+.theme-dark h2 { color: white; }
+.theme-dark h3 { color: white; }
+.theme-dark h4 { color: white; }
+.theme-dark h5 { color: white; }
+
+
+/* Paragraphs ---------------- */
+.theme-dark .elementor-widget-text-editor p {
+  color: #f3f0ec;
+}
+
+
+/* Links ---------------- */
+.theme-dark .elementor-widget-text-editor a {
+  color: #f3f0ec;
+  border-bottom: none;
+}
+
+.theme-dark .elementor-widget-text-editor a:hover {
+  color: #b88d60;
+}
+
+.theme-dark select option {
+    color: black;
+    background-color: white;
+}
+
+ Buttons ---------------- 
+.theme-dark .elementor-button {
+  color: #f3f0ec;
+  border: 1px ;
+  background-color: transparent;
+}
+
+.theme-dark .elementor-button:hover {
+  color: #55664c;
+  border: 1px solid #f3f0ec;
+  background-color: #f3f0ec;
+}
+
+
+/* ----------------------------------
+:: GHOST BUTTON V2
+---------------------------------- */
+.button-ghost-v2 .elementor-button::after {
+right: -55%;
+}
+
+/* ----------------------------------
+:: GHOST BUTTON
+---------------------------------- */
+
+.button-ghost .elementor-button {
+    color: #55664c;
+    border: 1px solid #55664c;
+    background-color: transparent;
+  }
+  
+  .button-ghost .elementor-button:hover {
+    color: #55664c;
+    border: 1px solid #55664c;
+    background-color: transparent;
+  }
+  
+  .button-ghost-large .elementor-button {
+    color: #55664c;
+    border: 1px solid #55664c;
+    background-color: transparent;
+  }
+  
+  .button-ghost-large .elementor-button:hover {
+    color: #55664c;
+    border: 1px solid #55664c;
+    background-color: transparent;
+  }
+  
+  .button-large .elementor-button {
+    color: #f3f0ec;
+    border: 1px solid #55664c;
+    background-color: #55664c;
+  }
+  
+  .button-large .elementor-button:hover {
+    color: #f3f0ec;
+    border: 1px solid #55664c;
+    background-color: #55664c;
+  }
+/* ----------------------------------
+:: CONTACT FORM
+---------------------------------- */
+
+/* Remove Focus Border from inputs ---------------- */
+.elementor-field-group .elementor-field-textual:focus {
+    box-shadow: none !important;
+    
+}
+
+
+
+/* Remove any filters applied to the ::after pseudo-element of .elementor-button inside .button-ghost */
+.button-ghost .elementor-button::after {
+    filter: unset;
+}
+
+/* Apply a transition to all properties on .elementor-button */
+.elementor-button {
+    transition: all 0.5s;
+}
+
+/* Set the content of the ::after pseudo-element of .elementor-button */
+.elementor-button::after {
+    content: url('/legacy/wp-content/uploads/2024/04/Arrow-2.svg');
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 7%;
+    opacity: 0;
+    /* Apply a filter to invert the colors of the SVG image */
+    filter: brightness(0) invert(1);
+}
+
+/* Apply a transition to all properties on .elementor-button when hovering */
+.elementor-button:hover {
+    transition: all 0.5s;
+    /* Adjust padding when hovering */
+    padding: 14px 4rem .64rem 20px;
+}
+
+/* Change the opacity of the ::after pseudo-element of .elementor-button to make the arrow visible on hover */
+.elementor-button:hover::after {
+    opacity: 1;
+    transition: all 0.5s;
+}
+
+/* ----------------------------------
+:: SELECT TEXT COLOUR CHANGE
+---------------------------------- */
+
+/* For Firefox Browsers*/
+::-moz-selection { 
+ color: #f3f0ec;
+ background: #b88d60;
+}
+
+/* For Other Browsers*/
+::selection {
+ color: #f3f0ec;
+ background: #b88d60;
+}
+
+/* ----------------------------------
+:: GENERAL
+---------------------------------- */
+
+.ignore-hover-color .swiper-slide .elementor-widget-text-editor p {
+    color: var(--e-global-color-text) !important;
+}
+
+.ghost-hover a:hover {
+    color: #b88d60 !important;
+}/* End custom CSS */
+/* Start Custom Fonts CSS */@font-face {
+	font-family: 'Castoro Titling';
+	font-style: normal;
+	font-weight: normal;
+	font-display: auto;
+	src: url('/legacy/wp-content/uploads/2024/04/castorotitling-regular-webfont.woff2') format('woff2'),
+		url('/legacy/wp-content/uploads/2024/04/castorotitling-regular-webfont.woff') format('woff'),
+		url('/legacy/wp-content/uploads/2024/04/CastoroTitling-Regular.ttf') format('truetype');
+}
+/* End Custom Fonts CSS */

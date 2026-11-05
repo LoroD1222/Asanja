@@ -1,8 +1,14 @@
-import { mkdir, readdir, readFile, rename, stat, unlink, writeFile } from 'node:fs/promises';
+import { cp, mkdir, readdir, readFile, rename, rm, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
+const sourceRoot = path.resolve('site-snapshot');
 const root = path.resolve('public/legacy');
 const productionOrigin = 'https://asanjaafrica.com';
+
+// Refresh the generated pages from the untouched WordPress export while
+// preserving the larger media library that was extracted separately.
+await mkdir(root, { recursive: true });
+await cp(sourceRoot, root, { recursive: true, force: true });
 const routeById = new Map([
   ['9', '/'],
   ['31', '/about/'],
@@ -163,12 +169,25 @@ function optimizeImages(html) {
 }
 
 function normalizeHeadings(html) {
+  const addVisualClass = (attributes, className) => {
+    const classAttribute = attributes.match(/\bclass=(["'])(.*?)\1/i);
+    if (classAttribute) {
+      return attributes.replace(
+        classAttribute[0],
+        `class=${classAttribute[1]}${classAttribute[2]} ${className}${classAttribute[1]}`,
+      );
+    }
+    return `${attributes} class="${className}"`;
+  };
+
   const h1Matches = [...html.matchAll(/<h1\b[^>]*>[\s\S]*?<\/h1>/gi)];
   if (h1Matches.length > 1) {
     let seen = 0;
     html = html.replace(/<h1(\b[^>]*)>([\s\S]*?)<\/h1>/gi, (_match, attributes, contents) => {
       seen += 1;
-      return seen === 1 ? `<h1${attributes}>${contents}</h1>` : `<div${attributes}>${contents}</div>`;
+      return seen === 1
+        ? `<h1${attributes}>${contents}</h1>`
+        : `<h2${addVisualClass(attributes, 'asanja-visual-h1')}>${contents}</h2>`;
     });
   }
 
@@ -176,12 +195,20 @@ function normalizeHeadings(html) {
     const dynamicTitle = /<h4(\b[^>]*)>([\s\S]*?)<\/h4>/i;
     const firstSectionTitle = /<h2(\b[^>]*)>([\s\S]*?)<\/h2>/i;
     html = dynamicTitle.test(html)
-      ? html.replace(dynamicTitle, '<h1$1>$2</h1>')
-      : html.replace(firstSectionTitle, '<h1$1>$2</h1>');
+      ? html.replace(dynamicTitle, (_match, attributes, contents) => (
+          `<h1${addVisualClass(attributes, 'asanja-visual-h4')}>${contents}</h1>`
+        ))
+      : html.replace(firstSectionTitle, (_match, attributes, contents) => (
+          `<h1${addVisualClass(attributes, 'asanja-visual-h2')}>${contents}</h1>`
+        ));
   }
 
-  html = html.replace(/<h6(\b[^>]*)>\s*highlights\s*<\/h6>/gi, '<h2$1>Highlights</h2>');
-  html = html.replace(/<h6(\b[^>]*)>([\s\S]*?)<\/h6>/gi, '<p$1>$2</p>');
+  // Upgrade the real section title without changing its original appearance.
+  // Decorative H6 labels stay H6 so the WordPress typography remains exact.
+  html = html.replace(
+    /<h6(\b[^>]*)>\s*highlights\s*<\/h6>/gi,
+    (_match, attributes) => `<h2${addVisualClass(attributes, 'asanja-visual-h6')}>Highlights</h2>`,
+  );
   return html;
 }
 
@@ -218,6 +245,13 @@ function optimizeSchema(html) {
   );
 }
 
+function secureExternalLinks(html) {
+  return html.replace(/<a\b[^>]*\btarget=["']_blank["'][^>]*>/gi, (tag) => {
+    if (/\brel=["']/i.test(tag)) return tag;
+    return tag.replace(/>$/, ' rel="noopener noreferrer">');
+  });
+}
+
 function optimizeSeo(html, route) {
   const seo = seoByRoute[route] ?? {
     keywords: 'Tanzania luxury safaris, Serengeti safari, private African safari, Asanja Africa',
@@ -244,11 +278,27 @@ function optimizeSeo(html, route) {
     .replace(/<!-- MailerLite Universal -->[\s\S]*?<!-- End MailerLite Universal -->/gi, '')
     .replace(/<!-- Hotjar Tracking Code[\s\S]*?<\/script>/gi, '')
     .replace(/<script\s+type=["']speculationrules["'][^>]*>[\s\S]*?<\/script>/gi, '')
-    .replace(/<p>Thank you for reading this post, don.?t forget to subscribe!<\/p>/gi, '')
+    .replace(/<script[^>]+id=["']elementor-frontend-js["'][^>]*><\/script>\s*/gi, '')
+    .replace(/<script>\s*\/\/ Select the elements[\s\S]*?window\.addEventListener\(['"]scroll['"],\s*toggleMenuVisibility\);\s*<\/script>/gi, '')
+    .replace(/\s*hoveDefault\(\);/g, '')
     .replaceAll('https://asanjaafrica.exsb.site/wp-content/uploads/', '/legacy/wp-content/uploads/')
     .replaceAll('http://new.asanjaafrica.com/wp-content/uploads/', '/legacy/wp-content/uploads/')
     .replaceAll('https://asanjaafrica.exsb.site/help-me-plan/', '/plan-my-stay/')
     .replaceAll('© [YEAR]', '© 2026');
+
+  // The live WordPress theme injects this line into the first introductory
+  // text widget on nearly every content page. It is not present in the static
+  // export, so restore it in the same widget instead of silently dropping
+  // visible production content.
+  if (route !== '/blogs/' && !html.includes("Thank you for reading this post, don't forget to subscribe!")) {
+    const subscriptionLine = route === '/'
+      ? "Thank you for reading this post, don't forget to subscribe!"
+      : "<p>Thank you for reading this post, don't forget to subscribe!</p>";
+    html = html.replace(
+      /(<div\s+class=["'][^"']*elementor-widget-text-editor[^"']*["'][^>]*>[\s\S]*?<div\s+class=["']elementor-widget-container["'][^>]*>\s*<p>[\s\S]*?<\/p>)/i,
+      `$1${subscriptionLine}`,
+    );
+  }
 
   if (!/<meta\s+name=["']description["']/i.test(html)) {
     html = html.replace('</title>', `</title>\n\t<meta name="description" content="${escapeAttribute(description)}" />`);
@@ -273,8 +323,14 @@ function optimizeSeo(html, route) {
   }
   html = html.replace('</head>', `\t${seoTags.join('\n\t')}\n</head>`);
   html = normalizeHeadings(html);
+  if (route.startsWith('/asanja_safaris/')) {
+    html = html
+      .replace('<div data-elementor-type="single-post"', '<main data-elementor-type="single-post"')
+      .replace(/<\/div>(\s*<footer data-elementor-type="footer")/, '</main>$1');
+  }
   html = optimizeImages(html);
   html = optimizeSchema(html);
+  html = secureExternalLinks(html);
   html = html
     .replaceAll('http:\\/\\/127.0.0.1:8080\\/wp-content\\/', '\\/legacy\\/wp-content\\/')
     .replaceAll('http:\\/\\/127.0.0.1:8080\\/wp-includes\\/', '\\/legacy\\/wp-includes\\/')
@@ -283,6 +339,16 @@ function optimizeSeo(html, route) {
     .replaceAll('http:\\/\\/127.0.0.1:8080\\/', '\\/')
     .replaceAll('https:\\/\\/asanjaafrica.exsb.site\\/wp-content\\/uploads\\/', '\\/legacy\\/wp-content\\/uploads\\/')
     .replaceAll('http:\\/\\/asanjaafrica.exsb.site\\/wp-content\\/uploads\\/', '\\/legacy\\/wp-content\\/uploads\\/');
+  if (!html.includes('asanja-whatsapp')) {
+    const whatsapp = `
+<a class="asanja-whatsapp" href="https://api.whatsapp.com/send?phone=255685700000" target="_blank" rel="noopener noreferrer" aria-label="Chat with Asanja Africa on WhatsApp">
+  <span class="asanja-whatsapp__label">Need Help? <strong>Chat with us</strong></span>
+  <span class="asanja-whatsapp__icon" aria-hidden="true">
+    <svg viewBox="0 0 32 32"><path fill="currentColor" d="M16 3a12.7 12.7 0 0 0-10.9 19.2L3.4 29l7-1.8A12.8 12.8 0 1 0 16 3Zm0 22.8c-2 0-3.9-.6-5.5-1.6l-.4-.2-4.1 1.1 1.1-4-.3-.4A10.2 10.2 0 1 1 16 25.8Zm5.6-7.6c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1a8.4 8.4 0 0 1-2.5-1.6 9.3 9.3 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.6l.5-.6.3-.6c.1-.2 0-.4 0-.6l-1-2.3c-.3-.6-.6-.5-.8-.5h-.7c-.2 0-.6.1-1 .5-.3.4-1.3 1.3-1.3 3.1 0 1.9 1.4 3.7 1.6 3.9.2.2 2.7 4.1 6.5 5.7.9.4 1.6.6 2.2.7.9.3 1.7.2 2.4.1.7-.1 1.8-.7 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4Z"/></svg>
+  </span>
+</a>`;
+    html = html.replace('</body>', `${whatsapp}\n</body>`);
+  }
   return html;
 }
 
@@ -296,6 +362,7 @@ function rewriteText(content, extension, route = null) {
     .replaceAll('http://asanjaafrica.exsb.site/wp-content/uploads/', '/legacy/wp-content/uploads/')
     .replaceAll('http://new.asanjaafrica.com/wp-content/uploads/', '/legacy/wp-content/uploads/')
     .replaceAll('https://asanjaafrica.exsb.site/make-a-booking/', '/make-a-booking/')
+    .replaceAll('href="/#booking-request"', 'href="/make-a-booking/#booking-request"')
     .replaceAll('reservations@new.asanjaafrica.com', 'reservations@asanjaafrica.com')
     .replaceAll('© [YEAR]', `© ${new Date().getFullYear()}`)
     .replace(/(?:\.\.\/)+wp-content\//g, '/legacy/wp-content/')
@@ -310,7 +377,8 @@ function rewriteText(content, extension, route = null) {
     .replace(/(?:\.\.\/)*index\.html/g, '/')
     .replace(/(?:\.\.\/)*terms\.html/g, '/terms/')
     .replaceAll('http://127.0.0.1:8080/', '/')
-    .replaceAll('http://127.0.0.1:8080', '/');
+    .replaceAll('http://127.0.0.1:8080', '/')
+    .replaceAll('href="/#booking-request"', 'href="/make-a-booking/#booking-request"');
 
   if (extension === '.html') {
     output = output
@@ -320,7 +388,10 @@ function rewriteText(content, extension, route = null) {
       output = output.replace(/<\/body>/i, '<script src="/migration.js" defer></script></body>');
     }
     if (!/href=["']\/migration\.css["']/i.test(output)) {
-      output = output.replace(/<\/head>/i, '\t<link rel="stylesheet" href="/migration.css" />\n</head>');
+      output = output.replace(
+        /<\/head>/i,
+        '\t<link rel="stylesheet" href="/migration.css" />\n\t<noscript><style>.elementor-invisible{visibility:visible!important}</style></noscript>\n</head>',
+      );
     }
     if (route) output = optimizeSeo(output, route);
   }
@@ -333,14 +404,22 @@ for (const file of originalFiles) {
   if (!path.basename(file).includes('?')) continue;
   const cleanPath = path.join(path.dirname(file), path.basename(file).split('?')[0]);
   const cleanExists = await stat(cleanPath).then(() => true).catch(() => false);
-  if (!cleanExists) await rename(file, cleanPath);
-  else await unlink(file);
+  if (cleanExists && path.extname(file).toLowerCase() === '.html') {
+    // Query-form HTML exports are legacy aliases of the clean route, not the
+    // canonical page itself. Keep the clean page and discard the alias file.
+    await rm(file, { force: true });
+    continue;
+  }
+  if (cleanExists) await rm(cleanPath, { force: true });
+  await rename(file, cleanPath);
 }
 
 const termsSource = path.join(root, 'terms.html');
 if (await stat(termsSource).then(() => true).catch(() => false)) {
   await mkdir(path.join(root, 'terms'), { recursive: true });
-  await rename(termsSource, path.join(root, 'terms', 'index.html'));
+  const termsDestination = path.join(root, 'terms', 'index.html');
+  await rm(termsDestination, { force: true });
+  await rename(termsSource, termsDestination);
 }
 
 for (const file of await walk(root)) {

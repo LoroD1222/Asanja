@@ -28,6 +28,43 @@ const legacyPostRoutes: Record<string, string> = {
   '37383': '/terms/',
 };
 
+const legacyPathRoutes = new Map<string, string>();
+
+function addLegacyPaths(target: string, paths: string[]) {
+  for (const source of paths) legacyPathRoutes.set(source.replace(/^\/+|\/+$/g, ''), target);
+}
+
+addLegacyPaths('/safaris/', [
+  'tanzania-safaris',
+  'tanzania-safaris/tanzania-southern-circuit-safaris',
+  'tanzania-safaris/honeymoon-safari-tanzania',
+  'tanzania-safaris/asanja-7-nights-8-days-serengeti-safari',
+  'tanzania-safaris/asanja-8-nights-9-days-serengeti-safari',
+  'tanzania-safaris/asanja-6-nights-7-days-serengeti-safari',
+  'tanzania-safaris/asanja-4-nights-5-days-serengeti-safari',
+  'tanzania-safaris/serengeti-national-park-safaris',
+  'tanzania-safaris/asanja-7-nights-8-days-tanzania-northern-circuit-safari',
+  'tanzania-safaris/3-nights-4-days-serengeti-safari-moru',
+  'tanzania-safaris/asanja-3-nights-4-days-serengeti-safari-grumeti',
+  'tanzania-safaris/asanja-5-nights-6-days-serengeti-safari',
+  'tanzania-safaris/asanja-6-nights-7-days-ruaha-national-park-safari',
+  'tanzania-safaris/asanja-5-nights-6-days-ruaha-national-park-safari',
+  'tanzania-safaris/asanja-6-nights-7-days-tanzania-northern-circuit-safari',
+  'tanzania-safaris/asanja-5-nights-6-days-tanzania-northern-circuit-safari',
+  'tanzania-safaris/asanja-4-nights-5-days-tanzania-northern-circuit-safari',
+  'tanzania-safaris/asanja-9-nights-10-days-tanzania-northern-circuit-safari',
+  'tanzania-safaris/tanzania-northern-circuit-safaris',
+]);
+
+addLegacyPaths('/', ['my-account', 'checkout', 'video-gallery']);
+addLegacyPaths('/contact/', ['contact-us']);
+addLegacyPaths('/plan-my-stay/', ['flights']);
+addLegacyPaths('/asanja-nyasirori/', ['asanja-camps/asanja-nyasirori-camp']);
+addLegacyPaths('/asanja-moru/', ['asanja-camps/asanja-moru-camp']);
+addLegacyPaths('/asanja-ruaha/', ['asanja-camps/asanja-ruaha-lodge']);
+addLegacyPaths('/asanja-sri-bustani/', ['asanja-camps/asanja-grumeti-camp']);
+addLegacyPaths('/camps-and-lodges/', ['asanja-camps']);
+
 function safeRoutePath(parts: string[]) {
   let clean: string[];
   try {
@@ -59,6 +96,14 @@ export async function GET(request: Request, context: RouteContext) {
     }
   }
 
+  const legacyTarget = legacyPathRoutes.get(parts.join('/'));
+  if (legacyTarget) {
+    return new Response(null, {
+      status: 301,
+      headers: { Location: legacyTarget },
+    });
+  }
+
   const filePath = path.join(process.cwd(), 'public', 'legacy', ...parts, 'index.html');
 
   try {
@@ -66,7 +111,7 @@ export async function GET(request: Request, context: RouteContext) {
     return new Response(html, {
       headers: {
         'Content-Type': 'text/html; charset=utf-8',
-        'Cache-Control': 'public, max-age=0, must-revalidate',
+        'Cache-Control': 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400',
         'X-Migrated-From': 'WordPress',
       },
     });

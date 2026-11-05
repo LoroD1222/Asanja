@@ -9,7 +9,8 @@
     "snapshot:prepare": "node tools/prepare-snapshot.mjs",
     "seo:audit": "node tools/seo-audit.mjs",
     "assets:check": "node tools/check-assets.mjs",
-    "links:check": "node tools/check-links.mjs"
+    "links:check": "node tools/check-links.mjs",
+    "redirects:check": "node tools/check-redirects.mjs"
   },
   "dependencies": {
     "next": "latest",

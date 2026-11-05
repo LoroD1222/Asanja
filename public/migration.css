@@ -6,9 +6,360 @@ iframe {
   max-width: 100%;
 }
 
+/*
+ * Match the typography that is actually rendered by the live WordPress
+ * site. Its Castoro Titling display face fails to resolve, so the browser
+ * shows the declared sans-serif fallback. The archived copy has a valid
+ * local file which otherwise changes display headings to a serif face.
+ */
+body .elementor-heading-title,
+body .elementor-button,
+body .elementor-nav-menu a {
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+
+/* Commissioner does resolve on the live homepage for secondary headings,
+ * controls and navigation; only its Castoro display face falls back. */
+body.page-id-9 h3.elementor-heading-title,
+body.page-id-9 h4.elementor-heading-title,
+body.page-id-9 h5.elementor-heading-title,
+body.page-id-9 h6.elementor-heading-title,
+body.page-id-9 .elementor-button,
+body.page-id-9 .elementor-nav-menu a {
+  font-family: Commissioner, sans-serif !important;
+}
+
+/* Swiper normally writes this width during initialization. The archived
+ * runtime cannot do that, so keep the homepage carousels aligned to the
+ * original full-width section containers at every breakpoint. */
+body.page-id-9 .elementor-widget-n-carousel {
+  width: 100%;
+  max-width: 100%;
+}
+
+.asanja-whatsapp,
+.asanja-whatsapp *,
+.asanja-whatsapp-panel,
+.asanja-whatsapp-panel * {
+  box-sizing: border-box;
+}
+
+.asanja-whatsapp {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  z-index: 999999999;
+  display: block;
+  width: 56px;
+  height: 56px;
+  color: #7a7a7a;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.asanja-whatsapp__label {
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 7px);
+  display: block;
+  width: 156px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  background: #f5f7f9;
+  color: #43474e;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  transform: translateY(-50%);
+  transition: opacity 400ms, visibility 400ms, transform 400ms;
+}
+
+.asanja-whatsapp__icon {
+  position: relative;
+  display: grid;
+  width: 56px;
+  height: 56px;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #2db742;
+  color: #fff;
+  box-shadow: 0 6px 8px 2px rgb(0 0 0 / 14%);
+}
+
+.asanja-whatsapp__icon svg {
+  width: 30px;
+  height: 30px;
+  transition: opacity 400ms, transform 400ms;
+}
+
+.asanja-whatsapp__icon::after {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  content: "×";
+  font: 300 28px/1 Arial, Helvetica, sans-serif;
+  opacity: 0;
+  transform: scale(0) rotate(-360deg);
+  transition: opacity 400ms, transform 400ms;
+}
+
+.asanja-whatsapp.is-active .asanja-whatsapp__label {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(15px);
+}
+
+.asanja-whatsapp.is-active .asanja-whatsapp__icon svg {
+  opacity: 0;
+  transform: scale(0) rotate(360deg);
+}
+
+.asanja-whatsapp.is-active .asanja-whatsapp__icon::after {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.asanja-whatsapp-panel {
+  position: fixed;
+  right: 30px;
+  bottom: 102px;
+  z-index: 999999998;
+  width: 351px;
+  max-width: calc(100% - 50px);
+  overflow: hidden;
+  border-radius: 5px 5px 8px 8px;
+  box-shadow: 0 10px 10px 4px rgb(0 0 0 / 4%);
+  font-family: Arial, Helvetica, sans-serif;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(50px);
+  transition: opacity 400ms, visibility 400ms, transform 400ms, box-shadow 200ms;
+}
+
+.asanja-whatsapp-panel.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.asanja-whatsapp-panel:hover,
+.asanja-whatsapp-panel:focus-within {
+  box-shadow: 0 10px 10px 4px rgb(32 32 37 / 23%);
+}
+
+.asanja-whatsapp-panel__heading {
+  position: relative;
+  min-height: 103px;
+  padding: 15px 43px 17px 74px;
+  background: #2db742;
+  color: #d9ebc6;
+}
+
+.asanja-whatsapp-panel__heading .asanja-whatsapp-panel__mark {
+  position: absolute;
+  top: 20px;
+  left: 23px;
+  width: 33px;
+  height: 33px;
+  color: #fff;
+}
+
+.asanja-whatsapp-panel__mark svg,
+.asanja-whatsapp-panel__avatar svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.asanja-whatsapp-panel__title {
+  min-height: 24px;
+  padding-top: 2px;
+  color: #fff;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.asanja-whatsapp-panel__intro {
+  min-height: 20px;
+  padding-top: 4px;
+  color: #d9ebc6;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.asanja-whatsapp-panel__content {
+  padding: 13px 20px 21px 19px;
+  background: #fff;
+  text-align: left;
+}
+
+.asanja-whatsapp-panel__notice {
+  padding: 0 3px;
+  color: #a5abb7;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.asanja-whatsapp-panel__item {
+  margin-top: 14px;
+}
+
+.asanja-whatsapp-panel__link {
+  position: relative;
+  display: table;
+  width: 100%;
+  min-height: 73px;
+  padding: 13px 40px 12px 74px;
+  border-left: 2px solid #2db742;
+  border-radius: 2px 4px;
+  background: #f5f7f9;
+  color: inherit;
+  text-decoration: none;
+  transition: background-color 200ms, box-shadow 200ms;
+}
+
+.asanja-whatsapp-panel__link:hover,
+.asanja-whatsapp-panel__link:focus-visible {
+  background: #fff;
+  box-shadow: 0 7px 15px 1px rgb(55 62 70 / 7%);
+}
+
+.asanja-whatsapp-panel__avatar {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 48px;
+  height: 48px;
+  color: #55cd6c;
+}
+
+.asanja-whatsapp-panel__text {
+  display: table-cell;
+  height: 48px;
+  min-height: 48px;
+  vertical-align: middle;
+}
+
+.asanja-whatsapp-panel__name {
+  color: #363c47;
+  font-size: 14px;
+  line-height: 1.188;
+}
+
+.asanja-whatsapp-panel__duty {
+  padding-top: 2px;
+  color: #989b9f;
+  font-size: 11px;
+  line-height: 1.125;
+}
+
+.asanja-whatsapp-panel__link::after {
+  position: absolute;
+  top: 26px;
+  right: 14px;
+  width: 20px;
+  height: 20px;
+  background: #2db742;
+  border-radius: 50%;
+  color: #fff;
+  content: "›";
+  font: 700 19px/18px Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  /* Swiper stretches every camp slide to the tallest card on the live site.
+   * Preserve that stable mobile stage height when the archived fallback is
+   * showing a shorter-content slide. */
+  body.page-id-9 .elementor-element-24265c3
+    .asanja-carousel-fallback > .swiper-wrapper > .swiper-slide {
+    min-height: 533.8px;
+  }
+
+  .asanja-whatsapp-panel {
+    right: 25px;
+  }
+}
+
+/*
+ * SEO heading upgrades must not change the Elementor design. These classes
+ * preserve the exact original tag typography after an H4/H2 is promoted to
+ * the page H1, an extra H1 is demoted to H2, or Highlights is promoted from H6.
+ */
+body.elementor-kit-11 h2.asanja-visual-h1 {
+  color: var(--e-global-color-secondary);
+  font-family: "Castoro Titling", sans-serif;
+  font-size: 72px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+body.elementor-kit-11 h1.asanja-visual-h2 {
+  color: var(--e-global-color-d5351c3);
+  font-family: "Castoro Titling", sans-serif;
+  font-size: 46px;
+  font-weight: 400;
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+body.elementor-kit-11 h1.asanja-visual-h4 {
+  color: var(--e-global-color-d5351c3);
+  font-family: Commissioner, sans-serif;
+  font-size: 29px;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+body.elementor-kit-11 h2.asanja-visual-h6 {
+  color: var(--e-global-color-d5351c3);
+  font-family: Commissioner, sans-serif;
+  font-size: 19px;
+  font-weight: 300;
+  line-height: 24px;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+}
+
+@media (max-width: 767px) {
+  body.elementor-kit-11 h2.asanja-visual-h1 {
+    font-size: 3.05rem;
+  }
+
+  body.elementor-kit-11 h1.asanja-visual-h2 {
+    font-size: 1.95rem;
+  }
+}
+
 body.page-id-414 .elementor-widget-text-editor a {
   overflow-wrap: anywhere;
   word-break: break-word;
+}
+
+/* The WordPress backup references WPForms shortcodes, but does not contain the
+ * WPForms plugin. Use the complete Elementor forms retained directly beside
+ * those shortcodes so booking and trip-planning pages remain usable. */
+body.page-id-1078 .elementor-element.elementor-element-a852b01,
+body.page-id-2749 .elementor-element.elementor-element-56de3f5 {
+  display: none !important;
+}
+
+body.page-id-1078 .elementor-element.elementor-element-e0aedeb,
+body.page-id-2749 .elementor-element.elementor-element-6dec466 {
+  display: block !important;
+}
+
+.asanja-honeypot {
+  position: absolute !important;
+  left: -10000px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
 }
 
 /* Keep the itinerary titles visually identical after their SEO heading upgrade. */
@@ -70,187 +421,221 @@ body.single-asanja_safaris .elementor-2090 h2.elementor-heading-title {
 
 }
 
-html.asanja-menu-open,
-html.asanja-menu-open body {
+/* Elementor's archived runtime no longer initializes on a modern Next.js
+ * response. These fallbacks preserve its original carousel layout and motion. */
+.asanja-carousel-fallback {
+  position: relative;
   overflow: hidden;
 }
 
-.asanja-menu-overlay[hidden],
-.asanja-menu-submenu[hidden] {
-  display: none !important;
+.asanja-carousel-fallback > .swiper-wrapper {
+  display: flex;
+  gap: var(--asanja-carousel-gap, 0px);
+  width: 100%;
+  overflow: visible !important;
+  transform: translate3d(0, 0, 0);
+  transition: transform var(--asanja-carousel-speed, 500ms) ease;
+  will-change: transform;
 }
 
-.asanja-menu-overlay {
+.asanja-carousel-fallback > .swiper-wrapper > .swiper-slide {
+  box-sizing: border-box;
+  width: auto !important;
+  min-width: 0;
+  flex: 0 0 var(--asanja-carousel-slide-width, 100%);
+}
+
+.asanja-carousel-fallback .swiper-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.asanja-carousel-fallback .swiper-pagination-bullet {
+  width: var(--e-n-carousel-swiper-pagination-size, 10px);
+  height: var(--e-n-carousel-swiper-pagination-size, 10px);
+  border: 0;
+  border-radius: 50%;
+  padding: 0;
+  background: var(--e-n-carousel-dots-normal-color, #f3f0ec);
+  opacity: 0.55;
+  cursor: pointer;
+}
+
+.asanja-carousel-fallback .swiper-pagination-bullet-active {
+  opacity: 1;
+}
+
+.asanja-carousel-fallback .elementor-swiper-button {
+  cursor: pointer;
+}
+
+.asanja-carousel-fallback .elementor-carousel-image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.asanja-carousel-fallback > .swiper-wrapper > .swiper-slide[aria-hidden="true"] {
+  pointer-events: none;
+}
+
+/* Replaces Elementor Pro's image lightbox without changing gallery markup. */
+html.asanja-lightbox-open {
+  overflow: hidden;
+}
+
+.asanja-lightbox {
   position: fixed;
   inset: 0;
   z-index: 1000000;
+  display: none;
+  grid-template-columns: minmax(44px, 8vw) minmax(0, 1fr) minmax(44px, 8vw);
+  align-items: center;
+  padding: 48px 12px 24px;
+  background: rgb(15 17 16 / 95%);
+}
+
+.asanja-lightbox.asanja-lightbox-visible {
   display: grid;
-  grid-template-columns: 35% 30% 35%;
-  background: #fff;
-  color: #777;
-  font-family: Raleway, sans-serif;
 }
 
-.asanja-menu-art {
-  background: #e8e8e8 center / cover no-repeat;
-  transition: background-image 180ms ease-in-out;
-}
-
-.asanja-menu-brand {
+.asanja-lightbox figure {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 42px;
-  padding: 48px;
-  background: #f3efe8;
+  max-width: 1200px;
+  max-height: calc(100dvh - 72px);
+  margin: 0 auto;
 }
 
-.asanja-menu-brand img {
+.asanja-lightbox img {
   display: block;
-  width: min(220px, 72%);
-  height: auto;
-  margin: auto;
+  max-width: 100%;
+  max-height: calc(100dvh - 170px);
+  object-fit: contain;
 }
 
-.asanja-menu-book {
-  border: 1px solid #777;
-  padding: 13px 30px;
-  color: #666;
-  font-size: 16px;
-  line-height: 1;
-  text-transform: uppercase;
-  text-decoration: none;
-}
-
-.asanja-menu-nav {
+.asanja-lightbox figcaption {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 22px;
-  padding: 90px 48px 48px 70px;
-  overflow-y: auto;
-  background: #fff;
+  gap: 5px;
+  max-width: 850px;
+  padding: 14px 12px 0;
+  color: #f6f2eb;
+  text-align: center;
 }
 
-.asanja-menu-nav > a,
-.asanja-menu-camps {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
+.asanja-lightbox figcaption span {
+  max-height: 3.8em;
+  overflow: auto;
+  font-size: 13px;
+  line-height: 1.45;
+  opacity: 0.78;
+}
+
+.asanja-lightbox button {
   border: 0;
-  padding: 0;
-  background: transparent !important;
-  color: #777 !important;
+  background: transparent;
+  color: #fff;
   font: inherit;
-  font-size: clamp(22px, 2vw, 31px);
-  font-weight: 400;
-  line-height: 1.18;
-  text-align: left;
-  text-decoration: none;
-  text-transform: uppercase;
   cursor: pointer;
 }
 
-.asanja-menu-nav a:hover,
-.asanja-menu-nav a:focus-visible,
-.asanja-menu-camps:hover,
-.asanja-menu-camps:focus-visible {
-  color: #56664f;
-}
-
-.asanja-menu-chevron {
-  color: #111;
-  font-size: 28px;
-}
-
-.asanja-menu-submenu {
-  display: grid;
-  gap: 9px;
-  padding: 15px 0 0 18px;
-}
-
-.asanja-menu-submenu a {
-  color: #777;
-  font-size: 15px;
-  line-height: 1.35;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-.asanja-menu-close {
+.asanja-lightbox-close {
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 64px;
-  height: 64px;
-  border: 0 !important;
-  background: #ba8a5c !important;
-  color: #fff !important;
-  font-family: Arial, sans-serif;
-  font-size: 43px;
-  font-weight: 200;
+  top: 10px;
+  right: 18px;
+  padding: 8px;
+  font-size: 38px !important;
   line-height: 1;
-  cursor: pointer;
+}
+
+.asanja-lightbox-prev,
+.asanja-lightbox-next {
+  padding: 20px 8px !important;
+  font-size: clamp(38px, 6vw, 72px) !important;
 }
 
 @media (max-width: 767px) {
-  .asanja-menu-overlay {
-    display: block;
-    min-height: 100dvh;
-    background: #f3efe8;
+  .asanja-lightbox {
+    grid-template-columns: 44px minmax(0, 1fr) 44px;
+    padding-inline: 0;
   }
 
-  .asanja-menu-art {
-    position: absolute;
-    inset: 0;
-    opacity: 0.14;
+  .asanja-lightbox figcaption span {
+    display: none;
   }
+}
 
-  .asanja-menu-brand {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    min-height: 150px;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 20px;
-    padding: 22px 78px 18px 24px;
-    background: transparent;
-  }
+/* Match Elementor Pro's full-screen popup shell while reusing the exact
+ * original popup template and responsive rules from post-1529.css. */
+html.asanja-popup-open,
+body.asanja-popup-open,
+body.dialog-body.dialog-lightbox-body {
+  overflow: hidden !important;
+}
 
-  .asanja-menu-brand a:first-child {
-    width: 88px;
-  }
+#elementor-popup-modal-1529.asanja-popup-fallback {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  display: none;
+  width: 100vw;
+  height: 100dvh;
+}
 
-  .asanja-menu-brand img {
-    width: 88px;
-  }
+#elementor-popup-modal-1529.asanja-popup-fallback.asanja-popup-visible {
+  display: flex;
+}
 
-  .asanja-menu-book {
-    padding: 11px 15px;
-    font-size: 12px;
-  }
+#elementor-popup-modal-1529.asanja-popup-fallback .dialog-widget-content {
+  width: 100vw;
+  height: 100dvh;
+}
 
-  .asanja-menu-nav {
-    position: relative;
-    z-index: 1;
-    max-height: calc(100dvh - 150px);
-    justify-content: flex-start;
-    gap: 16px;
-    padding: 26px 30px 42px;
-    background: rgba(255, 255, 255, 0.9);
-  }
+#elementor-popup-modal-1529.asanja-popup-fallback .dialog-message {
+  width: 100vw;
+  height: 100dvh;
+  max-height: 100dvh;
+  overflow: auto;
+}
 
-  .asanja-menu-nav > a,
-  .asanja-menu-camps {
-    font-size: clamp(21px, 7vw, 28px);
-  }
+#elementor-popup-modal-1529.asanja-popup-fallback [data-elementor-type="popup"] {
+  display: block !important;
+}
 
-  .asanja-menu-close {
-    z-index: 2;
-    width: 58px;
-    height: 58px;
+#elementor-popup-modal-1529 .menu-item-has-children > a::after {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-left: 12px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  content: "";
+  transform: translateY(-3px) rotate(45deg);
+  transition: transform 180ms ease;
+}
+
+#elementor-popup-modal-1529 .menu-item-has-children.asanja-submenu-open > a::after {
+  transform: translateY(2px) rotate(225deg);
+}
+
+#elementor-popup-modal-1529 .menu-items-column .menu-item-has-children.asanja-submenu-open > .sub-menu,
+#elementor-popup-modal-1529 .mob-menu .menu-item-has-children.asanja-submenu-open > .sub-menu {
+  position: static !important;
+  display: block !important;
+  width: 100% !important;
+  margin: 10px 0 0 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .asanja-carousel-fallback > .swiper-wrapper,
+  .asanja-lightbox,
+  .asanja-lightbox img,
+  #elementor-popup-modal-1529 .dialog-widget-content {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }

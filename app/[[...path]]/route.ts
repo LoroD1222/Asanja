@@ -1,5 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
+import { findPublishedArticleRedirect } from '../../sanity/legacy-redirect';
+import { renderLegacyBlogIndex } from '../../sanity/legacy-blog-index';
 
 export const dynamic = 'force-dynamic';
 
@@ -94,6 +96,12 @@ export async function GET(request: Request, context: RouteContext) {
         headers: { Location: legacyPostRoutes[legacyPostId] },
       });
     }
+    if (legacyPostId) {
+      const articleTarget = await findPublishedArticleRedirect(request.url, '');
+      if (articleTarget) {
+        return new Response(null, { status: 301, headers: { Location: articleTarget } });
+      }
+    }
   }
 
   const legacyTarget = legacyPathRoutes.get(parts.join('/'));
@@ -108,7 +116,8 @@ export async function GET(request: Request, context: RouteContext) {
 
   try {
     const html = await readFile(filePath, 'utf8');
-    return new Response(html, {
+    const responseHtml = parts.join('/') === 'blogs' ? await renderLegacyBlogIndex(html, request.url) : html;
+    return new Response(responseHtml, {
       headers: {
         'Content-Type': 'text/html; charset=utf-8',
         'Cache-Control': 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400',
@@ -116,6 +125,14 @@ export async function GET(request: Request, context: RouteContext) {
       },
     });
   } catch {
+    const articleTarget = await findPublishedArticleRedirect(request.url, parts.join('/'));
+    if (articleTarget) {
+      return new Response(null, {
+        status: 301,
+        headers: { Location: articleTarget },
+      });
+    }
+
     const notFoundPath = path.join(process.cwd(), 'public', 'legacy', '404', 'index.html');
     const fallback = await readFile(notFoundPath, 'utf8').catch(() => '<h1>Page not found</h1>');
     return new Response(fallback, {

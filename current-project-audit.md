@@ -73,7 +73,7 @@ The compatibility repair is now substantially complete. Historic redirects, camp
 - Source media files: 3,005.
 - Currently copied production media files: 221.
 - Missing referenced production assets: 0.
-- Published WordPress blog posts: 0. The 169 post records are drafts and are not public migration targets.
+- Published WordPress blog posts: 0. The 169 post records are drafts; under the expanded 2026-11-06 scope they are Sanity migration targets but must remain unpublished.
 
 ## Required next work
 

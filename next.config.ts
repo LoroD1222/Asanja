@@ -4,6 +4,14 @@ const nextConfig: NextConfig = {
   compress: true,
   poweredByHeader: false,
   trailingSlash: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+      },
+    ],
+  },
   async headers() {
     return [
       {

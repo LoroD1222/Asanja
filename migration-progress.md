@@ -1,6 +1,26 @@
 # Migration Progress
 
-Last updated: 2026-11-04
+Last updated: 2026-11-06
+
+## Scope expansion — 2026-11-06
+
+The owner expanded the migration scope to include all 169 standard WordPress
+draft posts and to make Sanity the permanent blog CMS. The earlier decision to
+exclude drafts from the public snapshot remains correct for the live site, but
+those drafts are now required as **unpublished Sanity documents**.
+
+- [x] Reconcile restored database, WP All Export archive, current routes and media tree.
+- [x] Create `complete-wordpress-inventory.md`.
+- [x] Create `INFORMATION-REQUIRED-FROM-OWNER.md`.
+- [x] Create updated missing-route and missing-media reports.
+- [ ] Receive/confirm Sanity project, organization and dataset.
+- [ ] Approve author identities, legacy URL policy, two missing slugs and CSV-only post ID 37587.
+- [ ] Recover or explicitly disposition unresolved article media.
+- [~] Scaffold standalone Sanity Studio; local schema/type checks pass, but real-project validation and deployment await owner configuration.
+- [x] Build deterministic WordPress extraction and Portable Text transformation.
+- [~] Validate exactly 169 local draft plans without publishing; actual Sanity import awaits owner configuration and content review.
+- [ ] Implement published-only blog, article, category/tag and secure preview routes.
+- [ ] Complete SEO, sitemap, redirect, webhook, responsive and production-build verification.
 
 Status legend: `[x]` verified, `[~]` implemented but additional QA/configuration required, `[ ]` not complete.
 
@@ -16,8 +36,10 @@ Status legend: `[x]` verified, `[~]` implemented but additional QA/configuration
 ## Complete public page inventory
 
 The restored WordPress database contains 19 published pages and 5 published
-`asanja_safaris` entries. There are no published WordPress blog posts; `/blogs/`
-is the intentionally empty archive shell shown on the live site.
+`asanja_safaris` entries. There are no currently published standard WordPress
+blog posts; `/blogs/` is the intentionally empty archive shell shown on the
+live site. The 169 standard posts are drafts and are now in scope for an
+unpublished Sanity import.
 
 | Route | Page type | Reconstruction status |
 |---|---|---|
@@ -123,12 +145,29 @@ is the intentionally empty archive shell shown on the live site.
 - [ ] Run performance/accessibility audits after functionality stabilizes.
 - [ ] Obtain explicit authorization before production deployment.
 
+## Phase 7 — Sanity CMS and 169-post recovery
+
+- [x] Add a standalone Sanity Studio workspace using environment-only project configuration.
+- [x] Define article, author, category, tag, SEO, migration provenance and structured Portable Text schemas.
+- [x] Add editor lists for imported, review, scheduled and published articles.
+- [x] Implement a repeatable read-only WordPress extractor.
+- [x] Reconcile 169 drafts, two excluded auto-drafts and one quarantined CSV-only record.
+- [x] Convert 169 bodies into Portable Text plans with images, links, headings, lists, tables and preserved shortcode review blocks.
+- [x] Validate that all 169 plans remain drafts/noindex and that no external writes or publications occurred.
+- [x] Produce `169-blog-post-migration-report.md`, CMS architecture, schema, setup and testing documentation.
+- [ ] Receive owner-approved Sanity project, dataset, roles, author profiles, URL policy and media exception policy.
+- [ ] Review five representative transformed articles with the content owner.
+- [ ] Implement and run the idempotent asset/document importer against the approved dataset.
+- [ ] Add published-only blog routes, secure Draft Mode preview, Visual Editing, sitemap and webhook revalidation.
+
 ## Current priority order
 
-1. Configure and verify real form delivery with new deployment secrets.
-2. Test form receipt on a deployment preview.
-3. Run deployed Lighthouse/accessibility/social/schema checks.
-4. Obtain explicit deployment authorization.
+1. Receive the owner decisions listed in `INFORMATION-REQUIRED-FROM-OWNER.md`.
+2. Review representative Portable Text conversions and resolve identity/slug/media gates.
+3. Import exactly 169 drafts into the owner-approved Sanity dataset without publishing.
+4. Implement and verify the published-only Next.js blog and secure preview workflow.
+5. Configure form delivery and run full deployment-preview, accessibility, SEO and performance QA.
+6. Obtain explicit deployment authorization.
 
 ## Latest live-reference corrections
 

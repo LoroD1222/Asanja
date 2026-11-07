@@ -672,8 +672,11 @@
       item.querySelector(':scope > a')?.addEventListener('focus', () => setMenuImage(index));
     });
 
+    // The desktop menu mirrors the original WordPress behaviour: parent items
+    // remain normal links (for example, Camps & Lodges opens its landing page).
+    // Only the compact mobile menu needs a click-to-expand interaction.
     const submenuItems = popup.querySelectorAll(
-      '.menu-items-column .elementor-nav-menu--main > ul > li.menu-item-has-children, .mob-menu .elementor-nav-menu > li.menu-item-has-children',
+      '.mob-menu .elementor-nav-menu > li.menu-item-has-children',
     );
 
     submenuItems.forEach((item) => {

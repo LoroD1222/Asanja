@@ -16,10 +16,11 @@ No published WordPress content page is currently missing.
 
 ## Blog content
 
-- The WordPress database contains no published standard posts.
-- It contains 169 draft posts and two auto-drafts.
-- Those drafts are intentionally excluded and must not be published or invented during migration.
-- `/blogs/` is present and matches the published WordPress page.
+- The WordPress database contains no currently published standard posts.
+- It contains 169 draft posts and two empty auto-drafts.
+- The 169 drafts are now in scope for import into Sanity as unpublished documents.
+- They remain intentionally excluded from public routes, public queries and the sitemap until individually approved and published.
+- `/blogs/` is present and matches the currently published empty WordPress archive; it will become the published-only Sanity listing.
 
 ## Media coverage
 
@@ -40,7 +41,7 @@ No published WordPress content page is currently missing.
 
 ## Content rules
 
-- Do not publish draft WordPress posts.
+- Import the 169 WordPress posts as Sanity drafts, but do not publish them automatically.
 - Do not invent missing copy.
 - Do not substitute generated or stock media.
 - Preserve original slugs and page-specific layouts.

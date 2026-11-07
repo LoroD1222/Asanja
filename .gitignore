@@ -12,3 +12,20 @@ public/legacy-pre-final/
 .env*
 !.env.example
 
+# Standalone Sanity Studio
+studio/node_modules/
+studio/dist/
+studio/.sanity/
+studio/schema.json
+studio/sanity.types.ts
+studio/.env*
+!studio/.env.example
+
+# WordPress -> Sanity migration working data. These directories can contain
+# unpublished copy, private author metadata, and large asset manifests.
+migration/node_modules/
+migration/extracted/
+migration/transformed/
+migration/reports/
+migration/.env*
+!migration/.env.example

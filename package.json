@@ -13,7 +13,9 @@
     "redirects:check": "node tools/check-redirects.mjs"
   },
   "dependencies": {
+    "@sanity/image-url": "^2.1.1",
     "next": "latest",
+    "next-sanity": "^13.4.0",
     "react": "latest",
     "react-dom": "latest"
   },

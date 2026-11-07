@@ -1,0 +1,28 @@
+{
+  "name": "asanja-wordpress-to-sanity-migration",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "extract": "node scripts/extract-wordpress.mjs",
+    "transform": "node scripts/transform-to-sanity.mjs",
+    "validate": "node scripts/validate.mjs",
+    "final-validate": "node scripts/final-validate.mjs",
+    "recover-media": "node scripts/recover-media.mjs",
+    "media-report": "node scripts/generate-media-report.mjs",
+    "import": "node scripts/import-to-sanity.mjs",
+    "verify-remote": "node scripts/verify-sanity-import.mjs",
+    "publication-preview": "node scripts/generate-publication-preview.mjs",
+    "link-audit": "node scripts/audit-links.mjs",
+    "redirect-map": "node scripts/generate-redirect-map.mjs",
+    "dry-run": "npm run extract && npm run transform && npm run validate",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "@portabletext/block-tools": "latest",
+    "@sanity/client": "latest",
+    "@sanity/schema": "latest",
+    "csv-parse": "latest",
+    "jsdom": "latest"
+  }
+}

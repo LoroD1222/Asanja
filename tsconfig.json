@@ -32,6 +32,8 @@
   ],
   "exclude": [
     "node_modules",
+    "migration",
+    "studio",
     "wordpress-runtime",
     "wordpress-source",
     "site-snapshot"

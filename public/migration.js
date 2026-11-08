@@ -634,6 +634,83 @@
     return popup;
   }
 
+  function enhancePopupMenus(popup) {
+    const currentPath = `${window.location.pathname.replace(/\/+$/, '')}/`;
+
+    popup.querySelectorAll('.elementor-nav-menu').forEach((menu, menuIndex) => {
+      const topLevelItems = [...menu.children].filter((child) => child.matches('li.menu-item'));
+      const experiencesItem = topLevelItems.find((item) => (
+        item.querySelector(':scope > a')?.getAttribute('href') === '/experiences/'
+      ));
+      let blogsItem = topLevelItems.find((item) => (
+        item.querySelector(':scope > a')?.getAttribute('href') === '/blogs/'
+      ));
+
+      if (!blogsItem) {
+        blogsItem = document.createElement('li');
+        blogsItem.className = 'menu-item menu-item-type-post_type menu-item-object-page asanja-menu-blogs';
+        const blogsLink = document.createElement('a');
+        blogsLink.href = '/blogs/';
+        blogsLink.className = experiencesItem?.querySelector(':scope > a')?.classList.contains('elementor-item')
+          ? 'elementor-item'
+          : 'elementor-sub-item';
+        blogsLink.textContent = 'Blogs';
+        if (menu.closest('nav[aria-hidden="true"]')) blogsLink.tabIndex = -1;
+        blogsItem.append(blogsLink);
+        experiencesItem?.after(blogsItem);
+        if (!experiencesItem) menu.append(blogsItem);
+      }
+
+      if (currentPath.startsWith('/blogs/')) {
+        const blogsLink = blogsItem.querySelector(':scope > a');
+        blogsItem.classList.add('current-menu-item', 'current_page_item');
+        blogsLink?.classList.add('elementor-item-active');
+        blogsLink?.setAttribute('aria-current', 'page');
+      }
+
+      const campsItem = topLevelItems.find((item) => (
+        item.querySelector(':scope > a')?.getAttribute('href') === '/camps-and-lodges/'
+      ));
+      const campsLink = campsItem?.querySelector(':scope > a');
+      const submenu = campsItem?.querySelector(':scope > .sub-menu');
+      if (!campsItem || !campsLink || !submenu || campsItem.querySelector(':scope > .asanja-submenu-toggle')) return;
+
+      const toggle = document.createElement('button');
+      toggle.type = 'button';
+      toggle.className = 'asanja-submenu-toggle';
+      toggle.setAttribute('aria-label', 'Show Camps & Lodges links');
+      toggle.innerHTML = `
+        <svg viewBox="0 0 16 10" aria-hidden="true" focusable="false">
+          <path d="m1 1 7 7 7-7" />
+        </svg>`;
+      if (!submenu.id) submenu.id = `asanja-camps-submenu-${menuIndex + 1}`;
+      toggle.setAttribute('aria-controls', submenu.id);
+      if (menu.closest('nav[aria-hidden="true"]')) toggle.tabIndex = -1;
+      campsLink.setAttribute('aria-haspopup', 'true');
+
+      const shouldStartOpen = currentPath === '/camps-and-lodges/'
+        || [...submenu.querySelectorAll('a[href]')].some((link) => {
+          const pathname = new URL(link.href, window.location.origin).pathname.replace(/\/+$/, '');
+          return pathname && pathname === window.location.pathname.replace(/\/+$/, '');
+        });
+
+      function setSubmenuOpen(open) {
+        campsItem.classList.toggle('asanja-submenu-open', open);
+        toggle.classList.toggle('is-open', open);
+        toggle.setAttribute('aria-expanded', String(open));
+        toggle.setAttribute('aria-label', `${open ? 'Hide' : 'Show'} Camps & Lodges links`);
+      }
+
+      setSubmenuOpen(shouldStartOpen);
+      toggle.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        setSubmenuOpen(!campsItem.classList.contains('asanja-submenu-open'));
+      });
+      campsLink.after(toggle);
+    });
+  }
+
   function initializePopupNavigation() {
     const template = document.querySelector('[data-elementor-type="popup"].elementor-1529');
     if (!template) return;
@@ -644,8 +721,11 @@
     popup.classList.add('asanja-popup-fallback');
     popup.setAttribute('aria-hidden', 'true');
 
+    enhancePopupMenus(popup);
+
     const content = popup.querySelector('.dialog-widget-content');
-    const topItems = [...popup.querySelectorAll('.menu-items-column .elementor-nav-menu--main > ul > li')];
+    const topItems = [...popup.querySelectorAll('.menu-items-column .elementor-nav-menu--main > ul > li')]
+      .filter((item) => !item.classList.contains('asanja-menu-blogs'));
     const images = [...popup.querySelectorAll('.menu-images-column .elementor-widget-spacer')];
     const openerSelector = 'a[href*="popup%3Aopen"], a[href*="popup:open"]';
     const closerSelector = 'a[href*="popup%3Aclose"], a[href*="popup:close"]';
@@ -670,24 +750,6 @@
     topItems.forEach((item, index) => {
       item.addEventListener('mouseenter', () => setMenuImage(index));
       item.querySelector(':scope > a')?.addEventListener('focus', () => setMenuImage(index));
-    });
-
-    // The desktop menu mirrors the original WordPress behaviour: parent items
-    // remain normal links (for example, Camps & Lodges opens its landing page).
-    // Only the compact mobile menu needs a click-to-expand interaction.
-    const submenuItems = popup.querySelectorAll(
-      '.mob-menu .elementor-nav-menu > li.menu-item-has-children',
-    );
-
-    submenuItems.forEach((item) => {
-      const link = item.querySelector(':scope > a');
-      link?.setAttribute('aria-haspopup', 'true');
-      link?.setAttribute('aria-expanded', 'false');
-      link?.addEventListener('click', (event) => {
-        event.preventDefault();
-        const open = item.classList.toggle('asanja-submenu-open');
-        link.setAttribute('aria-expanded', String(open));
-      });
     });
 
     function openPopup(trigger) {

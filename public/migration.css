@@ -606,28 +606,84 @@ body.dialog-body.dialog-lightbox-body {
   display: block !important;
 }
 
-#elementor-popup-modal-1529 .menu-item-has-children > a::after {
-  display: inline-block;
-  width: 9px;
-  height: 9px;
-  margin-left: 12px;
-  border-right: 2px solid currentColor;
-  border-bottom: 2px solid currentColor;
-  content: "";
-  transform: translateY(-3px) rotate(45deg);
+#elementor-popup-modal-1529 .menu-item-has-children {
+  position: relative;
+  display: grid !important;
+  grid-template-columns: max-content 34px;
+  column-gap: 8px;
+  align-items: start;
+  width: max-content;
+}
+
+#elementor-popup-modal-1529 .asanja-submenu-toggle {
+  position: static;
+  display: inline-grid;
+  width: 34px;
+  height: 36px;
+  padding: 0;
+  color: currentColor;
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  place-items: center;
+  cursor: pointer;
+}
+
+#elementor-popup-modal-1529 .asanja-submenu-toggle svg {
+  width: 18px;
+  height: 12px;
+  overflow: visible;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
   transition: transform 180ms ease;
 }
 
-#elementor-popup-modal-1529 .menu-item-has-children.asanja-submenu-open > a::after {
-  transform: translateY(2px) rotate(225deg);
+#elementor-popup-modal-1529 .asanja-submenu-toggle svg path {
+  color: inherit !important;
+  stroke: currentColor !important;
+}
+
+#elementor-popup-modal-1529 .current-menu-item > .asanja-submenu-toggle {
+  color: #b88d60;
+}
+
+#elementor-popup-modal-1529 .asanja-submenu-toggle.is-open svg {
+  transform: rotate(180deg);
+}
+
+#elementor-popup-modal-1529 .asanja-submenu-toggle:hover,
+#elementor-popup-modal-1529 .asanja-submenu-toggle:focus-visible {
+  color: #b88d60;
+}
+
+#elementor-popup-modal-1529 .asanja-submenu-toggle:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 2px;
 }
 
 #elementor-popup-modal-1529 .menu-items-column .menu-item-has-children.asanja-submenu-open > .sub-menu,
 #elementor-popup-modal-1529 .mob-menu .menu-item-has-children.asanja-submenu-open > .sub-menu {
+  grid-column: 1 / -1;
   position: static !important;
   display: block !important;
   width: 100% !important;
   margin: 10px 0 0 !important;
+}
+
+@media (max-width: 767px) {
+  #elementor-popup-modal-1529 .menu-item-has-children {
+    grid-template-columns: minmax(0, 1fr) 42px;
+    column-gap: 0;
+    width: 100%;
+  }
+
+  #elementor-popup-modal-1529 .asanja-submenu-toggle {
+    width: 42px;
+    height: 54px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

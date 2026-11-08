@@ -24,6 +24,10 @@ export async function sanityFetch<T>({query, params = {}, tags = []}: SanityFetc
   const queryParams = {...params, includeDrafts: preview}
 
   if (!preview) {
+    if (process.env.NODE_ENV === 'development') {
+      return publishedClient.fetch<T>(query, queryParams, {cache: 'no-store'})
+    }
+
     return publishedClient.fetch<T>(query, queryParams, {
       next: {revalidate: 300, tags},
     })

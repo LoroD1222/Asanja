@@ -12,6 +12,7 @@
     "media-report": "node scripts/generate-media-report.mjs",
     "import": "node scripts/import-to-sanity.mjs",
     "verify-remote": "node scripts/verify-sanity-import.mjs",
+    "publish": "node scripts/publish-to-sanity.mjs",
     "publication-preview": "node scripts/generate-publication-preview.mjs",
     "link-audit": "node scripts/audit-links.mjs",
     "redirect-map": "node scripts/generate-redirect-map.mjs",

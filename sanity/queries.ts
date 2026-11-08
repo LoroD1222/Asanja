@@ -27,7 +27,19 @@ export function articlesQuery(start: number, end: number) {
     "articles": *[${visibleArticleFilter}] | order(coalesce(originalPublishedAt, _createdAt) desc)[${start}...${end}]{
       ${articleCardFields}
     },
-    "total": count(*[${visibleArticleFilter}])
+    "total": count(*[${visibleArticleFilter}]),
+    "categories": *[
+      _type == "category" &&
+      defined(slug.current) &&
+      ($includeDrafts == true || !(_id in path("drafts.**"))) &&
+      count(*[${visibleArticleFilter} && references(^._id)]) > 0
+    ] | order(title asc){
+      _id,
+      title,
+      "slug": slug.current,
+      description,
+      "articleCount": count(*[${visibleArticleFilter} && references(^._id)])
+    }
   }`)
 }
 

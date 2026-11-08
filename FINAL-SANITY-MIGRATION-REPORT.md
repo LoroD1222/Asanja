@@ -1,5 +1,21 @@
 # Asanja Africa Final Sanity Migration Report
 
+## Publication update — 2026-11-08
+
+The owner approved publication of the complete verified import. Sanity's native document publication workflow published 169 articles, 22 categories, 213 tags and 2 authors to `mduy4p4u/production`.
+
+- Published articles: **169**
+- Remaining imported article drafts: **0**
+- Published articles indexable (`seo.noIndex != true`): **169**
+- Articles with at least one category: **169**
+- Broken published author/category/tag references: **0**
+- Quarantined WordPress post `37587`: still absent
+- Website deployment: not performed
+
+The local `/blogs/` page now renders the published articles with pagination and populated-category navigation. Individual article, category, tag, author and related-article views were verified. The production build passed after publication.
+
+The remaining sections record the earlier drafts-only import phase and are retained as migration evidence.
+
 Completed: 2026-11-07  
 Sanity project: `mduy4p4u`  
 Dataset: `production`  

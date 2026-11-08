@@ -35,7 +35,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const articles = await publishedClient.fetch<Array<{slug: string; lastModified?: string}>>(
     sitemapArticlesQuery,
     {},
-    {next: {revalidate: 300, tags: ['sanity', 'articles', 'sitemap']}},
+    process.env.NODE_ENV === 'development'
+      ? {cache: 'no-store'}
+      : {next: {revalidate: 300, tags: ['sanity', 'articles', 'sitemap']}},
   )
 
   return [

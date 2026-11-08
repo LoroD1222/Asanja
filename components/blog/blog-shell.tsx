@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import type {ReactNode} from 'react'
 import '../../app/sanity-blog.css'
@@ -9,12 +8,11 @@ export function BlogShell({children}: {children: ReactNode}) {
       <a className="skip-link" href="#main-content">Skip to content</a>
       <header className="blog-header">
         <Link className="blog-logo" href="/" aria-label="Asanja Africa home">
-          <Image
+          <img
             src="/legacy/wp-content/uploads/2020/08/Asanja_Logo_clean.svg"
             alt="Asanja Africa"
             width={184}
             height={52}
-            priority
           />
         </Link>
         <nav aria-label="Main navigation">
@@ -29,7 +27,7 @@ export function BlogShell({children}: {children: ReactNode}) {
       <main id="main-content">{children}</main>
       <footer className="blog-footer">
         <div>
-          <Image
+          <img
             src="/legacy/wp-content/uploads/2024/04/asanja_logo_with_slogan_dark-03.svg"
             alt="Asanja Africa — Open hearts and wild spirits"
             width={210}

@@ -55,4 +55,5 @@ export type Article = ArticleCardData & {
 export type ArticleCollection = {
   articles: ArticleCardData[]
   total: number
+  categories?: Array<Taxonomy & {articleCount: number}>
 }

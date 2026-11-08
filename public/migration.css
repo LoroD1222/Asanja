@@ -664,6 +664,12 @@ body.dialog-body.dialog-lightbox-body {
   outline-offset: 2px;
 }
 
+/* Elementor's container rule uses display:flex with enough priority to keep
+ * the first nested-tab panel visible after JavaScript marks it as hidden. */
+.elementor-widget-n-tabs .e-n-tabs-content > [role="tabpanel"][hidden] {
+  display: none !important;
+}
+
 #elementor-popup-modal-1529 .menu-items-column .menu-item-has-children.asanja-submenu-open > .sub-menu,
 #elementor-popup-modal-1529 .mob-menu .menu-item-has-children.asanja-submenu-open > .sub-menu {
   grid-column: 1 / -1;

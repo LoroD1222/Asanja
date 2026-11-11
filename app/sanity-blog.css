@@ -93,3 +93,75 @@
   .blog-footer {grid-template-columns: 1fr 1fr; gap: 2rem 1.5rem;}
   .blog-footer > div:first-child {grid-column: 1 / -1;}
 }
+
+/* Shared Asanja chrome for CMS articles, guides, and safari pages. The logo,
+   navigation, newsletter layout, links, and copyright strip mirror the
+   existing migrated site instead of introducing a second site identity. */
+.asanja-site-header {position: sticky; top: 0; z-index: 90; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 84px; padding: .75rem clamp(1.25rem, 3vw, 3rem); background: #f5f2ee; color: #515159;}
+.asanja-header-logo {display: inline-flex; align-items: center; min-width: 0;}
+.asanja-header-logo img {display: block; width: clamp(165px, 18vw, 210px); height: auto;}
+.asanja-header-actions {display: flex; align-items: center; gap: clamp(1.4rem, 4vw, 3rem);}
+.asanja-quote-link {display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: .5rem 1.15rem; border: 1px solid #777674; font-size: .82rem; font-weight: 400; letter-spacing: .04em; text-align: center; text-transform: uppercase; white-space: nowrap;}
+.asanja-quote-link:hover, .asanja-quote-link:focus-visible {background: #55664c; border-color: #55664c; color: #fff;}
+.asanja-menu {position: relative;}
+.asanja-menu summary {display: flex; align-items: center; justify-content: center; width: 38px; height: 40px; cursor: pointer; list-style: none;}
+.asanja-menu summary::-webkit-details-marker {display: none;}
+.asanja-menu summary:focus-visible {outline: 2px solid #55664c; outline-offset: 4px;}
+.asanja-menu-icon {display: grid; gap: 6px; width: 31px;}
+.asanja-menu-icon span {display: block; height: 2px; background: #55664c; transition: transform .2s ease, opacity .2s ease;}
+.asanja-menu[open] .asanja-menu-icon span:first-child {transform: translateY(8px) rotate(45deg);}
+.asanja-menu[open] .asanja-menu-icon span:nth-child(2) {opacity: 0;}
+.asanja-menu[open] .asanja-menu-icon span:last-child {transform: translateY(-8px) rotate(-45deg);}
+.asanja-menu-panel {position: absolute; right: -1rem; top: calc(100% + 21px); display: grid; width: min(380px, calc(100vw - 2rem)); padding: 1rem 1.5rem; background: #f5f2ee; box-shadow: 0 18px 38px rgb(20 25 18 / .18);}
+.asanja-menu-panel a {padding: .7rem .3rem; border-bottom: 1px solid #dedbd5; font-size: .86rem; letter-spacing: .06em; text-transform: uppercase;}
+.asanja-menu-panel a:last-child {border-bottom: 0;}
+.asanja-menu-panel a:hover, .asanja-menu-panel a:focus-visible {color: #55664c; text-decoration: underline; text-underline-offset: .25em;}
+.asanja-site-footer {background: #f5f2ee; color: #777674; font-size: .88rem;}
+.asanja-footer-main {width: min(1450px, calc(100% - 5rem)); margin: 0 auto;}
+.asanja-footer-top {display: flex; align-items: center; justify-content: space-between; gap: 3rem; padding: 3.6rem 0 2.8rem; border-bottom: 1px solid #d6d3ce;}
+.asanja-footer-logo {display: block; width: 190px; max-width: 100%; height: auto;}
+.asanja-newsletter {display: flex; align-items: center; justify-content: flex-end; gap: 1.5rem; flex-wrap: wrap;}
+.asanja-newsletter h2 {margin: 0; color: #515159; font-size: 1.05rem; font-weight: 400; letter-spacing: .15em; line-height: 1.25; text-align: center; text-transform: uppercase;}
+.asanja-newsletter form {display: flex; gap: .5rem;}
+.asanja-newsletter input {width: clamp(170px, 22vw, 270px); min-height: 41px; padding: .5rem .85rem; border: 1px solid #7e7c78; border-radius: 0; background: transparent; color: #515159; font: inherit;}
+.asanja-newsletter button {min-height: 41px; padding: .5rem 1.1rem; border: 1px solid #7e7c78; border-radius: 0; background: transparent; color: #515159; cursor: pointer; font: inherit; font-size: .82rem; letter-spacing: .04em; text-transform: uppercase;}
+.asanja-newsletter button:hover, .asanja-newsletter button:focus-visible {background: #55664c; border-color: #55664c; color: #fff;}
+.asanja-newsletter button:disabled {cursor: wait; opacity: .65;}
+.asanja-newsletter [role="status"] {flex-basis: 100%; margin: 0; color: #515159; font-size: .76rem; text-align: right;}
+.asanja-visually-hidden {position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;}
+.asanja-footer-links {display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem; padding: 2rem 0 3rem;}
+.asanja-footer-links h2 {margin: 0 0 .85rem; color: #515159; font-size: 1rem; font-weight: 400; letter-spacing: .12em; text-transform: uppercase;}
+.asanja-footer-links a {display: block; width: fit-content; line-height: 1.55;}
+.asanja-footer-links a:hover, .asanja-footer-links a:focus-visible {color: #55664c; text-decoration: underline; text-underline-offset: .2em;}
+.asanja-footer-socials {display: flex; align-items: center; gap: 1.3rem;}
+.asanja-footer-socials a {display: inline-flex; align-items: center; justify-content: center; width: 25px; height: 26px; color: #515159;}
+.asanja-footer-socials svg {display: block; width: 23px; height: 23px;}
+.asanja-social-facebook {font-family: Arial, sans-serif; font-size: 26px; font-weight: 700; line-height: 1;}
+.asanja-social-tripadvisor {font-size: 15px; font-weight: 700; letter-spacing: -.24em; padding-right: .24em;}
+.asanja-footer-bottom {display: flex; align-items: center; gap: 1.5rem; min-height: 115px; padding: 1rem clamp(1.25rem, 3vw, 3rem); background: #55664c; color: #f5f2ee; font-size: .78rem;}
+.asanja-footer-bottom img {display: block; width: 78px; height: 64px; object-fit: contain;}
+.asanja-footer-bottom p {margin: 0 0 .55rem;}
+.asanja-footer-bottom a:hover, .asanja-footer-bottom a:focus-visible {text-decoration: underline;}
+@media (max-width: 800px) {
+  .asanja-footer-main {width: min(100% - 3rem, 1450px);}
+  .asanja-footer-top {align-items: flex-start; flex-direction: column; gap: 2rem;}
+  .asanja-newsletter {justify-content: flex-start;}
+  .asanja-footer-links {grid-template-columns: repeat(2, minmax(0, 1fr));}
+}
+@media (max-width: 520px) {
+  .asanja-site-header {min-height: 72px; padding: .7rem 1rem;}
+  .asanja-header-logo img {width: 154px;}
+  .asanja-header-actions {gap: .7rem;}
+  .asanja-quote-link {min-height: 36px; padding: .4rem .6rem; font-size: .62rem;}
+  .asanja-menu-panel {right: -.5rem; top: calc(100% + 15px);}
+  .asanja-footer-main {width: calc(100% - 2rem);}
+  .asanja-footer-top {padding: 2.5rem 0 2rem;}
+  .asanja-newsletter {align-items: flex-start; flex-direction: column; gap: .75rem; width: 100%;}
+  .asanja-newsletter h2 {text-align: left;}
+  .asanja-newsletter form {width: 100%;}
+  .asanja-newsletter input {width: 100%; min-width: 0;}
+  .asanja-footer-links {gap: 2rem 1rem; padding: 2rem 0;}
+  .asanja-footer-socials {gap: .75rem;}
+  .asanja-footer-bottom {align-items: flex-start; min-height: 0; padding: 1.25rem 1rem;}
+  .asanja-footer-bottom img {width: 56px; height: 56px;}
+}

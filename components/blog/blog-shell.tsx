@@ -1,59 +1,68 @@
 import Link from 'next/link'
 import type {ReactNode} from 'react'
+import {NewsletterSignup} from './newsletter-signup'
 import '../../app/sanity-blog.css'
+
+const footerGroups = [
+  {title: 'Experience', links: [{label: 'Our Camps', href: '/camps-and-lodges/'}, {label: 'Safaris', href: '/safaris/'}, {label: 'Experiences', href: '/experiences/'}]},
+  {title: 'About', links: [{label: 'Our Story', href: '/about/'}, {label: 'FAQ', href: '/faqs/'}]},
+  {title: 'Contact', links: [{label: 'General enquiries', href: '/contact/'}, {label: 'Plan my stay', href: '/plan-my-stay/'}, {label: 'Terms & Conditions', href: '/terms/'}]},
+]
 
 export function BlogShell({children, className = ''}: {children: ReactNode; className?: string}) {
   return (
-    <div className={`sanity-blog ${className}`}>
+    <div className={`sanity-blog asanja-shared-shell ${className}`}>
       <a className="skip-link" href="#main-content">Skip to content</a>
-      <header className="blog-header">
-        <Link className="blog-logo" href="/" aria-label="Asanja Africa home">
-          <img
-            src="/legacy/wp-content/uploads/2020/08/Asanja_Logo_clean.svg"
-            alt="Asanja Africa"
-            width={184}
-            height={52}
-          />
+      <header className="asanja-site-header">
+        <Link className="asanja-header-logo" href="/" aria-label="Asanja Africa home">
+          <img src="/legacy/wp-content/uploads/2020/08/Asanja_Logo_clean.svg" alt="Asanja Africa" width={281} height={52} />
         </Link>
-        <nav aria-label="Main navigation">
-          <Link href="/about/">Asanja Story</Link>
-          <Link href="/camps-and-lodges/">Camps &amp; Lodges</Link>
-          <Link href="/safaris/">Safaris</Link>
-          <Link href="/experiences/">Experiences</Link>
-          <Link href="/blogs/">Journal</Link>
-        </nav>
-        <Link className="outline-button" href="/make-a-booking/">Request a quote</Link>
+        <div className="asanja-header-actions">
+          <Link className="asanja-quote-link" href="/plan-my-stay/">Request a quote</Link>
+          <details className="asanja-menu">
+            <summary aria-label="Toggle Asanja navigation"><span className="asanja-menu-icon" aria-hidden="true"><span/><span/><span/></span></summary>
+            <nav className="asanja-menu-panel" aria-label="Asanja navigation">
+              <Link href="/about/">Asanja Story</Link>
+              <Link href="/camps-and-lodges/">Camps &amp; Lodges</Link>
+              <Link href="/safaris/">Safaris</Link>
+              <Link href="/experiences/">Experiences</Link>
+              <Link href="/asanja-reviews/">Asanja Reviews</Link>
+              <Link href="/blogs/">Journal</Link>
+              <Link href="/faqs/">FAQs</Link>
+              <Link href="/contact/">Contact Us</Link>
+            </nav>
+          </details>
+        </div>
       </header>
       <main id="main-content">{children}</main>
-      <footer className="blog-footer">
-        <div>
-          <img
-            src="/legacy/wp-content/uploads/2024/04/asanja_logo_with_slogan_dark-03.svg"
-            alt="Asanja Africa — Open hearts and wild spirits"
-            width={210}
-            height={90}
-          />
-          <p>Unforgettable safari experiences in Tanzania.</p>
+      <footer className="asanja-site-footer">
+        <div className="asanja-footer-main">
+          <div className="asanja-footer-top">
+            <Link href="/" aria-label="Asanja Africa home">
+              <img className="asanja-footer-logo" src="/legacy/wp-content/uploads/2024/04/asanja_logo_with_slogan_dark-03.svg" alt="Asanja Africa — Open Hearts and Wild Spirits" width={430} height={108} loading="lazy" />
+            </Link>
+            <NewsletterSignup />
+          </div>
+          <div className="asanja-footer-links">
+            {footerGroups.map((group) => <div key={group.title}>
+              <h2>{group.title}</h2>
+              {group.links.map((link) => <Link key={link.href} href={link.href}>{link.label}</Link>)}
+            </div>)}
+            <div>
+              <h2>Socials</h2>
+              <div className="asanja-footer-socials">
+                <a href="https://www.facebook.com/Asanja.Africa/" target="_blank" rel="noopener noreferrer" aria-label="Asanja Africa on Facebook"><span aria-hidden="true" className="asanja-social-facebook">f</span></a>
+                <a href="https://www.instagram.com/asanjaafrica/?hl=en" target="_blank" rel="noopener noreferrer" aria-label="Asanja Africa on Instagram"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="18" cy="6" r="1" fill="currentColor" stroke="none"/></svg></a>
+                <a href="https://www.youtube.com/channel/UCMgdhTrY5qC9-FWYX8APIsg" target="_blank" rel="noopener noreferrer" aria-label="Asanja Africa on YouTube"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><rect x="1" y="4" width="22" height="16" rx="4"/><path d="m10 8 6 4-6 4z" fill="#f5f2ee"/></svg></a>
+                <a href="https://www.tripadvisor.com/Search?geo=6&q=asanja&ssrc=h" target="_blank" rel="noopener noreferrer" aria-label="Asanja Africa on Tripadvisor"><span aria-hidden="true" className="asanja-social-tripadvisor">◉◉</span></a>
+              </div>
+            </div>
+          </div>
         </div>
-        <div>
-          <h2>Explore</h2>
-          <Link href="/camps-and-lodges/">Our Camps</Link>
-          <Link href="/safaris/">Safaris</Link>
-          <Link href="/experiences/">Experiences</Link>
+        <div className="asanja-footer-bottom">
+          <img src="/legacy/wp-content/uploads/2020/08/Asanja-web-badge-04.svg" alt="" width={82} height={64} loading="lazy" />
+          <div><p>© {new Date().getFullYear()} Asanja Africa. All Rights Reserved. &nbsp;|&nbsp; Created with Love by <a href="https://asanjaafrica.com/" target="_blank" rel="noopener noreferrer">ASANJA</a></p><Link href="/privacy-policy/">Privacy Policy</Link></div>
         </div>
-        <div>
-          <h2>About</h2>
-          <Link href="/about/">Our Story</Link>
-          <Link href="/faqs/">FAQ</Link>
-          <Link href="/contact/">Contact</Link>
-        </div>
-        <div>
-          <h2>Plan your stay</h2>
-          <Link href="/make-a-booking/">Make a booking</Link>
-          <Link href="/plan-my-stay/">Help me plan</Link>
-          <Link href="/terms/">Terms &amp; conditions</Link>
-        </div>
-        <p className="blog-copyright">© {new Date().getFullYear()} Asanja Africa. All rights reserved.</p>
       </footer>
     </div>
   )

@@ -1,13 +1,7 @@
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID?.trim()
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET?.trim()
-
-if (!projectId) {
-  throw new Error('Missing NEXT_PUBLIC_SANITY_PROJECT_ID')
-}
-
-if (!dataset) {
-  throw new Error('Missing NEXT_PUBLIC_SANITY_DATASET')
-}
+// Public, owner-verified identifiers for this single-project site. Deployment
+// environment variables can override them when targeting another Sanity project.
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID?.trim() || 'mduy4p4u'
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET?.trim() || 'production'
 
 export const sanityEnv = {
   projectId,

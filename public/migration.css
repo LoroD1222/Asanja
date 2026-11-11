@@ -344,14 +344,490 @@ body.page-id-414 .elementor-widget-text-editor a {
 /* The WordPress backup references WPForms shortcodes, but does not contain the
  * WPForms plugin. Use the complete Elementor forms retained directly beside
  * those shortcodes so booking and trip-planning pages remain usable. */
-body.page-id-1078 .elementor-element.elementor-element-a852b01,
-body.page-id-2749 .elementor-element.elementor-element-56de3f5 {
+body.page-id-1078 .elementor-element.elementor-element-a852b01 {
   display: none !important;
 }
 
-body.page-id-1078 .elementor-element.elementor-element-e0aedeb,
-body.page-id-2749 .elementor-element.elementor-element-6dec466 {
+body.page-id-1078 .elementor-element.elementor-element-e0aedeb {
   display: block !important;
+}
+
+body.page-id-2749 .elementor-element.elementor-element-6dec466,
+body.page-id-2749 .elementor-element.elementor-element-66a375d {
+  display: none !important;
+}
+
+/* Native forms replace WordPress plugin shortcodes that cannot run in the
+ * preserved static markup. They post to the existing Next.js form endpoint. */
+.asanja-contact-form,
+.asanja-contact-form *,
+.asanja-trip-planner,
+.asanja-trip-planner * {
+  box-sizing: border-box;
+}
+
+.asanja-contact-form__grid,
+.asanja-plan-form__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px 18px;
+}
+
+.asanja-contact-form label,
+.asanja-plan-form label {
+  display: grid;
+  gap: 8px;
+  color: #515159;
+  font: 500 14px/1.35 Commissioner, Arial, sans-serif;
+}
+
+.asanja-contact-form__message,
+.asanja-plan-form__message {
+  grid-column: 1 / -1;
+}
+
+.asanja-contact-form input,
+.asanja-contact-form textarea,
+.asanja-plan-form input,
+.asanja-plan-form select,
+.asanja-plan-form textarea {
+  width: 100%;
+  min-height: 52px;
+  padding: 13px 15px;
+  border: 1px solid #d9d7d2;
+  border-radius: 3px;
+  outline: 0;
+  background: #fff;
+  color: #34363a;
+  font: 400 15px/1.45 Commissioner, Arial, sans-serif;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.asanja-contact-form textarea,
+.asanja-plan-form textarea {
+  min-height: 132px;
+  resize: vertical;
+}
+
+.asanja-contact-form input:focus,
+.asanja-contact-form textarea:focus,
+.asanja-plan-form input:focus,
+.asanja-plan-form select:focus,
+.asanja-plan-form textarea:focus {
+  border-color: #596c52;
+  box-shadow: 0 0 0 3px rgb(89 108 82 / 12%);
+}
+
+.asanja-form-button {
+  display: inline-flex;
+  min-height: 54px;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 24px;
+  padding: 14px 20px;
+  border: 0;
+  border-radius: 30px;
+  background: #596c52;
+  color: #fff;
+  font: 600 15px/1 Commissioner, Arial, sans-serif;
+  cursor: pointer;
+  transition: background-color 180ms ease, transform 180ms ease;
+}
+
+.asanja-form-button span[aria-hidden="true"] {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff;
+  color: #596c52;
+  font-size: 20px;
+}
+
+.asanja-form-button:hover,
+.asanja-form-button:focus-visible {
+  background: #465b42;
+  transform: translateY(-1px);
+}
+
+.asanja-form-button:disabled {
+  opacity: .62;
+  cursor: wait;
+  transform: none;
+}
+
+body.page-id-2749 .elementor-element.elementor-element-12eb906 {
+  --padding-top: 80px;
+  --padding-bottom: 80px;
+  --padding-left: 40px;
+  --padding-right: 40px;
+}
+
+body.page-id-2749 .elementor-element.elementor-element-d79dcd7 {
+  width: 100%;
+}
+
+.asanja-trip-planner {
+  display: grid;
+  grid-template-columns: minmax(300px, .86fr) minmax(560px, 1.14fr);
+  gap: clamp(45px, 6vw, 100px);
+  width: min(1440px, 100%);
+  margin: 0 auto;
+  color: #252b28;
+  font-family: Commissioner, Arial, sans-serif;
+}
+
+.asanja-trip-planner__intro {
+  align-self: center;
+}
+
+.asanja-trip-planner__eyebrow {
+  margin: 0 0 12px;
+  color: #b88d60;
+  font-size: 13px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.asanja-trip-planner__intro h2 {
+  margin: 0;
+  color: #111;
+  font: 400 clamp(42px, 4.2vw, 68px)/1.05 "Castoro Titling", Georgia, serif;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.asanja-trip-planner__lead {
+  max-width: 610px;
+  margin: 42px 0 44px;
+  color: #656760;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.asanja-trip-planner__steps {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid #d8d5cf;
+  list-style: none;
+}
+
+.asanja-trip-planner__steps li {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 20px;
+  align-items: start;
+  padding: 25px 0;
+  border-bottom: 1px solid #d8d5cf;
+}
+
+.asanja-trip-planner__steps li > span {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border: 1px solid #c9c6bf;
+  border-radius: 50%;
+}
+
+.asanja-trip-planner__steps strong,
+.asanja-trip-planner__steps small {
+  display: block;
+}
+
+.asanja-trip-planner__steps strong {
+  margin: 2px 0 4px;
+  font-size: 16px;
+}
+
+.asanja-trip-planner__steps small,
+.asanja-trip-planner__agent-note {
+  color: #7b7b75;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.asanja-trip-planner__whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 38px;
+  padding: 14px 16px 14px 20px;
+  border-radius: 28px;
+  background: #596c52;
+  color: #fff !important;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.asanja-trip-planner__whatsapp span {
+  display: grid;
+  width: 31px;
+  height: 31px;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff;
+  color: #596c52;
+  font-size: 19px;
+}
+
+.asanja-trip-planner__agent-note {
+  margin: 38px 0 0;
+}
+
+.asanja-plan-form {
+  align-self: start;
+  padding: clamp(30px, 4vw, 58px);
+  background: #fbfaf7;
+  box-shadow: 0 11px 30px rgb(51 50 44 / 10%);
+}
+
+.asanja-plan-form__heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.asanja-plan-form__heading h3 {
+  margin: 0;
+  color: #252b28;
+  font: 400 clamp(25px, 2.1vw, 34px)/1.1 "Castoro Titling", Georgia, serif;
+}
+
+.asanja-plan-form__heading span {
+  color: #777971;
+  font-size: 12px;
+}
+
+.asanja-plan-form__progress {
+  height: 3px;
+  margin: 30px 0 34px;
+  overflow: hidden;
+  background: #e4e2dc;
+}
+
+.asanja-plan-form__progress span {
+  display: block;
+  width: 50%;
+  height: 100%;
+  background: #596c52;
+  transition: width 250ms ease;
+}
+
+.asanja-plan-form select {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, #85877f 50%), linear-gradient(135deg, #85877f 50%, transparent 50%);
+  background-position: calc(100% - 18px) 23px, calc(100% - 13px) 23px;
+  background-repeat: no-repeat;
+  background-size: 5px 5px, 5px 5px;
+}
+
+.asanja-plan-form__choices {
+  margin: 32px 0 0;
+  padding: 0;
+  border: 0;
+}
+
+.asanja-plan-form__choices legend {
+  margin-bottom: 13px;
+  color: #51534f;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.asanja-plan-form__choices > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.asanja-plan-form__choices label {
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+
+.asanja-plan-form__choices input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  min-height: 0;
+  opacity: 0;
+}
+
+.asanja-plan-form__choices label span {
+  display: block;
+  padding: 10px 16px;
+  border: 1px solid #dedbd5;
+  border-radius: 24px;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 400;
+  transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease;
+}
+
+.asanja-plan-form__choices input:checked + span {
+  border-color: #596c52;
+  background: #596c52;
+  color: #fff;
+}
+
+.asanja-plan-form__choices input:focus-visible + span {
+  outline: 2px solid #596c52;
+  outline-offset: 2px;
+}
+
+.asanja-plan-form__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 34px;
+}
+
+.asanja-plan-form__actions--end {
+  justify-content: flex-end;
+  padding-right: 92px;
+}
+
+.asanja-plan-form__actions .asanja-form-button {
+  margin-top: 0;
+}
+
+.asanja-plan-form__back {
+  padding: 12px 0;
+  border: 0;
+  background: transparent;
+  color: #596c52;
+  font: 600 14px/1 Commissioner, Arial, sans-serif;
+  cursor: pointer;
+}
+
+.asanja-plan-form__prompt {
+  margin: 0 0 26px;
+  color: #656760;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+/* Keep the homepage experience feature composed at laptop/tablet sizes. */
+@media (max-width: 1024px) {
+  body.page-id-9 .elementor-element.elementor-element-65d6d4a {
+    overflow: hidden;
+    --align-items: stretch;
+    --padding-left: 30px;
+    --padding-right: 30px;
+  }
+
+  body.page-id-9 .elementor-element.elementor-element-5dbe47a {
+    width: 100%;
+    --content-width: 100%;
+    --align-items: flex-end;
+  }
+
+  body.page-id-9 .elementor-element.elementor-element-5dbe47a > .e-con-inner {
+    width: min(100%, 570px);
+    margin-left: auto;
+  }
+
+  body.page-id-9 .elementor-element.elementor-element-80182b6 .elementor-heading-title {
+    font-size: clamp(48px, 8vw, 72px);
+    line-height: .98;
+  }
+}
+
+@media (max-width: 900px) {
+  .asanja-trip-planner {
+    grid-template-columns: 1fr;
+  }
+
+  .asanja-trip-planner__intro {
+    width: min(680px, 100%);
+  }
+}
+
+@media (max-width: 767px) {
+  body.page-id-2749 .elementor-element.elementor-element-12eb906 {
+    --padding-top: 45px;
+    --padding-bottom: 45px;
+    --padding-left: 15px;
+    --padding-right: 15px;
+  }
+
+  .asanja-contact-form__grid,
+  .asanja-plan-form__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .asanja-contact-form__message,
+  .asanja-plan-form__message {
+    grid-column: auto;
+  }
+
+  .asanja-trip-planner {
+    gap: 42px;
+  }
+
+  .asanja-trip-planner__intro h2 {
+    font-size: clamp(38px, 12vw, 54px);
+    letter-spacing: .045em;
+  }
+
+  .asanja-trip-planner__lead {
+    margin: 28px 0 32px;
+    font-size: 15px;
+  }
+
+  .asanja-trip-planner__steps li {
+    grid-template-columns: 38px 1fr;
+    gap: 14px;
+  }
+
+  .asanja-trip-planner__steps li > span {
+    width: 36px;
+    height: 36px;
+  }
+
+  .asanja-plan-form {
+    padding: 26px 20px;
+  }
+
+  .asanja-plan-form__choices label span {
+    padding: 9px 13px;
+  }
+
+  .asanja-plan-form__actions {
+    align-items: stretch;
+  }
+
+  .asanja-plan-form__actions--end {
+    padding-right: 0;
+  }
+
+  .asanja-plan-form__actions .asanja-form-button {
+    flex: 1;
+  }
+
+  body.page-id-9 .elementor-element.elementor-element-65d6d4a {
+    --padding-left: 18px;
+    --padding-right: 18px;
+  }
+
+  body.page-id-9 .elementor-element.elementor-element-5dbe47a > .e-con-inner {
+    width: 100%;
+  }
+
+  body.page-id-9 .elementor-element.elementor-element-80182b6 {
+    text-align: start;
+  }
+
+  body.page-id-9 .elementor-element.elementor-element-80182b6 .elementor-heading-title {
+    font-size: clamp(42px, 14vw, 58px);
+  }
 }
 
 .asanja-honeypot {
@@ -441,6 +917,7 @@ body.single-asanja_safaris .elementor-2090 h2.elementor-heading-title {
 .asanja-carousel-fallback > .swiper-wrapper > .swiper-slide {
   box-sizing: border-box;
   width: auto !important;
+  max-width: var(--asanja-carousel-slide-width, 100%);
   min-width: 0;
   flex: 0 0 var(--asanja-carousel-slide-width, 100%);
 }

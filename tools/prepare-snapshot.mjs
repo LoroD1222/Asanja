@@ -252,7 +252,103 @@ function secureExternalLinks(html) {
   });
 }
 
+function removeDivByDataId(html, dataId) {
+  const openingPattern = new RegExp(`<div\\b[^>]*\\bdata-id=["']${dataId}["'][^>]*>`, 'i');
+  const opening = openingPattern.exec(html);
+  if (!opening) return html;
+
+  const tags = /<\/?div\b[^>]*>/gi;
+  tags.lastIndex = opening.index;
+  let depth = 0;
+  let match;
+  while ((match = tags.exec(html))) {
+    depth += match[0].startsWith('</') ? -1 : 1;
+    if (depth === 0) return html.slice(0, opening.index) + html.slice(tags.lastIndex);
+  }
+  return html;
+}
+
+const contactForm = `
+<form id="contact-form" class="asanja-contact-form" method="post" name="Contact_form" aria-label="Send us a message">
+  <div class="asanja-contact-form__grid">
+    <label><span>Full name</span><input type="text" name="name" autocomplete="name" placeholder="Your name" required></label>
+    <label><span>Email address</span><input type="email" name="email" autocomplete="email" placeholder="you@example.com" required></label>
+    <label><span>Phone / WhatsApp</span><input type="tel" name="phone" autocomplete="tel" placeholder="+255 ..."></label>
+    <label><span>Subject</span><input type="text" name="subject" placeholder="How can we help?"></label>
+    <label class="asanja-contact-form__message"><span>Your message</span><textarea name="message" rows="6" placeholder="Tell us about your safari plans" required></textarea></label>
+  </div>
+  <button class="asanja-form-button" type="submit"><span>Send message</span><span aria-hidden="true">↗</span></button>
+</form>`;
+
+const planYourTripForm = `
+<section class="asanja-trip-planner" aria-labelledby="asanja-trip-planner-title">
+  <div class="asanja-trip-planner__intro">
+    <p class="asanja-trip-planner__eyebrow">Tailor-made by Asanja</p>
+    <h2 id="asanja-trip-planner-title">Plan your trip</h2>
+    <p class="asanja-trip-planner__lead">Tell us a little about your safari. A planner who knows every Asanja camp will send you a tailored itinerary and price, with no obligation.</p>
+    <ol class="asanja-trip-planner__steps" aria-label="How planning works">
+      <li><span>1</span><div><strong>Tell us your plans</strong><small>Dates, who’s coming and what you’d love to see.</small></div></li>
+      <li><span>2</span><div><strong>Get your itinerary within 24 hours</strong><small>Tailored to you, by email or WhatsApp.</small></div></li>
+      <li><span>3</span><div><strong>Book and pack</strong><small>We’ll take care of everything from the airstrip onwards.</small></div></li>
+    </ol>
+    <a class="asanja-trip-planner__whatsapp" href="https://api.whatsapp.com/send?phone=255685700000" target="_blank" rel="noopener noreferrer">WhatsApp us <span aria-hidden="true">↗</span></a>
+    <p class="asanja-trip-planner__agent-note">Booking through an agent? We work with travel agents worldwide.</p>
+  </div>
+  <form class="asanja-plan-form" method="post" name="Plan_your_trip_form" aria-label="Plan your safari">
+    <div class="asanja-plan-form__heading"><h3>Your safari</h3><span data-plan-step-label>Step 1 of 2</span></div>
+    <div class="asanja-plan-form__progress" aria-hidden="true"><span data-plan-progress></span></div>
+    <div class="asanja-plan-form__panel" data-plan-step="1">
+      <div class="asanja-plan-form__grid">
+        <label><span>When would you like to travel?</span><select name="travel_time"><option value="Not sure yet">Not sure yet</option><option value="January to March">January to March</option><option value="April to June">April to June</option><option value="July to September">July to September</option><option value="October to December">October to December</option></select></label>
+        <label><span>How many nights?</span><select name="nights"><option value="3 to 4">3 to 4</option><option value="5 to 7" selected>5 to 7</option><option value="8 to 10">8 to 10</option><option value="More than 10">More than 10</option></select></label>
+        <label><span>Adults</span><select name="adults"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6+</option></select></label>
+        <label><span>Children under 12</span><select name="children"><option selected>0</option><option>1</option><option>2</option><option>3</option><option>4+</option></select></label>
+      </div>
+      <fieldset class="asanja-plan-form__choices"><legend>Which camps interest you?</legend><div>
+        <label><input type="checkbox" name="camp_moru" value="Moru"><span>Moru</span></label>
+        <label><input type="checkbox" name="camp_siri_bustani" value="Siri Bustani"><span>Siri Bustani</span></label>
+        <label><input type="checkbox" name="camp_nyasirori" value="Nyasirori"><span>Nyasirori</span></label>
+        <label><input type="checkbox" name="camp_ewasi_tarangire" value="Ewasi Tarangire"><span>Ewasi Tarangire</span></label>
+        <label><input type="checkbox" name="camp_ndembo_ruaha" value="Ndembo Ruaha"><span>Ndembo Ruaha</span></label>
+        <label><input type="checkbox" name="camp_under_the_stars" value="Under the Stars"><span>Under the Stars</span></label>
+      </div></fieldset>
+      <fieldset class="asanja-plan-form__choices"><legend>What’s the occasion?</legend><div>
+        <label><input type="radio" name="occasion" value="Honeymoon"><span>Honeymoon</span></label>
+        <label><input type="radio" name="occasion" value="Family safari"><span>Family safari</span></label>
+        <label><input type="radio" name="occasion" value="The migration"><span>The migration</span></label>
+        <label><input type="radio" name="occasion" value="Photography"><span>Photography</span></label>
+        <label><input type="radio" name="occasion" value="Anniversary"><span>Anniversary</span></label>
+        <label><input type="radio" name="occasion" value="Safari and Zanzibar"><span>Safari and Zanzibar</span></label>
+      </div></fieldset>
+      <div class="asanja-plan-form__actions asanja-plan-form__actions--end"><button class="asanja-form-button" type="button" data-plan-next>Continue <span aria-hidden="true">↗</span></button></div>
+    </div>
+    <div class="asanja-plan-form__panel" data-plan-step="2" hidden>
+      <p class="asanja-plan-form__prompt">Where should we send your personalised safari plan?</p>
+      <div class="asanja-plan-form__grid">
+        <label><span>First name</span><input type="text" name="first_name" autocomplete="given-name" required></label>
+        <label><span>Last name</span><input type="text" name="last_name" autocomplete="family-name" required></label>
+        <label><span>Email address</span><input type="email" name="email" autocomplete="email" required></label>
+        <label><span>Phone / WhatsApp</span><input type="tel" name="phone" autocomplete="tel"></label>
+        <label class="asanja-plan-form__message"><span>Anything else we should know?</span><textarea name="message" rows="5" placeholder="Interests, mobility needs, dietary requirements or a special celebration"></textarea></label>
+      </div>
+      <div class="asanja-plan-form__actions"><button class="asanja-plan-form__back" type="button" data-plan-back>← Back</button><button class="asanja-form-button" type="submit">Send my plans <span aria-hidden="true">↗</span></button></div>
+    </div>
+  </form>
+</section>`;
+
+function restoreFormsAndRequestedContent(html, route) {
+  if (route === '/contact/') {
+    html = html.replace(/<div class="elementor-shortcode">\s*\[wpforms id="5818" title="false"\]\s*<\/div>/i, contactForm);
+  }
+  if (route === '/plan-my-stay/') {
+    html = html.replace(/<div class="elementor-shortcode">\s*\[wpforms id="5916" title="false"\]\s*<\/div>/i, planYourTripForm);
+  }
+  if (route === '/experiences/') html = removeDivByDataId(html, '245e745');
+  return html;
+}
+
 function optimizeSeo(html, route) {
+  html = restoreFormsAndRequestedContent(html, route);
   const seo = seoByRoute[route] ?? {
     keywords: 'Tanzania luxury safaris, Serengeti safari, private African safari, Asanja Africa',
   };

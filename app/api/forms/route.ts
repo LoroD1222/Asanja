@@ -32,6 +32,80 @@ function successRedirect(type: string) {
   return null;
 }
 
+function escapeHtml(value: string) {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;');
+}
+
+function fieldLabel(value: string) {
+  return value
+    .replace(/^form_fields\[|\]$/g, '')
+    .replaceAll('_', ' ')
+    .replace(/\b\w/g, (letter) => letter.toUpperCase());
+}
+
+function formTitle(type: string) {
+  if (type === 'trip-planning') return 'New safari planning request';
+  if (type === 'booking') return 'New booking request';
+  if (type === 'newsletter') return 'New newsletter signup';
+  return 'New website enquiry';
+}
+
+async function deliverWithResend(payload: Submission, type: string, email: string) {
+  const apiKey = process.env.RESEND_API_KEY;
+  const from = process.env.FORM_FROM_EMAIL;
+  const to = (process.env.FORM_TO_EMAIL || '').split(',').map((value) => value.trim()).filter(Boolean);
+  if (!apiKey || !from || !to.length) return null;
+
+  const visibleFields = Object.entries(payload.fields).filter(([key]) => key !== 'website');
+  const subject = formTitle(type);
+  const text = [
+    subject,
+    `Page: ${payload.page}`,
+    '',
+    ...visibleFields.map(([key, value]) => `${fieldLabel(key)}: ${value}`),
+  ].join('\n');
+  const rows = visibleFields.map(([key, value]) => (
+    `<tr><th align="left" style="padding:8px 14px 8px 0;vertical-align:top">${escapeHtml(fieldLabel(key))}</th>`
+    + `<td style="padding:8px 0;white-space:pre-wrap">${escapeHtml(value)}</td></tr>`
+  )).join('');
+
+  return fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      from,
+      to,
+      subject,
+      reply_to: email,
+      text,
+      html: `<h1>${escapeHtml(subject)}</h1><p><strong>Page:</strong> ${escapeHtml(payload.page)}</p><table>${rows}</table>`,
+    }),
+    signal: AbortSignal.timeout(10_000),
+  });
+}
+
+async function deliverWithWebhook(payload: Submission, type: string) {
+  const webhook = process.env.FORM_WEBHOOK_URL;
+  if (!webhook) return null;
+  return fetch(webhook, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      ...(process.env.FORM_WEBHOOK_SECRET ? { Authorization: `Bearer ${process.env.FORM_WEBHOOK_SECRET}` } : {}),
+    },
+    body: JSON.stringify({ ...payload, type, submittedAt: new Date().toISOString() }),
+    signal: AbortSignal.timeout(10_000),
+  });
+}
+
 export async function POST(request: Request) {
   const contentLength = Number(request.headers.get('content-length') || 0);
   if (contentLength > 50_000) {
@@ -61,31 +135,22 @@ export async function POST(request: Request) {
   }
   attempts.set(client, [...recent, now]);
 
-  const webhook = process.env.FORM_WEBHOOK_URL;
-  if (!webhook) {
+  const type = submissionType(payload.form);
+  let response: Response | null;
+  try {
+    response = await deliverWithResend(payload, type, email) ?? await deliverWithWebhook(payload, type);
+  } catch {
+    return Response.json({ ok: false, message: 'Submission delivery failed.' }, { status: 502 });
+  }
+
+  if (!response) {
     return Response.json(
       {
         ok: false,
-        message: 'The form is ready, but FORM_WEBHOOK_URL must be configured before submissions can be delivered.',
+        message: 'The form is ready, but email delivery must be configured before submissions can be delivered.',
       },
       { status: 503 },
     );
-  }
-
-  const type = submissionType(payload.form);
-  let response: Response;
-  try {
-    response = await fetch(webhook, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        ...(process.env.FORM_WEBHOOK_SECRET ? { Authorization: `Bearer ${process.env.FORM_WEBHOOK_SECRET}` } : {}),
-      },
-      body: JSON.stringify({ ...payload, type, submittedAt: new Date().toISOString() }),
-      signal: AbortSignal.timeout(10_000),
-    });
-  } catch {
-    return Response.json({ ok: false, message: 'Submission delivery failed.' }, { status: 502 });
   }
 
   if (!response.ok) {

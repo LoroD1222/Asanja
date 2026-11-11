@@ -235,10 +235,13 @@
     }
 
     function render({ animate = true } = {}) {
-      const firstSlide = originalSlides[0];
-      if (!firstSlide) return;
+      const targetSlide = slides[physicalIndex];
+      if (!targetSlide) return;
       wrapper.style.transitionDuration = `${animate && !reduceMotion ? speed : 0}ms`;
-      const distance = physicalIndex * (firstSlide.getBoundingClientRect().width + gap);
+      // Align the requested slide to the actual mask edge. Multiplying the
+      // first slide width accumulates responsive rounding errors on later
+      // slides, especially when the widget adds a variable gap.
+      const distance = targetSlide.offsetLeft;
       wrapper.style.transform = `translate3d(${-distance}px, 0, 0)`;
       originalSlides.forEach((slide, slideIndex) => {
         slide.classList.toggle('asanja-slide-active', slideIndex === index);
@@ -837,6 +840,37 @@
     initializeAccordions();
     initializeLightbox();
     initializeWhatsAppWidget();
+    initializePlanForm();
+  }
+
+  function initializePlanForm() {
+    for (const form of document.querySelectorAll('.asanja-plan-form')) {
+      if (form.dataset.asanjaPlanReady) continue;
+      form.dataset.asanjaPlanReady = 'true';
+      const panels = [...form.querySelectorAll('[data-plan-step]')];
+      const label = form.querySelector('[data-plan-step-label]');
+      const progress = form.querySelector('[data-plan-progress]');
+
+      function showStep(step) {
+        panels.forEach((panel) => { panel.hidden = Number(panel.dataset.planStep) !== step; });
+        if (label) label.textContent = `Step ${step} of ${panels.length}`;
+        if (progress) progress.style.width = `${(step / panels.length) * 100}%`;
+        if (step > 1) form.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+      }
+
+      form.querySelector('[data-plan-next]')?.addEventListener('click', () => {
+        const firstPanel = form.querySelector('[data-plan-step="1"]');
+        const invalid = [...firstPanel.querySelectorAll('input, select, textarea')]
+          .find((field) => !field.checkValidity());
+        if (invalid) {
+          invalid.reportValidity();
+          return;
+        }
+        showStep(2);
+      });
+      form.querySelector('[data-plan-back]')?.addEventListener('click', () => showStep(1));
+      showStep(1);
+    }
   }
 
   if (document.readyState === 'loading') {
@@ -861,14 +895,20 @@
       event.stopImmediatePropagation();
 
       const submitter = form.querySelector('[type="submit"]');
-      const originalLabel = submitter?.textContent;
+      const originalMarkup = submitter?.innerHTML;
       if (submitter) {
         submitter.setAttribute('disabled', 'disabled');
         submitter.textContent = 'Sending…';
       }
 
-      const values = Object.fromEntries(new FormData(form).entries());
+      const values = {};
+      for (const [key, value] of new FormData(form).entries()) {
+        const normalized = String(value);
+        values[key] = values[key] ? `${values[key]}, ${normalized}` : normalized;
+      }
+      form.querySelector('.asanja-form-status')?.remove();
       const status = document.createElement('p');
+      status.className = 'asanja-form-status';
       status.setAttribute('role', 'status');
       status.style.marginTop = '12px';
       form.append(status);
@@ -893,7 +933,7 @@
       } finally {
         if (submitter) {
           submitter.removeAttribute('disabled');
-          submitter.textContent = originalLabel;
+          submitter.innerHTML = originalMarkup;
         }
       }
     }, true);

@@ -296,7 +296,17 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				</div>
 				<div class="elementor-element elementor-element-09bba65 elementor-widget-mobile__width-initial elementor-widget elementor-widget-shortcode" data-id="09bba65" data-element_type="widget" data-e-type="widget" data-widget_type="shortcode.default">
 				<div class="elementor-widget-container">
-							<div class="elementor-shortcode">[wpforms id="5818" title="false"]</div>
+
+<form id="contact-form" class="asanja-contact-form" method="post" name="Contact_form" aria-label="Send us a message">
+  <div class="asanja-contact-form__grid">
+    <label><span>Full name</span><input type="text" name="name" autocomplete="name" placeholder="Your name" required></label>
+    <label><span>Email address</span><input type="email" name="email" autocomplete="email" placeholder="you@example.com" required></label>
+    <label><span>Phone / WhatsApp</span><input type="tel" name="phone" autocomplete="tel" placeholder="+255 ..."></label>
+    <label><span>Subject</span><input type="text" name="subject" placeholder="How can we help?"></label>
+    <label class="asanja-contact-form__message"><span>Your message</span><textarea name="message" rows="6" placeholder="Tell us about your safari plans" required></textarea></label>
+  </div>
+  <button class="asanja-form-button" type="submit"><span>Send message</span><span aria-hidden="true">↗</span></button>
+</form>
 						</div>
 				</div>
 					</div>

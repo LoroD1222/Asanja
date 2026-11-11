@@ -1,5 +1,4 @@
 import type {Metadata} from 'next'
-import {notFound} from 'next/navigation'
 import {SafariTripPage} from '../../../components/pages/safari-trip-page'
 import {publishedClient} from '../../../sanity/client'
 import {articlesQuery} from '../../../sanity/queries'
@@ -12,9 +11,9 @@ export const metadata: Metadata = {
   robots: {index: false, follow: false},
 }
 
-// This fixture is only rendered in development. It uses the existing legacy
-// "Wild Treasures of Tanzania" trip outline and existing site photographs;
-// production trips are always fetched from Sanity by slug.
+// Public, no-index demonstration only. It uses the existing legacy
+// "Wild Treasures of Tanzania" trip outline and site photographs; actual
+// published trips are always fetched from Sanity by slug.
 const image = (path: string, alt: string, width: number, height: number): SanityImage => ({
   _type: 'image', alt, asset: {url: path, metadata: {dimensions: {width, height}}},
 })
@@ -81,11 +80,10 @@ function previewTrip(introduction: PageText, relatedBlogs: ArticleCollection['ar
 }
 
 export default async function SafariTripTemplatePreview() {
-  if (process.env.NODE_ENV !== 'development') notFound()
   const collection = await publishedClient.fetch<ArticleCollection>(articlesQuery(0, 3), {includeDrafts: false}).catch(() => ({articles: [], total: 0}))
   const articles = collection.articles || []
   const first = articles[0]
-  const introduction = paragraph('This local preview shows the actual CMS-driven safari template using the route outline of an existing Asanja Africa trip. A published trip can replace this preview with its own images, itinerary, links and pricing.', 'intro-copy')
+  const introduction = paragraph('This preview shows the CMS-driven safari template using the route outline of an existing Asanja Africa trip. A published trip can replace this demonstration with its own images, itinerary, links and pricing.', 'intro-copy')
   if (first) introduction.push({
     _type: 'block', _key: 'journal-link', style: 'normal',
     markDefs: [{_key: 'cms-article', _type: 'internalLink', target: {_id: first._id, _type: 'article', slug: first.slug}}],

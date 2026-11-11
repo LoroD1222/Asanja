@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type {ReactNode} from 'react'
+import {AsanjaMenu} from './asanja-menu'
 import {NewsletterSignup} from './newsletter-signup'
 import '../../app/sanity-blog.css'
 
@@ -19,19 +20,7 @@ export function BlogShell({children, className = ''}: {children: ReactNode; clas
         </Link>
         <div className="asanja-header-actions">
           <Link className="asanja-quote-link" href="/plan-my-stay/">Request a quote</Link>
-          <details className="asanja-menu">
-            <summary aria-label="Toggle Asanja navigation"><span className="asanja-menu-icon" aria-hidden="true"><span/><span/><span/></span></summary>
-            <nav className="asanja-menu-panel" aria-label="Asanja navigation">
-              <Link href="/about/">Asanja Story</Link>
-              <Link href="/camps-and-lodges/">Camps &amp; Lodges</Link>
-              <Link href="/safaris/">Safaris</Link>
-              <Link href="/experiences/">Experiences</Link>
-              <Link href="/asanja-reviews/">Asanja Reviews</Link>
-              <Link href="/blogs/">Journal</Link>
-              <Link href="/faqs/">FAQs</Link>
-              <Link href="/contact/">Contact Us</Link>
-            </nav>
-          </details>
+          <AsanjaMenu />
         </div>
       </header>
       <main id="main-content">{children}</main>

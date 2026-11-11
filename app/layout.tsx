@@ -1,6 +1,7 @@
 import type {Metadata} from 'next'
 import {draftMode} from 'next/headers'
 import {VisualEditing} from 'next-sanity/visual-editing'
+import './safari-pages.css'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://asanjaafrica.com'),

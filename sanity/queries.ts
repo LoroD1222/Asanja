@@ -50,6 +50,7 @@ export const articleBySlugQuery = defineQuery(`
     "tagReferenceIds": tags[]._ref,
     body[]{
       ...,
+      markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}},
       asset->{url, metadata{lqip, dimensions}}
     },
     author->{

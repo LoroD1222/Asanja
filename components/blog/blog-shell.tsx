@@ -2,9 +2,9 @@ import Link from 'next/link'
 import type {ReactNode} from 'react'
 import '../../app/sanity-blog.css'
 
-export function BlogShell({children}: {children: ReactNode}) {
+export function BlogShell({children, className = ''}: {children: ReactNode; className?: string}) {
   return (
-    <div className="sanity-blog">
+    <div className={`sanity-blog ${className}`}>
       <a className="skip-link" href="#main-content">Skip to content</a>
       <header className="blog-header">
         <Link className="blog-logo" href="/" aria-label="Asanja Africa home">

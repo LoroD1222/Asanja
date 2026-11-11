@@ -6,6 +6,7 @@ export const article = defineType({
   title: 'Article',
   type: 'document',
   icon: DocumentTextIcon,
+  __experimental_search: [{path: 'title', weight: 10}, {path: 'slug.current', weight: 5}],
   groups: [
     {name: 'content', title: 'Content', default: true},
     {name: 'taxonomy', title: 'Taxonomy'},
@@ -76,6 +77,15 @@ export const article = defineType({
       type: 'array',
       group: 'taxonomy',
       of: [defineArrayMember({type: 'reference', to: [{type: 'tag'}]})],
+      validation: (rule) => rule.unique(),
+    }),
+    defineField({
+      name: 'destinations',
+      title: 'Related destinations',
+      type: 'array',
+      group: 'taxonomy',
+      description: 'Used to recommend this article on relevant safari and destination pages.',
+      of: [defineArrayMember({type: 'reference', to: [{type: 'destination'}]})],
       validation: (rule) => rule.unique(),
     }),
     defineField({

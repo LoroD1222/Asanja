@@ -1,6 +1,9 @@
 import type {MetadataRoute} from 'next'
 import {publishedClient} from '../sanity/client'
 import {sitemapArticlesQuery} from '../sanity/queries'
+import {pageSitemapQuery} from '../sanity/page-queries'
+import {pageHref} from '../sanity/page-routes'
+import type {PageTarget} from '../sanity/page-types'
 
 export const dynamic = 'force-dynamic'
 
@@ -32,13 +35,13 @@ const staticPaths = [
 ]
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const articles = await publishedClient.fetch<Array<{slug: string; lastModified?: string}>>(
-    sitemapArticlesQuery,
-    {},
-    process.env.NODE_ENV === 'development'
-      ? {cache: 'no-store'}
-      : {next: {revalidate: 300, tags: ['sanity', 'articles', 'sitemap']}},
-  )
+  const fetchOptions = process.env.NODE_ENV === 'development'
+    ? {cache: 'no-store' as const}
+    : {next: {revalidate: 300, tags: ['sanity', 'articles', 'sitemap']}}
+  const [articles, pages] = await Promise.all([
+    publishedClient.fetch<Array<{slug: string; lastModified?: string}>>(sitemapArticlesQuery, {}, fetchOptions),
+    publishedClient.fetch<Array<PageTarget & {_updatedAt?: string}>>(pageSitemapQuery, {}, fetchOptions),
+  ])
 
   return [
     ...staticPaths.map((pathname) => ({
@@ -52,5 +55,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     })),
+    ...pages.flatMap((page) => {
+      const href = pageHref(page)
+      return href ? [{url: new URL(href, siteUrl).toString(), lastModified: page._updatedAt ? new Date(page._updatedAt) : undefined, changeFrequency: 'monthly' as const, priority: page._type === 'safariTrip' || page._type === 'seoLandingPage' ? 0.8 : 0.7}] : []
+    }),
   ]
 }

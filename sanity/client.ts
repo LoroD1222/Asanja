@@ -17,9 +17,10 @@ type SanityFetchOptions = {
   query: string
   params?: QueryParams
   tags?: string[]
+  stega?: boolean
 }
 
-export async function sanityFetch<T>({query, params = {}, tags = []}: SanityFetchOptions) {
+export async function sanityFetch<T>({query, params = {}, tags = [], stega = true}: SanityFetchOptions) {
   const preview = (await draftMode()).isEnabled
   const queryParams = {...params, includeDrafts: preview}
 
@@ -43,7 +44,7 @@ export async function sanityFetch<T>({query, params = {}, tags = []}: SanityFetc
       token,
       perspective: 'drafts',
       useCdn: false,
-      stega: {enabled: true, studioUrl: sanityEnv.studioUrl},
+      stega: stega ? {enabled: true, studioUrl: sanityEnv.studioUrl} : false,
     })
     .fetch<T>(query, queryParams, {cache: 'no-store'})
 }

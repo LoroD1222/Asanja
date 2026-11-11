@@ -1,9 +1,18 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
+import {validatePublishedReferences} from '../referenceValidation'
 
 export const blockContent = defineType({
   name: 'blockContent',
   title: 'Article body',
   type: 'array',
+  validation: (rule) => rule.custom(async (blocks, context) => {
+    const references = ((blocks || []) as Array<{_type?: string; markDefs?: Array<{_type?: string; reference?: {_ref?: string}}>}>)
+      .flatMap((block) => block._type === 'block'
+        ? (block.markDefs || []).filter((mark) => mark._type === 'internalLink').map((mark) => ({_ref: mark.reference?._ref}))
+        : [])
+    const unique = [...new Map(references.map((reference) => [reference._ref, reference])).values()]
+    return unique.length ? validatePublishedReferences(unique, context) : true
+  }),
   of: [
     defineArrayMember({
       type: 'block',
@@ -28,6 +37,16 @@ export const blockContent = defineType({
           {title: 'Strike-through', value: 'strike-through'},
         ],
         annotations: [
+          defineArrayMember({
+            name: 'internalLink',
+            title: 'Internal CMS link',
+            type: 'object',
+            fields: [
+              defineField({name: 'reference', title: 'Published page', type: 'reference', to: [
+                {type: 'article'}, {type: 'safariTrip'}, {type: 'seoLandingPage'}, {type: 'destination'}, {type: 'camp'},
+              ], validation: (rule) => rule.required()}),
+            ],
+          }),
           defineArrayMember({
             name: 'link',
             title: 'Link',

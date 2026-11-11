@@ -1,6 +1,8 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import {PortableText, type PortableTextComponents} from 'next-sanity'
 import type {Article, SanityImage} from '../../sanity/types'
+import {pageHref} from '../../sanity/page-routes'
 
 function safeHref(value: unknown) {
   const href = typeof value === 'string' ? value.trim() : ''
@@ -59,6 +61,10 @@ const components: PortableTextComponents = {
     migrationNote: () => null,
   },
   marks: {
+    internalLink: ({children, value}) => {
+      const href = pageHref(value?.target)
+      return href ? <Link href={href}>{children}</Link> : <span>{children}</span>
+    },
     link: ({children, value}) => {
       const data = value as {href?: string; blank?: boolean}
       const href = safeHref(data?.href)

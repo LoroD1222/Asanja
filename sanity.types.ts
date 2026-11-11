@@ -414,9 +414,354 @@ export type AllSanitySchemaTypes =
   | SanityImageAsset
   | Geopoint;
 
+// Source: ../sanity/page-queries.ts
+// Variable: safariTripBySlugQuery
+// Query: *[_type == "safariTrip" && slug.current == $slug && (defined(slug.current) && publicationStatus != "hidden" && ($includeDrafts == true || !(_id in path("drafts.**"))) || $includeDrafts == true)][0]{    _id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}, heroEyebrow, heroImages[]{..., asset->{url, metadata{lqip, dimensions}}}, introduction[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}},    travelStyle, startLocation, endLocation, featured, highlights[]{_key, title, description},    itinerary[]{_key, dayNumber, title, description[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}},      "destination": destination->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}}, "accommodation": accommodation->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}},      activities, meals, notes, image{..., asset->{url, metadata{lqip, dimensions}}}},    routeStops[]{_key, name, dayLabel, description, "coordinates": coalesce(coordinates, destination->coordinates), "destination": destination->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}}},    "relatedDestinations": relatedDestinations[]->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}},    "relatedCamps": relatedCamps[]->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}},    wildlife[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}}, activities, bestTime[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}}, bestMonths,    gallery[]{_key, kind, caption, videoUrl, image{..., asset->{url, metadata{lqip, dimensions}}}}, pricingDescription[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}}, pricingOptions[]{_key, name, accommodationLevel, description, pricePerPerson, childPrice, groupPrices[]{_key, minAdults, maxAdults, pricePerPerson}, seasonalPrices[]{_key, label, from, to, pricePerPerson}, features},    optionalExperiences[]{_key, name, description, pricePerPerson}, customQuoteAvailable,    included, excluded, travelInformation[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}}, travelNotes,    "relatedSafariTrips": relatedSafariTrips[]->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}},    "relatedBlogs": relatedBlogs[]->{  _id,  title,  "slug": slug.current,  excerpt,  originalPublishedAt,  readingTimeMinutes,  featuredImage{    ...,    asset->{url, metadata{lqip, dimensions}}  },  author->{_id, name, "slug": slug.current},  categories[]->{_id, title, "slug": slug.current, description},  tags[]->{_id, title, "slug": slug.current, description}},    "relatedLandingPages": relatedLandingPages[]->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}},    "automaticBlogCategoryIds": automaticBlogCategories[]._ref,    "automaticBlogTagIds": automaticBlogTags[]._ref,    automaticBlogsEnabled, automaticBlogsLimit,    faqs[]{_key, question, answer[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}}, "plainAnswer": pt::text(answer)}, reviews[]{_key, name, country, quote, rating, source, sourceUrl, visitDate, image{..., asset->{url, metadata{lqip, dimensions}}}},    sections[]{_key, kind, eyebrow, heading, body[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}}, image{..., asset->{url, metadata{lqip, dimensions}}}},    bookingHeading, bookingText[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}}, seo{..., openGraphImage{..., asset->{url, metadata{lqip, dimensions}}}}  }
+export type SafariTripBySlugQueryResult = null;
+
+// Source: ../sanity/page-queries.ts
+// Variable: seoLandingPageBySlugQuery
+// Query: *[_type == "seoLandingPage" && slug.current == $slug && (defined(slug.current) && publicationStatus != "hidden" && ($includeDrafts == true || !(_id in path("drafts.**"))) || $includeDrafts == true)][0]{    _id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}, eyebrow, introduction[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}},    sections[]{_key, kind, "anchor": anchor.current, eyebrow, heading, body[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}}, image{..., asset->{url, metadata{lqip, dimensions}}},      highlights[]{_key, title, description}, statistics[]{_key, value, label}, media[]{_key, kind, caption, videoUrl, image{..., asset->{url, metadata{lqip, dimensions}}}},      "destinations": destinations[]->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}}, "camps": camps[]->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}},      "trips": trips[]->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}}, "blogs": blogs[]->{  _id,  title,  "slug": slug.current,  excerpt,  originalPublishedAt,  readingTimeMinutes,  featuredImage{    ...,    asset->{url, metadata{lqip, dimensions}}  },  author->{_id, name, "slug": slug.current},  categories[]->{_id, title, "slug": slug.current, description},  tags[]->{_id, title, "slug": slug.current, description}},      "landingPages": landingPages[]->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}},      faqs[]{_key, question, answer[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}}, "plainAnswer": pt::text(answer)}, testimonials[]{_key, name, country, quote, rating, source, sourceUrl, visitDate, image{..., asset->{url, metadata{lqip, dimensions}}}},      ctaLabel, ctaUrl, "documentUrl": document.asset->url    },    "relatedBlogs": relatedBlogs[]->{  _id,  title,  "slug": slug.current,  excerpt,  originalPublishedAt,  readingTimeMinutes,  featuredImage{    ...,    asset->{url, metadata{lqip, dimensions}}  },  author->{_id, name, "slug": slug.current},  categories[]->{_id, title, "slug": slug.current, description},  tags[]->{_id, title, "slug": slug.current, description}},    "relatedLandingPages": relatedLandingPages[]->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}},    "relatedDestinations": relatedDestinations[]->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}},    "relatedCamps": relatedCamps[]->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}},    "relatedSafariTrips": relatedSafariTrips[]->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}},    "automaticBlogCategoryIds": automaticBlogCategories[]._ref,    "automaticBlogTagIds": automaticBlogTags[]._ref,    automaticBlogsEnabled, automaticBlogsLimit, seo{..., openGraphImage{..., asset->{url, metadata{lqip, dimensions}}}}  }
+export type SeoLandingPageBySlugQueryResult = null;
+
+// Source: ../sanity/page-queries.ts
+// Variable: contentPageBySlugQuery
+// Query: *[_type == $type && slug.current == $slug && (defined(slug.current) && publicationStatus != "hidden" && ($includeDrafts == true || !(_id in path("drafts.**"))) || $includeDrafts == true)][0]{    _id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}, description[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}}, location, coordinates, wildlife[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}}, bestTime[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}},    activities, facilities, style, gallery[]{_key, kind, caption, videoUrl, image{..., asset->{url, metadata{lqip, dimensions}}}}, "destination": destination->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}},    "relatedCamps": relatedCamps[]->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}},    "relatedSafariTrips": relatedSafariTrips[]->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}},    "relatedBlogs": relatedBlogs[]->{  _id,  title,  "slug": slug.current,  excerpt,  originalPublishedAt,  readingTimeMinutes,  featuredImage{    ...,    asset->{url, metadata{lqip, dimensions}}  },  author->{_id, name, "slug": slug.current},  categories[]->{_id, title, "slug": slug.current, description},  tags[]->{_id, title, "slug": slug.current, description}}, seo{..., openGraphImage{..., asset->{url, metadata{lqip, dimensions}}}}  }
+export type ContentPageBySlugQueryResult =
+  | {
+      _id: string;
+      _type: "article";
+      title: string;
+      slug: string;
+      publicationStatus: null;
+      summary: null;
+      category: null;
+      location: null;
+      durationDays: null;
+      durationNights: null;
+      priceFrom: null;
+      currency: null;
+      heroImage: null;
+      description: null;
+      coordinates: null;
+      wildlife: null;
+      bestTime: null;
+      activities: null;
+      facilities: null;
+      style: null;
+      gallery: null;
+      destination: null;
+      relatedCamps: null;
+      relatedSafariTrips: null;
+      relatedBlogs: null;
+      seo: {
+        _type: "seo";
+        title?: string;
+        description?: string;
+        canonicalUrl?: string;
+        openGraphTitle?: string;
+        openGraphDescription?: string;
+        openGraphImage: {
+          asset: {
+            url: string;
+            metadata: {
+              lqip: string | null;
+              dimensions: SanityImageDimensions | null;
+            } | null;
+          } | null;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          alt: string;
+          _type: "image";
+        } | null;
+        focusKeyword?: string;
+        noIndex?: boolean;
+      } | null;
+    }
+  | {
+      _id: string;
+      _type: "author";
+      title: null;
+      slug: string;
+      publicationStatus: null;
+      summary: null;
+      category: null;
+      location: null;
+      durationDays: null;
+      durationNights: null;
+      priceFrom: null;
+      currency: null;
+      heroImage: null;
+      description: null;
+      coordinates: null;
+      wildlife: null;
+      bestTime: null;
+      activities: null;
+      facilities: null;
+      style: null;
+      gallery: null;
+      destination: null;
+      relatedCamps: null;
+      relatedSafariTrips: null;
+      relatedBlogs: null;
+      seo: null;
+    }
+  | {
+      _id: string;
+      _type: "category";
+      title: string;
+      slug: string;
+      publicationStatus: null;
+      summary: null;
+      category: null;
+      location: null;
+      durationDays: null;
+      durationNights: null;
+      priceFrom: null;
+      currency: null;
+      heroImage: null;
+      description: null;
+      coordinates: null;
+      wildlife: null;
+      bestTime: null;
+      activities: null;
+      facilities: null;
+      style: null;
+      gallery: null;
+      destination: null;
+      relatedCamps: null;
+      relatedSafariTrips: null;
+      relatedBlogs: null;
+      seo: null;
+    }
+  | {
+      _id: string;
+      _type: "sanity.fileAsset";
+      title: string | null;
+      slug: null;
+      publicationStatus: null;
+      summary: null;
+      category: null;
+      location: null;
+      durationDays: null;
+      durationNights: null;
+      priceFrom: null;
+      currency: null;
+      heroImage: null;
+      description: null;
+      coordinates: null;
+      wildlife: null;
+      bestTime: null;
+      activities: null;
+      facilities: null;
+      style: null;
+      gallery: null;
+      destination: null;
+      relatedCamps: null;
+      relatedSafariTrips: null;
+      relatedBlogs: null;
+      seo: null;
+    }
+  | {
+      _id: string;
+      _type: "sanity.imageAsset";
+      title: string | null;
+      slug: null;
+      publicationStatus: null;
+      summary: null;
+      category: null;
+      location: null;
+      durationDays: null;
+      durationNights: null;
+      priceFrom: null;
+      currency: null;
+      heroImage: null;
+      description: null;
+      coordinates: null;
+      wildlife: null;
+      bestTime: null;
+      activities: null;
+      facilities: null;
+      style: null;
+      gallery: null;
+      destination: null;
+      relatedCamps: null;
+      relatedSafariTrips: null;
+      relatedBlogs: null;
+      seo: null;
+    }
+  | {
+      _id: string;
+      _type: "tag";
+      title: string;
+      slug: string;
+      publicationStatus: null;
+      summary: null;
+      category: null;
+      location: null;
+      durationDays: null;
+      durationNights: null;
+      priceFrom: null;
+      currency: null;
+      heroImage: null;
+      description: null;
+      coordinates: null;
+      wildlife: null;
+      bestTime: null;
+      activities: null;
+      facilities: null;
+      style: null;
+      gallery: null;
+      destination: null;
+      relatedCamps: null;
+      relatedSafariTrips: null;
+      relatedBlogs: null;
+      seo: null;
+    }
+  | null;
+
+// Source: ../sanity/page-queries.ts
+// Variable: pageSeoBySlugQuery
+// Query: *[_type == $type && slug.current == $slug && (defined(slug.current) && publicationStatus != "hidden" && ($includeDrafts == true || !(_id in path("drafts.**"))) || $includeDrafts == true)][0]{    _id, _type, title, "slug": slug.current, summary, seo{..., openGraphImage{..., asset->{url, metadata{lqip, dimensions}}}}  }
+export type PageSeoBySlugQueryResult =
+  | {
+      _id: string;
+      _type: "article";
+      title: string;
+      slug: string;
+      summary: null;
+      seo: {
+        _type: "seo";
+        title?: string;
+        description?: string;
+        canonicalUrl?: string;
+        openGraphTitle?: string;
+        openGraphDescription?: string;
+        openGraphImage: {
+          asset: {
+            url: string;
+            metadata: {
+              lqip: string | null;
+              dimensions: SanityImageDimensions | null;
+            } | null;
+          } | null;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          alt: string;
+          _type: "image";
+        } | null;
+        focusKeyword?: string;
+        noIndex?: boolean;
+      } | null;
+    }
+  | {
+      _id: string;
+      _type: "author";
+      title: null;
+      slug: string;
+      summary: null;
+      seo: null;
+    }
+  | {
+      _id: string;
+      _type: "category";
+      title: string;
+      slug: string;
+      summary: null;
+      seo: null;
+    }
+  | {
+      _id: string;
+      _type: "sanity.fileAsset";
+      title: string | null;
+      slug: null;
+      summary: null;
+      seo: null;
+    }
+  | {
+      _id: string;
+      _type: "sanity.imageAsset";
+      title: string | null;
+      slug: null;
+      summary: null;
+      seo: null;
+    }
+  | {
+      _id: string;
+      _type: "tag";
+      title: string;
+      slug: string;
+      summary: null;
+      seo: null;
+    }
+  | null;
+
+// Source: ../sanity/page-queries.ts
+// Variable: automaticPageBlogsQuery
+// Query: *[_type == "article" && defined(slug.current) && !(_id in path("drafts.**")) && !(_id in $excludedIds) && (    count(categories[_ref in $categoryIds]) > 0 || count(tags[_ref in $tagIds]) > 0 || count(destinations[_ref in $destinationIds]) > 0  )] | order(coalesce(originalPublishedAt, _createdAt) desc)[0...12]{  _id,  title,  "slug": slug.current,  excerpt,  originalPublishedAt,  readingTimeMinutes,  featuredImage{    ...,    asset->{url, metadata{lqip, dimensions}}  },  author->{_id, name, "slug": slug.current},  categories[]->{_id, title, "slug": slug.current, description},  tags[]->{_id, title, "slug": slug.current, description}}
+export type AutomaticPageBlogsQueryResult = Array<{
+  _id: string;
+  title: string;
+  slug: string;
+  excerpt: string | null;
+  originalPublishedAt: string | null;
+  readingTimeMinutes: number | null;
+  featuredImage: {
+    asset: {
+      url: string;
+      metadata: {
+        lqip: string | null;
+        dimensions: SanityImageDimensions | null;
+      } | null;
+    } | null;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    caption?: string;
+    credit?: string;
+    wordpressAttachmentId?: number;
+    _type: "image";
+  } | null;
+  author: {
+    _id: string;
+    name: string;
+    slug: string;
+  } | null;
+  categories: Array<{
+    _id: string;
+    title: string;
+    slug: string;
+    description: string | null;
+  }> | null;
+  tags: Array<{
+    _id: string;
+    title: string;
+    slug: string;
+    description: string | null;
+  }> | null;
+}>;
+
+// Source: ../sanity/page-queries.ts
+// Variable: automaticTripsQuery
+// Query: *[_type == "safariTrip" && defined(slug.current) && publicationStatus != "hidden" && !(_id in path("drafts.**")) && _id != $currentId && count(relatedDestinations[_ref in $destinationIds]) > 0]    | order(_updatedAt desc)[0...6]{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}}
+export type AutomaticTripsQueryResult = Array<never>;
+
+// Source: ../sanity/page-queries.ts
+// Variable: pageSitemapQuery
+// Query: *[_type in ["safariTrip", "seoLandingPage", "destination", "camp"] && defined(slug.current) && publicationStatus != "hidden" && seo.noIndex != true && !(_id in path("drafts.**"))]{    _id, _type, "slug": slug.current, _updatedAt  }
+export type PageSitemapQueryResult = Array<never>;
+
+// Source: ../sanity/page-queries.ts
+// Variable: siteSettingsQuery
+// Query: *[_type == "siteSettings" && _id == "siteSettings"][0]{whatsappNumber, contactEmail}
+export type SiteSettingsQueryResult = null;
+
 // Source: ../sanity/queries.ts
 // Variable: articleBySlugQuery
-// Query: *[_type == "article" && defined(slug.current) && ($includeDrafts == true || !(_id in path("drafts.**"))) && slug.current == $slug][0]{      _id,  title,  "slug": slug.current,  excerpt,  originalPublishedAt,  readingTimeMinutes,  featuredImage{    ...,    asset->{url, metadata{lqip, dimensions}}  },  author->{_id, name, "slug": slug.current},  categories[]->{_id, title, "slug": slug.current, description},  tags[]->{_id, title, "slug": slug.current, description},    "categoryReferenceIds": categories[]._ref,    "tagReferenceIds": tags[]._ref,    body[]{      ...,      asset->{url, metadata{lqip, dimensions}}    },    author->{      _id, name, "slug": slug.current, bio,      image{..., asset->{url, metadata{lqip, dimensions}}}    },    relatedArticles[]->{  _id,  title,  "slug": slug.current,  excerpt,  originalPublishedAt,  readingTimeMinutes,  featuredImage{    ...,    asset->{url, metadata{lqip, dimensions}}  },  author->{_id, name, "slug": slug.current},  categories[]->{_id, title, "slug": slug.current, description},  tags[]->{_id, title, "slug": slug.current, description}},    migration{wordpressUrl, sourcePath},    seo{      ...,      openGraphImage{..., asset->{url, metadata{lqip, dimensions}}}    }  }
+// Query: *[_type == "article" && defined(slug.current) && ($includeDrafts == true || !(_id in path("drafts.**"))) && slug.current == $slug][0]{      _id,  title,  "slug": slug.current,  excerpt,  originalPublishedAt,  readingTimeMinutes,  featuredImage{    ...,    asset->{url, metadata{lqip, dimensions}}  },  author->{_id, name, "slug": slug.current},  categories[]->{_id, title, "slug": slug.current, description},  tags[]->{_id, title, "slug": slug.current, description},    "categoryReferenceIds": categories[]._ref,    "tagReferenceIds": tags[]._ref,    body[]{      ...,      markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}},      asset->{url, metadata{lqip, dimensions}}    },    author->{      _id, name, "slug": slug.current, bio,      image{..., asset->{url, metadata{lqip, dimensions}}}    },    relatedArticles[]->{  _id,  title,  "slug": slug.current,  excerpt,  originalPublishedAt,  readingTimeMinutes,  featuredImage{    ...,    asset->{url, metadata{lqip, dimensions}}  },  author->{_id, name, "slug": slug.current},  categories[]->{_id, title, "slug": slug.current, description},  tags[]->{_id, title, "slug": slug.current, description}},    migration{wordpressUrl, sourcePath},    seo{      ...,      openGraphImage{..., asset->{url, metadata{lqip, dimensions}}}    }  }
 export type ArticleBySlugQueryResult = {
   _id: string;
   title: string;
@@ -511,6 +856,7 @@ export type ArticleBySlugQueryResult = {
         credit?: string;
         sourceUrl?: string;
         wordpressAttachmentId?: number;
+        markDefs: null;
       }
     | {
         _key: string;
@@ -522,6 +868,7 @@ export type ArticleBySlugQueryResult = {
             _key: string;
           } & TableRow
         >;
+        markDefs: null;
         asset: null;
       }
     | {
@@ -533,12 +880,12 @@ export type ArticleBySlugQueryResult = {
         }>;
         style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
         listItem?: "bullet" | "number";
-        markDefs?: Array<{
+        markDefs: Array<{
           href: string;
           blank?: boolean;
           _type: "link";
           _key: string;
-        }>;
+        }> | null;
         level?: number;
         _type: "block";
         _key: string;
@@ -550,6 +897,7 @@ export type ArticleBySlugQueryResult = {
         name?: string;
         raw?: string;
         note?: string;
+        markDefs: null;
         asset: null;
       }
     | {
@@ -557,6 +905,7 @@ export type ArticleBySlugQueryResult = {
         _type: "migrationNote";
         reason?: string;
         sourceHtml?: string;
+        markDefs: null;
         asset: null;
       }
   >;
@@ -855,7 +1204,15 @@ export type SitemapArticlesQueryResult = Array<{
 // Query TypeMap
 declare global {
   interface SanityQueries {
-    '\n  *[_type == "article" && defined(slug.current) && ($includeDrafts == true || !(_id in path("drafts.**"))) && slug.current == $slug][0]{\n    \n  _id,\n  title,\n  "slug": slug.current,\n  excerpt,\n  originalPublishedAt,\n  readingTimeMinutes,\n  featuredImage{\n    ...,\n    asset->{url, metadata{lqip, dimensions}}\n  },\n  author->{_id, name, "slug": slug.current},\n  categories[]->{_id, title, "slug": slug.current, description},\n  tags[]->{_id, title, "slug": slug.current, description}\n,\n    "categoryReferenceIds": categories[]._ref,\n    "tagReferenceIds": tags[]._ref,\n    body[]{\n      ...,\n      asset->{url, metadata{lqip, dimensions}}\n    },\n    author->{\n      _id, name, "slug": slug.current, bio,\n      image{..., asset->{url, metadata{lqip, dimensions}}}\n    },\n    relatedArticles[]->{\n  _id,\n  title,\n  "slug": slug.current,\n  excerpt,\n  originalPublishedAt,\n  readingTimeMinutes,\n  featuredImage{\n    ...,\n    asset->{url, metadata{lqip, dimensions}}\n  },\n  author->{_id, name, "slug": slug.current},\n  categories[]->{_id, title, "slug": slug.current, description},\n  tags[]->{_id, title, "slug": slug.current, description}\n},\n    migration{wordpressUrl, sourcePath},\n    seo{\n      ...,\n      openGraphImage{..., asset->{url, metadata{lqip, dimensions}}}\n    }\n  }\n': ArticleBySlugQueryResult;
+    '\n  *[_type == "safariTrip" && slug.current == $slug && (defined(slug.current) && publicationStatus != "hidden" && ($includeDrafts == true || !(_id in path("drafts.**"))) || $includeDrafts == true)][0]{\n    _id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}, heroEyebrow, heroImages[]{..., asset->{url, metadata{lqip, dimensions}}}, introduction[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}},\n    travelStyle, startLocation, endLocation, featured, highlights[]{_key, title, description},\n    itinerary[]{_key, dayNumber, title, description[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}},\n      "destination": destination->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}}, "accommodation": accommodation->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}},\n      activities, meals, notes, image{..., asset->{url, metadata{lqip, dimensions}}}},\n    routeStops[]{_key, name, dayLabel, description, "coordinates": coalesce(coordinates, destination->coordinates), "destination": destination->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}}},\n    "relatedDestinations": relatedDestinations[]->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}},\n    "relatedCamps": relatedCamps[]->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}},\n    wildlife[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}}, activities, bestTime[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}}, bestMonths,\n    gallery[]{_key, kind, caption, videoUrl, image{..., asset->{url, metadata{lqip, dimensions}}}}, pricingDescription[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}}, pricingOptions[]{_key, name, accommodationLevel, description, pricePerPerson, childPrice, groupPrices[]{_key, minAdults, maxAdults, pricePerPerson}, seasonalPrices[]{_key, label, from, to, pricePerPerson}, features},\n    optionalExperiences[]{_key, name, description, pricePerPerson}, customQuoteAvailable,\n    included, excluded, travelInformation[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}}, travelNotes,\n    "relatedSafariTrips": relatedSafariTrips[]->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}},\n    "relatedBlogs": relatedBlogs[]->{\n  _id,\n  title,\n  "slug": slug.current,\n  excerpt,\n  originalPublishedAt,\n  readingTimeMinutes,\n  featuredImage{\n    ...,\n    asset->{url, metadata{lqip, dimensions}}\n  },\n  author->{_id, name, "slug": slug.current},\n  categories[]->{_id, title, "slug": slug.current, description},\n  tags[]->{_id, title, "slug": slug.current, description}\n},\n    "relatedLandingPages": relatedLandingPages[]->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}},\n    "automaticBlogCategoryIds": automaticBlogCategories[]._ref,\n    "automaticBlogTagIds": automaticBlogTags[]._ref,\n    automaticBlogsEnabled, automaticBlogsLimit,\n    faqs[]{_key, question, answer[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}}, "plainAnswer": pt::text(answer)}, reviews[]{_key, name, country, quote, rating, source, sourceUrl, visitDate, image{..., asset->{url, metadata{lqip, dimensions}}}},\n    sections[]{_key, kind, eyebrow, heading, body[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}}, image{..., asset->{url, metadata{lqip, dimensions}}}},\n    bookingHeading, bookingText[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}}, seo{..., openGraphImage{..., asset->{url, metadata{lqip, dimensions}}}}\n  }\n': SafariTripBySlugQueryResult;
+    '\n  *[_type == "seoLandingPage" && slug.current == $slug && (defined(slug.current) && publicationStatus != "hidden" && ($includeDrafts == true || !(_id in path("drafts.**"))) || $includeDrafts == true)][0]{\n    _id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}, eyebrow, introduction[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}},\n    sections[]{_key, kind, "anchor": anchor.current, eyebrow, heading, body[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}}, image{..., asset->{url, metadata{lqip, dimensions}}},\n      highlights[]{_key, title, description}, statistics[]{_key, value, label}, media[]{_key, kind, caption, videoUrl, image{..., asset->{url, metadata{lqip, dimensions}}}},\n      "destinations": destinations[]->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}}, "camps": camps[]->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}},\n      "trips": trips[]->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}}, "blogs": blogs[]->{\n  _id,\n  title,\n  "slug": slug.current,\n  excerpt,\n  originalPublishedAt,\n  readingTimeMinutes,\n  featuredImage{\n    ...,\n    asset->{url, metadata{lqip, dimensions}}\n  },\n  author->{_id, name, "slug": slug.current},\n  categories[]->{_id, title, "slug": slug.current, description},\n  tags[]->{_id, title, "slug": slug.current, description}\n},\n      "landingPages": landingPages[]->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}},\n      faqs[]{_key, question, answer[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}}, "plainAnswer": pt::text(answer)}, testimonials[]{_key, name, country, quote, rating, source, sourceUrl, visitDate, image{..., asset->{url, metadata{lqip, dimensions}}}},\n      ctaLabel, ctaUrl, "documentUrl": document.asset->url\n    },\n    "relatedBlogs": relatedBlogs[]->{\n  _id,\n  title,\n  "slug": slug.current,\n  excerpt,\n  originalPublishedAt,\n  readingTimeMinutes,\n  featuredImage{\n    ...,\n    asset->{url, metadata{lqip, dimensions}}\n  },\n  author->{_id, name, "slug": slug.current},\n  categories[]->{_id, title, "slug": slug.current, description},\n  tags[]->{_id, title, "slug": slug.current, description}\n},\n    "relatedLandingPages": relatedLandingPages[]->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}},\n    "relatedDestinations": relatedDestinations[]->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}},\n    "relatedCamps": relatedCamps[]->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}},\n    "relatedSafariTrips": relatedSafariTrips[]->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}},\n    "automaticBlogCategoryIds": automaticBlogCategories[]._ref,\n    "automaticBlogTagIds": automaticBlogTags[]._ref,\n    automaticBlogsEnabled, automaticBlogsLimit, seo{..., openGraphImage{..., asset->{url, metadata{lqip, dimensions}}}}\n  }\n': SeoLandingPageBySlugQueryResult;
+    '\n  *[_type == $type && slug.current == $slug && (defined(slug.current) && publicationStatus != "hidden" && ($includeDrafts == true || !(_id in path("drafts.**"))) || $includeDrafts == true)][0]{\n    _id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}, description[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}}, location, coordinates, wildlife[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}}, bestTime[]{..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}},\n    activities, facilities, style, gallery[]{_key, kind, caption, videoUrl, image{..., asset->{url, metadata{lqip, dimensions}}}}, "destination": destination->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}},\n    "relatedCamps": relatedCamps[]->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}},\n    "relatedSafariTrips": relatedSafariTrips[]->{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}},\n    "relatedBlogs": relatedBlogs[]->{\n  _id,\n  title,\n  "slug": slug.current,\n  excerpt,\n  originalPublishedAt,\n  readingTimeMinutes,\n  featuredImage{\n    ...,\n    asset->{url, metadata{lqip, dimensions}}\n  },\n  author->{_id, name, "slug": slug.current},\n  categories[]->{_id, title, "slug": slug.current, description},\n  tags[]->{_id, title, "slug": slug.current, description}\n}, seo{..., openGraphImage{..., asset->{url, metadata{lqip, dimensions}}}}\n  }\n': ContentPageBySlugQueryResult;
+    '\n  *[_type == $type && slug.current == $slug && (defined(slug.current) && publicationStatus != "hidden" && ($includeDrafts == true || !(_id in path("drafts.**"))) || $includeDrafts == true)][0]{\n    _id, _type, title, "slug": slug.current, summary, seo{..., openGraphImage{..., asset->{url, metadata{lqip, dimensions}}}}\n  }\n': PageSeoBySlugQueryResult;
+    '\n  *[_type == "article" && defined(slug.current) && !(_id in path("drafts.**")) && !(_id in $excludedIds) && (\n    count(categories[_ref in $categoryIds]) > 0 || count(tags[_ref in $tagIds]) > 0 || count(destinations[_ref in $destinationIds]) > 0\n  )] | order(coalesce(originalPublishedAt, _createdAt) desc)[0...12]{\n  _id,\n  title,\n  "slug": slug.current,\n  excerpt,\n  originalPublishedAt,\n  readingTimeMinutes,\n  featuredImage{\n    ...,\n    asset->{url, metadata{lqip, dimensions}}\n  },\n  author->{_id, name, "slug": slug.current},\n  categories[]->{_id, title, "slug": slug.current, description},\n  tags[]->{_id, title, "slug": slug.current, description}\n}\n': AutomaticPageBlogsQueryResult;
+    '\n  *[_type == "safariTrip" && defined(slug.current) && publicationStatus != "hidden" && !(_id in path("drafts.**")) && _id != $currentId && count(relatedDestinations[_ref in $destinationIds]) > 0]\n    | order(_updatedAt desc)[0...6]{_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage{..., asset->{url, metadata{lqip, dimensions}}}}\n': AutomaticTripsQueryResult;
+    '\n  *[_type in ["safariTrip", "seoLandingPage", "destination", "camp"] && defined(slug.current) && publicationStatus != "hidden" && seo.noIndex != true && !(_id in path("drafts.**"))]{\n    _id, _type, "slug": slug.current, _updatedAt\n  }\n': PageSitemapQueryResult;
+    '*[_type == "siteSettings" && _id == "siteSettings"][0]{whatsappNumber, contactEmail}': SiteSettingsQueryResult;
+    '\n  *[_type == "article" && defined(slug.current) && ($includeDrafts == true || !(_id in path("drafts.**"))) && slug.current == $slug][0]{\n    \n  _id,\n  title,\n  "slug": slug.current,\n  excerpt,\n  originalPublishedAt,\n  readingTimeMinutes,\n  featuredImage{\n    ...,\n    asset->{url, metadata{lqip, dimensions}}\n  },\n  author->{_id, name, "slug": slug.current},\n  categories[]->{_id, title, "slug": slug.current, description},\n  tags[]->{_id, title, "slug": slug.current, description}\n,\n    "categoryReferenceIds": categories[]._ref,\n    "tagReferenceIds": tags[]._ref,\n    body[]{\n      ...,\n      markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}},\n      asset->{url, metadata{lqip, dimensions}}\n    },\n    author->{\n      _id, name, "slug": slug.current, bio,\n      image{..., asset->{url, metadata{lqip, dimensions}}}\n    },\n    relatedArticles[]->{\n  _id,\n  title,\n  "slug": slug.current,\n  excerpt,\n  originalPublishedAt,\n  readingTimeMinutes,\n  featuredImage{\n    ...,\n    asset->{url, metadata{lqip, dimensions}}\n  },\n  author->{_id, name, "slug": slug.current},\n  categories[]->{_id, title, "slug": slug.current, description},\n  tags[]->{_id, title, "slug": slug.current, description}\n},\n    migration{wordpressUrl, sourcePath},\n    seo{\n      ...,\n      openGraphImage{..., asset->{url, metadata{lqip, dimensions}}}\n    }\n  }\n': ArticleBySlugQueryResult;
     '\n  *[_type == "article" && defined(slug.current) && ($includeDrafts == true || !(_id in path("drafts.**"))) && _id != $articleId && (\n    count(categories[_ref in $categoryIds]) > 0 ||\n    count(tags[_ref in $tagIds]) > 0\n  )]\n    | order(coalesce(originalPublishedAt, _createdAt) desc)[0...3]{\n  _id,\n  title,\n  "slug": slug.current,\n  excerpt,\n  originalPublishedAt,\n  readingTimeMinutes,\n  featuredImage{\n    ...,\n    asset->{url, metadata{lqip, dimensions}}\n  },\n  author->{_id, name, "slug": slug.current},\n  categories[]->{_id, title, "slug": slug.current, description},\n  tags[]->{_id, title, "slug": slug.current, description}\n}\n': RelatedArticlesQueryResult;
     '{\n  "taxonomy": *[_type == $type && slug.current == $slug && ($includeDrafts == true || !(_id in path("drafts.**")))][0]{\n    _id, title, "slug": slug.current, description\n  },\n  "articles": *[_type == "article" && defined(slug.current) && ($includeDrafts == true || !(_id in path("drafts.**"))) && references(*[_type == $type && slug.current == $slug]._id)]\n    | order(coalesce(originalPublishedAt, _createdAt) desc){\n  _id,\n  title,\n  "slug": slug.current,\n  excerpt,\n  originalPublishedAt,\n  readingTimeMinutes,\n  featuredImage{\n    ...,\n    asset->{url, metadata{lqip, dimensions}}\n  },\n  author->{_id, name, "slug": slug.current},\n  categories[]->{_id, title, "slug": slug.current, description},\n  tags[]->{_id, title, "slug": slug.current, description}\n}\n}': TaxonomyArticlesQueryResult;
     '{\n  "author": *[_type == "author" && slug.current == $slug && ($includeDrafts == true || !(_id in path("drafts.**")))][0]{\n    _id, name, "slug": slug.current, bio,\n    image{..., asset->{url, metadata{lqip, dimensions}}}\n  },\n  "articles": *[_type == "article" && defined(slug.current) && ($includeDrafts == true || !(_id in path("drafts.**"))) && author->slug.current == $slug]\n    | order(coalesce(originalPublishedAt, _createdAt) desc){\n  _id,\n  title,\n  "slug": slug.current,\n  excerpt,\n  originalPublishedAt,\n  readingTimeMinutes,\n  featuredImage{\n    ...,\n    asset->{url, metadata{lqip, dimensions}}\n  },\n  author->{_id, name, "slug": slug.current},\n  categories[]->{_id, title, "slug": slug.current, description},\n  tags[]->{_id, title, "slug": slug.current, description}\n}\n}': AuthorArticlesQueryResult;

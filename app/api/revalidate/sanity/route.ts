@@ -13,6 +13,12 @@ export async function POST(request: NextRequest) {
 
   revalidateTag('sanity', 'max')
   revalidateTag('articles', 'max')
+  revalidateTag('safariTrip', 'max')
+  revalidateTag('seoLandingPage', 'max')
+  revalidateTag('destination', 'max')
+  revalidateTag('camp', 'max')
+  revalidateTag('siteSettings', 'max')
+  revalidateTag('automatic-related-blogs', 'max')
   if (body?._type && body.slug?.current) revalidateTag(`${body._type}:${body.slug.current}`, 'max')
 
   return Response.json({revalidated: true})

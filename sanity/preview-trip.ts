@@ -23,8 +23,10 @@ export function previewParagraph(copy: string, key: string): PageText {
   return [{_type: 'block', _key: key, style: 'normal', markDefs: [], children: [{_type: 'span', _key: `${key}-span`, text: copy, marks: []}]}]
 }
 
-const overnight = (dayNumber: number, title: string, description: string, photo?: SanityImage) => ({
-  _key: `day-${dayNumber}`, dayNumber, title, description: previewParagraph(description, `day-${dayNumber}-copy`), image: photo,
+const overnight = (dayNumber: number, title: string, paragraphs: string[], photo?: SanityImage) => ({
+  _key: `day-${dayNumber}`, dayNumber, title,
+  description: paragraphs.flatMap((paragraph, index) => previewParagraph(paragraph, `day-${dayNumber}-copy-${index + 1}`)),
+  image: photo,
 })
 
 export function buildPreviewTrip(introduction?: PageText, relatedBlogs: ArticleCardData[] = []): SafariTrip {
@@ -41,19 +43,58 @@ export function buildPreviewTrip(introduction?: PageText, relatedBlogs: ArticleC
       {_key: 'parks', title: 'Five remarkable stops', description: 'Arusha, Tarangire, Ngorongoro, Serengeti and Ruaha appear in the existing route outline.'},
     ],
     itinerary: [
-      overnight(1, 'Arrival in Arusha', 'Arrive in Arusha and settle in for the first night of your Tanzania journey. Your final arrival arrangements are confirmed with your travel designer.'),
-      overnight(2, 'Into Tarangire', 'Travel toward Tarangire for the first of two nights among its striking baobab landscapes. Your private guide shapes the day around your arrival time.', tarangire),
-      overnight(3, 'A full day in Tarangire', 'Enjoy another day to explore Tarangire at your own pace, with time for wildlife viewing and an unhurried evening.', tarangire),
-      overnight(4, 'Ngorongoro Conservation Area', 'Continue to Ngorongoro for a one-night stay. The existing route includes a half-day crater visit.', ngorongoro),
-      overnight(5, 'On to the Serengeti', 'Make your way to the Serengeti and settle in at Asanja Nyasirori, your base for four nights on the plains.', serengeti),
-      overnight(6, 'Serengeti safari', 'Set out with your private guide to explore the Serengeti. Your daily route can respond to the season and the wildlife you encounter.', serengeti),
-      overnight(7, 'More time on the plains', 'A second full day gives you room to slow down and enjoy the scale of the Serengeti, returning to camp at the end of the day.', serengeti),
-      overnight(8, 'Your final Serengeti day', 'Spend another day discovering the Serengeti before your journey turns toward Tanzania’s southern wilderness.', serengeti),
-      overnight(9, 'Fly to Ruaha', 'The existing trip outline includes a flight from Grumeti to Msembe. Arrive in Ruaha and settle in at Asanja Ndembo.', ruaha),
-      overnight(10, 'Ruaha in your own time', 'Explore Ruaha with a private guide. The precise route and activities are planned around your dates and interests.', ruaha),
-      overnight(11, 'Another day in Ruaha', 'Enjoy another full day in the park, with time to follow the changing light and return to camp between outings.', ruaha),
-      overnight(12, 'A final day in the bush', 'Make the most of your last full safari day in Ruaha before the onward flight to Dar es Salaam.', ruaha),
-      overnight(13, 'Departure for Dar es Salaam', 'The existing outline includes a flight from Msembe airstrip to Dar es Salaam, where this example journey concludes.'),
+      overnight(1, 'Arrival in Arusha', [
+        'Your journey begins in Arusha, the gateway to Tanzania’s northern safari circuit. Arrive, settle in and take a moment to unwind after your travels.',
+        'This first night leaves room to rest before the adventure starts. Your travel designer will confirm the arrival transfer, accommodation and next-day departure details in your final itinerary.',
+      ]),
+      overnight(2, 'Into Tarangire', [
+        'Leave Arusha and travel toward Tarangire for the first of two nights in this distinctive landscape. The route opens onto broad views and the park’s memorable baobab scenery.',
+        'Meet your private guide and begin exploring at a pace that works for your arrival time. The exact game-drive plan and overnight arrangements will be confirmed for your travel dates.',
+      ], tarangire),
+      overnight(3, 'A full day in Tarangire', [
+        'With a full day here, there is time to explore beyond a quick first impression. Follow your guide through changing habitats and pause when a sighting invites a longer look.',
+        'The day can be shaped around the conditions and your interests, with space for a slower midday break before returning to your accommodation for a second night in Tarangire.',
+      ], tarangire),
+      overnight(4, 'Ngorongoro Conservation Area', [
+        'Continue from Tarangire to the Ngorongoro Conservation Area. The existing trip outline includes a half-day crater visit, giving this stage a very different setting from the days before.',
+        'After your time in the crater, settle in for one night in the area. Your guide will confirm the order of travel, the visit and your accommodation in the final day-by-day plan.',
+      ], ngorongoro),
+      overnight(5, 'On to the Serengeti', [
+        'Travel onward to the Serengeti, where open plains mark the next chapter of the safari. The journey itself offers a chance to watch the scenery change as you head toward camp.',
+        'Settle in at Asanja Nyasirori, listed in the existing outline as your base for four nights. Your first Serengeti outing will depend on the day’s travel time and final arrangements.',
+      ], serengeti),
+      overnight(6, 'Serengeti safari', [
+        'Begin a full day in the Serengeti with your private guide. Rather than following a fixed checklist, the drive can respond to recent sightings, weather and the areas best suited to your interests.',
+        'Take time to enjoy the wider landscape as well as the wildlife you encounter. Return to Asanja Nyasirori at the end of the day, ready for another perspective on the plains tomorrow.',
+      ], serengeti),
+      overnight(7, 'More time on the plains', [
+        'A second full Serengeti day gives the journey breathing room. You might revisit a promising area or explore a different part of the landscape with your guide, depending on the season.',
+        'This is the benefit of several nights in one place: less time packing and more time noticing the details. The exact route remains flexible rather than promising a particular sighting.',
+      ], serengeti),
+      overnight(8, 'Your final Serengeti day', [
+        'Make the most of your final full day based at Asanja Nyasirori. Follow the light and the wildlife with your guide, or simply enjoy a less hurried pace before the next leg of the journey.',
+        'Tonight is the fourth night in the Serengeti in the existing trip outline. The following stage connects the northern safari circuit with Ruaha in southern Tanzania.',
+      ], serengeti),
+      overnight(9, 'Fly to Ruaha', [
+        'The existing route includes a flight from Grumeti to Msembe. After arriving in Ruaha, the setting changes again as you begin the southern part of your safari.',
+        'Settle in at Asanja Ndembo, listed as your base for four nights. Flight timing, transfers and any available safari time on arrival will be confirmed when your dates are booked.',
+      ], ruaha),
+      overnight(10, 'Ruaha in your own time', [
+        'Spend your first full day exploring Ruaha with a private guide. There is time to get a feel for its landscape and let the day unfold around what you find along the way.',
+        'Your guide can adapt the outing to the conditions and your preferences. The final proposal will set out confirmed activities, timings and any arrangements specific to your stay.',
+      ], ruaha),
+      overnight(11, 'Another day in Ruaha', [
+        'A second full day gives you room to see Ruaha from another angle. Return to an area that caught your eye or take a different route as the light and activity change.',
+        'The itinerary is designed to feel unhurried, with time back at Asanja Ndembo between outings if your confirmed schedule allows. No particular wildlife encounter can be guaranteed.',
+      ], ruaha),
+      overnight(12, 'A final day in the bush', [
+        'Enjoy one last full safari day in Ruaha before the onward journey. This is a chance to slow down, take in the landscape and make the most of your time with your guide.',
+        'Return to Asanja Ndembo for the fourth night shown in the existing outline. Your departure transfer and flight details will be included in the confirmed travel documents.',
+      ], ruaha),
+      overnight(13, 'Departure for Dar es Salaam', [
+        'The journey closes with the flight from Msembe airstrip to Dar es Salaam listed in the existing trip outline. Leave Ruaha behind with thirteen days of contrasting safari landscapes to remember.',
+        'Your final itinerary will specify flight times, transfers and onward connection details. This preview illustrates the page layout; it is not a confirmed booking or ticketed schedule.',
+      ]),
     ],
     // Approximate city and park reference points, not an operational travel route.
     // City: GeoNames 161325. Parks: UN Tanzania Environment Statistics 2014,

@@ -1,0 +1,23 @@
+.readable {
+  min-width: 0;
+}
+
+.readable :global(.safari-prose) {
+  max-width: 68ch;
+  color: #35443a;
+  font: 400 clamp(1.0625rem, 1.2vw, 1.1875rem) / 1.72 Georgia, serif;
+}
+
+.readable :global(.safari-prose p) {
+  margin: 0 0 1.05em;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.readable > :global(p) {
+  max-width: 68ch;
+  color: #435248;
+  font-size: 1rem;
+  line-height: 1.65;
+}

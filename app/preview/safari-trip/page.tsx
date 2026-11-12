@@ -15,14 +15,14 @@ export default async function SafariTripTemplatePreview() {
   const collection = await publishedClient.fetch<ArticleCollection>(articlesQuery(0, 3), {includeDrafts: false}).catch(() => ({articles: [], total: 0}))
   const articles = collection.articles || []
   const first = articles[0]
-  const introduction = previewParagraph('This preview demonstrates the CMS-driven safari template using the route outline of an existing Asanja Africa trip. A published trip uses its own day-by-day details, images, related content and confirmed prices.', 'intro-copy')
+  const introduction = previewParagraph('Journey from the baobab country of Tarangire to the Ngorongoro highlands, the Serengeti plains and the wide wilderness of Ruaha. Private guiding and carefully chosen stays give this route room to feel entirely your own.', 'intro-copy')
   if (first) introduction.push({
     _type: 'block', _key: 'journal-link', style: 'normal',
     markDefs: [{_key: 'cms-article', _type: 'internalLink', target: {_id: first._id, _type: 'article', slug: first.slug}}],
     children: [
-      {_type: 'span', _key: 'journal-before', text: 'The rich-text editor can also link directly to a published CMS article, such as ', marks: []},
+      {_type: 'span', _key: 'journal-before', text: 'For more inspiration before you travel, read ', marks: []},
       {_type: 'span', _key: 'journal-title', text: first.title, marks: ['cms-article']},
-      {_type: 'span', _key: 'journal-after', text: '.', marks: []},
+      {_type: 'span', _key: 'journal-after', text: ' in the Asanja journal.', marks: []},
     ],
   })
   return <SafariTripPage trip={buildPreviewTrip(introduction, first ? [first] : [])} automaticBlogs={articles.slice(1)} automaticTrips={[]} preview />

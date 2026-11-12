@@ -17,7 +17,7 @@ export function QuoteForm({tripTitle, slug, durationDays, currency = 'USD', opti
   const option = options[optionIndex] || null
   const extras = experiences.filter((experience) => selectedExtras.includes(experience._key))
   const amount = indicativePrice({date, adults, children, days, option, extras}, durationDays)
-  const whatsapp = preview ? null : whatsappHref(whatsappNumber, `Hello Asanja Africa, I would like a quote for ${tripTitle}. Travel date: ${date || 'to be confirmed'}. Travellers: ${adults} adults and ${children} children. Duration: ${days} days. Accommodation: ${option?.name || 'please advise'}. Additional experiences: ${extras.map((item) => item.name).join(', ') || 'none selected'}.`)
+  const whatsapp = whatsappHref(whatsappNumber, preview ? 'Hello Asanja Africa, I saw the safari template preview and would like help planning a trip.' : `Hello Asanja Africa, I would like a quote for ${tripTitle}. Travel date: ${date || 'to be confirmed'}. Travellers: ${adults} adults and ${children} children. Duration: ${days} days. Accommodation: ${option?.name || 'please advise'}. Additional experiences: ${extras.map((item) => item.name).join(', ') || 'none selected'}.`)
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()

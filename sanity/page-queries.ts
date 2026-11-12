@@ -3,7 +3,7 @@ import {articleCardFields} from './queries'
 
 const publicPage = 'defined(slug.current) && publicationStatus != "hidden" && ($includeDrafts == true || !(_id in path("drafts.**")))'
 const imageFields = '{..., asset->{url, metadata{lqip, dimensions}}}'
-const cardFields = `_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, durationDays, durationNights, priceFrom, currency, heroImage${imageFields}`
+const cardFields = `_id, _type, title, "slug": slug.current, publicationStatus, summary, category, location, coordinates, durationDays, durationNights, priceFrom, currency, heroImage${imageFields}`
 const textFields = '..., markDefs[]{..., _type == "internalLink" => {"target": reference->{_id, _type, "slug": slug.current, publicationStatus}}}'
 const mediaFields = `_key, kind, caption, videoUrl, image${imageFields}`
 const faqFields = `_key, question, answer[]{${textFields}}, "plainAnswer": pt::text(answer)`
@@ -69,7 +69,7 @@ export const contentPageBySlugQuery = defineQuery(`
 
 export const pageSeoBySlugQuery = defineQuery(`
   *[_type == $type && slug.current == $slug && (${publicPage} || $includeDrafts == true)][0]{
-    _id, _type, title, "slug": slug.current, summary, ${seoFields}
+    _id, _type, title, "slug": slug.current, summary, heroImage${imageFields}, ${seoFields}
   }
 `)
 
@@ -77,6 +77,11 @@ export const automaticPageBlogsQuery = defineQuery(`
   *[_type == "article" && defined(slug.current) && !(_id in path("drafts.**")) && !(_id in $excludedIds) && (
     count(categories[_ref in $categoryIds]) > 0 || count(tags[_ref in $tagIds]) > 0 || count(destinations[_ref in $destinationIds]) > 0
   )] | order(coalesce(originalPublishedAt, _createdAt) desc)[0...12]{${articleCardFields}}
+`)
+
+export const recentPageBlogsQuery = defineQuery(`
+  *[_type == "article" && defined(slug.current) && !(_id in path("drafts.**")) && !(_id in $excludedIds)]
+    | order(coalesce(originalPublishedAt, _createdAt) desc)[0...12]{${articleCardFields}}
 `)
 
 export const automaticTripsQuery = defineQuery(`

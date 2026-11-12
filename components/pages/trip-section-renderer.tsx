@@ -3,6 +3,7 @@ import type {ArticleCardData} from '../../sanity/types'
 import type {PageCard, SafariTrip, TripSection} from '../../sanity/page-types'
 import {lowestPublishedRate} from '../../sanity/price'
 import {pageHref} from '../../sanity/page-routes'
+import {tripRouteStops} from '../../sanity/trip-route'
 import {CardGrid} from './content-card'
 import {PageImage} from './page-image'
 import {FAQSection, RelatedBlogs, ReviewSection, SectionHeading} from './page-sections'
@@ -45,7 +46,7 @@ export function hasTripSectionContent(section: TripSection, trip: SafariTrip, au
     case 'overview': return Boolean(trip.introduction?.length || trip.summary)
     case 'highlights': return Boolean(trip.highlights?.length)
     case 'itinerary': return Boolean(trip.itinerary?.length)
-    case 'route': return Boolean(trip.routeStops?.some((stop) => stop.coordinates && Number.isFinite(stop.coordinates.lat) && Number.isFinite(stop.coordinates.lng)))
+    case 'route': return tripRouteStops(trip).length > 0
     case 'destinations': return Boolean(trip.relatedDestinations?.some((item) => pageHref(item)))
     case 'accommodation': return Boolean(trip.relatedCamps?.some((item) => pageHref(item)))
     case 'wildlife': return Boolean(trip.wildlife?.length || trip.activities?.length)
@@ -77,14 +78,14 @@ export function TripSectionRenderer({section, trip, automaticTrips, whatsappNumb
     {section.kind !== 'overview' ? <PortablePageText value={section.body} /> : null}
     {content}
     {section.kind === 'highlights' && trip.highlights?.length ? <div className="safari-highlights">{trip.highlights.map((item, index) => <div key={item._key}><span>{String(index + 1).padStart(2, '0')}</span><h3>{item.title}</h3>{item.description ? <p>{item.description}</p> : null}</div>)}</div> : null}
-    {section.kind === 'itinerary' ? <><SafariItinerary days={trip.itinerary} />{!preview ? <a className="safari-text-link" href={`/safaris/${trip.slug}/itinerary.pdf/`} download>Download itinerary PDF ↓</a> : null}</> : null}
-    {section.kind === 'route' ? <SafariRouteMap stops={trip.routeStops} /> : null}
+    {section.kind === 'itinerary' ? <><SafariItinerary days={trip.itinerary} /><a className="safari-text-link" href={preview ? '/preview/safari-trip/itinerary.pdf/' : `/safaris/${trip.slug}/itinerary.pdf/`} download>{preview ? 'Download sample itinerary PDF ↓' : 'Download itinerary PDF ↓'}</a></> : null}
+    {section.kind === 'route' ? <SafariRouteMap stops={tripRouteStops(trip)} /> : null}
     {section.kind === 'destinations' ? <CardGrid items={trip.relatedDestinations} label="Destination" /> : null}
     {section.kind === 'accommodation' ? <CardGrid items={trip.relatedCamps} label="Stay" /> : null}
     {section.kind === 'wildlife' ? <><PortablePageText value={trip.wildlife} />{trip.activities?.length ? <ul className="safari-pill-list">{trip.activities.map((item) => <li key={item}>{item}</li>)}</ul> : null}<PageImage image={section.image} className="safari-wide-image" /></> : null}
     {section.kind === 'gallery' ? <SafariGallery items={trip.gallery} /> : null}
     {section.kind === 'pricing' ? <><PortablePageText value={trip.pricingDescription} />{trip.pricingOptions?.length ? <div className="safari-pricing-grid">{trip.pricingOptions.map((option) => {const rate = lowestPublishedRate(option); return <article key={option._key}><span className="safari-kicker">{option.accommodationLevel || 'Private safari'}</span><h3>{option.name}</h3>{option.description ? <p>{option.description}</p> : null}<div className="safari-price">{rate !== null ? <>From <strong>{new Intl.NumberFormat('en-US', {style: 'currency', currency: trip.currency || 'USD', maximumFractionDigits: 0}).format(rate)}</strong> <small>per adult · final quote depends on dates and group size</small></> : 'Price on request'}</div>{option.groupPrices?.length || option.seasonalPrices?.length ? <p>{option.groupPrices?.length && option.seasonalPrices?.length ? 'Group and seasonal rates' : option.groupPrices?.length ? 'Group rates' : 'Seasonal rates'} are reflected in your tailored quote.</p> : null}{option.features?.length ? <ul>{option.features.map((feature) => <li key={feature}>{feature}</li>)}</ul> : null}</article>})}</div> : null}{preview && !trip.pricingOptions?.length ? <PreviewPlaceholder kind="pricing" /> : !trip.pricingOptions?.length ? <p className="safari-price-on-request">This journey is quoted around your dates, group and preferred accommodation.</p> : null}<a className="safari-text-link" href="#safari-quote">Request a tailored quote ↗</a></> : null}
-    {section.kind === 'inclusions' && (trip.included?.length || trip.excluded?.length) ? <div className="safari-inclusions">{trip.included?.length ? <div><h3>Included</h3><ul>{trip.included.map((item) => <li key={item}>{item}</li>)}</ul></div> : null}{trip.excluded?.length ? <div><h3>Not included</h3><ul>{trip.excluded.map((item) => <li key={item}>{item}</li>)}</ul></div> : null}</div> : null}
+    {section.kind === 'inclusions' && (trip.included?.length || trip.excluded?.length) ? <div className="safari-inclusions">{trip.included?.length ? <div><h3>Included</h3><ul>{trip.included.map((item) => <li key={item}>{item}</li>)}</ul></div> : null}{trip.excluded?.length ? <div><h3>Not included</h3><ul>{trip.excluded.map((item) => <li key={item}>{item}</li>)}</ul></div> : preview ? <div><h3>Not included</h3><p>Exclusions were not specified in the source trip outline. Enter the confirmed list in Studio before publishing.</p></div> : null}</div> : null}
     {section.kind === 'season' ? <><PortablePageText value={trip.bestTime} />{trip.bestMonths?.length ? <ul className="safari-pill-list">{trip.bestMonths.map((month) => <li key={month}>{month}</li>)}</ul> : null}<PageImage image={section.image} className="safari-wide-image" /></> : null}
     {section.kind === 'travel' ? <><PortablePageText value={trip.travelInformation} />{trip.travelNotes?.length ? <ul className="safari-travel-notes">{trip.travelNotes.map((note) => <li key={note}>{note}</li>)}</ul> : null}</> : null}
     {section.kind === 'relatedTrips' ? <CardGrid items={recommendedTrips} label="Safari trip" /> : null}

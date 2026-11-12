@@ -11,6 +11,7 @@ export type PageCard = PageTarget & {
   title: string
   summary?: string
   heroImage?: SanityImage
+  coordinates?: GeoPoint
   category?: string
   location?: string
   durationDays?: number

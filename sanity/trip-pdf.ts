@@ -10,11 +10,11 @@ function pdfSafe(value: string) {
   return value.replace(/[\u2018\u2019]/g, "'").replace(/[\u201c\u201d]/g, '"').replace(/[\u2013\u2014]/g, '-').replace(/[\u2022]/g, '-').replace(/[^\x20-\x7e\xa0-\xff\n]/g, '?')
 }
 
-export async function buildTripPdf(trip: SafariTrip, contact?: {contactEmail?: string; whatsappNumber?: string}) {
+export async function buildTripPdf(trip: SafariTrip, contact?: {contactEmail?: string; whatsappNumber?: string; pageUrl?: string; isPreview?: boolean}) {
   const document = await PDFDocument.create()
   document.setTitle(`${trip.title} | Asanja Africa itinerary`)
   document.setAuthor('Asanja Africa')
-  document.setSubject('Published safari itinerary')
+  document.setSubject(contact?.isPreview ? 'Safari itinerary template preview' : 'Published safari itinerary')
   const bodyFont = await document.embedFont(StandardFonts.Helvetica)
   const headingFont = await document.embedFont(StandardFonts.TimesRoman)
   const boldFont = await document.embedFont(StandardFonts.HelveticaBold)
@@ -68,6 +68,7 @@ export async function buildTripPdf(trip: SafariTrip, contact?: {contactEmail?: s
   function list(items?: string[]) {for (const item of items || []) draw(`- ${item}`, {size: 9.5, lineHeight: 15, gap: 2})}
 
   newPage()
+  if (contact?.isPreview) draw('TEMPLATE PREVIEW - DATES, DAILY ACTIVITIES AND ACCOMMODATION REQUIRE CONFIRMATION', {size: 9, font: boldFont, color: gold, gap: 12})
   draw(trip.title, {size: 30, font: headingFont, lineHeight: 34, color: deep, gap: 16})
   draw(`${trip.durationDays} days${trip.durationNights !== undefined ? ` / ${trip.durationNights} nights` : ''}${trip.travelStyle ? `  |  ${trip.travelStyle}` : ''}`, {size: 11, font: boldFont, color: gold, gap: 18})
   if (trip.summary) draw(trip.summary, {size: 12, lineHeight: 19, color: deep, gap: 18})
@@ -94,7 +95,7 @@ export async function buildTripPdf(trip: SafariTrip, contact?: {contactEmail?: s
   draw('Your itinerary can be tailored to your dates, interests and preferred pace. Contact Asanja Africa for a confirmed quotation.', {gap: 7})
   if (contact?.contactEmail) draw(`Email: ${contact.contactEmail}`, {size: 9, gap: 3})
   if (contact?.whatsappNumber) draw(`WhatsApp: +${contact.whatsappNumber}`, {size: 9, gap: 3})
-  draw(`Safari page: https://asanjaafrica.com/safaris/${trip.slug}/`, {size: 9, gap: 3})
+  draw(`Safari page: ${contact?.pageUrl || `https://asanjaafrica.com/safaris/${trip.slug}/`}`, {size: 9, gap: 3})
 
   document.getPages().forEach((item, index) => {item.drawLine({start: {x: margin, y: 47}, end: {x: width - margin, y: 47}, thickness: .5, color: gold}); item.drawText(`ASANJA AFRICA  |  ${index + 1} / ${document.getPageCount()}`, {x: margin, y: 30, size: 8, font: bodyFont, color: muted})})
   return document.save()

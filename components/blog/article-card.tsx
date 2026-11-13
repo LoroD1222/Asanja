@@ -12,7 +12,7 @@ export function ArticleCard({article}: {article: ArticleCardData}) {
   const date = formatDate(article.originalPublishedAt)
 
   return (
-    <article className="article-card">
+    <article className={`article-card${image?.url ? '' : ' article-card--no-image'}`}>
       <Link className="article-card-image" href={`/blogs/${article.slug}/`} tabIndex={-1} aria-hidden="true">
         {image?.url ? (
           <Image
@@ -22,7 +22,7 @@ export function ArticleCard({article}: {article: ArticleCardData}) {
             height={image.metadata?.dimensions?.height || 800}
             sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 33vw"
           />
-        ) : <span className="article-card-placeholder" />}
+        ) : <span className="article-card-placeholder"><span>Asanja<br />journal</span><span aria-hidden="true">↗</span></span>}
       </Link>
       <div className="article-card-content">
         {article.categories?.length ? (

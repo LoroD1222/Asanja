@@ -283,3 +283,70 @@
 .safari-faq-contact a:hover{color:#57654c}
 
 @media(max-width:700px){.safari-trip-page .safari-pricing-grid,.safari-trip-page .safari-inclusions{grid-template-columns:1fr}.safari-pricing-intro,.safari-inclusions-intro{margin-bottom:2.2rem}.safari-trip-page .safari-pricing-grid>.safari-package{padding:1.65rem}.safari-trip-page .safari-pricing-grid .safari-package-description{min-height:0}.safari-section-faq .safari-section-heading h2{gap:.7rem;font-size:clamp(1.75rem,7.6vw,2.3rem);letter-spacing:.07em}.safari-trip-page .safari-faq{margin-top:2.3rem}.safari-trip-page .safari-faq summary{min-height:75px;gap:1.5rem}.safari-trip-page .safari-faq summary span{width:34px;height:34px}.safari-trip-page .safari-faq .safari-prose{margin-right:0}.trip-story-arrows img{filter:brightness(0) invert(1)}}
+
+/* Image-led journey links continue the camp-tile language of the Asanja design. */
+.safari-trip-page .safari-card-grid--editorial{gap:clamp(1rem,2vw,1.5rem)}
+.safari-trip-page .safari-section-accommodation .safari-card-grid--editorial,.safari-trip-page .safari-section-relatedTrips .safari-card-grid--editorial{grid-template-columns:repeat(2,minmax(0,1fr))}
+.safari-editorial-card{min-width:0;background:#f7f2ef;border-radius:4px;overflow:hidden}
+.safari-editorial-card-visual{position:relative;display:block;height:clamp(310px,30vw,430px);overflow:hidden;isolation:isolate;color:#fff!important}
+.safari-editorial-card-image,.safari-editorial-card-image img,.safari-editorial-card-shade{position:absolute;inset:0;display:block;width:100%;height:100%}
+.safari-editorial-card-image img{object-fit:cover;transition:transform .65s cubic-bezier(.2,.6,.2,1)}
+.safari-editorial-card-shade{background:linear-gradient(180deg,rgba(15,27,18,.12) 15%,rgba(15,27,18,.24) 47%,rgba(15,27,18,.88) 100%)}
+.safari-editorial-card:hover .safari-editorial-card-image img,.safari-editorial-card-visual:focus-visible .safari-editorial-card-image img{transform:scale(1.045)}
+.safari-editorial-card-copy{position:absolute;right:3.3rem;bottom:1.5rem;left:1.5rem;display:flex;flex-direction:column;gap:.3rem}
+.safari-editorial-card-type{color:#ead7bc;font:600 .61rem/1.3 AsanjaPoppins,Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase}
+.safari-editorial-card-copy strong{font:400 clamp(1.65rem,2.65vw,2.8rem)/1.1 AsanjaMarcellus,Georgia,serif;letter-spacing:.015em}
+.safari-editorial-card-copy small{color:#f5f3ee;font:400 .76rem/1.45 AsanjaPoppins,Arial,sans-serif;letter-spacing:.04em}
+.safari-editorial-card-arrow{position:absolute;top:1rem;right:1rem;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#fff;color:#334733;font:400 22px/1 Arial,sans-serif;transition:transform .2s}
+.safari-editorial-card:hover .safari-editorial-card-arrow{transform:translate(2px,-2px)}
+.safari-editorial-card p{min-height:5.3em;margin:0;padding:1.2rem 1.5rem;color:#566157;font:400 .86rem/1.72 AsanjaPoppins,Arial,sans-serif}
+.safari-editorial-card--no-image .safari-editorial-card-image{background:radial-gradient(circle at 78% 20%,#89977c,#57654c 48%,#354b39)}
+.safari-trip-page .safari-section-destinations .safari-editorial-card-visual{height:clamp(320px,31vw,390px)}
+.safari-trip-page .safari-section-accommodation .safari-editorial-card-visual{height:clamp(380px,38vw,490px)}
+.safari-trip-page .safari-section-relatedTrips .safari-editorial-card-visual{height:clamp(340px,35vw,440px)}
+
+/* Journal cards stay editorial even when an article has no featured image. */
+.safari-trip-page .safari-blogs .article-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1rem,2vw,1.5rem)}
+.safari-trip-page .safari-blogs .article-grid:has(>.article-card:only-child){grid-template-columns:minmax(0,620px);justify-content:center}
+.safari-trip-page .safari-blogs .article-card{display:flex;flex-direction:column;min-width:0;overflow:hidden;background:#f7f2ef;border-radius:4px}
+.safari-trip-page .safari-blogs .article-card-image{aspect-ratio:16/10;border:0}
+.safari-trip-page .safari-blogs .article-card-image img{display:block}
+.safari-trip-page .safari-blogs .article-card-placeholder{position:relative;display:flex;align-items:end;justify-content:space-between;padding:1.6rem;background:radial-gradient(circle at 86% 13%,#89977c,#57654c 58%,#334934);color:#fff}
+.safari-trip-page .safari-blogs .article-card-placeholder span:first-child{font:400 clamp(1.65rem,3vw,2.7rem)/1.08 AsanjaMarcellus,Georgia,serif;letter-spacing:.06em;text-transform:uppercase}
+.safari-trip-page .safari-blogs .article-card-placeholder span:last-child{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#fff;color:#57654c;font-size:1.25rem}
+.safari-trip-page .safari-blogs .article-card-content{display:flex;flex:1;flex-direction:column;padding:1.4rem 1.5rem 1.5rem}
+.safari-trip-page .safari-blogs .article-card h2{margin:.45rem 0 1.1rem;color:#243138;font:400 clamp(1.45rem,2.1vw,2rem)/1.25 AsanjaMarcellus,Georgia,serif}
+.safari-trip-page .safari-blogs .article-card p{color:#5b665d;font:400 .85rem/1.65 AsanjaPoppins,Arial,sans-serif}
+.safari-trip-page .safari-blogs .article-meta{margin-top:auto;padding-top:1rem;border-top:1px solid #d6d7ce;color:#7f6b53;font:500 .67rem AsanjaPoppins,Arial,sans-serif;text-transform:uppercase;letter-spacing:.09em}
+.safari-trip-page .safari-blogs.is-automatic{background:#fbf7ee}
+
+/* The selected highlight changes its story and photograph. */
+.safari-highlights-visual{position:relative;min-width:0;min-height:440px;overflow:hidden;border-radius:4px;background:#5b684e}
+.safari-highlights-visual .safari-highlights-image{height:100%;min-height:440px;max-height:570px}
+.safari-highlights-count{position:absolute;right:1rem;bottom:1rem;padding:.45rem .7rem;background:#f7f2ef;color:#344535;font:500 .68rem AsanjaPoppins,Arial,sans-serif;letter-spacing:.13em}
+.safari-highlights-list{justify-content:center}
+.safari-highlights-item{border-top:1px solid #24313822}
+.safari-highlights-item button{display:grid;grid-template-columns:42px minmax(0,1fr) 32px;align-items:center;gap:1.4rem;width:100%;padding:clamp(1.3rem,2.3vw,1.9rem) 0;border:0;background:none;color:#243138;text-align:left;cursor:pointer}
+.safari-highlights-item button:focus-visible{outline:2px solid #57654c;outline-offset:3px}
+.safari-highlights-item.is-active .safari-highlights-title{color:#36513b}
+.safari-highlights-title{font:400 clamp(1.25rem,1.9vw,1.6rem)/1.25 AsanjaMarcellus,Georgia,serif;letter-spacing:.025em}
+.safari-highlights-indicator{display:grid;place-items:center;width:28px;height:28px;border:1px solid #b5bfb1;border-radius:50%;color:#57654c;font:400 1.1rem Arial,sans-serif}
+.safari-highlights-item.is-active .safari-highlights-indicator{background:#57654c;color:#fff}
+.safari-highlights-item p{max-width:490px;margin:-.6rem 2.8rem 1.6rem 3.9rem;color:#59635d;font:400 clamp(.83rem,1.15vw,.95rem)/1.7 AsanjaPoppins,Arial,sans-serif}
+
+/* A compact, asymmetric service panel replaces the generic two-card treatment. */
+.safari-trip-page .safari-section-inclusions{padding:clamp(4.5rem,7vw,6.5rem) 0}
+.safari-inclusions-layout{display:grid;grid-template-columns:minmax(260px,.62fr) minmax(0,1.38fr);gap:clamp(2rem,4vw,4rem);align-items:stretch}
+.safari-inclusions-intro{display:flex;flex-direction:column;justify-content:center;max-width:none;min-height:440px;margin:0;padding:clamp(2rem,3.8vw,3.5rem);background:#57654c;text-align:left}
+.safari-inclusions-intro .safari-section-heading{margin:0 0 1.4rem;text-align:left}
+.safari-inclusions-intro .safari-section-heading .safari-kicker{color:#e7caa5}
+.safari-inclusions-intro .safari-section-heading h2{color:#fff;font-size:clamp(2rem,3.2vw,2.9rem);line-height:1.15;letter-spacing:.035em}
+.safari-inclusions-intro .safari-prose{margin:0;color:#f0f1e9;text-align:left;font-size:.94rem}
+.safari-trip-page .safari-inclusions{grid-template-columns:1fr;gap:1.5rem;align-content:center}
+.safari-trip-page .safari-inclusions>div{padding:1.15rem 0 0;border-top:1px solid #57654c}
+.safari-trip-page .safari-inclusions>div+div{border-top-color:#9fa89a}
+.safari-trip-page .safari-inclusions h3{margin:.5rem 0 .5rem;font-size:clamp(1.45rem,2vw,1.8rem)}
+.safari-trip-page .safari-inclusions li{padding:.55rem 0;border-bottom-color:#d7d8d1;font-size:.83rem}
+
+@media(max-width:800px){.safari-inclusions-layout{grid-template-columns:1fr;gap:2rem}.safari-inclusions-intro{min-height:0}.safari-trip-page .safari-inclusions{grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem}.safari-trip-page .safari-section-destinations .safari-card-grid--editorial{grid-template-columns:repeat(2,minmax(0,1fr))}.safari-highlights-visual,.safari-highlights-visual .safari-highlights-image{min-height:0;height:clamp(300px,55vw,430px)}}
+@media(max-width:650px){.safari-trip-page .safari-card-grid--editorial,.safari-trip-page .safari-section-accommodation .safari-card-grid--editorial,.safari-trip-page .safari-section-relatedTrips .safari-card-grid--editorial,.safari-trip-page .safari-section-destinations .safari-card-grid--editorial,.safari-trip-page .safari-blogs .article-grid,.safari-trip-page .safari-inclusions{grid-template-columns:1fr}.safari-trip-page .safari-editorial-card-visual,.safari-trip-page .safari-section-destinations .safari-editorial-card-visual,.safari-trip-page .safari-section-accommodation .safari-editorial-card-visual,.safari-trip-page .safari-section-relatedTrips .safari-editorial-card-visual{height:360px}.safari-editorial-card p{min-height:0}.safari-highlights-item button{grid-template-columns:32px minmax(0,1fr) 28px;gap:.8rem}.safari-highlights-item p{margin:-.4rem 2.25rem 1.4rem 2.8rem}.safari-inclusions-intro{padding:2rem}.safari-trip-page .safari-inclusions{gap:1.8rem}}

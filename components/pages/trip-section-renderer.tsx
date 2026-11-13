@@ -12,6 +12,7 @@ import {QuoteForm} from './quote-form'
 import {SafariGallery} from './safari-gallery'
 import {SafariItinerary} from './safari-itinerary'
 import {SafariRouteMap} from './safari-route-map'
+import {TripHighlights} from './trip-highlights'
 import {TripReviews} from './trip-reviews'
 
 const headings: Record<TripSection['kind'], string> = {
@@ -77,17 +78,13 @@ export function TripSectionRenderer({section, trip, automaticTrips, whatsappNumb
   if (section.kind === 'reviews') return <TripReviews id={id} items={trip.reviews} fallbackImage={trip.heroImage} preview={preview} />
   if (section.kind === 'booking') return <section className="safari-section safari-section-booking" id={id}><QuoteForm tripTitle={trip.title} slug={trip.slug} durationDays={trip.durationDays} currency={trip.currency} options={trip.pricingOptions} experiences={trip.optionalExperiences} camps={trip.relatedCamps} whatsappNumber={whatsappNumber} preview={preview} heading={section.heading || trip.bookingHeading || 'Plan your trip'} intro={trip.bookingText?.length ? <PortablePageText value={trip.bookingText} /> : undefined} /></section>
   if (section.kind === 'highlights') {
-    const highlightImage = section.image?.asset?.url ? section.image : trip.gallery?.find((item) => item.kind === 'photo' && item.image?.asset?.url)?.image
+    const highlightImages = [section.image, ...(trip.gallery || []).filter((item) => item.kind === 'photo').map((item) => item.image)]
+      .filter((image): image is NonNullable<typeof section.image> => Boolean(image?.asset?.url))
+      .filter((image, index, all) => all.findIndex((candidate) => candidate.asset?.url === image.asset?.url) === index)
     return <section className="safari-section safari-section-highlights" id={id}>
       <SectionHeading eyebrow={section.eyebrow} title={title} />
       <PortablePageText value={section.body} />
-      <div className={`safari-highlights${highlightImage ? '' : ' safari-highlights--text-only'}`}>
-        {highlightImage ? <PageImage image={highlightImage} className="safari-highlights-image" sizes="(max-width: 800px) 100vw, 48vw" /> : null}
-        <ol className="safari-highlights-list">{trip.highlights?.map((item, index) => <li key={item._key}>
-          <span className="safari-highlights-number">{String(index + 1).padStart(2, '0')}</span>
-          <div><h3>{item.title}</h3>{item.description ? <p>{item.description}</p> : null}</div>
-        </li>)}</ol>
-      </div>
+      {trip.highlights?.length ? <TripHighlights items={trip.highlights} images={highlightImages} /> : preview ? <PreviewPlaceholder kind="highlights" /> : null}
     </section>
   }
   if (section.kind === 'pricing') return <section className="safari-section safari-section-pricing" id={id}>
@@ -127,13 +124,13 @@ export function TripSectionRenderer({section, trip, automaticTrips, whatsappNumb
     {content}
     {section.kind === 'itinerary' ? <><SafariItinerary days={trip.itinerary} /><a className="safari-text-link" href={preview ? '/preview/safari-trip/itinerary.pdf/' : `/safaris/${trip.slug}/itinerary.pdf/`} download>{preview ? 'Download sample itinerary PDF ↓' : 'Download itinerary PDF ↓'}</a></> : null}
     {section.kind === 'route' ? <SafariRouteMap stops={tripRouteStops(trip)} /> : null}
-    {section.kind === 'destinations' ? <CardGrid items={trip.relatedDestinations} label="Destination" preview={preview} /> : null}
-    {section.kind === 'accommodation' ? <CardGrid items={trip.relatedCamps} label="Stay" preview={preview} /> : null}
+    {section.kind === 'destinations' ? <CardGrid items={trip.relatedDestinations} label="Destination" preview={preview} editorial /> : null}
+    {section.kind === 'accommodation' ? <CardGrid items={trip.relatedCamps} label="Stay" preview={preview} editorial /> : null}
     {section.kind === 'wildlife' ? <><PortablePageText value={trip.wildlife} />{trip.activities?.length ? <ul className="safari-pill-list">{trip.activities.map((item) => <li key={item}>{item}</li>)}</ul> : null}<PageImage image={section.image} className="safari-wide-image" /></> : null}
     {section.kind === 'gallery' ? <SafariGallery items={trip.gallery} /> : null}
     {section.kind === 'season' ? <><PortablePageText value={trip.bestTime} />{trip.bestMonths?.length ? <ul className="safari-pill-list">{trip.bestMonths.map((month) => <li key={month}>{month}</li>)}</ul> : null}<PageImage image={section.image} className="safari-wide-image" /></> : null}
     {section.kind === 'travel' ? <><PortablePageText value={trip.travelInformation} />{trip.travelNotes?.length ? <ul className="safari-travel-notes">{trip.travelNotes.map((note) => <li key={note}>{note}</li>)}</ul> : null}</> : null}
-    {section.kind === 'relatedTrips' ? <CardGrid items={recommendedTrips} label="Safari trip" preview={preview} /> : null}
+    {section.kind === 'relatedTrips' ? <CardGrid items={recommendedTrips} label="Safari trip" preview={preview} editorial /> : null}
     {section.kind === 'relatedLandingPages' ? <CardGrid items={trip.relatedLandingPages} label="Safari guide" preview={preview} /> : null}
     {section.kind === 'editorial' ? <div className="safari-editorial"><PageImage image={section.image} /></div> : null}
     {preview && !hasTripSectionContent(section, trip, automaticTrips) ? <PreviewPlaceholder kind={section.kind} /> : null}

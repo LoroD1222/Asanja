@@ -2,13 +2,8 @@ import Link from 'next/link'
 import type {ReactNode} from 'react'
 import {AsanjaMenu} from './asanja-menu'
 import {NewsletterSignup} from './newsletter-signup'
+import {footerGroups} from './asanja-site-data'
 import '../../app/sanity-blog.css'
-
-const footerGroups = [
-  {title: 'Experience', links: [{label: 'Our Camps', href: '/camps-and-lodges/'}, {label: 'Safaris', href: '/safaris/'}, {label: 'Experiences', href: '/experiences/'}]},
-  {title: 'About', links: [{label: 'Our Story', href: '/about/'}, {label: 'FAQ', href: '/faqs/'}]},
-  {title: 'Contact', links: [{label: 'General enquiries', href: '/contact/'}, {label: 'Plan my stay', href: '/plan-my-stay/'}, {label: 'Terms & Conditions', href: '/terms/'}]},
-]
 
 export function BlogShell({children, className = ''}: {children: ReactNode; className?: string}) {
   return (
@@ -25,6 +20,7 @@ export function BlogShell({children, className = ''}: {children: ReactNode; clas
       </header>
       <main id="main-content">{children}</main>
       <footer className="asanja-site-footer">
+        <div className="asanja-footer-landscape" aria-hidden="true" />
         <div className="asanja-footer-main">
           <div className="asanja-footer-top">
             <Link href="/" aria-label="Asanja Africa home">

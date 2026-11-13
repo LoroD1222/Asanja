@@ -31,10 +31,10 @@ const facts = [
 ]
 
 const experiences = [
-  'Guided nature walks',
-  'Sundowner experiences',
-  'Night game drives',
-  'Immersive bush activities',
+  {label: 'Guided nature walks', href: '/experiences/'},
+  {label: 'Sundowner experiences', href: '/experiences/'},
+  {label: 'Night game drives', href: '/experiences/'},
+  {label: 'Immersive bush activities', href: '/experiences/'},
 ]
 
 const gallery = [
@@ -127,7 +127,12 @@ export default function AsanjaEwasiTarangirePage() {
           <p>Guests can experience the unique wonders of Tarangire, from immense elephant herds and iconic baobab-dotted plains to seasonal wildlife migrations and the rare sighting of tree-climbing pythons. From camp, it is not uncommon to witness giraffes, zebras, predators, and other wildlife passing through the surrounding wilderness.</p>
           <p>Asanja Ewasi offers more than traditional game drives. Guests can further connect with the wilderness through experiences that reveal Tarangire from a new perspective.</p>
         </div>
-        <ul>{experiences.map((experience) => <li key={experience}>{experience}</li>)}</ul>
+        <ul>{experiences.map((experience) => <li key={experience.label}>
+          <Link href={experience.href} aria-label={`${experience.label} — explore Asanja experiences`}>
+            <span aria-hidden="true">↗</span>
+            {experience.label}
+          </Link>
+        </li>)}</ul>
       </section>
 
       <section className={styles.gallery} aria-labelledby="ewasi-gallery-title">
@@ -139,10 +144,28 @@ export default function AsanjaEwasiTarangirePage() {
         </div>
       </section>
 
-      <section className={styles.cta}>
-        <p>Opening in 2027</p>
-        <h2>Be among the first to experience Ewasi</h2>
-        <Link href="/plan-my-stay/">Start planning your safari</Link>
+      <section className={styles.cta} aria-label="Plan your Asanja safari">
+        <Image
+          className={styles.ctaImage}
+          src="/legacy/wp-content/uploads/2025/10/Elephant-2.webp"
+          alt="Elephant crossing the golden grasslands of Tanzania"
+          fill
+          sizes="100vw"
+        />
+        <div className={styles.ctaWash} />
+        <div className={styles.ctaContent}>
+          <Image
+            className={styles.ctaLogo}
+            src="/legacy/wp-content/uploads/2024/04/asanja_logo_with_slogan_dark-03.svg"
+            alt="Asanja — Open Hearts and Wild Spirits"
+            width={430}
+            height={108}
+          />
+          <Link href="/plan-my-stay/">
+            <span>Plan your trip</span>
+            <span className={styles.ctaArrow} aria-hidden="true">↗</span>
+          </Link>
+        </div>
       </section>
     </article>
   </BlogShell>

@@ -19,7 +19,7 @@ const headings: Record<TripSection['kind'], string> = {
   destinations: 'Places you will explore', accommodation: 'Where you will stay', wildlife: 'The wild moments',
   gallery: 'A glimpse of the journey', pricing: 'Choose your journey', inclusions: 'What is covered',
   season: 'When to go', travel: 'Before you travel', relatedTrips: 'More journeys', relatedBlogs: 'Stories for the journey',
-  relatedLandingPages: 'Explore more of Tanzania', faq: 'Good questions, answered', reviews: 'Words from our guests',
+  relatedLandingPages: 'Explore more of Tanzania', faq: 'Good to know', reviews: 'Words from our guests',
   booking: 'Plan your own safari', editorial: 'Explore the journey',
 }
 
@@ -90,6 +90,37 @@ export function TripSectionRenderer({section, trip, automaticTrips, whatsappNumb
       </div>
     </section>
   }
+  if (section.kind === 'pricing') return <section className="safari-section safari-section-pricing" id={id}>
+    <div className="safari-pricing-intro"><SectionHeading eyebrow={section.eyebrow} title={title} /><PortablePageText value={section.body} /><PortablePageText value={trip.pricingDescription} /></div>
+    {trip.pricingOptions?.length ? <div className="safari-pricing-grid">{trip.pricingOptions.map((option, index) => {
+      const rate = lowestPublishedRate(option)
+      return <article key={option._key} className="safari-package">
+        <div className="safari-package-top"><span className="safari-package-number">{String(index + 1).padStart(2, '0')}</span><span className="safari-package-type">{option.accommodationLevel || 'Private safari'}</span></div>
+        <h3>{option.name}</h3>
+        {option.description ? <p className="safari-package-description">{option.description}</p> : null}
+        <div className="safari-price">{rate !== null ? <><span>From</span><strong>{new Intl.NumberFormat('en-US', {style: 'currency', currency: trip.currency || 'USD', maximumFractionDigits: 0}).format(rate)}</strong><small>per adult · final quote depends on dates and group size</small></> : <><span>Private quotation</span><strong>Price on request</strong><small>Tailored to your dates and group</small></>}</div>
+        {option.features?.length ? <ul>{option.features.map((feature) => <li key={feature}>{feature}</li>)}</ul> : null}
+        {option.groupPrices?.length || option.seasonalPrices?.length ? <p className="safari-package-rate-note">{option.groupPrices?.length && option.seasonalPrices?.length ? 'Group and seasonal rates' : option.groupPrices?.length ? 'Group rates' : 'Seasonal rates'} are reflected in your tailored quote.</p> : null}
+        <a className="safari-package-link" href="#safari-quote">Enquire about this journey <span aria-hidden="true">↗</span></a>
+      </article>
+    })}</div> : preview ? <PreviewPlaceholder kind="pricing" /> : <p className="safari-price-on-request">This journey is quoted around your dates, group and preferred accommodation.</p>}
+    {preview ? <p className="safari-pricing-disclaimer">Illustrative options for this preview. Your travel designer will confirm the final itinerary, inclusions and rate.</p> : null}
+  </section>
+  if (section.kind === 'inclusions') return <section className="safari-section safari-section-inclusions" id={id}>
+    <div className="safari-inclusions-layout">
+      <div className="safari-inclusions-intro"><SectionHeading eyebrow={section.eyebrow} title={title} /><PortablePageText value={section.body} /></div>
+      {trip.included?.length || trip.excluded?.length ? <div className="safari-inclusions">
+        {trip.included?.length ? <div><span className="safari-inclusions-label">01 / Your journey</span><h3>What&apos;s included</h3><ul>{trip.included.map((item) => <li key={item}>{item}</li>)}</ul></div> : null}
+        {trip.excluded?.length ? <div><span className="safari-inclusions-label">02 / To arrange separately</span><h3>Not included</h3><ul>{trip.excluded.map((item) => <li key={item}>{item}</li>)}</ul></div> : null}
+      </div> : preview ? <PreviewPlaceholder kind="inclusions" /> : null}
+    </div>
+  </section>
+  if (section.kind === 'faq') return <section className="safari-section safari-section-faq" id={id}>
+    <SectionHeading eyebrow={section.eyebrow} title={title} />
+    <PortablePageText value={section.body} />
+    <FAQSection items={trip.faqs} />
+    {trip.faqs?.length ? <p className="safari-faq-contact">Still have a question? <a href="#safari-quote">Ask a safari planner</a></p> : preview ? <PreviewPlaceholder kind="faq" /> : null}
+  </section>
   return <section className={'safari-section safari-section-' + section.kind} id={id}>
     {section.kind !== 'overview' ? <SectionHeading eyebrow={section.eyebrow || 'Asanja Africa'} title={title} /> : null}
     {section.kind !== 'overview' ? <PortablePageText value={section.body} /> : null}
@@ -100,14 +131,11 @@ export function TripSectionRenderer({section, trip, automaticTrips, whatsappNumb
     {section.kind === 'accommodation' ? <CardGrid items={trip.relatedCamps} label="Stay" preview={preview} /> : null}
     {section.kind === 'wildlife' ? <><PortablePageText value={trip.wildlife} />{trip.activities?.length ? <ul className="safari-pill-list">{trip.activities.map((item) => <li key={item}>{item}</li>)}</ul> : null}<PageImage image={section.image} className="safari-wide-image" /></> : null}
     {section.kind === 'gallery' ? <SafariGallery items={trip.gallery} /> : null}
-    {section.kind === 'pricing' ? <><PortablePageText value={trip.pricingDescription} />{trip.pricingOptions?.length ? <div className="safari-pricing-grid">{trip.pricingOptions.map((option) => {const rate = lowestPublishedRate(option); return <article key={option._key}><span className="safari-kicker">{option.accommodationLevel || 'Private safari'}</span><h3>{option.name}</h3>{option.description ? <p>{option.description}</p> : null}<div className="safari-price">{rate !== null ? <>From <strong>{new Intl.NumberFormat('en-US', {style: 'currency', currency: trip.currency || 'USD', maximumFractionDigits: 0}).format(rate)}</strong> <small>per adult · final quote depends on dates and group size</small></> : 'Price on request'}</div>{option.groupPrices?.length || option.seasonalPrices?.length ? <p>{option.groupPrices?.length && option.seasonalPrices?.length ? 'Group and seasonal rates' : option.groupPrices?.length ? 'Group rates' : 'Seasonal rates'} are reflected in your tailored quote.</p> : null}{option.features?.length ? <ul>{option.features.map((feature) => <li key={feature}>{feature}</li>)}</ul> : null}</article>})}</div> : null}{preview && !trip.pricingOptions?.length ? <PreviewPlaceholder kind="pricing" /> : !trip.pricingOptions?.length ? <p className="safari-price-on-request">This journey is quoted around your dates, group and preferred accommodation.</p> : null}<a className="safari-text-link" href="#safari-quote">Request a tailored quote ↗</a></> : null}
-    {section.kind === 'inclusions' && (trip.included?.length || trip.excluded?.length) ? <div className="safari-inclusions">{trip.included?.length ? <div><h3>Included</h3><ul>{trip.included.map((item) => <li key={item}>{item}</li>)}</ul></div> : null}{trip.excluded?.length ? <div><h3>Not included</h3><ul>{trip.excluded.map((item) => <li key={item}>{item}</li>)}</ul></div> : preview ? <div><h3>Not included</h3><p>Exclusions were not specified in the source trip outline. Enter the confirmed list in Studio before publishing.</p></div> : null}</div> : null}
     {section.kind === 'season' ? <><PortablePageText value={trip.bestTime} />{trip.bestMonths?.length ? <ul className="safari-pill-list">{trip.bestMonths.map((month) => <li key={month}>{month}</li>)}</ul> : null}<PageImage image={section.image} className="safari-wide-image" /></> : null}
     {section.kind === 'travel' ? <><PortablePageText value={trip.travelInformation} />{trip.travelNotes?.length ? <ul className="safari-travel-notes">{trip.travelNotes.map((note) => <li key={note}>{note}</li>)}</ul> : null}</> : null}
     {section.kind === 'relatedTrips' ? <CardGrid items={recommendedTrips} label="Safari trip" preview={preview} /> : null}
     {section.kind === 'relatedLandingPages' ? <CardGrid items={trip.relatedLandingPages} label="Safari guide" preview={preview} /> : null}
-    {section.kind === 'faq' ? <FAQSection items={trip.faqs} /> : null}
     {section.kind === 'editorial' ? <div className="safari-editorial"><PageImage image={section.image} /></div> : null}
-    {preview && !hasTripSectionContent(section, trip, automaticTrips) && section.kind !== 'pricing' ? <PreviewPlaceholder kind={section.kind} /> : null}
+    {preview && !hasTripSectionContent(section, trip, automaticTrips) ? <PreviewPlaceholder kind={section.kind} /> : null}
   </section>
 }

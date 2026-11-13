@@ -59,8 +59,7 @@
 .safari-play{position:absolute;z-index:1;top:50%;left:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:55px;height:55px;border:1px solid #fff;border-radius:50%;background:#24352799;color:#fff}
 .safari-video-placeholder{display:grid;place-items:center;width:100%;height:100%;color:#4a5d4b;font:400 1.2rem AsanjaMarcellus,Georgia,serif}
 .safari-lightbox{width:min(1100px,96vw);max-height:95vh;padding:1.5rem;border:0;background:#1c251e;color:#fff}.safari-lightbox::backdrop{background:#101610e8}.safari-lightbox-media{display:grid;place-items:center;min-height:45vh}.safari-lightbox-media img{display:block;max-width:100%;max-height:74vh;width:auto;height:auto;object-fit:contain}.safari-lightbox-media iframe{width:min(100%,980px);aspect-ratio:16/9;border:0}.safari-lightbox-close{position:absolute;top:.25rem;right:.6rem;border:0;background:none;color:#fff;font-size:2rem;cursor:pointer}.safari-lightbox-controls{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:1rem;font-size:.74rem}.safari-lightbox-controls button{border:0;background:none;color:#fff;font-size:1.5rem;cursor:pointer}
-.safari-pricing-grid>article{padding:2rem;background:var(--safari-cream)}.safari-pricing-grid h3{font:400 1.8rem Georgia,serif;margin:.5rem 0}.safari-pricing-grid p,.safari-pricing-grid li{font-size:.86rem;color:#657064}.safari-pricing-grid ul{padding-left:1.2rem}.safari-price{padding:1rem 0;margin:1rem 0;border-top:1px solid var(--safari-line);border-bottom:1px solid var(--safari-line);font-size:.83rem}.safari-price strong{font:400 1.8rem Georgia,serif}.safari-price small{display:block;color:#7d827a}
-.safari-inclusions{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}.safari-inclusions>div{padding:2rem;background:var(--safari-cream)}.safari-inclusions h3{font:400 1.8rem Georgia,serif}.safari-inclusions ul,.safari-travel-notes{padding:0;list-style:none}.safari-inclusions li,.safari-travel-notes li{padding:.65rem 0;border-bottom:1px solid var(--safari-line);font-size:.86rem}.safari-inclusions li:before{content:'✓';color:#9e7147;margin-right:.7rem}.safari-inclusions>div+div li:before{content:'–'}.safari-pill-list{display:flex;flex-wrap:wrap;gap:.6rem;padding:0;list-style:none}.safari-pill-list li{padding:.5rem .8rem;background:#e9eee7;color:#496149;font-size:.75rem}.safari-wide-image{width:100%;max-height:550px;object-fit:cover;margin-top:1.5rem}
+.safari-travel-notes{padding:0;list-style:none}.safari-travel-notes li{padding:.65rem 0;border-bottom:1px solid var(--safari-line);font-size:.86rem}.safari-pill-list{display:flex;flex-wrap:wrap;gap:.6rem;padding:0;list-style:none}.safari-pill-list li{padding:.5rem .8rem;background:#e9eee7;color:#496149;font-size:.75rem}.safari-wide-image{width:100%;max-height:550px;object-fit:cover;margin-top:1.5rem}
 .safari-faq{border-top:1px solid var(--safari-line)}.safari-faq details{padding:1.2rem 0;border-bottom:1px solid var(--safari-line)}.safari-faq summary{display:flex;justify-content:space-between;gap:1rem;cursor:pointer;list-style:none;font:400 1.25rem Georgia,serif}.safari-faq summary::-webkit-details-marker{display:none}.safari-faq details[open] summary span{transform:rotate(45deg)}.safari-faq .safari-prose{margin-top:1rem;font-size:1rem}.safari-reviews blockquote{margin:0;padding:2rem;background:var(--safari-cream)}.safari-reviews blockquote>img{width:60px;height:60px;border-radius:50%;object-fit:cover}.safari-stars{color:#ab7848}.safari-reviews blockquote p{font:400 1.2rem/1.55 Georgia,serif}.safari-reviews footer{font-size:.72rem;color:#697369}.safari-reviews footer a{text-decoration:underline}
 .safari-quote{scroll-margin-top:80px;padding:clamp(2rem,4vw,4rem);background:#354738;color:#fff}.safari-quote h3{font:400 clamp(2rem,4vw,3.5rem) Georgia,serif;margin:.2rem 0}.safari-quote>div:first-child p:last-child{max-width:650px;color:#d9e0d8;font-size:.9rem}.safari-quote-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem}.safari-quote-grid label{display:grid;gap:.4rem;color:#e3e9e1;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}.safari-quote-grid input,.safari-quote-grid select,.safari-quote-grid textarea{width:100%;min-width:0;min-height:44px;padding:.7rem;border:1px solid #c7d0c7;background:#fff;color:#27392b;font:400 .9rem Arial,sans-serif}.safari-quote-message{grid-column:span 2}.safari-quote fieldset{border:1px solid #778b77;margin:1.5rem 0;padding:1rem}.safari-quote fieldset legend{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em}.safari-quote fieldset label{display:block;margin:.55rem 0;font-size:.85rem}.safari-honeypot{position:absolute;left:-10000px}.safari-quote-footer{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;margin-top:1.7rem}.safari-quote-footer>div{display:grid;margin-right:auto}.safari-quote-footer span,.safari-quote-footer small{font-size:.7rem;color:#d5ddd2;text-transform:uppercase;letter-spacing:.06em}.safari-quote-footer strong{font:400 1.9rem Georgia,serif}.safari-quote-footer button,.safari-quote-footer a{min-height:46px;padding:.8rem 1rem;border:1px solid #b98b56;background:#b98b56;color:#fff;cursor:pointer;text-transform:uppercase;font-size:.69rem;letter-spacing:.1em}.safari-quote-footer a{background:transparent;border-color:#fff}.safari-quote-footer button:disabled{opacity:.65;cursor:wait}.safari-form-status{margin:1.2rem 0 0;font-size:.85rem}
 .safari-blogs .article-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.safari-blogs .article-card{min-width:0}.safari-blogs .article-card-image img{width:100%;height:100%;object-fit:cover}.safari-blogs.is-automatic{background:#f8f6f2;margin-inline:calc((min(1220px,100vw - 3rem) - 100vw)/2);padding-inline:max(1.5rem,calc((100vw - 1220px)/2))}
@@ -71,9 +70,9 @@
 .safari-trip-closing-wash{position:absolute;inset:24% 0 0;background:linear-gradient(180deg,rgba(231,218,202,0) 13%,rgba(231,218,202,.7) 99%)}
 .safari-trip-closing-content{position:absolute;z-index:1;right:0;bottom:18%;left:0;display:flex;flex-direction:column;align-items:center;gap:clamp(18px,2vw,29px)}
 .safari-trip-closing-logo{display:block;width:min(30.35vw,437px);height:auto;opacity:.7}
-.safari-page .safari-trip-closing-content>a{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;width:clamp(180px,16.4vw,236px);min-height:clamp(44px,3.62vw,52px);padding:6px 8px 6px 18px;border-radius:999px;background:#ba8f64;color:#fff;font:600 clamp(13px,1.18vw,17px)/1.2 AsanjaPoppins,Arial,sans-serif;transition:background .2s,transform .2s}
-.safari-trip-closing-content>a span{display:grid;place-items:center;flex:none;width:34px;height:34px;border-radius:50%;background:#fff;color:#ba8f64;font:400 21px/1 Arial,sans-serif}
-.safari-page .safari-trip-closing-content>a:hover{background:#9d744e;transform:translateY(-2px)}
+.safari-page .safari-trip-closing-content>a{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;width:clamp(180px,16.4vw,236px);min-height:clamp(44px,3.62vw,52px);padding:6px 8px 6px 18px;border-radius:999px;background:#57654c;color:#fff;font:600 clamp(13px,1.18vw,17px)/1.2 AsanjaPoppins,Arial,sans-serif;transition:background .2s,transform .2s}
+.safari-trip-closing-content>a span{display:grid;place-items:center;flex:none;width:34px;height:34px;border-radius:50%;background:#fff;color:#57654c;font:400 21px/1 Arial,sans-serif}
+.safari-page .safari-trip-closing-content>a:hover{background:#3f503b;transform:translateY(-2px)}
 .safari-trip-closing-content>a:focus-visible{outline:3px solid #303b31;outline-offset:4px}
 @media(max-width:650px){.safari-trip-closing{aspect-ratio:auto;min-height:400px}.safari-trip-closing-scene img{object-position:center 38%}.safari-trip-closing-content{bottom:13%;gap:18px}.safari-trip-closing-logo{width:min(300px,76vw)}.safari-page .safari-trip-closing-content>a{width:210px;min-height:48px;font-size:14px}.safari-trip-closing-content>a span{width:30px;height:30px;font-size:19px}}
 .safari-sticky{position:fixed;z-index:30;bottom:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.75rem clamp(1rem,5vw,5rem);background:#2f382e;color:#fff;box-shadow:0 -6px 28px #0002;font-size:.83rem}.safari-sticky>div{display:flex;gap:.6rem}.safari-sticky a{display:inline-flex;align-items:center;padding:.6rem 1rem;background:#b98b56;color:#fff!important;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase}.safari-sticky a+a{background:transparent;border:1px solid #a9b6a6}
@@ -159,47 +158,47 @@
 .trip-plan-form .safari-form-status{color:#344632}
 
 /* Guest stories follow the supplied desktop and mobile Figma compositions. */
-.safari-trip-page .trip-stories{margin-inline:calc(50% - 50vw);padding:92px 0 66px;background:#ba8f64;color:#fff;font-family:AsanjaPoppins,Arial,sans-serif;scroll-margin-top:75px}
+.safari-trip-page .trip-stories{margin-inline:calc(50% - 50vw);padding:92px 0 66px;background:#fbf7ee;color:#111;font-family:AsanjaPoppins,Arial,sans-serif;scroll-margin-top:75px}
 .trip-stories-inner{width:min(1240px,calc(100% - 3rem));margin:auto}
 .trip-stories-title{display:flex;align-items:center;gap:24px}
-.trip-stories-title>span{height:1px;flex:1;background:#ffffff30}
-.trip-stories-title h2{margin:0;color:#fff;font:400 clamp(2.2rem,3.5vw,3.125rem) AsanjaMarcellus,Georgia,serif;letter-spacing:.11em;text-align:center;text-transform:uppercase;white-space:nowrap}
+.trip-stories-title>span{height:1px;flex:1;background:#00000030}
+.trip-stories-title h2{margin:0;color:#111;font:400 clamp(2.2rem,3.5vw,3.125rem) AsanjaMarcellus,Georgia,serif;letter-spacing:.11em;text-align:center;text-transform:uppercase;white-space:nowrap}
 .trip-stories-rating{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:16px;text-align:center}
 .trip-stories-rating p{margin:0;font-size:17px;line-height:1.6}
 .trip-stories-dots{display:none}
 .trip-stories-average{font-size:15px;letter-spacing:.08em}
-.trip-story-card{display:grid;grid-template-columns:1fr 1fr;min-height:520px;margin-top:45px;overflow:hidden;border:1px solid #ffffff87;border-radius:8px;background:#fbf7ee;box-shadow:0 4px 16px #0000000f}
-.trip-story-photo{position:relative;min-width:0;min-height:520px;overflow:hidden;background:#9d8768}
+.trip-story-card{display:grid;grid-template-columns:1fr 1fr;min-height:520px;margin-top:45px;overflow:hidden;border:1px solid #e2dfd9;border-radius:8px;background:#fbf7ee;box-shadow:0 4px 16px #0000000f}
+.trip-story-photo{position:relative;min-width:0;min-height:520px;overflow:hidden;background:#d6d7c8}
 .trip-story-photo picture,.trip-story-photo picture img{display:block;width:100%;height:100%}
 .trip-story-photo picture img{position:absolute;inset:0;object-fit:cover}
 .trip-story-photo-placeholder{width:100%;height:100%;min-height:520px;background:#8e977f}
-.trip-story-location{position:absolute;left:24px;bottom:16px;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid #ffffff7a;border-radius:99px;background:#f7f2eff5;color:#ba8f64;font-size:13px;font-weight:500}
+.trip-story-location{position:absolute;left:24px;bottom:16px;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid #ffffff7a;border-radius:99px;background:#f7f2eff5;color:#57654c;font-size:13px;font-weight:500}
 .trip-story-content{display:flex;flex-direction:column;min-width:0;padding:40px;color:#111}
 .trip-story-quote{flex:1}
-.trip-story-quote>span{display:block;height:42px;color:#ba8f64;font:92px/.7 AsanjaMarcellus,Georgia,serif}
+.trip-story-quote>span{display:block;height:42px;color:#57654c;font:92px/.7 AsanjaMarcellus,Georgia,serif}
 .trip-story-quote blockquote{margin:20px 0 24px}
 .trip-story-quote p{margin:0;color:#56534f;font-size:18px;line-height:1.8}
 .trip-story-mobile-quote{display:none}
 .trip-story-attribution{display:flex;align-items:center;gap:14px;margin:14px 0 28px}
-.trip-story-attribution>img,.trip-story-initials{display:grid;place-items:center;width:52px;height:52px;flex:none;border-radius:50%;object-fit:cover;background:#ba8f64;color:#fff;font-size:17px}
+.trip-story-attribution>img,.trip-story-initials{display:grid;place-items:center;width:52px;height:52px;flex:none;border-radius:50%;object-fit:cover;background:#57654c;color:#fff;font-size:17px}
 .trip-story-attribution strong,.trip-story-attribution small{display:block}
 .trip-story-attribution strong{font-size:17px;font-weight:600}
 .trip-story-attribution small{margin-top:3px;font-size:13px}
 .trip-story-navigation{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:20px;border-top:1px solid #00000010}
 .trip-story-thumbnails{display:flex;gap:8px;min-width:0}
 .trip-story-thumbnails button{display:block;width:66px;height:66px;flex:none;overflow:hidden;padding:0;border:2px solid transparent;border-radius:5px;background:#d5d1c8;opacity:.64;cursor:pointer}
-.trip-story-thumbnails button.is-active{border-color:#ba8f64;opacity:1}
+.trip-story-thumbnails button.is-active{border-color:#57654c;opacity:1}
 .trip-story-thumbnails button img{width:100%;height:100%;object-fit:cover}
 .trip-story-arrows{display:flex;gap:8px}
 .trip-story-arrows button{width:40px;height:40px;padding:0;border:0;border-radius:50%;background:transparent;cursor:pointer}
 .trip-story-arrows img{display:block;width:40px;height:40px}
-.trip-stories-link{display:flex;flex-direction:column;align-items:center;gap:10px;width:max-content;max-width:100%;margin:32px auto 0;color:#fff!important;font-size:17px;line-height:1.6;text-align:center;text-decoration:underline;text-underline-offset:3px}
+.trip-stories-link{display:flex;flex-direction:column;align-items:center;gap:10px;width:max-content;max-width:100%;margin:32px auto 0;color:#243138!important;font-size:17px;line-height:1.6;text-align:center;text-decoration:underline;text-underline-offset:3px}
 .trip-stories-link img{display:block;width:110px;height:17px}
-.trip-stories-preview-note{margin:24px auto 0;color:#ffffffbd;font-size:12px;text-align:center}
+.trip-stories-preview-note{margin:24px auto 0;color:#677166;font-size:12px;text-align:center}
 
 @media(max-width:1050px){.trip-plan{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:48px;padding:72px 0}.trip-plan-form{padding:28px}.trip-story-content{padding:30px}.trip-story-quote p{font-size:16px;line-height:1.65}.trip-story-thumbnails button{width:52px;height:52px}}
 @media(max-width:800px){.trip-plan{grid-template-columns:1fr;gap:40px}.trip-plan-copy{max-width:620px}.trip-plan-steps{margin-bottom:28px}.trip-story-card{grid-template-columns:1fr}.trip-story-photo{min-height:320px;height:320px}.trip-story-photo-placeholder{min-height:320px}.trip-story-content{min-height:420px}.trip-story-quote{flex:1}}
-@media(max-width:650px){.safari-trip-page .safari-section-booking{padding:0}.trip-plan{width:calc(100% - 3rem);padding:56px 0;gap:32px}.trip-plan-copy h2{font-size:32px;letter-spacing:.09em;margin-bottom:22px}.trip-plan-intro{font-size:15px;margin-bottom:26px}.trip-plan-steps li{padding:18px 0}.trip-plan-steps strong{font-size:14px}.trip-plan-steps small{font-size:12px}.trip-plan-agent{font-size:12px;margin-top:24px}.trip-plan-form{padding:24px}.trip-plan-form-top h3{font-size:24px}.trip-plan-form-top span{font-size:11px}.trip-plan-fields{gap:16px}.trip-plan-fields label{font-size:12px}.trip-plan-fields input,.trip-plan-fields select,.trip-plan-fields textarea{padding:9px 10px;font-size:13px}.trip-plan-choice legend{font-size:12px}.trip-plan-choice button{font-size:12px;padding:7px 11px}.trip-plan-pill,.safari-trip-page .trip-plan-pill{font-size:13px;min-height:46px}.safari-trip-page .trip-stories{padding:56px 0}.trip-stories-inner{width:calc(100% - 3rem)}.trip-stories-title{gap:12px}.trip-stories-title h2{font-size:28px;letter-spacing:.11em}.trip-stories-rating{gap:10px;margin-top:16px}.trip-stories-stars{display:none}.trip-stories-dots{display:block}.trip-stories-rating p{font-size:13px}.trip-story-card{margin-top:32px;border:0}.trip-story-photo{height:260px;min-height:260px}.trip-story-location{left:16px;bottom:16px;font-size:12px}.trip-story-content{min-height:440px;padding:24px;background:#b28b66;color:#fff}.trip-story-quote>span{color:#ffffff55}.trip-story-quote blockquote{margin:16px 0 20px}.trip-story-quote p{color:#fff;font:400 25px/1.35 AsanjaMarcellus,Georgia,serif}.trip-story-desktop-quote{display:none}.trip-story-mobile-quote{display:block}.trip-story-attribution{margin:20px 0 24px}.trip-story-attribution small{color:#fff}.trip-story-initials{background:#f7f2ef;color:#ba8f64}.trip-story-navigation{border-color:#ffffff30}.trip-story-thumbnails{gap:6px}.trip-story-thumbnails button{width:38px;height:38px}.trip-story-thumbnails button.is-active{border-color:#fff}.trip-story-arrows button,.trip-story-arrows img{width:36px;height:36px}.trip-stories-link{font-size:14px;margin-top:32px}.trip-stories-link img{display:none}}
+@media(max-width:650px){.safari-trip-page .safari-section-booking{padding:0}.trip-plan{width:calc(100% - 3rem);padding:56px 0;gap:32px}.trip-plan-copy h2{font-size:32px;letter-spacing:.09em;margin-bottom:22px}.trip-plan-intro{font-size:15px;margin-bottom:26px}.trip-plan-steps li{padding:18px 0}.trip-plan-steps strong{font-size:14px}.trip-plan-steps small{font-size:12px}.trip-plan-agent{font-size:12px;margin-top:24px}.trip-plan-form{padding:24px}.trip-plan-form-top h3{font-size:24px}.trip-plan-form-top span{font-size:11px}.trip-plan-fields{gap:16px}.trip-plan-fields label{font-size:12px}.trip-plan-fields input,.trip-plan-fields select,.trip-plan-fields textarea{padding:9px 10px;font-size:13px}.trip-plan-choice legend{font-size:12px}.trip-plan-choice button{font-size:12px;padding:7px 11px}.trip-plan-pill,.safari-trip-page .trip-plan-pill{font-size:13px;min-height:46px}.safari-trip-page .trip-stories{padding:56px 0}.trip-stories-inner{width:calc(100% - 3rem)}.trip-stories-title{gap:12px}.trip-stories-title h2{font-size:28px;letter-spacing:.11em}.trip-stories-rating{gap:10px;margin-top:16px}.trip-stories-stars{display:block;width:94px;height:auto}.trip-stories-rating p{font-size:13px}.trip-story-card{margin-top:32px;border:0}.trip-story-photo{height:260px;min-height:260px}.trip-story-location{left:16px;bottom:16px;font-size:12px}.trip-story-content{min-height:440px;padding:24px;background:#57654c;color:#fff}.trip-story-quote>span{color:#ffffff55}.trip-story-quote blockquote{margin:16px 0 20px}.trip-story-quote p{color:#fff;font:400 25px/1.35 AsanjaMarcellus,Georgia,serif}.trip-story-desktop-quote{display:none}.trip-story-mobile-quote{display:block}.trip-story-attribution{margin:20px 0 24px}.trip-story-attribution small{color:#fff}.trip-story-initials{background:#f7f2ef;color:#57654c}.trip-story-navigation{border-color:#ffffff30}.trip-story-thumbnails{gap:6px}.trip-story-thumbnails button{width:38px;height:38px}.trip-story-thumbnails button.is-active{border-color:#fff}.trip-story-arrows button,.trip-story-arrows img{width:36px;height:36px}.trip-stories-link{font-size:14px;margin-top:32px}.trip-stories-link img{display:none}}
 
 /* Trip highlights follow the editorial image-and-story pattern in the Asanja design. */
 .safari-trip-page .safari-section-highlights{position:relative;isolation:isolate;border:0;padding:clamp(4.5rem,7vw,6.25rem) 0}
@@ -219,3 +218,68 @@
 .safari-highlights-list p{max-width:490px;margin:0;color:#59635d;font:400 clamp(.83rem,1.15vw,.95rem)/1.7 AsanjaPoppins,Arial,sans-serif}
 @media(max-width:800px){.safari-highlights{grid-template-columns:1fr;gap:1.5rem}.safari-highlights-image{height:clamp(300px,55vw,430px);min-height:0;max-height:none}.safari-highlights-list li{padding:1.5rem 0}}
 @media(max-width:500px){.safari-trip-page .safari-section-highlights{padding:3.75rem 0}.safari-section-highlights .safari-section-heading h2{gap:.6rem;font-size:clamp(1.75rem,8vw,2.3rem);letter-spacing:.035em}.safari-section-highlights .safari-section-heading h2::before,.safari-section-highlights .safari-section-heading h2::after{display:none}.safari-section-highlights>.safari-prose{font-size:.9rem;text-align:left}.safari-highlights{margin-top:2rem}.safari-highlights-image{height:300px}.safari-highlights-list li{grid-template-columns:32px minmax(0,1fr);gap:.8rem}.safari-highlights-list h3{font-size:1.25rem}.safari-highlights-list p{font-size:.84rem}}
+
+/* Package choices use the same quiet, editorial rhythm as the Asanja design. */
+.safari-trip-page .safari-section-pricing{position:relative;isolation:isolate;border:0;padding:clamp(5rem,8vw,7rem) 0}
+.safari-trip-page .safari-section-pricing::before{content:'';position:absolute;z-index:-1;inset:0 calc(50% - 50vw);background:#fbf7ee}
+.safari-pricing-intro{max-width:900px;margin:0 auto 3rem;text-align:center}
+.safari-pricing-intro .safari-section-heading{max-width:none;margin-bottom:1.25rem}
+.safari-pricing-intro .safari-section-heading h2{font:400 clamp(2.4rem,4.2vw,3.25rem)/1.15 AsanjaMarcellus,Georgia,serif;letter-spacing:.065em;text-transform:uppercase}
+.safari-pricing-intro .safari-prose{max-width:730px;margin:0 auto;color:#5d655f;font:400 clamp(.94rem,1.2vw,1.05rem)/1.75 AsanjaPoppins,Arial,sans-serif}
+.safari-pricing-intro .safari-prose p{margin:0}
+.safari-trip-page .safari-pricing-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:1.4rem}
+.safari-trip-page .safari-pricing-grid>.safari-package{display:flex;flex-direction:column;min-width:0;padding:clamp(1.7rem,3vw,2.7rem);border:1px solid #dcded4;border-top:3px solid #57654c;background:#fff;box-shadow:0 8px 24px #2431380a}
+.safari-package-top{display:flex;align-items:center;gap:1rem;color:#57654c;font:600 .7rem/1.3 AsanjaPoppins,Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+.safari-package-number{display:grid;place-items:center;width:2.4rem;height:2.4rem;flex:none;border:1px solid #cbd2c7;border-radius:50%;font-size:.68rem}
+.safari-trip-page .safari-pricing-grid h3{margin:1.6rem 0 .7rem;color:#243138;font:400 clamp(1.65rem,2.3vw,2.2rem)/1.2 AsanjaMarcellus,Georgia,serif}
+.safari-trip-page .safari-pricing-grid .safari-package-description{min-height:3.5em;margin:0;color:#5f6860;font:400 .95rem/1.7 AsanjaPoppins,Arial,sans-serif}
+.safari-trip-page .safari-price{display:flex;flex-direction:column;gap:.25rem;margin:1.8rem 0 1.3rem;padding:1.3rem 0;border-top:1px solid #d8ddd5;border-bottom:1px solid #d8ddd5}
+.safari-price>span{color:#758071;font:500 .65rem AsanjaPoppins,Arial,sans-serif;letter-spacing:.13em;text-transform:uppercase}
+.safari-trip-page .safari-price strong{color:#354d39;font:400 clamp(1.35rem,2vw,1.8rem)/1.3 AsanjaMarcellus,Georgia,serif}
+.safari-trip-page .safari-price small{color:#687168;font:400 .72rem/1.5 AsanjaPoppins,Arial,sans-serif}
+.safari-trip-page .safari-pricing-grid ul{display:grid;gap:.65rem;margin:0 0 1.8rem;padding:0;list-style:none}
+.safari-trip-page .safari-pricing-grid li{position:relative;padding-left:1.65rem;color:#4f5c51;font:400 .86rem/1.55 AsanjaPoppins,Arial,sans-serif}
+.safari-trip-page .safari-pricing-grid li::before{content:'✓';position:absolute;left:0;color:#57654c;font-weight:600}
+.safari-package-rate-note{margin:.2rem 0 1.4rem!important;color:#687168;font:400 .8rem/1.5 AsanjaPoppins,Arial,sans-serif}
+.safari-page .safari-package-link{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:auto;padding-top:1.1rem;border-top:1px solid #d8ddd5;color:#3d5740;font:600 .76rem AsanjaPoppins,Arial,sans-serif;text-decoration:none}
+.safari-package-link span{display:grid;place-items:center;width:2rem;height:2rem;border:1px solid #b9c5b4;border-radius:50%;font-size:1rem;transition:background .2s,color .2s}
+.safari-package-link:hover span,.safari-package-link:focus-visible span{background:#57654c;color:#fff}
+.safari-pricing-disclaimer{margin:1.2rem 0 0;color:#6b746b;font:400 .74rem/1.5 AsanjaPoppins,Arial,sans-serif;text-align:center}
+
+/* Inclusions are presented as a clear service list, not generic cards. */
+.safari-trip-page .safari-section-inclusions{position:relative;isolation:isolate;border:0;padding:clamp(5rem,8vw,7rem) 0}
+.safari-trip-page .safari-section-inclusions::before{content:'';position:absolute;z-index:-1;inset:0 calc(50% - 50vw);background:#f7f2ef}
+.safari-inclusions-intro{max-width:900px;margin:0 auto 3.2rem;text-align:center}
+.safari-inclusions-intro .safari-section-heading{max-width:none;margin-bottom:1.2rem}
+.safari-inclusions-intro .safari-section-heading h2{font:400 clamp(2.4rem,4.2vw,3.25rem)/1.15 AsanjaMarcellus,Georgia,serif;letter-spacing:.06em;text-transform:uppercase}
+.safari-inclusions-intro .safari-prose{max-width:750px;margin:0 auto;color:#5d655f;font:400 clamp(.94rem,1.2vw,1.05rem)/1.75 AsanjaPoppins,Arial,sans-serif}
+.safari-inclusions-intro .safari-prose p{margin:0}
+.safari-trip-page .safari-inclusions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(2rem,5vw,5rem)}
+.safari-trip-page .safari-inclusions>div{padding:1.5rem 0 0;border-top:2px solid #57654c;background:none}
+.safari-trip-page .safari-inclusions>div+div{border-top-color:#b9aaa0}
+.safari-inclusions-label{color:#71806d;font:600 .67rem AsanjaPoppins,Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.safari-trip-page .safari-inclusions h3{margin:.9rem 0 1.2rem;color:#243138;font:400 clamp(1.55rem,2.3vw,2rem)/1.2 AsanjaMarcellus,Georgia,serif}
+.safari-trip-page .safari-inclusions ul{margin:0;padding:0}
+.safari-trip-page .safari-inclusions li{display:grid;grid-template-columns:1.25rem minmax(0,1fr);gap:.8rem;padding:.85rem 0;border-bottom:1px solid #d9d8d0;color:#4f5b52;font:400 .9rem/1.6 AsanjaPoppins,Arial,sans-serif}
+.safari-trip-page .safari-inclusions li::before{content:'✓';margin:0;color:#57654c;font-weight:600}
+.safari-trip-page .safari-inclusions>div+div li::before{content:'—';color:#927d71}
+
+/* Figma's Good to Know section, with live expandable CMS answers. */
+.safari-trip-page .safari-section-faq{position:relative;isolation:isolate;border:0;padding:clamp(5rem,8vw,6.5rem) 0}
+.safari-trip-page .safari-section-faq::before{content:'';position:absolute;z-index:-1;inset:0 calc(50% - 50vw);background:#f7f2ef}
+.safari-section-faq .safari-section-heading{max-width:none;margin:0 0 1rem;text-align:center}
+.safari-section-faq .safari-section-heading h2{display:flex;align-items:center;gap:1.5rem;color:#111;font:400 clamp(2.2rem,4.2vw,3.125rem)/1.2 AsanjaMarcellus,Georgia,serif;letter-spacing:.11em;text-transform:uppercase}
+.safari-section-faq .safari-section-heading h2::before,.safari-section-faq .safari-section-heading h2::after{content:'';height:1px;flex:1;background:#00000015}
+.safari-section-faq>.safari-prose{max-width:650px;margin:0 auto;color:#60625d;font:400 clamp(.92rem,1.2vw,1.05rem)/1.6 AsanjaPoppins,Arial,sans-serif;text-align:center}
+.safari-section-faq>.safari-prose p{margin:0}
+.safari-trip-page .safari-faq{max-width:880px;margin:3.75rem auto 0;border-top:1px solid #0000001c}
+.safari-trip-page .safari-faq details{padding:0;border-bottom:1px solid #0000001c}
+.safari-trip-page .safari-faq summary{align-items:center;min-height:86px;padding:1.4rem 0;color:#243138;font:400 clamp(1.05rem,1.7vw,1.375rem)/1.35 AsanjaMarcellus,Georgia,serif;letter-spacing:.02em}
+.safari-trip-page .safari-faq summary span{display:grid;place-items:center;width:40px;height:40px;flex:none;border:1px solid #0000001c;border-radius:50%;font:300 1.3rem AsanjaPoppins,Arial,sans-serif;transition:transform .2s,background .2s,color .2s}
+.safari-trip-page .safari-faq summary:hover span,.safari-trip-page .safari-faq summary:focus-visible span{background:#57654c;color:#fff}
+.safari-trip-page .safari-faq .safari-prose{max-width:760px;margin:0 3.5rem 1.6rem 0;color:#5d655f;font:400 .95rem/1.75 AsanjaPoppins,Arial,sans-serif}
+.safari-faq-contact{margin:2.8rem 0 0;color:#5f655f;font:400 .95rem/1.6 AsanjaPoppins,Arial,sans-serif;text-align:center}
+.safari-faq-contact a{text-decoration:underline;text-underline-offset:3px}
+.safari-faq-contact a:hover{color:#57654c}
+
+@media(max-width:700px){.safari-trip-page .safari-pricing-grid,.safari-trip-page .safari-inclusions{grid-template-columns:1fr}.safari-pricing-intro,.safari-inclusions-intro{margin-bottom:2.2rem}.safari-trip-page .safari-pricing-grid>.safari-package{padding:1.65rem}.safari-trip-page .safari-pricing-grid .safari-package-description{min-height:0}.safari-section-faq .safari-section-heading h2{gap:.7rem;font-size:clamp(1.75rem,7.6vw,2.3rem);letter-spacing:.07em}.safari-trip-page .safari-faq{margin-top:2.3rem}.safari-trip-page .safari-faq summary{min-height:75px;gap:1.5rem}.safari-trip-page .safari-faq summary span{width:34px;height:34px}.safari-trip-page .safari-faq .safari-prose{margin-right:0}.trip-story-arrows img{filter:brightness(0) invert(1)}}

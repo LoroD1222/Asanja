@@ -24,11 +24,11 @@ export function TripReviews({items, fallbackImage, preview = false, id}: {items?
   return <section className="trip-stories" id={id} aria-label="Guest stories">
     <div className="trip-stories-inner">
       <div className="trip-stories-title"><span aria-hidden="true" /><h2>Guest stories</h2><span aria-hidden="true" /></div>
-      <div className="trip-stories-rating">{showFiveStars ? <><Image className="trip-stories-stars" src="/figma-trip-review/stars.svg" width={142} height={22} alt="" /><Image className="trip-stories-dots" src="/figma-trip-review/rating-dots.svg" width={64} height={8} alt="" /></> : averageRating !== null ? <span className="trip-stories-average">{averageRating.toFixed(1)} / 5</span> : null}<p>{ratingCaption}</p></div>
+      <div className="trip-stories-rating">{showFiveStars ? <Image className="trip-stories-stars" src="/figma-trip-review/green-stars.svg" width={142} height={22} alt="" /> : averageRating !== null ? <span className="trip-stories-average">{averageRating.toFixed(1)} / 5</span> : null}<p>{ratingCaption}</p></div>
       <div className="trip-story-card" key={current._key}>
         <div className="trip-story-photo">
           {photo?.asset?.url ? <picture>{preview && activeIndex === 0 ? <source media="(max-width: 700px)" srcSet="/figma-trip-review/mobile-camp.jpg" /> : null}<PageImage image={photo} sizes="(max-width: 700px) 100vw, 50vw" /></picture> : <div className="trip-story-photo-placeholder" />}
-          {current.locationLabel ? <span className="trip-story-location"><Image src="/figma-trip-review/location.svg" width={16} height={18} alt="" />{current.locationLabel}</span> : null}
+          {current.locationLabel ? <span className="trip-story-location"><Image src="/figma-trip-review/green-location.svg" width={13} height={18} alt="" />{current.locationLabel}</span> : null}
         </div>
         <div className="trip-story-content">
           <div className="trip-story-quote"><span aria-hidden="true">“</span><blockquote><p className={current.mobileQuote ? 'trip-story-desktop-quote' : undefined}>{current.quote}</p>{current.mobileQuote ? <p className="trip-story-mobile-quote">{current.mobileQuote}</p> : null}</blockquote></div>
@@ -38,11 +38,11 @@ export function TripReviews({items, fallbackImage, preview = false, id}: {items?
           </div>
           <div className="trip-story-navigation">
             <div className="trip-story-thumbnails" aria-label="Choose a guest story">{visible.map((item, index) => {const thumbnail = item.settingImage?.asset?.url ? item.settingImage : fallbackImage; return <button type="button" key={item._key} className={index === activeIndex ? 'is-active' : ''} aria-label={`Show review from ${item.name}`} aria-current={index === activeIndex ? 'true' : undefined} onClick={() => setActiveIndex(index)}>{thumbnail?.asset?.url ? <PageImage image={thumbnail} sizes="66px" /> : <span />}</button>})}</div>
-            <div className="trip-story-arrows"><button type="button" aria-label="Previous review" onClick={() => move(-1)}><Image src="/figma-trip-review/previous.svg" width={40} height={40} alt="" /></button><button type="button" aria-label="Next review" onClick={() => move(1)}><Image src="/figma-trip-review/next.svg" width={40} height={40} alt="" /></button></div>
+            <div className="trip-story-arrows"><button type="button" aria-label="Previous review" onClick={() => move(-1)}><Image src="/figma-trip-review/green-previous.svg" width={40} height={40} alt="" /></button><button type="button" aria-label="Next review" onClick={() => move(1)}><Image src="/figma-trip-review/green-next.svg" width={40} height={40} alt="" /></button></div>
           </div>
         </div>
       </div>
-      {reviewLink ? <a className="trip-stories-link" href={reviewLink} target="_blank" rel="noopener noreferrer">Read more reviews on TripAdvisor<Image src="/figma-trip-review/tripadvisor.svg" width={110} height={17} alt="TripAdvisor" /></a> : null}
+      {reviewLink ? <a className="trip-stories-link" href={reviewLink} target="_blank" rel="noopener noreferrer">Read more reviews on TripAdvisor<Image src="/figma-trip-review/green-tripadvisor.svg" width={110} height={17} alt="TripAdvisor" /></a> : null}
       {preview ? <p className="trip-stories-preview-note">Design preview: replace the example stories with approved guest reviews in Sanity.</p> : null}
     </div>
   </section>

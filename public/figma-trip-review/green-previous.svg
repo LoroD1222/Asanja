@@ -1,0 +1,7 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Previous">
+<rect x="0.5" y="0.5" width="39" height="39" rx="19.5" fill="#57654C" fill-opacity="0.321569"/>
+<rect x="0.5" y="0.5" width="39" height="39" rx="19.5" stroke="#57654C"/>
+<path id="Chevron" d="M22 16L18 20L22 24" stroke-width="2" stroke-linecap="round" stroke="black"/>
+</g>
+</svg>

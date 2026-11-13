@@ -33,5 +33,5 @@ export default async function SafariTripRoute({params}: Props) {
       mainEntity: trip.faqs.filter((faq) => faq.question && faq.plainAnswer).map((faq) => ({'@type': 'Question', name: faq.question, acceptedAnswer: {'@type': 'Answer', text: faq.plainAnswer}})),
     }] : []),
   ]
-  return <>{structured.length ? <script type="application/ld+json" dangerouslySetInnerHTML={{__html: jsonLd(structured)}} /> : null}<SafariTripPage trip={trip} automaticBlogs={automaticBlogs} automaticTrips={automaticTrips} whatsappNumber={settings?.whatsappNumber} preview={trip.isSample} /></>
+  return <>{structured.length ? <script type="application/ld+json" dangerouslySetInnerHTML={{__html: jsonLd(structured)}} /> : null}<SafariTripPage trip={trip} automaticBlogs={automaticBlogs} automaticTrips={automaticTrips} whatsappNumber={settings?.whatsappNumber} /></>
 }

@@ -15,6 +15,7 @@ function toggle(value: string, values: string[], update: (next: string[]) => voi
 }
 
 export function QuoteForm({tripTitle, slug, durationDays, durationNights, currency = 'USD', options = [], experiences = [], camps = [], whatsappNumber, preview = false, sample = false, intro, heading}: {tripTitle: string; slug: string; durationDays: number; durationNights?: number; currency?: string; options?: TripPricingOption[]; experiences?: OptionalExperience[]; camps?: PageCard[]; whatsappNumber?: string; preview?: boolean; sample?: boolean; intro?: ReactNode; heading?: string}) {
+  const demonstration = preview || sample
   const [step, setStep] = useState<1 | 2>(1)
   const [travelWindow, setTravelWindow] = useState('Not sure yet')
   const [nights, setNights] = useState(typeof durationNights === 'number' ? String(durationNights) : durationDays > 1 ? String(durationDays - 1) : '5 to 7')
@@ -37,7 +38,7 @@ export function QuoteForm({tripTitle, slug, durationDays, durationNights, curren
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     if (step === 1) {setStep(2); return}
-    if (preview) return
+    if (demonstration) return
     setSending(true); setStatus('')
     const form = new FormData(event.currentTarget)
     const fields = {
@@ -85,8 +86,8 @@ export function QuoteForm({tripTitle, slug, durationDays, durationNights, curren
       </> : <>
         <p className="trip-plan-step-note">A few details and we can shape the right journey for you.</p>
         <div className="trip-plan-fields">
-          <label>Your name<input name="name" required={!preview} maxLength={120} autoComplete="name" placeholder="Your name" /></label>
-          <label>Email address<input name="email" type="email" required={!preview} maxLength={254} autoComplete="email" placeholder="you@example.com" /></label>
+          <label>Your name<input name="name" required={!demonstration} maxLength={120} autoComplete="name" placeholder="Your name" /></label>
+          <label>Email address<input name="email" type="email" required={!demonstration} maxLength={254} autoComplete="email" placeholder="you@example.com" /></label>
           <label>Phone or WhatsApp<input name="phone" type="tel" maxLength={50} autoComplete="tel" placeholder="Include country code" /></label>
           <label>Exact date, if known<input type="date" value={date} onChange={(event) => setDate(event.target.value)} /></label>
           {options.length ? <label>Package preference<select value={optionIndex} onChange={(event) => setOptionIndex(Number(event.target.value))}>{options.map((item, index) => <option value={index} key={item._key}>{item.name}</option>)}</select></label> : null}
@@ -94,8 +95,8 @@ export function QuoteForm({tripTitle, slug, durationDays, durationNights, curren
         </div>
         {experiences.length ? <fieldset className="trip-plan-choice"><legend>Optional experiences</legend><div>{experiences.map((experience) => <button type="button" key={experience._key} aria-pressed={selectedExtras.includes(experience._key)} onClick={() => toggle(experience._key, selectedExtras, setSelectedExtras)}>{experience.name}</button>)}</div></fieldset> : null}
         {option ? <p className="trip-plan-estimate" aria-live="polite">{amount === null ? 'We’ll prepare a tailored price for your dates.' : `Indicative total: ${new Intl.NumberFormat('en-US', {style: 'currency', currency, maximumFractionDigits: 0}).format(amount)}. Final rate confirmed by Asanja Africa.`}</p> : null}
-        {preview ? <p className="trip-plan-step-note">{sample ? 'This itinerary is an illustrative sample. Use the booking page to ask about a confirmed safari.' : 'This is a layout preview; use the live booking page to send an enquiry.'}</p> : null}
-        <div className="trip-plan-actions trip-plan-actions-final"><button type="button" className="trip-plan-back" onClick={() => setStep(1)}>← Back</button>{preview ? <a className="trip-plan-pill" href="/make-a-booking/">Open live booking <span aria-hidden="true">↗</span></a> : <button className="trip-plan-pill" type="submit" disabled={sending}>{sending ? 'Sending…' : 'Send my plans'} <span aria-hidden="true">↗</span></button>}</div>
+        {demonstration ? <p className="trip-plan-step-note">{sample ? 'This itinerary is an illustrative sample. Use the live trip planner to ask about a confirmed safari.' : 'This is a layout preview; use the live trip planner to send an enquiry.'}</p> : null}
+        <div className="trip-plan-actions trip-plan-actions-final"><button type="button" className="trip-plan-back" onClick={() => setStep(1)}>← Back</button>{demonstration ? <a className="trip-plan-pill" href="/plan-my-stay/">Open live trip planner <span aria-hidden="true">↗</span></a> : <button className="trip-plan-pill" type="submit" disabled={sending}>{sending ? 'Sending…' : 'Send my plans'} <span aria-hidden="true">↗</span></button>}</div>
       </>}
       <input name="website" tabIndex={-1} autoComplete="off" className="safari-honeypot" aria-hidden="true" />
       {status ? <p className="safari-form-status" role="status">{status}</p> : null}

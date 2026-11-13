@@ -128,7 +128,7 @@ export function TripSectionRenderer({section, trip, automaticTrips, automaticBlo
     {section.kind !== 'overview' ? <SectionHeading eyebrow={section.eyebrow || 'Asanja Africa'} title={title} /> : null}
     {section.kind !== 'overview' ? <PortablePageText value={section.body} /> : null}
     {content}
-    {section.kind === 'itinerary' ? <><SafariItinerary days={trip.itinerary} /><a className="safari-text-link" href={preview ? '/preview/safari-trip/itinerary.pdf/' : `/safaris/${trip.slug}/itinerary.pdf/`} download>{preview ? 'Download sample itinerary PDF ↓' : 'Download itinerary PDF ↓'}</a></> : null}
+    {section.kind === 'itinerary' ? <><SafariItinerary days={trip.itinerary} /><a className="safari-text-link" href={preview ? '/preview/safari-trip/itinerary.pdf/' : `/safaris/${trip.slug}/itinerary.pdf/`} download>{preview || trip.isSample ? 'Download sample itinerary PDF ↓' : 'Download itinerary PDF ↓'}</a></> : null}
     {section.kind === 'route' ? <SafariRouteMap stops={tripRouteStops(trip)} /> : null}
     {section.kind === 'destinations' ? <CardGrid items={trip.relatedDestinations} label="Destination" preview={preview} editorial /> : null}
     {section.kind === 'accommodation' ? <CardGrid items={trip.relatedCamps} label="Stay" preview={preview} editorial /> : null}

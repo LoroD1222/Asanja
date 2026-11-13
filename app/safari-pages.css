@@ -448,6 +448,15 @@
 .safari-trip-page .trip-plan-fields select,
 .safari-trip-page .trip-plan-fields textarea,
 .safari-trip-page .trip-plan-choice button{font-size:.95rem}
+
+/* Guide links use the same image-led editorial language as the journey cards. */
+.safari-trip-page .safari-section-relatedLandingPages .safari-section-heading{max-width:none;margin:0 0 clamp(2rem,4vw,3rem);text-align:center}
+.safari-trip-page .safari-section-relatedLandingPages .safari-section-heading h2{color:#303b31;font:400 clamp(2.25rem,4vw,3.5rem)/1.16 AsanjaMarcellus,Georgia,serif;letter-spacing:.055em;text-transform:uppercase}
+.safari-trip-page .safari-section-relatedLandingPages .safari-card-grid--editorial{grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1rem,2.2vw,1.75rem)}
+.safari-trip-page .safari-section-relatedLandingPages .safari-card-grid--editorial:has(>.safari-editorial-card:only-child){grid-template-columns:minmax(0,660px);justify-content:center}
+.safari-trip-page .safari-section-relatedLandingPages .safari-editorial-card-visual{height:clamp(340px,36vw,450px)}
+.safari-trip-page .safari-section-relatedLandingPages .safari-editorial-card p{min-height:0;padding:1.25rem 1.5rem 1.45rem}
+@media(max-width:650px){.safari-trip-page .safari-section-relatedLandingPages .safari-section-heading h2{font-size:clamp(2rem,8vw,2.6rem);letter-spacing:.035em}.safari-trip-page .safari-section-relatedLandingPages .safari-card-grid--editorial,.safari-trip-page .safari-section-relatedLandingPages .safari-card-grid--editorial:has(>.safari-editorial-card:only-child){grid-template-columns:1fr}.safari-trip-page .safari-section-relatedLandingPages .safari-editorial-card-visual{height:340px}}
 .safari-trip-page .trip-plan-fields input::placeholder,
 .safari-trip-page .trip-plan-fields textarea::placeholder{color:#68746b}
 @media(max-width:650px){

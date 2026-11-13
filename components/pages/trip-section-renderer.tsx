@@ -137,7 +137,7 @@ export function TripSectionRenderer({section, trip, automaticTrips, automaticBlo
     {section.kind === 'season' ? <><PortablePageText value={trip.bestTime} />{trip.bestMonths?.length ? <ul className="safari-pill-list">{trip.bestMonths.map((month) => <li key={month}>{month}</li>)}</ul> : null}<PageImage image={section.image} className="safari-wide-image" /></> : null}
     {section.kind === 'travel' ? <><PortablePageText value={trip.travelInformation} />{trip.travelNotes?.length ? <ul className="safari-travel-notes">{trip.travelNotes.map((note) => <li key={note}>{note}</li>)}</ul> : null}</> : null}
     {section.kind === 'relatedTrips' ? <CardGrid items={recommendedTrips} label="Safari trip" preview={preview} editorial /> : null}
-    {section.kind === 'relatedLandingPages' ? <CardGrid items={trip.relatedLandingPages} label="Safari guide" preview={preview} /> : null}
+    {section.kind === 'relatedLandingPages' ? <CardGrid items={trip.relatedLandingPages} label="Safari guide" preview={preview} editorial /> : null}
     {section.kind === 'editorial' ? <div className="safari-editorial"><PageImage image={section.image} /></div> : null}
     {preview && !hasTripSectionContent(section, trip, automaticTrips, automaticBlogs) ? <PreviewPlaceholder kind={section.kind} /> : null}
   </section>

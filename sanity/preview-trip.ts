@@ -175,7 +175,7 @@ export function buildPreviewTrip(introduction?: PageText, relatedBlogs: ArticleC
       {_key: 'inclusions', kind: 'inclusions', body: previewParagraph('Know what is part of your journey before you set off. Your final proposal will confirm every inclusion and anything you need to arrange separately.', 'inclusions-note')},
       {_key: 'related-trips', kind: 'relatedTrips', eyebrow: 'Continue exploring'},
       {_key: 'related-blogs', kind: 'relatedBlogs', heading: 'From the Asanja journal'},
-      {_key: 'related-pages', kind: 'relatedLandingPages', eyebrow: 'Sample internal links'},
+      {_key: 'related-pages', kind: 'relatedLandingPages', eyebrow: 'Continue the journey'},
       {_key: 'faq', kind: 'faq', heading: 'Good to know', body: previewParagraph('Answers to a few questions you may have before setting off.', 'faq-intro')},
       {_key: 'reviews', kind: 'reviews', eyebrow: 'Sample testimonials', body: previewParagraph('Illustrative quotes for the client preview. Replace them with approved guest reviews in the CMS.', 'reviews-note')},
       {_key: 'booking', kind: 'booking', heading: 'Plan your trip'},

@@ -89,10 +89,16 @@ export function CampPageView({page}: {page: CampPage}) {
       </div> : null}
 
       <section className={styles.booking}>
-        <p className={styles.eyebrow}>Stay with us</p>
-        <h2>{page.bookingHeading || 'Make a booking'}</h2>
-        {page.bookingText?.length ? <PortablePageText value={page.bookingText} /> : <p>Let our safari specialists create a personalised journey around your stay at {page.title}.</p>}
-        <Link href="/plan-my-stay/">{page.bookingButtonLabel || 'Make a booking'}</Link>
+        {page.bookingImage?.asset?.url ? <>
+          <PageImage image={page.bookingImage} className={styles.bookingImage} sizes="100vw" />
+          <div className={styles.bookingWash} />
+        </> : null}
+        <div className={styles.bookingContent}>
+          <p className={styles.eyebrow}>Stay with us</p>
+          <h2>{page.bookingHeading || 'Make a booking'}</h2>
+          {page.bookingText?.length ? <PortablePageText value={page.bookingText} /> : <p>Let our safari specialists create a personalised journey around your stay at {page.title}.</p>}
+          <Link href="/plan-my-stay/">{page.bookingButtonLabel || 'Make a booking'}</Link>
+        </div>
       </section>
     </article>
   </BlogShell>

@@ -4,10 +4,13 @@ import {draftMode} from 'next/headers'
 import {createClient, type QueryParams} from 'next-sanity'
 import {sanityEnv} from './env'
 
+const readToken = process.env.SANITY_API_READ_TOKEN?.trim()
+
 export const publishedClient = createClient({
   projectId: sanityEnv.projectId,
   dataset: sanityEnv.dataset,
   apiVersion: sanityEnv.apiVersion,
+  token: readToken || undefined,
   perspective: 'published',
   useCdn: true,
   stega: false,
@@ -34,14 +37,13 @@ export async function sanityFetch<T>({query, params = {}, tags = [], stega = tru
     })
   }
 
-  const token = process.env.SANITY_API_READ_TOKEN?.trim()
-  if (!token) {
+  if (!readToken) {
     throw new Error('Draft Mode requires the server-only SANITY_API_READ_TOKEN environment variable.')
   }
 
   return publishedClient
     .withConfig({
-      token,
+      token: readToken,
       perspective: 'drafts',
       useCdn: false,
       stega: stega ? {enabled: true, studioUrl: sanityEnv.studioUrl} : false,

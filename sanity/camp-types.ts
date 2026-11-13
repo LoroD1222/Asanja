@@ -18,6 +18,7 @@ export type CampPage = PageCard & {
   amenitiesIntroduction?: PageText
   facilities?: string[]
   gallery?: PageMedia[]
+  bookingImage?: SanityImage
   locationDescription?: PageText
   locationImage?: SanityImage
   destination?: PageCard | null

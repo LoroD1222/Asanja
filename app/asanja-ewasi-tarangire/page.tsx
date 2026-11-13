@@ -2,6 +2,8 @@ import type {Metadata} from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import {BlogShell} from '../../components/blog/blog-shell'
+import {PageImage} from '../../components/pages/page-image'
+import {getPublishedCampBookingImage} from '../../sanity/camp-data'
 import styles from './ewasi.module.css'
 
 const title = 'Asanja Ewasi Tarangire'
@@ -44,7 +46,8 @@ const gallery = [
   {src: '/camps/asanja-ewasi-tarangire/ewasi-safari-002-social.webp', alt: 'Private suite and plunge pool at Asanja Ewasi Tarangire', width: 1920, height: 1081},
 ]
 
-export default function AsanjaEwasiTarangirePage() {
+export default async function AsanjaEwasiTarangirePage() {
+  const bookingImage = await getPublishedCampBookingImage('asanja-ewasi-tarangire').catch(() => null)
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'LodgingBusiness',
@@ -145,13 +148,15 @@ export default function AsanjaEwasiTarangirePage() {
       </section>
 
       <section className={styles.cta} aria-label="Plan your Asanja safari">
-        <Image
-          className={styles.ctaImage}
-          src="/legacy/wp-content/uploads/2026/09/Photo-29-11-2025-03-58-52-1-scaled.webp"
-          alt="Elephant herd crossing the misty plains beneath acacia trees"
-          fill
-          sizes="100vw"
-        />
+        {bookingImage?.asset?.url
+          ? <PageImage image={bookingImage} className={styles.ctaImage} sizes="100vw" />
+          : <Image
+              className={styles.ctaImage}
+              src="/legacy/wp-content/uploads/2026/09/Photo-29-11-2025-03-58-52-1-scaled.webp"
+              alt="Elephant herd crossing the misty plains beneath acacia trees"
+              fill
+              sizes="100vw"
+            />}
         <div className={styles.ctaWash} />
         <div className={styles.ctaContent}>
           <Image

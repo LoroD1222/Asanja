@@ -28,7 +28,12 @@ export const resolve: PresentationPluginOptions['resolve'] = {
     }),
     camp: defineLocations({
       select: {title: 'title', slug: 'slug.current'},
-      resolve: (document) => ({locations: [{title: document?.title || 'Camp', href: document?.slug ? `/camps/${document.slug}/` : '/camps/'}]}),
+      resolve: (document) => ({locations: [{
+        title: document?.title || 'Camp',
+        href: document?.slug === 'asanja-ewasi-tarangire'
+          ? '/asanja-ewasi-tarangire/'
+          : document?.slug ? `/camps/${document.slug}/` : '/camps/',
+      }]}),
     }),
   },
 }

@@ -42,12 +42,15 @@
 .locationCard :global(.safari-prose p){margin:0 0 1rem}
 .locationCard>a{display:inline-flex;margin-top:1.8rem;padding-bottom:.35rem;border-bottom:1px solid currentColor;color:var(--camp-green);font:600 .7rem AsanjaPoppins,Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase}
 .related{width:min(1220px,calc(100% - 3rem));margin:0 auto}
-.booking{padding:clamp(5rem,8vw,7rem) 1.5rem;background:var(--camp-cream) url('/legacy/wp-content/uploads/2024/04/Hero_texture.png') center/cover no-repeat;text-align:center}
+.booking{position:relative;isolation:isolate;overflow:hidden;padding:clamp(5rem,8vw,7rem) 1.5rem;background:var(--camp-cream) url('/legacy/wp-content/uploads/2024/04/Hero_texture.png') center/cover no-repeat;text-align:center}
+.bookingImage{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover}
+.bookingWash{position:absolute;inset:0;z-index:-1;background:rgba(247,243,236,.72)}
+.bookingContent{position:relative}
 .booking h2{font-size:clamp(2.8rem,5vw,4.8rem)}
-.booking>p:not(.eyebrow),.booking :global(.safari-prose){max-width:720px;margin:1.25rem auto 0;color:#727575;font:400 .95rem/1.72 AsanjaPoppins,Arial,sans-serif}
+.bookingContent>p:not(.eyebrow),.booking :global(.safari-prose){max-width:720px;margin:1.25rem auto 0;color:#727575;font:400 .95rem/1.72 AsanjaPoppins,Arial,sans-serif}
 .booking :global(.safari-prose p){margin:0 0 1rem}
-.booking>a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;margin-top:2rem;padding:.7rem 1.35rem;border:1px solid var(--camp-sand);background:var(--camp-sand);color:#fff!important;font:600 .7rem AsanjaPoppins,Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;transition:background .2s,color .2s}
-.booking>a:hover,.booking>a:focus-visible{background:transparent;color:var(--camp-sand)!important}
+.bookingContent>a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;margin-top:2rem;padding:.7rem 1.35rem;border:1px solid var(--camp-sand);background:var(--camp-sand);color:#fff!important;font:600 .7rem AsanjaPoppins,Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;transition:background .2s,color .2s}
+.bookingContent>a:hover,.bookingContent>a:focus-visible{background:transparent;color:var(--camp-sand)!important}
 @media(max-width:900px){.hero{min-height:72svh}.story,.amenities,.location{grid-template-columns:1fr}.storyImage{min-height:55vw}.facilityList{grid-template-columns:1fr}.facilityList li:nth-child(odd){border-right:0}.location{min-height:0}.locationMedia{height:56vw;min-height:360px}.locationCard{margin-top:-5rem;margin-right:1.5rem;margin-left:1.5rem;position:relative}}
 @media(max-width:560px){.hero{min-height:70svh}.hero h1{font-size:clamp(2.55rem,11vw,3.65rem)}.heroContent{padding-top:3rem}.scrollCue{margin-top:2.5rem}.introduction,.gallery,.amenities,.booking{padding-top:4.5rem;padding-bottom:4.5rem}.story{gap:2rem;padding:1rem 1rem 4.5rem}.storyImage{min-height:76vw}.storyCopy{padding:1.5rem .5rem 0}.story h2,.amenities h2,.location h2{font-size:clamp(2.25rem,10vw,3.25rem)}.facilityList li{grid-template-columns:34px minmax(0,1fr);min-height:76px;padding:.85rem 0}.location{gap:0;padding:0 0 4rem}.locationMedia{height:76vw;min-height:310px}.locationCard{margin:-2.5rem 1rem 0;padding:2rem 1.35rem}.related{width:calc(100% - 2rem)}}
 @media(prefers-reduced-motion:reduce){.scrollCue{transition:none}}

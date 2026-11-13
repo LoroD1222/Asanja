@@ -22,6 +22,7 @@ export const campBySlugQuery = defineQuery(`
     amenitiesIntroduction[]{${textFields}},
     facilities,
     gallery[]{_key, kind, caption, videoUrl, image${imageFields}},
+    bookingImage${imageFields},
     locationDescription[]{${textFields}},
     locationImage${imageFields},
     "destination": destination->{${cardFields}},
@@ -49,8 +50,17 @@ export const campMenuQuery = defineQuery(`
   *[_type == "camp" && ${publicCamp}] | order(title asc){
     _id,
     "label": coalesce(navigationLabel, title),
-    "href": "/camps/" + slug.current + "/"
+    "href": select(
+      slug.current == "asanja-ewasi-tarangire" => "/asanja-ewasi-tarangire/",
+      "/camps/" + slug.current + "/"
+    )
   }
+`)
+
+export const campBookingImageBySlugQuery = defineQuery(`
+  *[_type == "camp" && slug.current == $slug && ${publicCamp}][0]{
+    bookingImage${imageFields}
+  }.bookingImage
 `)
 
 export function getCampPage(slug: string, stega = true) {
@@ -83,4 +93,12 @@ export function getPublishedCampMenuItems() {
   return publishedClient.fetch<CampMenuItem[]>(campMenuQuery, {includeDrafts: false}, {
     next: {revalidate: 300, tags: ['sanity', 'camp', 'camp-navigation']},
   })
+}
+
+export function getPublishedCampBookingImage(slug: string) {
+  return publishedClient.fetch<CampPage['bookingImage'] | null>(
+    campBookingImageBySlugQuery,
+    {slug, includeDrafts: false},
+    {next: {revalidate: 300, tags: ['sanity', 'camp', `camp:${slug}`]}},
+  )
 }

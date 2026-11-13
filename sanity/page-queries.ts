@@ -11,7 +11,7 @@ const seoFields = `seo{..., openGraphImage${imageFields}}`
 
 export const safariTripBySlugQuery = defineQuery(`
   *[_type == "safariTrip" && slug.current == $slug && (${publicPage} || $includeDrafts == true)][0]{
-    ${cardFields}, heroEyebrow, heroDescription[]{${textFields}}, introduction[]{${textFields}},
+    ${cardFields}, isSample, heroEyebrow, heroDescription[]{${textFields}}, introduction[]{${textFields}},
     travelStyle, startLocation, endLocation, featured, highlights[]{_key, title, description},
     itinerary[]{_key, dayNumber, title, description[]{${textFields}},
       "destination": destination->{${cardFields}}, "accommodation": accommodation->{${cardFields}},
@@ -69,7 +69,7 @@ export const contentPageBySlugQuery = defineQuery(`
 
 export const pageSeoBySlugQuery = defineQuery(`
   *[_type == $type && slug.current == $slug && (${publicPage} || $includeDrafts == true)][0]{
-    _id, _type, title, "slug": slug.current, summary, heroImage${imageFields}, ${seoFields}
+    _id, _type, title, "slug": slug.current, summary, isSample, heroImage${imageFields}, ${seoFields}
   }
 `)
 
@@ -85,12 +85,12 @@ export const recentPageBlogsQuery = defineQuery(`
 `)
 
 export const automaticTripsQuery = defineQuery(`
-  *[_type == "safariTrip" && defined(slug.current) && publicationStatus != "hidden" && !(_id in path("drafts.**")) && _id != $currentId && count(relatedDestinations[_ref in $destinationIds]) > 0]
+  *[_type == "safariTrip" && defined(slug.current) && publicationStatus != "hidden" && isSample != true && !(_id in path("drafts.**")) && _id != $currentId && count(relatedDestinations[_ref in $destinationIds]) > 0]
     | order(_updatedAt desc)[0...6]{${cardFields}}
 `)
 
 export const pageSitemapQuery = defineQuery(`
-  *[_type in ["safariTrip", "seoLandingPage", "destination", "camp"] && defined(slug.current) && publicationStatus != "hidden" && seo.noIndex != true && !(_id in path("drafts.**"))]{
+  *[_type in ["safariTrip", "seoLandingPage", "destination", "camp"] && defined(slug.current) && publicationStatus != "hidden" && seo.noIndex != true && isSample != true && !(_id in path("drafts.**"))]{
     _id, _type, "slug": slug.current, _updatedAt
   }
 `)

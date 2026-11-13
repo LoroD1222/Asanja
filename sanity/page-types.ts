@@ -36,6 +36,7 @@ export type OptionalExperience = {_key: string; name: string; description?: stri
 export type TripSection = {_key: string; kind: 'overview' | 'highlights' | 'itinerary' | 'route' | 'destinations' | 'accommodation' | 'wildlife' | 'gallery' | 'pricing' | 'inclusions' | 'season' | 'travel' | 'relatedTrips' | 'relatedBlogs' | 'relatedLandingPages' | 'faq' | 'reviews' | 'booking' | 'editorial'; eyebrow?: string; heading?: string; body?: PageText; image?: SanityImage}
 
 export type SafariTrip = PageCard & {
+  isSample?: boolean;
   heroEyebrow?: string; heroDescription?: PageText; introduction?: PageText; durationDays: number; durationNights?: number
   travelStyle?: string; startLocation?: string; endLocation?: string; featured?: boolean; highlights?: Array<{_key: string; title: string; description?: string}>
   itinerary?: ItineraryDay[]; routeStops?: RouteStop[]; relatedDestinations?: PageCard[]; relatedCamps?: PageCard[]

@@ -12,6 +12,6 @@ export async function GET(_request: Request, {params}: Context) {
     publishedClient.fetch<{contactEmail?: string; whatsappNumber?: string} | null>(siteSettingsQuery),
   ])
   if (!trip || !trip.slug) return new Response('Itinerary not found.', {status: 404})
-  const bytes = await buildTripPdf(trip, settings || undefined)
+  const bytes = await buildTripPdf(trip, {...(settings || {}), isPreview: trip.isSample})
   return new Response(new Uint8Array(bytes).buffer, {headers: {'Content-Type': 'application/pdf', 'Content-Disposition': `attachment; filename="${trip.slug}-itinerary.pdf"`, 'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=3600'}})
 }

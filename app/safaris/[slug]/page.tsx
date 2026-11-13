@@ -10,7 +10,7 @@ type Props = {params: Promise<{slug: string}>}
 export async function generateMetadata({params}: Props): Promise<Metadata> {
   const {slug} = await params
   const page = await getPageSeo('safariTrip', slug)
-  return page ? pageMetadata(page, `/safaris/${page.slug}/`) : {title: 'Safari not found', robots: {index: false, follow: false}}
+  return page ? pageMetadata({...page, seo: {...page.seo, noIndex: page.isSample || page.seo?.noIndex}}, `/safaris/${page.slug}/`) : {title: 'Safari not found', robots: {index: false, follow: false}}
 }
 
 export default async function SafariTripRoute({params}: Props) {
@@ -24,7 +24,7 @@ export default async function SafariTripRoute({params}: Props) {
     getSiteSettings(),
   ])
   const url = new URL(`/safaris/${trip.slug}/`, siteOrigin).toString()
-  const structured = [
+  const structured = trip.isSample ? [] : [
     {'@context': 'https://schema.org', '@type': 'TouristTrip', name: trip.title, description: trip.summary, url, image: trip.heroImage?.asset?.url, touristType: trip.category, provider: {'@id': `${siteOrigin}/#organization`}},
     organizationData,
     breadcrumbData([{name: 'Home', path: '/'}, {name: 'Safaris', path: '/safaris/'}, {name: trip.title, path: `/safaris/${trip.slug}/`}]),
@@ -33,5 +33,5 @@ export default async function SafariTripRoute({params}: Props) {
       mainEntity: trip.faqs.filter((faq) => faq.question && faq.plainAnswer).map((faq) => ({'@type': 'Question', name: faq.question, acceptedAnswer: {'@type': 'Answer', text: faq.plainAnswer}})),
     }] : []),
   ]
-  return <><script type="application/ld+json" dangerouslySetInnerHTML={{__html: jsonLd(structured)}} /><SafariTripPage trip={trip} automaticBlogs={automaticBlogs} automaticTrips={automaticTrips} whatsappNumber={settings?.whatsappNumber} /></>
+  return <>{structured.length ? <script type="application/ld+json" dangerouslySetInnerHTML={{__html: jsonLd(structured)}} /> : null}<SafariTripPage trip={trip} automaticBlogs={automaticBlogs} automaticTrips={automaticTrips} whatsappNumber={settings?.whatsappNumber} preview={trip.isSample} /></>
 }

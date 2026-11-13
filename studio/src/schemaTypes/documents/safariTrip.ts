@@ -32,6 +32,7 @@ export const safariTrip = defineType({
     defineField({name: 'startLocation', title: 'Starting location', type: 'string', group: 'overview'}),
     defineField({name: 'endLocation', title: 'Ending location', type: 'string', group: 'overview'}),
     defineField({name: 'featured', title: 'Featured safari', type: 'boolean', group: 'overview', initialValue: false}),
+    defineField({name: 'isSample', title: 'Sample itinerary', type: 'boolean', group: 'overview', initialValue: false, description: 'Clearly labels this page as an illustrative sample. It is kept out of search engines and its enquiry form cannot be submitted.'}),
     defineField({name: 'heroEyebrow', title: 'Hero eyebrow', type: 'string', group: 'hero'}),
     defineField({name: 'heroDescription', title: 'Hero description', type: 'pageRichText', group: 'hero', description: 'Rich text below the safari name. Supports contextual links to published CMS pages; the short description is used when this is empty.'}),
     image('heroImage', 'Main hero image', 'hero'),

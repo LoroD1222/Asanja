@@ -147,8 +147,8 @@ export default function AsanjaEwasiTarangirePage() {
       <section className={styles.cta} aria-label="Plan your Asanja safari">
         <Image
           className={styles.ctaImage}
-          src="/legacy/wp-content/uploads/2025/10/Elephant-2.webp"
-          alt="Elephant crossing the golden grasslands of Tanzania"
+          src="/legacy/wp-content/uploads/2026/09/Photo-29-11-2025-03-58-52-1-scaled.webp"
+          alt="Elephant herd crossing the misty plains beneath acacia trees"
           fill
           sizes="100vw"
         />

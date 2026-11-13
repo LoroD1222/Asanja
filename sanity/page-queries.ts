@@ -11,7 +11,7 @@ const seoFields = `seo{..., openGraphImage${imageFields}}`
 
 export const safariTripBySlugQuery = defineQuery(`
   *[_type == "safariTrip" && slug.current == $slug && (${publicPage} || $includeDrafts == true)][0]{
-    ${cardFields}, heroEyebrow, heroImages[]${imageFields}, introduction[]{${textFields}},
+    ${cardFields}, heroEyebrow, heroDescription[]{${textFields}}, introduction[]{${textFields}},
     travelStyle, startLocation, endLocation, featured, highlights[]{_key, title, description},
     itinerary[]{_key, dayNumber, title, description[]{${textFields}},
       "destination": destination->{${cardFields}}, "accommodation": accommodation->{${cardFields}},
@@ -29,7 +29,7 @@ export const safariTripBySlugQuery = defineQuery(`
     "automaticBlogCategoryIds": automaticBlogCategories[]._ref,
     "automaticBlogTagIds": automaticBlogTags[]._ref,
     automaticBlogsEnabled, automaticBlogsLimit,
-    faqs[]{${faqFields}}, reviews[]{_key, name, country, quote, rating, source, sourceUrl, visitDate, image${imageFields}},
+    faqs[]{${faqFields}}, reviews[]{_key, name, country, guestDescription, quote, mobileQuote, rating, source, sourceUrl, visitDate, image${imageFields}, settingImage${imageFields}, locationLabel},
     sections[]{_key, kind, eyebrow, heading, body[]{${textFields}}, image${imageFields}},
     bookingHeading, bookingText[]{${textFields}}, ${seoFields}
   }
@@ -43,7 +43,7 @@ export const seoLandingPageBySlugQuery = defineQuery(`
       "destinations": destinations[]->{${cardFields}}, "camps": camps[]->{${cardFields}},
       "trips": trips[]->{${cardFields}}, "blogs": blogs[]->{${articleCardFields}},
       "landingPages": landingPages[]->{${cardFields}},
-      faqs[]{${faqFields}}, testimonials[]{_key, name, country, quote, rating, source, sourceUrl, visitDate, image${imageFields}},
+      faqs[]{${faqFields}}, testimonials[]{_key, name, country, guestDescription, quote, mobileQuote, rating, source, sourceUrl, visitDate, image${imageFields}, settingImage${imageFields}, locationLabel},
       ctaLabel, ctaUrl, "documentUrl": document.asset->url
     },
     "relatedBlogs": relatedBlogs[]->{${articleCardFields}},

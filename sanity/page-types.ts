@@ -27,7 +27,7 @@ export type PageSeo = {
 
 export type PageMedia = {_key: string; kind: 'photo' | 'video'; image?: SanityImage; caption?: string; videoUrl?: string}
 export type FAQ = {_key: string; question: string; answer?: PageText; plainAnswer?: string}
-export type Review = {_key: string; name: string; country?: string; quote: string; rating?: number; source?: string; sourceUrl?: string; visitDate?: string; image?: SanityImage}
+export type Review = {_key: string; name: string; country?: string; guestDescription?: string; quote: string; mobileQuote?: string; rating?: number; source?: string; sourceUrl?: string; visitDate?: string; image?: SanityImage; settingImage?: SanityImage; locationLabel?: string}
 
 export type RouteStop = {_key: string; name: string; dayLabel?: string; description?: string; coordinates?: GeoPoint; destination?: PageCard | null}
 export type ItineraryDay = {_key: string; dayNumber: number; title: string; description?: PageText; destination?: PageCard | null; accommodation?: PageCard | null; activities?: string[]; meals?: string[]; notes?: string; image?: SanityImage}
@@ -36,7 +36,7 @@ export type OptionalExperience = {_key: string; name: string; description?: stri
 export type TripSection = {_key: string; kind: 'overview' | 'highlights' | 'itinerary' | 'route' | 'destinations' | 'accommodation' | 'wildlife' | 'gallery' | 'pricing' | 'inclusions' | 'season' | 'travel' | 'relatedTrips' | 'relatedBlogs' | 'relatedLandingPages' | 'faq' | 'reviews' | 'booking' | 'editorial'; eyebrow?: string; heading?: string; body?: PageText; image?: SanityImage}
 
 export type SafariTrip = PageCard & {
-  heroEyebrow?: string; heroImages?: SanityImage[]; introduction?: PageText; durationDays: number; durationNights?: number
+  heroEyebrow?: string; heroDescription?: PageText; introduction?: PageText; durationDays: number; durationNights?: number
   travelStyle?: string; startLocation?: string; endLocation?: string; featured?: boolean; highlights?: Array<{_key: string; title: string; description?: string}>
   itinerary?: ItineraryDay[]; routeStops?: RouteStop[]; relatedDestinations?: PageCard[]; relatedCamps?: PageCard[]
   wildlife?: PageText; activities?: string[]; bestTime?: PageText; bestMonths?: string[]; gallery?: PageMedia[]

@@ -1,8 +1,9 @@
 import {CalendarIcon} from '@sanity/icons/Calendar'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {validatePublishedReferences, validateUniqueSlug} from '../referenceValidation'
+import {imageOptimizationWarning, imageUploadGuidance} from '../imageOptimization'
 
-const image = (name: string, title: string, group: string) => defineField({name, title, type: 'image', group, options: {hotspot: true}, fields: [
+const image = (name: string, title: string, group: string) => defineField({name, title, type: 'image', group, description: imageUploadGuidance, options: {hotspot: true}, validation: (rule) => [rule.required(), imageOptimizationWarning(rule)], fields: [
   defineField({name: 'alt', title: 'Alternative text', type: 'string', validation: (rule) => rule.required().warning('Describe the image for accessibility.')}),
   defineField({name: 'caption', title: 'Caption', type: 'string'}),
 ]})
@@ -32,8 +33,8 @@ export const safariTrip = defineType({
     defineField({name: 'endLocation', title: 'Ending location', type: 'string', group: 'overview'}),
     defineField({name: 'featured', title: 'Featured safari', type: 'boolean', group: 'overview', initialValue: false}),
     defineField({name: 'heroEyebrow', title: 'Hero eyebrow', type: 'string', group: 'hero'}),
+    defineField({name: 'heroDescription', title: 'Hero description', type: 'pageRichText', group: 'hero', description: 'Rich text below the safari name. Supports contextual links to published CMS pages; the short description is used when this is empty.'}),
     image('heroImage', 'Main hero image', 'hero'),
-    defineField({name: 'heroImages', title: 'Additional hero images', type: 'array', group: 'hero', of: [defineArrayMember({type: 'image', options: {hotspot: true}, fields: [defineField({name: 'alt', title: 'Alternative text', type: 'string'})]})]}),
     defineField({name: 'highlights', title: 'Safari highlights', type: 'array', group: 'experience', of: [defineArrayMember({type: 'object', fields: [
       defineField({name: 'title', title: 'Highlight', type: 'string', validation: (rule) => rule.required()}),
       defineField({name: 'description', title: 'Description', type: 'text', rows: 2}),

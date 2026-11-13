@@ -1,32 +1,49 @@
 'use client'
 
-import {useState, type FormEvent} from 'react'
-import type {OptionalExperience, TripPricingOption} from '../../sanity/page-types'
+import {useState, type FormEvent, type ReactNode} from 'react'
+import type {OptionalExperience, PageCard, TripPricingOption} from '../../sanity/page-types'
 import {whatsappHref} from '../../sanity/contact'
 import {indicativePrice} from '../../sanity/price'
 
-export function QuoteForm({tripTitle, slug, durationDays, currency = 'USD', options = [], experiences = [], whatsappNumber, preview = false}: {tripTitle: string; slug: string; durationDays: number; currency?: string; options?: TripPricingOption[]; experiences?: OptionalExperience[]; whatsappNumber?: string; preview?: boolean}) {
-  const [date, setDate] = useState('')
+const previewCamps = ['Moru', 'Siri Bustani', 'Nyasirori', 'Ewasi Tarangire', 'Ndembo Ruaha', 'Under the Stars']
+const occasions = ['Honeymoon', 'Family safari', 'The migration', 'Photography', 'Anniversary', 'Safari and Zanzibar']
+const travelWindows = ['Not sure yet', 'Within 3 months', 'In 3 to 6 months', 'In 6 to 12 months', 'More than a year away']
+const nightChoices = ['3 to 4', '5 to 7', '8 to 10', '11 to 14', '15 or more']
+
+function toggle(value: string, values: string[], update: (next: string[]) => void) {
+  update(values.includes(value) ? values.filter((item) => item !== value) : [...values, value])
+}
+
+export function QuoteForm({tripTitle, slug, durationDays, currency = 'USD', options = [], experiences = [], camps = [], whatsappNumber, preview = false, intro, heading}: {tripTitle: string; slug: string; durationDays: number; currency?: string; options?: TripPricingOption[]; experiences?: OptionalExperience[]; camps?: PageCard[]; whatsappNumber?: string; preview?: boolean; intro?: ReactNode; heading?: string}) {
+  const [step, setStep] = useState<1 | 2>(1)
+  const [travelWindow, setTravelWindow] = useState('Not sure yet')
+  const [nights, setNights] = useState(durationDays > 1 ? String(durationDays - 1) : '5 to 7')
   const [adults, setAdults] = useState(2)
   const [children, setChildren] = useState(0)
-  const [days, setDays] = useState(durationDays)
+  const [selectedCamps, setSelectedCamps] = useState<string[]>([])
+  const [selectedOccasions, setSelectedOccasions] = useState<string[]>([])
+  const [date, setDate] = useState('')
   const [optionIndex, setOptionIndex] = useState(0)
   const [selectedExtras, setSelectedExtras] = useState<string[]>([])
   const [status, setStatus] = useState('')
   const [sending, setSending] = useState(false)
   const option = options[optionIndex] || null
   const extras = experiences.filter((experience) => selectedExtras.includes(experience._key))
+  const days = /^\d+$/.test(nights) ? Number(nights) + 1 : 0
   const amount = indicativePrice({date, adults, children, days, option, extras}, durationDays)
-  const whatsapp = whatsappHref(whatsappNumber, preview ? 'Hello Asanja Africa, I saw the safari template preview and would like help planning a trip.' : `Hello Asanja Africa, I would like a quote for ${tripTitle}. Travel date: ${date || 'to be confirmed'}. Travellers: ${adults} adults and ${children} children. Duration: ${days} days. Accommodation: ${option?.name || 'please advise'}. Additional experiences: ${extras.map((item) => item.name).join(', ') || 'none selected'}.`)
+  const campChoices = preview ? previewCamps : camps.length ? camps.map((camp) => camp.title) : previewCamps
+  const whatsapp = whatsappHref(whatsappNumber, preview ? 'Hello Asanja Africa, I saw the safari template preview and would like help planning a trip.' : `Hello Asanja Africa, I would like a quote for ${tripTitle}. Travel: ${date || travelWindow}. Travellers: ${adults} adults and ${children} children. Nights: ${nights}. Camps: ${selectedCamps.join(', ') || 'please advise'}. Interests: ${selectedOccasions.join(', ') || 'please advise'}.`)
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    if (step === 1) {setStep(2); return}
     if (preview) return
     setSending(true); setStatus('')
     const form = new FormData(event.currentTarget)
     const fields = {
-      name: String(form.get('name') || ''), email: String(form.get('email') || ''),
-      travelDate: date, adults: String(adults), children: String(children), days: String(days),
+      name: String(form.get('name') || ''), email: String(form.get('email') || ''), phone: String(form.get('phone') || ''),
+      travelDate: date, travelWindow, nights, adults: String(adults), children: String(children), days: days ? String(days) : 'Flexible',
+      camps: selectedCamps.join(', ') || 'Please advise', occasions: selectedOccasions.join(', ') || 'Not specified',
       accommodation: option?.name || 'Custom / not selected', extras: extras.map((item) => item.name).join(', '),
       estimatedPrice: amount === null ? 'Quotation required' : `${currency} ${amount}`,
       message: String(form.get('message') || ''), website: String(form.get('website') || ''),
@@ -40,21 +57,48 @@ export function QuoteForm({tripTitle, slug, durationDays, currency = 'USD', opti
     finally {setSending(false)}
   }
 
-  return <form id="safari-quote" className="safari-quote" onSubmit={submit}>
-    <div><p className="safari-kicker">Tailor your journey</p><h3>{preview ? 'Quote form preview' : 'Request your safari quote'}</h3><p>{preview ? 'This sample trip is not published, so the form will not send an inquiry. You can use the live booking page to contact Asanja Africa.' : 'Tell us how you want to travel. When all selected prices are available, the estimate below is indicative; our team confirms the final quotation.'}</p></div>
-    <div className="safari-quote-grid">
-      <label>Travel date<input type="date" value={date} onChange={(event) => setDate(event.target.value)} /></label>
-      <label>Adults<input type="number" min="1" max="30" value={adults} onChange={(event) => setAdults(Math.max(1, Number(event.target.value) || 1))} /></label>
-      <label>Children<input type="number" min="0" max="20" value={children} onChange={(event) => setChildren(Math.max(0, Number(event.target.value) || 0))} /></label>
-      <label>Safari days<input type="number" min="1" max="60" value={days} onChange={(event) => setDays(Math.max(1, Number(event.target.value) || 1))} /></label>
-      {options.length ? <label>Accommodation preference<select value={optionIndex} onChange={(event) => setOptionIndex(Number(event.target.value))}>{options.map((item, index) => <option value={index} key={item._key}>{item.name}</option>)}</select></label> : null}
-      <label>Your name<input name="name" required maxLength={120} autoComplete="name" /></label>
-      <label>Email address<input name="email" type="email" required maxLength={254} autoComplete="email" /></label>
-      <label className="safari-quote-message">Anything else we should know?<textarea name="message" rows={3} maxLength={5000} /></label>
+  return <div className="trip-plan" id="safari-quote">
+    <div className="trip-plan-copy">
+      <h2>{heading || 'Plan your trip'}</h2>
+      <div className="trip-plan-intro">{intro || <p>Tell us a little about your safari. A planner who knows every Asanja camp will send you a tailored itinerary and price, with no obligation.</p>}</div>
+      <ol className="trip-plan-steps">
+        <li><span>1</span><div><strong>Tell us your plans</strong><small>Dates, who’s coming and what you’d love to see.</small></div></li>
+        <li><span>2</span><div><strong>Get your itinerary within 24 hours</strong><small>Tailored to you, by email or WhatsApp.</small></div></li>
+        <li><span>3</span><div><strong>Book and pack</strong><small>We’ll take care of everything from the airstrip onwards.</small></div></li>
+      </ol>
+      {whatsapp ? <a className="trip-plan-pill" href={whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp us <span aria-hidden="true">↗</span></a> : null}
+      <p className="trip-plan-agent">Booking through an agent? We work with travel agents worldwide.</p>
     </div>
-    {experiences.length ? <fieldset><legend>Optional experiences</legend>{experiences.map((experience) => <label key={experience._key}><input type="checkbox" checked={selectedExtras.includes(experience._key)} onChange={(event) => setSelectedExtras(event.target.checked ? [...selectedExtras, experience._key] : selectedExtras.filter((key) => key !== experience._key))} /> {experience.name}{typeof experience.pricePerPerson === 'number' ? ` · ${currency} ${experience.pricePerPerson} per person` : ' · quote required'}</label>)}</fieldset> : null}
-    <input name="website" tabIndex={-1} autoComplete="off" className="safari-honeypot" aria-hidden="true" />
-    <div className="safari-quote-footer"><div aria-live="polite"><span>Indicative total</span><strong>{amount === null ? 'Custom quote' : new Intl.NumberFormat('en-US', {style: 'currency', currency, maximumFractionDigits: 0}).format(amount)}</strong><small>{amount === null ? 'We will calculate a tailored price.' : 'Final price confirmed by Asanja Africa.'}</small></div>{preview ? <a href="/make-a-booking/">Open live booking page ↗</a> : <button type="submit" disabled={sending}>{sending ? 'Sending…' : 'Request my quote ↗'}</button>}{whatsapp ? <a href={whatsapp} target="_blank" rel="noopener noreferrer">Ask on WhatsApp ↗</a> : null}</div>
-    {status ? <p className="safari-form-status" role="status">{status}</p> : null}
-  </form>
+    <form className="trip-plan-form" onSubmit={submit}>
+      <div className="trip-plan-form-top"><h3>{step === 1 ? 'Your safari' : 'Your details'}</h3><span>Step {step} of 2</span></div>
+      <div className="trip-plan-progress" aria-label={`Step ${step} of 2`}><span style={{width: step === 1 ? '50%' : '100%'}} /></div>
+      {step === 1 ? <>
+        <div className="trip-plan-fields">
+          <label>When would you like to travel?<select value={travelWindow} onChange={(event) => setTravelWindow(event.target.value)}>{travelWindows.map((choice) => <option key={choice}>{choice}</option>)}</select></label>
+          <label>How many nights?<select value={nights} onChange={(event) => setNights(event.target.value)}>{!nightChoices.includes(nights) ? <option value={nights}>{nights} nights — this trip</option> : null}{nightChoices.map((choice) => <option key={choice}>{choice}</option>)}</select></label>
+          <label>Adults<select value={adults} onChange={(event) => setAdults(Number(event.target.value))}>{Array.from({length: 12}, (_, index) => index + 1).map((value) => <option key={value} value={value}>{value}</option>)}</select></label>
+          <label>Children under 12<select value={children} onChange={(event) => setChildren(Number(event.target.value))}>{Array.from({length: 11}, (_, index) => index).map((value) => <option key={value} value={value}>{value}</option>)}</select></label>
+        </div>
+        <fieldset className="trip-plan-choice"><legend>Which camps interest you?</legend><div>{campChoices.map((camp) => <button type="button" key={camp} aria-pressed={selectedCamps.includes(camp)} onClick={() => toggle(camp, selectedCamps, setSelectedCamps)}>{camp}</button>)}</div></fieldset>
+        <fieldset className="trip-plan-choice"><legend>What’s the occasion?</legend><div>{occasions.map((occasion) => <button type="button" key={occasion} aria-pressed={selectedOccasions.includes(occasion)} onClick={() => toggle(occasion, selectedOccasions, setSelectedOccasions)}>{occasion}</button>)}</div></fieldset>
+        <div className="trip-plan-actions"><button className="trip-plan-pill" type="submit">Continue <span aria-hidden="true">↗</span></button></div>
+      </> : <>
+        <p className="trip-plan-step-note">A few details and we can shape the right journey for you.</p>
+        <div className="trip-plan-fields">
+          <label>Your name<input name="name" required={!preview} maxLength={120} autoComplete="name" placeholder="Your name" /></label>
+          <label>Email address<input name="email" type="email" required={!preview} maxLength={254} autoComplete="email" placeholder="you@example.com" /></label>
+          <label>Phone or WhatsApp<input name="phone" type="tel" maxLength={50} autoComplete="tel" placeholder="Include country code" /></label>
+          <label>Exact date, if known<input type="date" value={date} onChange={(event) => setDate(event.target.value)} /></label>
+          {options.length ? <label>Package preference<select value={optionIndex} onChange={(event) => setOptionIndex(Number(event.target.value))}>{options.map((item, index) => <option value={index} key={item._key}>{item.name}</option>)}</select></label> : null}
+          <label className="trip-plan-message">Anything else we should know?<textarea name="message" rows={3} maxLength={5000} placeholder="Tell us what matters most to you" /></label>
+        </div>
+        {experiences.length ? <fieldset className="trip-plan-choice"><legend>Optional experiences</legend><div>{experiences.map((experience) => <button type="button" key={experience._key} aria-pressed={selectedExtras.includes(experience._key)} onClick={() => toggle(experience._key, selectedExtras, setSelectedExtras)}>{experience.name}</button>)}</div></fieldset> : null}
+        {option ? <p className="trip-plan-estimate" aria-live="polite">{amount === null ? 'We’ll prepare a tailored price for your dates.' : `Indicative total: ${new Intl.NumberFormat('en-US', {style: 'currency', currency, maximumFractionDigits: 0}).format(amount)}. Final rate confirmed by Asanja Africa.`}</p> : null}
+        {preview ? <p className="trip-plan-step-note">This is a layout preview; use the live booking page to send an enquiry.</p> : null}
+        <div className="trip-plan-actions trip-plan-actions-final"><button type="button" className="trip-plan-back" onClick={() => setStep(1)}>← Back</button>{preview ? <a className="trip-plan-pill" href="/make-a-booking/">Open live booking <span aria-hidden="true">↗</span></a> : <button className="trip-plan-pill" type="submit" disabled={sending}>{sending ? 'Sending…' : 'Send my plans'} <span aria-hidden="true">↗</span></button>}</div>
+      </>}
+      <input name="website" tabIndex={-1} autoComplete="off" className="safari-honeypot" aria-hidden="true" />
+      {status ? <p className="safari-form-status" role="status">{status}</p> : null}
+    </form>
+  </div>
 }

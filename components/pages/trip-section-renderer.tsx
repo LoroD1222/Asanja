@@ -76,11 +76,24 @@ export function TripSectionRenderer({section, trip, automaticTrips, whatsappNumb
   if (section.kind === 'relatedBlogs') return trip.relatedBlogs?.length ? <RelatedBlogs title={title} eyebrow={section.eyebrow || 'Selected reading'} articles={trip.relatedBlogs} /> : preview ? <section className="safari-section safari-section-relatedBlogs" id={id}><SectionHeading eyebrow="Handpicked in Studio" title={title} /><div className="safari-preview-placeholder"><span aria-hidden="true">✳</span><div><strong>Selected blog cards appear here</strong><p>Search and choose published articles in Studio. Additional relevant articles appear separately at the bottom of the page.</p></div></div></section> : null
   if (section.kind === 'reviews') return <TripReviews id={id} items={trip.reviews} fallbackImage={trip.heroImage} preview={preview} />
   if (section.kind === 'booking') return <section className="safari-section safari-section-booking" id={id}><QuoteForm tripTitle={trip.title} slug={trip.slug} durationDays={trip.durationDays} currency={trip.currency} options={trip.pricingOptions} experiences={trip.optionalExperiences} camps={trip.relatedCamps} whatsappNumber={whatsappNumber} preview={preview} heading={section.heading || trip.bookingHeading || 'Plan your trip'} intro={trip.bookingText?.length ? <PortablePageText value={trip.bookingText} /> : undefined} /></section>
+  if (section.kind === 'highlights') {
+    const highlightImage = section.image?.asset?.url ? section.image : trip.gallery?.find((item) => item.kind === 'photo' && item.image?.asset?.url)?.image
+    return <section className="safari-section safari-section-highlights" id={id}>
+      <SectionHeading eyebrow={section.eyebrow} title={title} />
+      <PortablePageText value={section.body} />
+      <div className={`safari-highlights${highlightImage ? '' : ' safari-highlights--text-only'}`}>
+        {highlightImage ? <PageImage image={highlightImage} className="safari-highlights-image" sizes="(max-width: 800px) 100vw, 48vw" /> : null}
+        <ol className="safari-highlights-list">{trip.highlights?.map((item, index) => <li key={item._key}>
+          <span className="safari-highlights-number">{String(index + 1).padStart(2, '0')}</span>
+          <div><h3>{item.title}</h3>{item.description ? <p>{item.description}</p> : null}</div>
+        </li>)}</ol>
+      </div>
+    </section>
+  }
   return <section className={'safari-section safari-section-' + section.kind} id={id}>
     {section.kind !== 'overview' ? <SectionHeading eyebrow={section.eyebrow || 'Asanja Africa'} title={title} /> : null}
     {section.kind !== 'overview' ? <PortablePageText value={section.body} /> : null}
     {content}
-    {section.kind === 'highlights' && trip.highlights?.length ? <div className="safari-highlights">{trip.highlights.map((item, index) => <div key={item._key}><span>{String(index + 1).padStart(2, '0')}</span><h3>{item.title}</h3>{item.description ? <p>{item.description}</p> : null}</div>)}</div> : null}
     {section.kind === 'itinerary' ? <><SafariItinerary days={trip.itinerary} /><a className="safari-text-link" href={preview ? '/preview/safari-trip/itinerary.pdf/' : `/safaris/${trip.slug}/itinerary.pdf/`} download>{preview ? 'Download sample itinerary PDF ↓' : 'Download itinerary PDF ↓'}</a></> : null}
     {section.kind === 'route' ? <SafariRouteMap stops={tripRouteStops(trip)} /> : null}
     {section.kind === 'destinations' ? <CardGrid items={trip.relatedDestinations} label="Destination" preview={preview} /> : null}

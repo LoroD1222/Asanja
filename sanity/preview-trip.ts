@@ -42,9 +42,9 @@ export function buildPreviewTrip(introduction?: PageText, relatedBlogs: ArticleC
     heroDescription: previewParagraph('From Tarangire’s ancient baobabs to the Serengeti plains and wild Ruaha, discover Tanzania on a private journey shaped around you.', 'hero-description'),
     introduction: introduction || previewParagraph('Explore the changing landscapes of northern and southern Tanzania, with private guiding, remarkable wildlife areas and time to unwind in the bush.', 'intro-copy'),
     highlights: [
-      {_key: 'drives', title: 'Private game drives', description: 'Private and exclusive game drives are listed in the existing trip outline.'},
-      {_key: 'guide', title: 'Your own guide', description: 'A knowledgeable, private English-speaking guide accompanies the safari.'},
-      {_key: 'parks', title: 'Five remarkable stops', description: 'Arusha, Tarangire, Ngorongoro, Serengeti and Ruaha appear in the existing route outline.'},
+      {_key: 'drives', title: 'Explore at your own pace', description: 'Private game drives in a dedicated 4×4 leave room to pause for the wildlife, landscapes and moments that catch your eye.'},
+      {_key: 'guide', title: 'Guided, not hurried', description: 'A private English-speaking guide helps shape each day around the conditions and your interests.'},
+      {_key: 'parks', title: 'North meets south', description: 'Journey through Tarangire, Ngorongoro and the Serengeti before flying to the wide wilderness of Ruaha.'},
     ],
     itinerary: [
       overnight(1, 'Arrival in Arusha', [
@@ -166,7 +166,7 @@ export function buildPreviewTrip(introduction?: PageText, relatedBlogs: ArticleC
     ],
     sections: [
       {_key: 'overview', kind: 'overview', image: serengeti},
-      {_key: 'highlights', kind: 'highlights'},
+      {_key: 'highlights', kind: 'highlights', image: tarangire, body: previewParagraph('A private journey across Tanzania’s northern and southern safari country, with the freedom to follow each day as it unfolds.', 'highlights-intro')},
       {_key: 'itinerary', kind: 'itinerary', eyebrow: 'Illustrative day-by-day plan', heading: 'The journey, day by day'},
       {_key: 'route', kind: 'route', body: previewParagraph('Follow the journey from Arusha through Tarangire, Ngorongoro and the Serengeti to Ruaha. Map markers are approximate reference points for this client preview.', 'map-note')},
       {_key: 'destinations', kind: 'destinations', eyebrow: 'Sample destination cards'},

@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import {BlogShell} from '../blog/blog-shell'
 import type {ArticleCardData} from '../../sanity/types'
 import type {PageCard, SafariTrip, TripSection} from '../../sanity/page-types'
@@ -22,7 +23,14 @@ export function SafariTripPage({trip, automaticBlogs, automaticTrips, whatsappNu
     <div className="safari-page-content">{sections.map((section) => <TripSectionRenderer key={section._key} section={section} trip={trip} automaticTrips={automaticTrips} whatsappNumber={whatsappNumber} preview={preview} />)}
       <RelatedBlogs title={preview ? 'Journal card preview' : 'More from the journal'} eyebrow={preview ? 'Existing CMS articles' : 'Automatically recommended'} articles={automaticBlogs} automatic />
     </div>
-    <section className="safari-closing"><p className="safari-kicker">The next chapter</p><h2>{trip.bookingHeading || 'Your Tanzania story starts with a conversation.'}</h2><div><a href="#booking">{preview ? 'View inquiry options ↗' : 'Request a quote ↗'}</a>{whatsapp ? <a href={whatsapp} target="_blank" rel="noopener noreferrer">Ask on WhatsApp ↗</a> : null}</div></section>
+    <section className="safari-trip-closing" aria-label="Plan your safari trip">
+      <div className="safari-trip-closing-scene" aria-hidden="true"><Image src="/figma-trip-closing/landscape.png" alt="" fill sizes="100vw" /></div>
+      <div className="safari-trip-closing-wash" aria-hidden="true" />
+      <div className="safari-trip-closing-content">
+        <Image className="safari-trip-closing-logo" src="/legacy/wp-content/uploads/2024/04/asanja_logo_with_slogan_dark-03.svg" alt="Asanja — Open Hearts and Wild Spirits" width={430} height={109} unoptimized />
+        <a href="#booking">Plan Your Trip <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
     <StickyBookingBar title={trip.title} whatsapp={whatsapp} preview={preview} />
   </article></BlogShell>
 }

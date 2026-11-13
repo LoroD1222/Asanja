@@ -16,9 +16,9 @@ export function RelatedCards({title, eyebrow, items, label}: {title: string; eye
   return visible.length ? <section className="safari-section"><SectionHeading eyebrow={eyebrow} title={title} /><CardGrid items={visible} label={label} /></section> : null
 }
 
-export function RelatedBlogs({title, eyebrow, articles, automatic = false}: {title: string; eyebrow?: string; articles?: ArticleCardData[]; automatic?: boolean}) {
+export function RelatedBlogs({title, eyebrow, articles, automatic = false, id}: {title: string; eyebrow?: string; articles?: ArticleCardData[]; automatic?: boolean; id?: string}) {
   const visible = (articles || []).filter((article) => article?._id && article.slug)
-  return visible.length ? <section className={'safari-section safari-blogs' + (automatic ? ' is-automatic' : '')}><SectionHeading eyebrow={eyebrow || 'Asanja journal'} title={title} /><ArticleList articles={visible} /></section> : null
+  return visible.length ? <section id={id} className={'safari-section safari-blogs' + (automatic ? ' is-automatic' : '')}><SectionHeading eyebrow={eyebrow || 'Asanja journal'} title={title} /><ArticleList articles={visible} /></section> : null
 }
 
 export function FAQSection({items}: {items?: FAQ[]}) {

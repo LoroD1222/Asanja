@@ -14,10 +14,10 @@ function toggle(value: string, values: string[], update: (next: string[]) => voi
   update(values.includes(value) ? values.filter((item) => item !== value) : [...values, value])
 }
 
-export function QuoteForm({tripTitle, slug, durationDays, currency = 'USD', options = [], experiences = [], camps = [], whatsappNumber, preview = false, intro, heading}: {tripTitle: string; slug: string; durationDays: number; currency?: string; options?: TripPricingOption[]; experiences?: OptionalExperience[]; camps?: PageCard[]; whatsappNumber?: string; preview?: boolean; intro?: ReactNode; heading?: string}) {
+export function QuoteForm({tripTitle, slug, durationDays, durationNights, currency = 'USD', options = [], experiences = [], camps = [], whatsappNumber, preview = false, intro, heading}: {tripTitle: string; slug: string; durationDays: number; durationNights?: number; currency?: string; options?: TripPricingOption[]; experiences?: OptionalExperience[]; camps?: PageCard[]; whatsappNumber?: string; preview?: boolean; intro?: ReactNode; heading?: string}) {
   const [step, setStep] = useState<1 | 2>(1)
   const [travelWindow, setTravelWindow] = useState('Not sure yet')
-  const [nights, setNights] = useState(durationDays > 1 ? String(durationDays - 1) : '5 to 7')
+  const [nights, setNights] = useState(typeof durationNights === 'number' ? String(durationNights) : durationDays > 1 ? String(durationDays - 1) : '5 to 7')
   const [adults, setAdults] = useState(2)
   const [children, setChildren] = useState(0)
   const [selectedCamps, setSelectedCamps] = useState<string[]>([])
@@ -31,7 +31,7 @@ export function QuoteForm({tripTitle, slug, durationDays, currency = 'USD', opti
   const extras = experiences.filter((experience) => selectedExtras.includes(experience._key))
   const days = /^\d+$/.test(nights) ? Number(nights) + 1 : 0
   const amount = indicativePrice({date, adults, children, days, option, extras}, durationDays)
-  const campChoices = preview ? previewCamps : camps.length ? camps.map((camp) => camp.title) : previewCamps
+  const campChoices = preview ? previewCamps : camps.filter((camp) => camp?.title).map((camp) => camp.title)
   const whatsapp = whatsappHref(whatsappNumber, preview ? 'Hello Asanja Africa, I saw the safari template preview and would like help planning a trip.' : `Hello Asanja Africa, I would like a quote for ${tripTitle}. Travel: ${date || travelWindow}. Travellers: ${adults} adults and ${children} children. Nights: ${nights}. Camps: ${selectedCamps.join(', ') || 'please advise'}. Interests: ${selectedOccasions.join(', ') || 'please advise'}.`)
 
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -79,7 +79,7 @@ export function QuoteForm({tripTitle, slug, durationDays, currency = 'USD', opti
           <label>Adults<select value={adults} onChange={(event) => setAdults(Number(event.target.value))}>{Array.from({length: 12}, (_, index) => index + 1).map((value) => <option key={value} value={value}>{value}</option>)}</select></label>
           <label>Children under 12<select value={children} onChange={(event) => setChildren(Number(event.target.value))}>{Array.from({length: 11}, (_, index) => index).map((value) => <option key={value} value={value}>{value}</option>)}</select></label>
         </div>
-        <fieldset className="trip-plan-choice"><legend>Which camps interest you?</legend><div>{campChoices.map((camp) => <button type="button" key={camp} aria-pressed={selectedCamps.includes(camp)} onClick={() => toggle(camp, selectedCamps, setSelectedCamps)}>{camp}</button>)}</div></fieldset>
+        {campChoices.length ? <fieldset className="trip-plan-choice"><legend>Which camps interest you?</legend><div>{campChoices.map((camp) => <button type="button" key={camp} aria-pressed={selectedCamps.includes(camp)} onClick={() => toggle(camp, selectedCamps, setSelectedCamps)}>{camp}</button>)}</div></fieldset> : null}
         <fieldset className="trip-plan-choice"><legend>What’s the occasion?</legend><div>{occasions.map((occasion) => <button type="button" key={occasion} aria-pressed={selectedOccasions.includes(occasion)} onClick={() => toggle(occasion, selectedOccasions, setSelectedOccasions)}>{occasion}</button>)}</div></fieldset>
         <div className="trip-plan-actions"><button className="trip-plan-pill" type="submit">Continue <span aria-hidden="true">↗</span></button></div>
       </> : <>

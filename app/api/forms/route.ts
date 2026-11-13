@@ -22,6 +22,7 @@ function isSubmission(value: unknown): value is Submission {
 function submissionType(form: string) {
   if (form === 'Booking_request_form') return 'booking';
   if (form === 'Plan_your_trip_form') return 'trip-planning';
+  if (form === 'Safari_trip_quote_form') return 'trip-planning';
   if (form === 'form_newsletter') return 'newsletter';
   return 'enquiry';
 }

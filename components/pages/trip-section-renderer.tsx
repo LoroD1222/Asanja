@@ -42,7 +42,7 @@ function PreviewPlaceholder({kind}: {kind: TripSection['kind']}) {
   return guidance ? <div className="safari-preview-placeholder"><span aria-hidden="true">✳</span><div><strong>{guidance.label}</strong><p>{guidance.detail}</p></div></div> : null
 }
 
-export function hasTripSectionContent(section: TripSection, trip: SafariTrip, automaticTrips: PageCard[]) {
+export function hasTripSectionContent(section: TripSection, trip: SafariTrip, automaticTrips: PageCard[], automaticBlogs: ArticleCardData[] = []) {
   if (section.body?.length || section.image?.asset?.url) return true
   switch (section.kind) {
     case 'overview': return Boolean(trip.introduction?.length || trip.summary)
@@ -58,7 +58,7 @@ export function hasTripSectionContent(section: TripSection, trip: SafariTrip, au
     case 'season': return Boolean(trip.bestTime?.length || trip.bestMonths?.length)
     case 'travel': return Boolean(trip.travelInformation?.length || trip.travelNotes?.length)
     case 'relatedTrips': return Boolean(trip.relatedSafariTrips?.some((item) => pageHref(item)) || automaticTrips.length)
-    case 'relatedBlogs': return Boolean(trip.relatedBlogs?.some((item) => item?._id && item.slug))
+    case 'relatedBlogs': return Boolean(trip.relatedBlogs?.some((item) => item?._id && item.slug) || automaticBlogs.some((item) => item?._id && item.slug))
     case 'relatedLandingPages': return Boolean(trip.relatedLandingPages?.some((item) => pageHref(item)))
     case 'faq': return Boolean(trip.faqs?.length)
     case 'reviews': return Boolean(trip.reviews?.length)
@@ -67,16 +67,22 @@ export function hasTripSectionContent(section: TripSection, trip: SafariTrip, au
   }
 }
 
-export function TripSectionRenderer({section, trip, automaticTrips, whatsappNumber, preview = false}: {section: TripSection; trip: SafariTrip; automaticTrips: PageCard[]; whatsappNumber?: string; preview?: boolean}) {
-  if (!preview && !hasTripSectionContent(section, trip, automaticTrips)) return null
+export function TripSectionRenderer({section, trip, automaticTrips, automaticBlogs = [], whatsappNumber, preview = false}: {section: TripSection; trip: SafariTrip; automaticTrips: PageCard[]; automaticBlogs?: ArticleCardData[]; whatsappNumber?: string; preview?: boolean}) {
+  if (!preview && !hasTripSectionContent(section, trip, automaticTrips, automaticBlogs)) return null
   const title = section.heading || headings[section.kind]
   const id = section.kind === 'booking' ? 'booking' : `${section.kind}-${section._key}`
   const trips = trip.relatedSafariTrips?.filter((item) => item?._id !== trip._id) || []
   const recommendedTrips = trips.length ? trips : automaticTrips
-  const content = section.kind === 'overview' ? <div className="safari-overview"><div className="safari-overview-copy"><SectionHeading eyebrow={section.eyebrow} title={title} /><PortablePageText value={section.body?.length ? section.body : trip.introduction} /><dl><div><dt>Duration</dt><dd>{trip.durationDays} days{trip.durationNights !== undefined ? ` / ${trip.durationNights} nights` : ''}</dd></div>{trip.travelStyle ? <div><dt>Travel style</dt><dd>{trip.travelStyle}</dd></div> : null}{trip.startLocation ? <div><dt>Starts in</dt><dd>{trip.startLocation}</dd></div> : null}{trip.endLocation ? <div><dt>Ends in</dt><dd>{trip.endLocation}</dd></div> : null}</dl></div><PageImage image={section.image} /></div> : null
-  if (section.kind === 'relatedBlogs') return trip.relatedBlogs?.length ? <RelatedBlogs title={title} eyebrow={section.eyebrow || 'Selected reading'} articles={trip.relatedBlogs} /> : preview ? <section className="safari-section safari-section-relatedBlogs" id={id}><SectionHeading eyebrow="Handpicked in Studio" title={title} /><div className="safari-preview-placeholder"><span aria-hidden="true">✳</span><div><strong>Selected blog cards appear here</strong><p>Search and choose published articles in Studio. Additional relevant articles appear separately at the bottom of the page.</p></div></div></section> : null
+  const overviewImage = section.image?.asset?.url ? section.image : trip.relatedDestinations?.find((destination) => destination?.heroImage?.asset?.url)?.heroImage || trip.gallery?.find((item) => item.kind === 'photo' && item.image?.asset?.url)?.image || trip.heroImage
+  const content = section.kind === 'overview' ? <div className="safari-overview"><div className="safari-overview-copy"><SectionHeading eyebrow={section.eyebrow} title={title} />{section.body?.length || trip.introduction?.length ? <PortablePageText value={section.body?.length ? section.body : trip.introduction} /> : trip.summary ? <p>{trip.summary}</p> : null}<dl><div><dt>Duration</dt><dd>{trip.durationDays} days{trip.durationNights !== undefined ? ` / ${trip.durationNights} nights` : ''}</dd></div>{trip.travelStyle ? <div><dt>Travel style</dt><dd>{trip.travelStyle}</dd></div> : null}{trip.startLocation ? <div><dt>Starts in</dt><dd>{trip.startLocation}</dd></div> : null}{trip.endLocation ? <div><dt>Ends in</dt><dd>{trip.endLocation}</dd></div> : null}</dl></div><PageImage image={overviewImage} /></div> : null
+  if (section.kind === 'relatedBlogs') {
+    const selected = (trip.relatedBlogs || []).filter((item) => item?._id && item.slug)
+    const seen = new Set(selected.map((item) => item._id))
+    const articles = [...selected, ...automaticBlogs.filter((item) => item?._id && item.slug && !seen.has(item._id))]
+    return articles.length ? <RelatedBlogs id={id} title={title} eyebrow={section.eyebrow || 'Asanja journal'} articles={articles} /> : preview ? <section className="safari-section safari-section-relatedBlogs" id={id}><SectionHeading eyebrow="Handpicked in Studio" title={title} /><div className="safari-preview-placeholder"><span aria-hidden="true">✳</span><div><strong>Selected blog cards appear here</strong><p>Search and choose published articles in Studio, or enable automatic recommendations for this section.</p></div></div></section> : null
+  }
   if (section.kind === 'reviews') return <TripReviews id={id} items={trip.reviews} fallbackImage={trip.heroImage} preview={preview} />
-  if (section.kind === 'booking') return <section className="safari-section safari-section-booking" id={id}><QuoteForm tripTitle={trip.title} slug={trip.slug} durationDays={trip.durationDays} currency={trip.currency} options={trip.pricingOptions} experiences={trip.optionalExperiences} camps={trip.relatedCamps} whatsappNumber={whatsappNumber} preview={preview} heading={section.heading || trip.bookingHeading || 'Plan your trip'} intro={trip.bookingText?.length ? <PortablePageText value={trip.bookingText} /> : undefined} /></section>
+  if (section.kind === 'booking') return <section className="safari-section safari-section-booking" id={id}><QuoteForm tripTitle={trip.title} slug={trip.slug} durationDays={trip.durationDays} durationNights={trip.durationNights} currency={trip.currency} options={trip.pricingOptions} experiences={trip.optionalExperiences} camps={trip.relatedCamps} whatsappNumber={whatsappNumber} preview={preview} heading={section.heading || trip.bookingHeading || 'Plan your trip'} intro={trip.bookingText?.length ? <PortablePageText value={trip.bookingText} /> : undefined} /></section>
   if (section.kind === 'highlights') {
     const highlightImages = [section.image, ...(trip.gallery || []).filter((item) => item.kind === 'photo').map((item) => item.image)]
       .filter((image): image is NonNullable<typeof section.image> => Boolean(image?.asset?.url))
@@ -133,6 +139,6 @@ export function TripSectionRenderer({section, trip, automaticTrips, whatsappNumb
     {section.kind === 'relatedTrips' ? <CardGrid items={recommendedTrips} label="Safari trip" preview={preview} editorial /> : null}
     {section.kind === 'relatedLandingPages' ? <CardGrid items={trip.relatedLandingPages} label="Safari guide" preview={preview} /> : null}
     {section.kind === 'editorial' ? <div className="safari-editorial"><PageImage image={section.image} /></div> : null}
-    {preview && !hasTripSectionContent(section, trip, automaticTrips) ? <PreviewPlaceholder kind={section.kind} /> : null}
+    {preview && !hasTripSectionContent(section, trip, automaticTrips, automaticBlogs) ? <PreviewPlaceholder kind={section.kind} /> : null}
   </section>
 }

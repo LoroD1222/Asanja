@@ -1,3 +1,6 @@
+import {NextResponse} from 'next/server';
+import {createItineraryAccessToken, itineraryAccessConfigured, itineraryAccessCookie, itineraryAccessMaxAge} from '../../../sanity/itinerary-access';
+
 type Submission = {
   page: string;
   form: string;
@@ -20,6 +23,7 @@ function isSubmission(value: unknown): value is Submission {
 }
 
 function submissionType(form: string) {
+  if (form === 'Safari_itinerary_pdf') return 'pdf-download';
   if (form === 'Booking_request_form') return 'booking';
   if (form === 'Plan_your_trip_form') return 'trip-planning';
   if (form === 'Safari_trip_quote_form') return 'trip-planning';
@@ -50,6 +54,7 @@ function fieldLabel(value: string) {
 }
 
 function formTitle(type: string) {
+  if (type === 'pdf-download') return 'New safari itinerary PDF request';
   if (type === 'trip-planning') return 'New safari planning request';
   if (type === 'booking') return 'New booking request';
   if (type === 'newsletter') return 'New newsletter signup';
@@ -127,6 +132,17 @@ export async function POST(request: Request) {
     return Response.json({ ok: false, message: 'Please enter a valid email address.' }, { status: 400 });
   }
 
+  const isPdfDownload = payload.form === 'Safari_itinerary_pdf';
+  const grantsPdfAccess = isPdfDownload || ['Safari_trip_quote_form', 'Plan_your_trip_form', 'Booking_request_form'].includes(payload.form);
+  if (isPdfDownload) {
+    if (!/^\/(?:preview\/safari-trip|safaris\/[a-z0-9-]+)\/$/.test(payload.page) || (payload.fields.name || '').trim().length < 2) {
+      return Response.json({ok: false, message: 'Please enter your name and choose a valid safari itinerary.'}, {status: 400});
+    }
+    if (!itineraryAccessConfigured()) {
+      return Response.json({ok: false, message: 'PDF access is not configured yet.'}, {status: 503});
+    }
+  }
+
   const forwarded = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim();
   const client = forwarded || 'local';
   const now = Date.now();
@@ -158,9 +174,17 @@ export async function POST(request: Request) {
     return Response.json({ ok: false, message: 'Submission delivery failed.' }, { status: 502 });
   }
 
-  return Response.json({
+  const result = NextResponse.json({
     ok: true,
     message: 'Thank you. Your request has been received.',
     redirect: successRedirect(type),
   });
+  if (grantsPdfAccess) {
+    const token = createItineraryAccessToken();
+    if (token) result.cookies.set(itineraryAccessCookie, token, {
+      httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'lax',
+      path: '/', maxAge: itineraryAccessMaxAge,
+    });
+  }
+  return result;
 }

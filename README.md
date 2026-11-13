@@ -25,6 +25,8 @@ npm start
 
 The browser submits migrated forms to `/api/forms`. Set `FORM_WEBHOOK_URL` in the deployment environment to the HTTPS endpoint that should receive the form data. Without it, the pages still work but form delivery returns a configuration error.
 
+Safari itinerary PDFs include CMS photos and an illustrated route map. Visitors enter a name and email before downloading; a signed, HTTP-only cookie remembers access in the same browser for 90 days. A successful safari quote, trip-planning, or booking form also unlocks the PDF in that browser. The download form uses the same Resend or webhook delivery as other forms and only unlocks after delivery succeeds. Set `PDF_ACCESS_SECRET` in the deployment environment (or use the purpose-derived `SANITY_REVALIDATE_SECRET` fallback), plus working form-delivery settings. Direct PDF URLs return 403 without the cookie.
+
 ## SEO and performance
 
 - Every indexable page has one H1, a logical heading hierarchy, a unique title, description, keywords, canonical URL, Open Graph metadata, image alt text, and structured data.

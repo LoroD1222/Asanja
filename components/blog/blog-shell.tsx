@@ -3,9 +3,12 @@ import type {ReactNode} from 'react'
 import {AsanjaMenu} from './asanja-menu'
 import {NewsletterSignup} from './newsletter-signup'
 import {footerGroups} from './asanja-site-data'
+import {getCampMenuItems} from '../../sanity/camp-data'
 import '../../app/sanity-blog.css'
 
-export function BlogShell({children, className = ''}: {children: ReactNode; className?: string}) {
+export async function BlogShell({children, className = ''}: {children: ReactNode; className?: string}) {
+  const cmsCampLinks = await getCampMenuItems().catch(() => [])
+
   return (
     <div className={`sanity-blog asanja-shared-shell ${className}`}>
       <a className="skip-link" href="#main-content">Skip to content</a>
@@ -15,7 +18,7 @@ export function BlogShell({children, className = ''}: {children: ReactNode; clas
         </Link>
         <div className="asanja-header-actions">
           <Link className="asanja-quote-link" href="/plan-my-stay/">Request a quote</Link>
-          <AsanjaMenu />
+          <AsanjaMenu cmsCampLinks={cmsCampLinks} />
         </div>
       </header>
       <main id="main-content">{children}</main>

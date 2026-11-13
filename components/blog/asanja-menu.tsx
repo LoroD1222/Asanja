@@ -9,9 +9,13 @@ function isCurrentPath(pathname: string, href: string) {
   return normalized === href || (href === '/blogs/' && normalized.startsWith('/blogs/'))
 }
 
-export function AsanjaMenu() {
+type CmsCampLink = {label: string; href: string}
+
+export function AsanjaMenu({cmsCampLinks = []}: {cmsCampLinks?: CmsCampLink[]}) {
   const pathname = usePathname()
-  const campsCurrent = campLinks.some(({href}) => isCurrentPath(pathname, href)) || isCurrentPath(pathname, '/camps-and-lodges/')
+  const allCampLinks = [...campLinks, ...cmsCampLinks].filter((item, index, items) => items.findIndex(({href}) => href === item.href) === index)
+  const menuLinks = siteMenuLinks.map((item) => item.href === '/camps-and-lodges/' ? {...item, children: allCampLinks} : item)
+  const campsCurrent = allCampLinks.some(({href}) => isCurrentPath(pathname, href)) || isCurrentPath(pathname, '/camps-and-lodges/')
 
   return <div className="asanja-menu">
     <a className="asanja-menu-button" href="#asanja-menu-panel" aria-label="Open Asanja navigation" aria-controls="asanja-menu-panel">
@@ -19,7 +23,7 @@ export function AsanjaMenu() {
     </a>
     <div className="asanja-menu-panel" id="asanja-menu-panel" role="dialog" aria-modal="true" aria-label="Asanja navigation">
       <div className="asanja-menu-visual" aria-hidden="true">
-        {siteMenuLinks.map(({label, image}, index) => <span key={label} className={index === 0 ? 'is-active' : ''} style={{backgroundImage: `url(${image})`}} />)}
+        {menuLinks.map(({label, image}, index) => <span key={label} className={index === 0 ? 'is-active' : ''} style={{backgroundImage: `url(${image})`}} />)}
       </div>
       <div className="asanja-menu-brand">
         <Link href="/" aria-label="Asanja Africa home">
@@ -31,7 +35,7 @@ export function AsanjaMenu() {
         <a className="asanja-menu-close" href="#" aria-label="Close navigation"><span aria-hidden="true" /></a>
         <nav aria-label="Main navigation">
           <ul className="asanja-menu-list">
-            {siteMenuLinks.map((item) => {
+            {menuLinks.map((item) => {
               const hasChildren = 'children' in item
               const current = hasChildren ? campsCurrent : isCurrentPath(pathname, item.href)
               return <li key={item.href} className={`${hasChildren ? 'has-children ' : ''}${current ? 'is-current' : ''}`}>

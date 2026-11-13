@@ -699,6 +699,44 @@
     [...wrapper.children].forEach((item, index, all) => item.setAttribute('aria-label', `${index + 1} of ${all.length}`));
   }
 
+  async function injectSanityCamps() {
+    let camps = [];
+    try {
+      const response = await fetch('/api/camps/navigation/', { headers: { Accept: 'application/json' } });
+      if (!response.ok) return;
+      const result = await response.json();
+      camps = Array.isArray(result.camps) ? result.camps : [];
+    } catch {
+      return;
+    }
+
+    const currentPath = `${window.location.pathname.replace(/\/+$/, '')}/`;
+    document.querySelectorAll('li.menu-item-has-children').forEach((item) => {
+      const parentLink = item.querySelector(':scope > a');
+      const submenu = item.querySelector(':scope > .sub-menu');
+      if (parentLink?.getAttribute('href') !== '/camps-and-lodges/' || !submenu) return;
+
+      camps.forEach((camp) => {
+        const alreadyListed = [...submenu.querySelectorAll('a[href]')].some((link) => link.getAttribute('href') === camp?.href);
+        if (!camp || typeof camp.href !== 'string' || typeof camp.label !== 'string' || alreadyListed) return;
+        const entry = document.createElement('li');
+        entry.className = 'menu-item menu-item-type-post_type menu-item-object-page asanja-menu-sanity-camp';
+        const link = document.createElement('a');
+        link.href = camp.href;
+        link.className = 'elementor-sub-item';
+        link.textContent = camp.label;
+        if (submenu.closest('nav[aria-hidden="true"]')) link.tabIndex = -1;
+        if (currentPath === camp.href) {
+          entry.classList.add('current-menu-item', 'current_page_item');
+          link.classList.add('elementor-item-active');
+          link.setAttribute('aria-current', 'page');
+        }
+        entry.append(link);
+        submenu.append(entry);
+      });
+    });
+  }
+
   function enhancePopupMenus(popup) {
     const currentPath = `${window.location.pathname.replace(/\/+$/, '')}/`;
 
@@ -912,6 +950,7 @@
     initializeMotionEffects();
     initializePopupNavigation();
     injectEwasiCamp();
+    injectSanityCamps();
     initializeCarousels();
     initializeTabs();
     initializeAccordions();

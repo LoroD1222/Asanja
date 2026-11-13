@@ -20,6 +20,7 @@ const staticPaths = [
   '/asanja-nyasirori/',
   '/asanja-ruaha/',
   '/asanja-under-the-stars/',
+  '/asanja-ewasi-tarangire/',
   '/asanja-reviews/',
   '/faqs/',
   '/contact/',

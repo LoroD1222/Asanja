@@ -637,6 +637,68 @@
     return popup;
   }
 
+  function injectEwasiCamp() {
+    const ewasiHref = '/asanja-ewasi-tarangire/';
+    const currentPath = `${window.location.pathname.replace(/\/+$/, '')}/`;
+
+    document.querySelectorAll('li.menu-item-has-children').forEach((item) => {
+      const parentLink = item.querySelector(':scope > a');
+      const submenu = item.querySelector(':scope > .sub-menu');
+      if (parentLink?.getAttribute('href') !== '/camps-and-lodges/' || !submenu || submenu.querySelector(`a[href="${ewasiHref}"]`)) return;
+
+      const entry = document.createElement('li');
+      entry.className = 'menu-item menu-item-type-post_type menu-item-object-page asanja-menu-ewasi';
+      const link = document.createElement('a');
+      link.href = ewasiHref;
+      link.className = 'elementor-sub-item';
+      link.textContent = 'Asanja Ewasi, Tarangire';
+      if (submenu.closest('nav[aria-hidden="true"]')) link.tabIndex = -1;
+      if (currentPath === ewasiHref) {
+        entry.classList.add('current-menu-item', 'current_page_item');
+        link.classList.add('elementor-item-active');
+        link.setAttribute('aria-current', 'page');
+      }
+      submenu.append(entry);
+    });
+
+    if (currentPath !== '/camps-and-lodges/') return;
+
+    const campLinks = document.querySelector('.elementor-element-b5660dd > .e-con-inner');
+    if (campLinks && !campLinks.querySelector('.asanja-ewasi-camp-link')) {
+      const link = document.createElement('a');
+      link.className = 'elementor-element e-con-full e-flex e-con e-child asanja-ewasi-camp-link';
+      link.href = ewasiHref;
+      link.innerHTML = `
+        <span class="asanja-ewasi-camp-link__icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M6 33c5-8 11-12 18-12s13 4 18 12"/><path d="M8 37h32"/><path d="M24 10v11"/></svg>
+        </span>
+        <span class="asanja-ewasi-camp-link__label">Ewasi Tarangire</span>`;
+      campLinks.append(link);
+    }
+
+    const carouselWidget = document.querySelector('.elementor-element-fb43c0b');
+    const wrapper = carouselWidget?.querySelector('.e-n-carousel > .swiper-wrapper');
+    if (!wrapper || wrapper.querySelector('.asanja-ewasi-collection-slide')) return;
+
+    const slide = document.createElement('div');
+    slide.className = 'swiper-slide asanja-ewasi-collection-slide';
+    slide.dataset.slide = String(wrapper.children.length + 1);
+    slide.setAttribute('role', 'group');
+    slide.setAttribute('aria-roledescription', 'slide');
+    slide.innerHTML = `
+      <div class="asanja-ewasi-collection-card">
+        <div class="asanja-ewasi-collection-copy">
+          <span>Opening in 2027</span>
+          <h3>Asanja Ewasi Tarangire</h3>
+          <p>Ten private rooms in the heart of Tarangire, where contemporary luxury, Maa heritage and the vast baobab plains meet.</p>
+          <a href="${ewasiHref}">Discover</a>
+        </div>
+        <div class="asanja-ewasi-collection-image" role="img" aria-label="Asanja Ewasi suite with private plunge pool"></div>
+      </div>`;
+    wrapper.append(slide);
+    [...wrapper.children].forEach((item, index, all) => item.setAttribute('aria-label', `${index + 1} of ${all.length}`));
+  }
+
   function enhancePopupMenus(popup) {
     const currentPath = `${window.location.pathname.replace(/\/+$/, '')}/`;
 
@@ -676,7 +738,21 @@
       ));
       const campsLink = campsItem?.querySelector(':scope > a');
       const submenu = campsItem?.querySelector(':scope > .sub-menu');
-      if (!campsItem || !campsLink || !submenu || campsItem.querySelector(':scope > .asanja-submenu-toggle')) return;
+      if (!campsItem || !campsLink || !submenu) return;
+
+      if (!submenu.querySelector('a[href="/asanja-ewasi-tarangire/"]')) {
+        const ewasiItem = document.createElement('li');
+        ewasiItem.className = 'menu-item menu-item-type-post_type menu-item-object-page asanja-menu-ewasi';
+        const ewasiLink = document.createElement('a');
+        ewasiLink.href = '/asanja-ewasi-tarangire/';
+        ewasiLink.className = 'elementor-sub-item';
+        ewasiLink.textContent = 'Asanja Ewasi, Tarangire';
+        if (menu.closest('nav[aria-hidden="true"]')) ewasiLink.tabIndex = -1;
+        ewasiItem.append(ewasiLink);
+        submenu.append(ewasiItem);
+      }
+
+      if (campsItem.querySelector(':scope > .asanja-submenu-toggle')) return;
 
       const toggle = document.createElement('button');
       toggle.type = 'button';
@@ -835,6 +911,7 @@
     initializeEntranceAnimations();
     initializeMotionEffects();
     initializePopupNavigation();
+    injectEwasiCamp();
     initializeCarousels();
     initializeTabs();
     initializeAccordions();

@@ -136,7 +136,8 @@
 .asanja-footer-socials a {display: inline-flex; align-items: center; justify-content: center; width: 25px; height: 26px; color: #515159;}
 .asanja-footer-socials svg {display: block; width: 23px; height: 23px;}
 .asanja-social-facebook {font-family: Arial, sans-serif; font-size: 26px; font-weight: 700; line-height: 1;}
-.asanja-social-tripadvisor {font-size: 15px; font-weight: 700; letter-spacing: -.24em; padding-right: .24em;}
+.asanja-footer-socials .asanja-social-link-tripadvisor {width: 38px;}
+.asanja-footer-socials .asanja-social-tripadvisor {width: 38px; height: 24px;}
 .asanja-footer-bottom {display: flex; align-items: center; gap: 1.5rem; min-height: 115px; padding: 1rem clamp(1.25rem, 3vw, 3rem); background: #55664c; color: #f5f2ee; font-size: .78rem;}
 .asanja-footer-bottom img {display: block; width: 78px; height: 64px; object-fit: contain;}
 .asanja-footer-bottom p {margin: 0 0 .55rem;}

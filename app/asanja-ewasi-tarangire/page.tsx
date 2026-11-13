@@ -26,10 +26,10 @@ export const metadata: Metadata = {
 }
 
 const facts = [
-  {value: '2027', label: 'Opening in Tarangire National Park'},
-  {value: '10', label: 'Rooms, including one family unit'},
-  {value: '30 min', label: 'From Kuro Airstrip'},
-  {value: 'Private', label: 'Plunge pool for every room'},
+  {index: '01', value: '2027', label: 'Opening in Tarangire National Park'},
+  {index: '02', value: '10', label: 'Rooms, including one family unit'},
+  {index: '03', value: '30 min', label: 'From Kuro Airstrip'},
+  {index: '04', value: 'Private', label: 'Plunge pool for every room'},
 ]
 
 const experiences = [
@@ -90,8 +90,19 @@ export default async function AsanjaEwasiTarangirePage() {
         </div>
       </section>
 
-      <section className={styles.facts} aria-label="Asanja Ewasi camp facts">
-        {facts.map((fact) => <div key={fact.label}><strong>{fact.value}</strong><span>{fact.label}</span></div>)}
+      <section className={styles.facts} aria-labelledby="ewasi-facts-title">
+        <div className={styles.factsIntroduction}>
+          <p className={styles.eyebrow}>Ewasi at a glance</p>
+          <h2 id="ewasi-facts-title">An intimate retreat shaped by the plains</h2>
+          <p>Thoughtfully scaled, quietly luxurious and deeply connected to Tarangire.</p>
+        </div>
+        <div className={styles.factsGrid}>
+          {facts.map((fact) => <div className={styles.fact} key={fact.label}>
+            <span className={styles.factIndex}>{fact.index}</span>
+            <strong>{fact.value}</strong>
+            <span className={styles.factLabel}>{fact.label}</span>
+          </div>)}
+        </div>
       </section>
 
       <section className={styles.split}>
@@ -167,8 +178,7 @@ export default async function AsanjaEwasiTarangirePage() {
             height={108}
           />
           <Link href="/plan-my-stay/">
-            <span>Plan your trip</span>
-            <span className={styles.ctaArrow} aria-hidden="true">↗</span>
+            <span>Plan your stay</span>
           </Link>
         </div>
       </section>

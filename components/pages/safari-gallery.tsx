@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import {useCallback, useEffect, useRef, useState} from 'react'
+import {useEffect, useRef, useState} from 'react'
 import type {PageMedia} from '../../sanity/page-types'
 
 function videoEmbed(href?: string) {
@@ -24,60 +24,7 @@ function videoEmbed(href?: string) {
 export function SafariGallery({items}: {items?: PageMedia[]}) {
   const media = (items || []).filter((item) => item.kind === 'photo' ? Boolean(item.image?.asset?.url) : Boolean(videoEmbed(item.videoUrl)))
   const [active, setActive] = useState<number | null>(null)
-  const [carouselIndex, setCarouselIndex] = useState(0)
-  const [canPrevious, setCanPrevious] = useState(false)
-  const [canNext, setCanNext] = useState(false)
-  const carousel = useRef<HTMLDivElement>(null)
   const dialog = useRef<HTMLDialogElement>(null)
-
-  const updateCarousel = useCallback(() => {
-    const viewport = carousel.current
-    if (!viewport) return
-    const slides = Array.from(viewport.querySelectorAll<HTMLElement>('.safari-gallery-item'))
-    if (!slides.length) return
-
-    const nearest = slides.reduce((best, slide, index) =>
-      Math.abs(slide.offsetLeft - viewport.scrollLeft) < Math.abs(slides[best].offsetLeft - viewport.scrollLeft)
-        ? index
-        : best, 0)
-    const maximumScroll = viewport.scrollWidth - viewport.clientWidth
-
-    setCarouselIndex(nearest)
-    setCanPrevious(viewport.scrollLeft > 2)
-    setCanNext(viewport.scrollLeft < maximumScroll - 2)
-  }, [])
-
-  const moveCarousel = (direction: -1 | 1) => {
-    const viewport = carousel.current
-    if (!viewport) return
-    const slides = Array.from(viewport.querySelectorAll<HTMLElement>('.safari-gallery-item'))
-    const target = slides[Math.max(0, Math.min(carouselIndex + direction, slides.length - 1))]
-    if (!target) return
-
-    viewport.scrollTo({
-      left: target.offsetLeft,
-      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
-    })
-  }
-
-  useEffect(() => {
-    const viewport = carousel.current
-    if (!viewport) return
-    let frame = 0
-    const onScroll = () => {
-      cancelAnimationFrame(frame)
-      frame = requestAnimationFrame(updateCarousel)
-    }
-    const observer = new ResizeObserver(updateCarousel)
-    viewport.addEventListener('scroll', onScroll, {passive: true})
-    observer.observe(viewport)
-    updateCarousel()
-    return () => {
-      cancelAnimationFrame(frame)
-      viewport.removeEventListener('scroll', onScroll)
-      observer.disconnect()
-    }
-  }, [media.length, updateCarousel])
 
   useEffect(() => {
     if (active === null) dialog.current?.close()
@@ -94,32 +41,23 @@ export function SafariGallery({items}: {items?: PageMedia[]}) {
   }, [active, media.length])
   if (!media.length) return null
   const selected = active === null ? null : media[active]
+  const visibleMedia = media.slice(0, 5)
   return <>
     <div className="safari-gallery-shell">
-      <div
-        className="safari-gallery"
-        ref={carousel}
-        role="region"
-        aria-label="Safari image gallery"
-        tabIndex={0}
-        onKeyDown={(event) => {
-          if (event.key === 'ArrowLeft') {event.preventDefault(); moveCarousel(-1)}
-          if (event.key === 'ArrowRight') {event.preventDefault(); moveCarousel(1)}
-        }}
-      >
-        {media.map((item, index) => <button className="safari-gallery-item" key={item._key} type="button" onClick={() => setActive(index)} aria-label={`Open ${item.kind === 'video' ? 'video' : 'photo'} ${index + 1}${item.caption ? `: ${item.caption}` : ''}`}>
+      <div className={`safari-gallery safari-gallery--${visibleMedia.length}`} role="group" aria-label={`Safari photo and video gallery, ${media.length} items`}>
+        {visibleMedia.map((item, index) => <button className="safari-gallery-item" key={item._key} type="button" onClick={() => setActive(index)} aria-label={`Open ${item.kind === 'video' ? 'video' : 'photo'} ${index + 1} of ${media.length}${item.caption ? `: ${item.caption}` : ''}`}>
           <span className="safari-gallery-media">
-            {item.image?.asset?.url ? <Image src={item.image.asset.url} alt={item.image.alt || ''} fill sizes="(max-width: 650px) calc(100vw - 2rem), (max-width: 980px) 50vw, 33vw" quality={78} /> : <span className="safari-video-placeholder">Play video</span>}
+            {item.image?.asset?.url ? <Image src={item.image.asset.url} alt={item.image.alt || item.caption || ''} fill sizes={index === 0 ? '(max-width: 800px) calc(100vw - 2rem), 50vw' : '(max-width: 650px) 45vw, (max-width: 800px) 50vw, 25vw'} quality={78} /> : <span className="safari-video-placeholder">Safari film</span>}
             {item.kind === 'video' ? <span className="safari-play" aria-hidden="true">▶</span> : null}
           </span>
-          {item.caption ? <span className="safari-gallery-caption">{item.caption}</span> : null}
+          <span className="safari-gallery-caption">
+            <span className="safari-gallery-number">{String(index + 1).padStart(2, '0')}</span>
+            <span className="safari-gallery-title">{item.caption || (item.kind === 'video' ? 'Safari film' : 'Safari moment')}</span>
+          </span>
+          <span className="safari-gallery-open" aria-hidden="true">↗</span>
+          {index === 4 && media.length > 5 ? <span className="safari-gallery-more" aria-hidden="true">+{media.length - 5} more</span> : null}
         </button>)}
       </div>
-      {media.length > 1 ? <div className="safari-gallery-controls">
-        <button type="button" onClick={() => moveCarousel(-1)} disabled={!canPrevious} aria-label="Previous gallery image">←</button>
-        <span aria-live="polite">{carouselIndex + 1} / {media.length}</span>
-        <button type="button" onClick={() => moveCarousel(1)} disabled={!canNext} aria-label="Next gallery image">→</button>
-      </div> : null}
     </div>
     <dialog className="safari-lightbox" ref={dialog} onClose={() => setActive(null)} onClick={(event) => {if (event.target === dialog.current) setActive(null)}} aria-label="Media gallery">
       {selected ? <><button className="safari-lightbox-close" type="button" onClick={() => setActive(null)} aria-label="Close gallery">×</button>

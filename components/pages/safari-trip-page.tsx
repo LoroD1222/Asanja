@@ -2,12 +2,10 @@ import Image from 'next/image'
 import {BlogShell} from '../blog/blog-shell'
 import type {ArticleCardData} from '../../sanity/types'
 import type {PageCard, SafariTrip, TripSection} from '../../sanity/page-types'
-import {whatsappHref} from '../../sanity/contact'
-import {Breadcrumbs, RelatedBlogs} from './page-sections'
+import {RelatedBlogs} from './page-sections'
 import {PageImage} from './page-image'
 import {PortablePageText} from './portable-page-text'
 import {hasTripSectionContent, TripSectionRenderer} from './trip-section-renderer'
-import {StickyBookingBar} from './sticky-booking-bar'
 
 const defaultKinds: TripSection['kind'][] = ['overview','highlights','itinerary','route','destinations','accommodation','wildlife','gallery','pricing','inclusions','season','travel','relatedTrips','relatedBlogs','relatedLandingPages','faq','reviews','booking']
 
@@ -15,9 +13,7 @@ export function SafariTripPage({trip, automaticBlogs, automaticTrips, whatsappNu
   const provided: TripSection[] = trip.sections || defaultKinds.map((kind) => ({_key: kind, kind}))
   const sections: TripSection[] = provided.some((section) => section.kind === 'booking') ? provided : [...provided, {_key: 'booking-fallback', kind: 'booking'}]
   const itinerary = sections.find((section) => section.kind === 'itinerary')
-  const whatsapp = whatsappHref(whatsappNumber, preview ? 'Hello Asanja Africa, I saw the safari template preview and would like help planning a trip.' : `Hello Asanja Africa, I would like to ask about ${trip.title}.`)
   return <BlogShell className="safari-site"><article className="safari-page safari-trip-page">
-    <Breadcrumbs current={trip.title} parents={[{label: 'Safaris', href: '/safaris/'}]} />
     <header className="safari-hero"><div className="safari-hero-media"><PageImage image={trip.heroImage} priority sizes="100vw" /></div><div className="safari-hero-overlay"/><div className="safari-hero-content"><p className="safari-kicker">{trip.heroEyebrow || trip.category || 'Asanja Africa safari'}</p><h1>{trip.title}</h1>{trip.heroDescription?.length ? <div className="safari-hero-description"><PortablePageText value={trip.heroDescription} /></div> : <p className="safari-hero-summary">{trip.summary}</p>}<div className="safari-hero-facts"><span>{trip.durationDays} days{trip.durationNights !== undefined ? ` / ${trip.durationNights} nights` : ''}</span>{trip.relatedDestinations?.length ? <span>{trip.relatedDestinations.filter(Boolean).length} {preview ? 'featured destinations' : 'destinations'}</span> : null}{typeof trip.priceFrom === 'number' ? <span>From {new Intl.NumberFormat('en-US', {style: 'currency', currency: trip.currency || 'USD', maximumFractionDigits: 0}).format(trip.priceFrom)} per person</span> : null}</div><div className="safari-hero-actions"><a href="#booking">{preview ? 'View quote form ↗' : 'Plan this safari ↗'}</a>{itinerary ? <a href={`#itinerary-${itinerary._key}`}>Explore itinerary ↓</a> : null}</div></div></header>
     <nav className="safari-jump" aria-label="On this page"><span>Explore this journey</span>{sections.filter((section) => ['overview','itinerary','route','accommodation','pricing','faq'].includes(section.kind) && (preview || hasTripSectionContent(section, trip, automaticTrips))).map((section) => <a key={section._key} href={`#${section.kind + '-' + section._key}`}>{section.heading || section.kind}</a>)}<a href="#booking">Enquire ↗</a></nav>
     <div className="safari-page-content">{sections.map((section) => <TripSectionRenderer key={section._key} section={section} trip={trip} automaticTrips={automaticTrips} whatsappNumber={whatsappNumber} preview={preview} />)}
@@ -31,6 +27,5 @@ export function SafariTripPage({trip, automaticBlogs, automaticTrips, whatsappNu
         <a href="#booking">Plan Your Trip <span aria-hidden="true">↗</span></a>
       </div>
     </section>
-    <StickyBookingBar title={trip.title} whatsapp={whatsapp} preview={preview} />
   </article></BlogShell>
 }

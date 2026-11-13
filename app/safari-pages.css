@@ -1,5 +1,6 @@
 .safari-site{--safari-ink:#303b31;--safari-moss:#596c52;--safari-clay:#b98b56;--safari-cream:#f5f2ee;--safari-line:#d9d4cb;color:var(--safari-ink)}
 .safari-page{padding-bottom:64px;overflow:clip}
+.safari-page.safari-trip-page{padding-bottom:0}
 .safari-page a{color:inherit}
 .safari-kicker{display:block;color:var(--safari-clay);font-size:.69rem;font-weight:700;letter-spacing:.17em;text-transform:uppercase;margin:0 0 1rem}
 .safari-breadcrumbs{display:flex;align-items:center;gap:.7rem;overflow:auto;white-space:nowrap;padding:.8rem clamp(1.2rem,5vw,5rem);background:#f8f6f2;color:#687369;font-size:.73rem}

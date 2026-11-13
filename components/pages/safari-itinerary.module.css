@@ -4,8 +4,8 @@
 
 .readable :global(.safari-prose) {
   max-width: 66ch;
-  color: #4c5b50;
-  font: 400 clamp(.9375rem, 1.12vw, 1.0625rem) / 1.8 AsanjaPoppins, Arial, sans-serif;
+  color: #35443a;
+  font: 400 clamp(1rem, 1.2vw, 1.08rem) / 1.7 AsanjaPoppins, Arial, sans-serif;
 }
 
 .readable :global(.safari-prose p) {
@@ -17,6 +17,6 @@
 
 .readable > :global(p) {
   max-width: 66ch;
-  color: #435248;
-  font: 400 .92rem / 1.7 AsanjaPoppins, Arial, sans-serif;
+  color: #35443a;
+  font: 400 1rem / 1.7 AsanjaPoppins, Arial, sans-serif;
 }

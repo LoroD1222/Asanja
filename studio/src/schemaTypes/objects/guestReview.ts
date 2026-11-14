@@ -12,6 +12,8 @@ export const guestReview = defineType({
     defineField({name: 'rating', title: 'Rating (if provided by guest)', type: 'number', validation: (rule) => rule.integer().min(1).max(5)}),
     defineField({name: 'source', title: 'Review source', type: 'string', description: 'For example, email or a review platform.'}),
     defineField({name: 'sourceUrl', title: 'Source URL', type: 'url'}),
+    defineField({name: 'reviewUrl', title: 'Individual review URL', type: 'url', description: 'Link to the original review so visitors can check the full context.'}),
+    defineField({name: 'profileUrl', title: 'Reviewer profile URL', type: 'url', description: 'Link to the reviewer’s public profile. Do not copy their profile photo without permission.'}),
     defineField({name: 'visitDate', title: 'Visit date', type: 'date'}),
     defineField({name: 'image', title: 'Guest image (permission required)', type: 'image', options: {hotspot: true}, description: imageUploadGuidance, validation: imageOptimizationWarning, fields: [defineField({name: 'alt', title: 'Alternative text', type: 'string'})]}),
     defineField({name: 'guestDescription', title: 'Guest description', type: 'string', description: 'Optional attribution such as Family of three.'}),

@@ -12,6 +12,8 @@ export function TripReviews({items, fallbackImage, preview = false, id}: {items?
   const [activeIndex, setActiveIndex] = useState(0)
   if (!visible.length) return null
   const current = visible[Math.min(activeIndex, visible.length - 1)]
+  const currentReviewLink = safeExternalHref(current.reviewUrl)
+  const currentProfileLink = safeExternalHref(current.profileUrl)
   const photo = current.settingImage?.asset?.url ? current.settingImage : fallbackImage
   const source = visible.find((item) => item.source?.toLowerCase().includes('tripadvisor') && safeExternalHref(item.sourceUrl))
   const reviewLink = source ? safeExternalHref(source.sourceUrl) : null
@@ -32,11 +34,11 @@ export function TripReviews({items, fallbackImage, preview = false, id}: {items?
         </div>
         <div className="trip-story-content">
           {current.textType === 'summary'
-            ? <div className="trip-story-summary"><span>Review summary</span><p>{current.quote}</p>{safeExternalHref(current.sourceUrl) ? <a href={safeExternalHref(current.sourceUrl)!} target="_blank" rel="noopener noreferrer">View the TripAdvisor listing ↗</a> : null}</div>
+            ? <div className="trip-story-summary"><span>Review summary</span><p>{current.quote}</p>{currentReviewLink ? <a href={currentReviewLink} target="_blank" rel="noopener noreferrer">Read the full review on TripAdvisor ↗</a> : safeExternalHref(current.sourceUrl) ? <a href={safeExternalHref(current.sourceUrl)!} target="_blank" rel="noopener noreferrer">View the TripAdvisor listing ↗</a> : null}</div>
             : <div className="trip-story-quote"><span aria-hidden="true">“</span><blockquote><p className={current.mobileQuote ? 'trip-story-desktop-quote' : undefined}>{current.quote}</p>{current.mobileQuote ? <p className="trip-story-mobile-quote">{current.mobileQuote}</p> : null}</blockquote></div>}
           <div className="trip-story-attribution">
             {current.image?.asset?.url ? <PageImage image={current.image} sizes="52px" /> : <span className="trip-story-initials" aria-hidden="true">{current.name.split(' ').map((part) => part[0]).join('').slice(0, 2).toUpperCase()}</span>}
-            <div><strong>{current.name}</strong>{current.guestDescription || current.country ? <small>{current.guestDescription || current.country}</small> : null}</div>
+            <div>{currentProfileLink ? <a className="trip-story-profile" href={currentProfileLink} target="_blank" rel="noopener noreferrer" aria-label={`View ${current.name}'s TripAdvisor profile`}><strong>{current.name} <span aria-hidden="true">↗</span></strong></a> : <strong>{current.name}</strong>}{current.guestDescription || current.country ? <small>{current.guestDescription || current.country}</small> : null}</div>
           </div>
           <div className="trip-story-navigation">
             <div className="trip-story-thumbnails" aria-label="Choose a guest story">{visible.map((item, index) => {const thumbnail = item.settingImage?.asset?.url ? item.settingImage : fallbackImage; return <button type="button" key={item._key} className={index === activeIndex ? 'is-active' : ''} aria-label={`Show review from ${item.name}`} aria-current={index === activeIndex ? 'true' : undefined} onClick={() => setActiveIndex(index)}>{thumbnail?.asset?.url ? <PageImage image={thumbnail} sizes="66px" /> : <span />}</button>})}</div>

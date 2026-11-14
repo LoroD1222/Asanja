@@ -374,7 +374,11 @@
 .safari-trip-page .safari-hero-actions a:hover{transform:translateY(-2px);background:#eae8df;color:#243138}
 .safari-trip-page .safari-jump{top:80px;z-index:80;gap:1.5rem;padding-block:1.1rem;border-bottom-color:#e4dfd7;background:#f7f2ef;box-shadow:none;color:#536053;font:500 .68rem/1.2 AsanjaPoppins,Arial,sans-serif;letter-spacing:.08em}
 .safari-trip-page .safari-jump span,.safari-trip-page .safari-jump a:last-child{color:#57654c}
-.safari-trip-page .safari-jump a{transition:color .2s}
+.safari-trip-page .safari-jump a{position:relative;flex:none;padding:.45rem .55rem;margin:-.45rem -.55rem;border-radius:3px;transition:background .2s,color .2s}
+.safari-trip-page .safari-jump a:hover,.safari-trip-page .safari-jump a.is-active{background:#e4e9df;color:#304b35}
+.safari-trip-page .safari-jump a.is-active{font-weight:700}
+.safari-trip-page .safari-jump a.is-active::after{content:'';position:absolute;right:.55rem;bottom:.2rem;left:.55rem;height:2px;background:#57654c}
+.safari-trip-page .safari-jump a:focus-visible{outline:2px solid #57654c;outline-offset:3px}
 .safari-trip-page .safari-section{scroll-margin-top:152px}
 .safari-trip-page .safari-section-overview{padding:clamp(5rem,8vw,7rem) 0;border-bottom:0}
 .safari-trip-page .safari-overview{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(3rem,6vw,6rem);align-items:center}

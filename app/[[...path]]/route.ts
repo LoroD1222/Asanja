@@ -2,6 +2,7 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { findPublishedArticleRedirect } from '../../sanity/legacy-redirect';
 import { renderLegacyBlogIndex } from '../../sanity/legacy-blog-index';
+import { renderLegacySafariIndex } from '../../sanity/legacy-safari-index';
 
 export const dynamic = 'force-dynamic';
 
@@ -116,7 +117,12 @@ export async function GET(request: Request, context: RouteContext) {
 
   try {
     const html = await readFile(filePath, 'utf8');
-    const responseHtml = parts.join('/') === 'blogs' ? await renderLegacyBlogIndex(html, request.url) : html;
+    const routePath = parts.join('/');
+    const responseHtml = routePath === 'blogs'
+      ? await renderLegacyBlogIndex(html, request.url)
+      : routePath === 'safaris'
+        ? await renderLegacySafariIndex(html)
+        : html;
     return new Response(responseHtml, {
       headers: {
         'Content-Type': 'text/html; charset=utf-8',

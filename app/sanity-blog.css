@@ -448,3 +448,17 @@ body:has(.asanja-menu-panel:target) {overflow: hidden;}
   .asanja-menu-panel {animation: none;}
   .asanja-menu-visual span {transition: none;}
 }
+
+/* Keep the shared footer usable at phone widths without squeezing the form or credits. */
+@media (max-width: 600px) {
+  .asanja-footer-main {width: 100%; padding-inline: 20px; border-radius: 24px 24px 0 0;}
+  .asanja-footer-top {gap: 1.5rem;}
+  .asanja-newsletter {min-width: 0; gap: 1rem;}
+  .asanja-newsletter form {display:grid;grid-template-columns:minmax(0,1fr);gap:.65rem;min-width:0;}
+  .asanja-newsletter input,.asanja-newsletter button {width:100%;min-height:44px;}
+  .asanja-newsletter [role="status"] {text-align:center;}
+  .asanja-footer-links {grid-template-columns:repeat(2,minmax(0,1fr));gap:1.75rem 1rem;}
+  .asanja-footer-links h2 {font-size:.85rem;}
+  .asanja-footer-bottom {flex-direction:column;align-items:center;gap:.7rem;padding:1.4rem 20px;text-align:center;}
+  .asanja-footer-bottom p {line-height:1.6;}
+}

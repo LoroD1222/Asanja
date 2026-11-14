@@ -16,11 +16,14 @@ export function SafariRouteMap({stops}: {stops?: RouteStop[]}) {
   useEffect(() => {
     if (!node.current || !valid.length) return
     let disposed = false
+    let resizeObserver: ResizeObserver | undefined
     import('leaflet').then((L) => {
       if (disposed || !node.current) return
       const first = valid[0].coordinates!
       const instance = L.map(node.current, {scrollWheelZoom: false, zoomControl: true}).setView([first.lat, first.lng], 6)
       map.current = instance
+      resizeObserver = new ResizeObserver(() => instance.invalidateSize({pan: false}))
+      resizeObserver.observe(node.current)
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 17, attribution: '&copy; OpenStreetMap contributors'}).addTo(instance)
       const coordinates: Array<[number, number]> = valid.map((stop) => [stop.coordinates!.lat, stop.coordinates!.lng])
       if (coordinates.length > 1) {
@@ -41,7 +44,7 @@ export function SafariRouteMap({stops}: {stops?: RouteStop[]}) {
         return marker
       })
     })
-    return () => {disposed = true; map.current?.remove(); map.current = null; markers.current = []}
+    return () => {disposed = true; resizeObserver?.disconnect(); map.current?.remove(); map.current = null; markers.current = []}
   }, [stops])
 
   if (!valid.length) return null

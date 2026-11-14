@@ -469,6 +469,29 @@
 .safari-trip-page .safari-pricing-disclaimer,
 .safari-trip-page .safari-price small,
 .safari-trip-page .safari-package-rate-note{color:#49564b;font-size:.88rem;line-height:1.6}
+.safari-trip-page .safari-route,
+.safari-trip-page .safari-route-map,
+.safari-trip-page .safari-route-list{min-width:0}
+.safari-trip-page .safari-route-list button strong{min-width:0;overflow-wrap:anywhere}
+@media(max-width:650px){
+  .safari-trip-page .trip-plan-fields{grid-template-columns:minmax(0,1fr)}
+  .safari-trip-page .trip-plan-actions-final{flex-wrap:wrap}
+  .safari-trip-page .safari-section-route{padding-block:3.5rem}
+  .safari-trip-page .safari-section-route .safari-section-heading{margin-bottom:1.5rem}
+  .safari-trip-page .safari-route{grid-template-columns:minmax(0,1fr);min-height:0}
+  .safari-trip-page .safari-route-map{width:100%;height:clamp(280px,82vw,360px);min-height:0}
+  .safari-trip-page .safari-route-list{padding:1.25rem}
+  .safari-trip-page .safari-route-list ol{margin:1rem 0 1.25rem}
+  .safari-trip-page .safari-route-list button{display:grid;grid-template-columns:2rem minmax(0,1fr);gap:.2rem .6rem;min-height:58px;padding:.65rem 0}
+  .safari-trip-page .safari-route-list button strong{font-size:1.05rem}
+  .safari-trip-page .safari-route-list button small{grid-column:2;margin:0;font-size:.76rem;text-align:left}
+  .safari-trip-page .safari-route-list>div a{display:inline-block;min-height:44px;padding-block:.75rem;font-size:.8rem}
+  .safari-trip-page .safari-route-map .leaflet-control-attribution{font-size:10px;line-height:1.3}
+}
+@media(max-width:400px){
+  .safari-trip-page .trip-story-navigation{flex-wrap:wrap}
+  .safari-trip-page .trip-story-arrows{margin-left:auto}
+}
 .safari-trip-page .safari-jump{font-size:.76rem;scrollbar-width:none}
 .safari-trip-page .safari-jump::-webkit-scrollbar{display:none}
 .safari-trip-page .safari-kicker,

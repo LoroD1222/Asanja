@@ -364,8 +364,6 @@ body:has(.asanja-menu-panel:target) {overflow: hidden;}
   border-bottom: 1px solid #b88d60;
   transform: translateY(2px) rotate(225deg);
 }
-.asanja-submenu-control {position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap;}
-.asanja-submenu-toggle {display: none;}
 .asanja-submenu {display: grid; gap: 5px; padding: 11px 0 0 24px;}
 .asanja-submenu a {
   display: inline-block;
@@ -439,22 +437,15 @@ body:has(.asanja-menu-panel:target) {overflow: hidden;}
   .asanja-quote-link {min-width: 189px; min-height: 41px;}
   .asanja-menu {height: 45.5px;}
   .asanja-menu-button {margin-top: 4px;}
-  .asanja-menu-panel {grid-template-columns: 1fr; grid-template-rows: 138px minmax(0, 1fr); overflow-y: auto;}
-  .asanja-menu-brand {min-height: 138px; padding: 15px 70px 15px 20px;}
+  .asanja-menu-panel {grid-template-columns: 1fr; grid-template-rows: 14vh minmax(0, 1fr); overflow-y: auto;}
+  .asanja-menu-brand {min-height: 14vh; padding: 12px 70px 12px 20px;}
   .asanja-menu-brand > a:first-child {width: 140px;}
   .asanja-menu-booking {display: none;}
-  .asanja-menu-navigation {align-items: flex-start; min-height: calc(100dvh - 138px); padding: 55px 30px 35px; overflow: visible;}
-  .asanja-menu-close {width: 60px; height: 60px;}
-  .asanja-menu-list > li {margin-bottom: 0;}
-  .asanja-menu-link-row {min-height: 66px; gap: 0;}
-  .asanja-menu-link-row > a {flex: 1 1 auto; font-family: Arial, Helvetica, sans-serif; font-size: 28.8px; font-weight: 300; line-height: 1.2;}
-  .asanja-submenu-indicator {display: none;}
-  .asanja-submenu-toggle {display: grid; flex: 0 0 42px; width: 42px; height: 48px; padding: 0; border: 0; background: transparent; place-items: center; cursor: pointer;}
-  .asanja-submenu-toggle span {width: 10px; height: 10px; border-right: 2px solid #7a7a7a; border-bottom: 2px solid #7a7a7a; transform: translateY(-3px) rotate(45deg); transition: transform .2s ease;}
-  .asanja-submenu-control:focus-visible + .asanja-menu-link-row .asanja-submenu-toggle {outline: 1px solid #55664c; outline-offset: 2px;}
-  .asanja-submenu-control:checked + .asanja-menu-link-row .asanja-submenu-toggle span {transform: translateY(3px) rotate(225deg);}
-  .asanja-submenu {display: none; gap: 2px; padding: 0 0 12px 24px;}
-  .asanja-submenu-control:checked ~ .asanja-submenu {display: grid;}
+  .asanja-menu-navigation {align-items: flex-start; min-height: 86vh; padding: 55px 28px 35px; overflow: visible;}
+  .asanja-menu-close {width: 54px; height: 54px;}
+  .asanja-menu-list > li {margin-bottom: 21px;}
+  .asanja-menu-link-row > a {font-size: 24px;}
+  .asanja-submenu {gap: 2px; padding-top: 8px;}
   .asanja-submenu a {font-size: 10px;}
   .asanja-footer-landscape {height: 150px; background-position: center;}
   .asanja-footer-main {width: calc(100% - 30px); padding: 0 25px; border-radius: 28px 28px 0 0;}

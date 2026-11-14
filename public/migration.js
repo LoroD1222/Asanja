@@ -586,9 +586,22 @@
     }
     trigger.after(panel);
     let openedAt = -Infinity;
+    let labelTimer = 0;
+    const mobileLabelQuery = window.matchMedia('(max-width: 767px)');
+
+    function scheduleHelpLabel() {
+      window.clearTimeout(labelTimer);
+      trigger.classList.remove('is-label-hidden');
+      if (!mobileLabelQuery.matches) return;
+      labelTimer = window.setTimeout(() => trigger.classList.add('is-label-hidden'), 8000);
+    }
+
+    scheduleHelpLabel();
+    mobileLabelQuery.addEventListener?.('change', scheduleHelpLabel);
 
     function setOpen(open, { focus = false } = {}) {
       if (open) openedAt = performance.now();
+      if (open) trigger.classList.add('is-label-hidden');
       trigger.classList.toggle('is-active', open);
       panel.classList.toggle('is-active', open);
       trigger.setAttribute('aria-expanded', String(open));
@@ -859,6 +872,18 @@
     let previouslyFocused = null;
     let popupTimer = 0;
 
+    function syncPopupNavigationState(open) {
+      popup.querySelectorAll('nav').forEach((nav) => {
+        const visible = open && nav instanceof HTMLElement && nav.offsetParent !== null;
+        nav.setAttribute('aria-hidden', String(!visible));
+        nav.querySelectorAll('a, button').forEach((control) => {
+          if (!(control instanceof HTMLElement)) return;
+          if (visible) control.removeAttribute('tabindex');
+          else control.tabIndex = -1;
+        });
+      });
+    }
+
     function setMenuImage(itemIndex) {
       images.forEach((image, imageIndex) => image.classList.toggle('active', imageIndex === itemIndex));
       topItems.forEach((item, index) => item.querySelector(':scope > a')?.classList.toggle('active', index === itemIndex));
@@ -881,10 +906,15 @@
       if (content) content.style.animationDuration = `${popupDuration}ms`;
       document.documentElement.classList.add('asanja-popup-open');
       document.body.classList.add('asanja-popup-open', 'dialog-body', 'dialog-lightbox-body', 'dialog-container', 'dialog-lightbox-container');
+      syncPopupNavigationState(true);
       setMenuImage(0);
       popup.querySelectorAll('.elementor-invisible').forEach((element) => revealAnimatedElement(element));
       popupTimer = window.setTimeout(() => content?.classList.remove(entranceAnimation), popupDuration);
-      window.setTimeout(() => popup.querySelector('.menu-items-column a, .mob-menu a')?.focus(), 0);
+      window.setTimeout(() => {
+        const firstVisibleLink = [...popup.querySelectorAll('.menu-items-column .elementor-nav-menu a, .mob-menu .elementor-nav-menu a')]
+          .find((link) => link instanceof HTMLElement && link.offsetParent !== null);
+        firstVisibleLink?.focus();
+      }, 0);
     }
 
     function closePopup() {
@@ -896,6 +926,7 @@
       popupTimer = window.setTimeout(() => {
         popup.classList.remove('asanja-popup-visible');
         popup.setAttribute('aria-hidden', 'true');
+        syncPopupNavigationState(false);
         content?.classList.remove(exitAnimation, 'reverse');
         document.documentElement.classList.remove('asanja-popup-open');
         document.body.classList.remove('asanja-popup-open', 'dialog-body', 'dialog-lightbox-body', 'dialog-container', 'dialog-lightbox-container');
@@ -935,6 +966,10 @@
         event.preventDefault();
         first.focus();
       }
+    });
+
+    window.addEventListener('resize', () => {
+      if (popup.classList.contains('asanja-popup-visible')) syncPopupNavigationState(true);
     });
 
     try {

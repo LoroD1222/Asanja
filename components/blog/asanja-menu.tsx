@@ -42,15 +42,33 @@ export function AsanjaMenu({
         <a className="asanja-menu-close" href="#" aria-label="Close navigation"><span aria-hidden="true" /></a>
         <nav aria-label="Main navigation">
           <ul className="asanja-menu-list">
-            {menuLinks.map((item) => {
+            {menuLinks.map((item, index) => {
               const hasChildren = 'children' in item
               const current = isCurrentPath(pathname, item.href) || (hasChildren && item.children.some(({href}) => isCurrentPath(pathname, href)))
+              const submenuId = `asanja-submenu-${index}`
+              const controlId = `${submenuId}-control`
               return <li key={item.href} className={`${hasChildren ? 'has-children ' : ''}${current ? 'is-current' : ''}`}>
+                {hasChildren ? <input
+                  className="asanja-submenu-control"
+                  id={controlId}
+                  type="checkbox"
+                  aria-label={`Show ${item.label} links`}
+                  aria-controls={submenuId}
+                /> : null}
                 <div className="asanja-menu-link-row">
                   <a href={item.href} aria-current={current ? 'page' : undefined}>{item.label}</a>
-                  {hasChildren ? <span className="asanja-submenu-indicator" aria-hidden="true" /> : null}
+                  {hasChildren ? <>
+                    <span className="asanja-submenu-indicator" aria-hidden="true" />
+                    <label
+                      className="asanja-submenu-toggle"
+                      htmlFor={controlId}
+                      aria-label={`Toggle ${item.label} links`}
+                    >
+                      <span aria-hidden="true" />
+                    </label>
+                  </> : null}
                 </div>
-                {hasChildren ? <ul className="asanja-submenu">
+                {hasChildren ? <ul className="asanja-submenu" id={submenuId}>
                   {item.children.map((child) => {
                     const childCurrent = isCurrentPath(pathname, child.href)
                     return <li key={child.href} className={childCurrent ? 'is-current' : ''}>

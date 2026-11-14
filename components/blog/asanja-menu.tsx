@@ -1,7 +1,3 @@
-'use client'
-
-import Link from 'next/link'
-import {usePathname} from 'next/navigation'
 import {campLinks, siteMenuLinks} from './asanja-site-data'
 
 function isCurrentPath(pathname: string, href: string) {
@@ -9,10 +5,18 @@ function isCurrentPath(pathname: string, href: string) {
   return normalized === href || (href === '/blogs/' && normalized.startsWith('/blogs/'))
 }
 
-type CmsCampLink = {label: string; href: string}
+export type CmsMenuLink = {label: string; href: string}
 
-export function AsanjaMenu({cmsCampLinks = [], cmsSafariLinks = []}: {cmsCampLinks?: CmsCampLink[]; cmsSafariLinks?: CmsCampLink[]}) {
-  const pathname = usePathname()
+export function AsanjaMenu({
+  cmsCampLinks = [],
+  cmsSafariLinks = [],
+  currentPath = '',
+}: {
+  cmsCampLinks?: CmsMenuLink[]
+  cmsSafariLinks?: CmsMenuLink[]
+  currentPath?: string
+}) {
+  const pathname = currentPath
   const allCampLinks = [...campLinks, ...cmsCampLinks].filter((item, index, items) => items.findIndex(({href}) => href === item.href) === index)
   const menuLinks = siteMenuLinks.map((item) => {
     if (item.href === '/camps-and-lodges/') return {...item, children: allCampLinks}
@@ -29,10 +33,10 @@ export function AsanjaMenu({cmsCampLinks = [], cmsSafariLinks = []}: {cmsCampLin
         {menuLinks.map(({label, image}, index) => <span key={label} className={index === 0 ? 'is-active' : ''} style={{backgroundImage: `url(${image})`}} />)}
       </div>
       <div className="asanja-menu-brand">
-        <Link href="/" aria-label="Asanja Africa home">
+        <a href="/" aria-label="Asanja Africa home">
           <img src="/legacy/wp-content/uploads/2020/08/Asanja-web-badge-04.svg" alt="" width={409} height={314} />
-        </Link>
-        <Link className="asanja-menu-booking" href="/plan-my-stay/">Make a booking</Link>
+        </a>
+        <a className="asanja-menu-booking" href="/plan-my-stay/">Make a booking</a>
       </div>
       <div className="asanja-menu-navigation">
         <a className="asanja-menu-close" href="#" aria-label="Close navigation"><span aria-hidden="true" /></a>
@@ -43,14 +47,14 @@ export function AsanjaMenu({cmsCampLinks = [], cmsSafariLinks = []}: {cmsCampLin
               const current = isCurrentPath(pathname, item.href) || (hasChildren && item.children.some(({href}) => isCurrentPath(pathname, href)))
               return <li key={item.href} className={`${hasChildren ? 'has-children ' : ''}${current ? 'is-current' : ''}`}>
                 <div className="asanja-menu-link-row">
-                  <Link href={item.href} aria-current={current ? 'page' : undefined}>{item.label}</Link>
+                  <a href={item.href} aria-current={current ? 'page' : undefined}>{item.label}</a>
                   {hasChildren ? <span className="asanja-submenu-indicator" aria-hidden="true" /> : null}
                 </div>
                 {hasChildren ? <ul className="asanja-submenu">
                   {item.children.map((child) => {
                     const childCurrent = isCurrentPath(pathname, child.href)
                     return <li key={child.href} className={childCurrent ? 'is-current' : ''}>
-                      <Link href={child.href} aria-current={childCurrent ? 'page' : undefined}>{child.label}</Link>
+                      <a href={child.href} aria-current={childCurrent ? 'page' : undefined}>{child.label}</a>
                     </li>
                   })}
                 </ul> : null}

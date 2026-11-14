@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import type {ReactNode} from 'react'
-import {AsanjaMenu} from './asanja-menu'
+import {AsanjaHeader} from './asanja-header'
 import {NewsletterSignup} from './newsletter-signup'
 import {footerGroups} from './asanja-site-data'
 import {getCampMenuItems} from '../../sanity/camp-data'
@@ -15,16 +15,9 @@ export async function BlogShell({children, className = ''}: {children: ReactNode
 
   return (
     <div className={`sanity-blog asanja-shared-shell ${className}`}>
+      <link rel="stylesheet" href="/asanja-shared-header.css" />
       <a className="skip-link" href="#main-content">Skip to content</a>
-      <header className="asanja-site-header">
-        <Link className="asanja-header-logo" href="/" aria-label="Asanja Africa home">
-          <img src="/legacy/wp-content/uploads/2020/08/Asanja_Logo_clean.svg" alt="Asanja Africa" width={281} height={52} />
-        </Link>
-        <div className="asanja-header-actions">
-          <Link className="asanja-quote-link" href="/plan-my-stay/">Request a quote</Link>
-          <AsanjaMenu cmsCampLinks={cmsCampLinks} cmsSafariLinks={cmsSafariLinks} />
-        </div>
-      </header>
+      <AsanjaHeader cmsCampLinks={cmsCampLinks} cmsSafariLinks={cmsSafariLinks} />
       <main id="main-content">{children}</main>
       <footer className="asanja-site-footer">
         <div className="asanja-footer-landscape" aria-hidden="true" />

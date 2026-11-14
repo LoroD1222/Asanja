@@ -29,7 +29,7 @@ export const safariTripBySlugQuery = defineQuery(`
     "automaticBlogCategoryIds": automaticBlogCategories[]._ref,
     "automaticBlogTagIds": automaticBlogTags[]._ref,
     automaticBlogsEnabled, automaticBlogsLimit,
-    faqs[]{${faqFields}}, reviews[]{_key, name, country, guestDescription, quote, mobileQuote, rating, source, sourceUrl, visitDate, image${imageFields}, settingImage${imageFields}, locationLabel},
+    faqs[]{${faqFields}}, reviews[]{_key, name, country, guestDescription, quote, textType, mobileQuote, rating, source, sourceUrl, visitDate, image${imageFields}, settingImage${imageFields}, locationLabel},
     sections[]{_key, kind, eyebrow, heading, body[]{${textFields}}, image${imageFields}},
     bookingHeading, bookingText[]{${textFields}}, ${seoFields}
   }
@@ -43,7 +43,7 @@ export const seoLandingPageBySlugQuery = defineQuery(`
       "destinations": destinations[]->{${cardFields}}, "camps": camps[]->{${cardFields}},
       "trips": trips[]->{${cardFields}}, "blogs": blogs[]->{${articleCardFields}},
       "landingPages": landingPages[]->{${cardFields}},
-      faqs[]{${faqFields}}, testimonials[]{_key, name, country, guestDescription, quote, mobileQuote, rating, source, sourceUrl, visitDate, image${imageFields}, settingImage${imageFields}, locationLabel},
+      faqs[]{${faqFields}}, testimonials[]{_key, name, country, guestDescription, quote, textType, mobileQuote, rating, source, sourceUrl, visitDate, image${imageFields}, settingImage${imageFields}, locationLabel},
       ctaLabel, ctaUrl, "documentUrl": document.asset->url
     },
     "relatedBlogs": relatedBlogs[]->{${articleCardFields}},

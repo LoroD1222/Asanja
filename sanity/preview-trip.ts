@@ -15,8 +15,9 @@ const nyasiroriCamp = image('/legacy/wp-content/uploads/2025/10/Asanja-Nyasirori
 const ndemboCamp = image('/legacy/wp-content/uploads/2025/07/camps-asanja-ndembo-lounge_20250710111917.webp', 'Asanja Ndembo lounge', 1200, 800)
 const giraffes = image('/legacy/wp-content/uploads/2025/05/safaris-masterpiece-giraffes_20250723123323.webp', 'Giraffes on safari', 1200, 800)
 const figmaMoruCamp = image('/figma-trip-review/camp.png', 'Asanja Moru safari tent in its natural setting', 1400, 788)
-const figmaMoruThumb = image('/figma-trip-review/thumbnails.jpg', 'Asanja Moru tent', 4000, 1868)
-const figmaGuestAvatar = image('/figma-trip-review/avatar.png', 'Guest profile photograph', 100, 100)
+const moruTent = image('/legacy/wp-content/uploads/2025/10/Moru-room-tent.webp', 'Tent at Asanja Moru', 1200, 800)
+const moruMess = image('/legacy/wp-content/uploads/2025/10/Moru-mess.webp', 'Dining tent at Asanja Moru', 1200, 800)
+const tripAdvisorMoruUrl = 'https://www.tripadvisor.com/Hotel_Review-g293751-d1997580-Reviews-Asanja_Moru-Serengeti_National_Park.html'
 
 const demoCard = (id: string, type: PageCard['_type'], title: string, summary: string, heroImage: SanityImage, extras: Partial<PageCard> = {}): PageCard => ({
   _id: `demo-${id}`, _type: type, slug: id, title, summary, heroImage, ...extras,
@@ -158,10 +159,9 @@ export function buildPreviewTrip(introduction?: PageText, relatedBlogs: ArticleC
       {_key: 'faq-packing', question: 'What should I pack for the safari?', answer: previewParagraph('Bring comfortable layers and practical safari essentials. The existing route specifies a 15 kg soft-bag limit for its internal flights; your confirmed travel notes will provide the full packing guidance.', 'faq-packing-answer')},
     ],
     reviews: [
-      {_key: 'review-demo-one', name: 'Kathy P.', guestDescription: 'Family of three', rating: 5, quote: 'We stayed at Asanja Moru for three nights and I am definitely coming back here again. I have travelled a lot but this has to be my favourite place I have stayed at. The hospitality was unmatched, the food was the best we had in Tanzania and the accommodation itself was just unreal. They made every moment special like bringing us a cake for climbing Kilimanjaro. We loved loved this place.', mobileQuote: 'We stayed for only three nights, but all of us were teary-eyed when we left. The elephants were twenty feet away each morning at breakfast.', image: figmaGuestAvatar, settingImage: figmaMoruCamp, locationLabel: 'Moru, Emanyata tent', source: 'TripAdvisor', sourceUrl: 'https://www.tripadvisor.com/Search?geo=6&q=asanja&ssrc=h'},
-      {_key: 'review-demo-two', name: 'Sample guest', guestDescription: 'Illustrative story', rating: 5, quote: 'Every day felt thoughtfully paced, from the first game drive to the quiet evenings back at camp.', settingImage: figmaMoruThumb},
-      {_key: 'review-demo-three', name: 'Sample traveller', guestDescription: 'Illustrative story', rating: 5, quote: 'The changing landscapes made this journey feel like several wonderful safaris in one.', settingImage: figmaMoruThumb},
-      {_key: 'review-demo-four', name: 'Sample family', guestDescription: 'Illustrative story', rating: 5, quote: 'We loved having the time to slow down, explore and enjoy quiet evenings at camp.', settingImage: figmaMoruThumb},
+      {_key: 'review-moru-a-kevh', name: 'A_KevH', guestDescription: 'Family stay · August 2026', rating: 5, textType: 'summary', quote: 'A family guest praised the warm welcome, excellent food and Serengeti location. Watching the sunset over the plains, together with the team’s service, made the stay especially memorable.', settingImage: figmaMoruCamp, locationLabel: 'Asanja Moru, Serengeti', source: 'TripAdvisor', sourceUrl: tripAdvisorMoruUrl},
+      {_key: 'review-moru-kczigler', name: 'KCzigler', guestDescription: 'Family stay · February 2026', rating: 5, textType: 'summary', quote: 'This family enjoyed the spacious tent, attentive staff and meals. They especially remembered the hot-water bottles on cold nights and the team’s song when it was time to leave.', settingImage: moruTent, locationLabel: 'Asanja Moru, Serengeti', source: 'TripAdvisor', sourceUrl: tripAdvisorMoruUrl},
+      {_key: 'review-moru-dream26550658099', name: 'Dream26550658099', guestDescription: 'Couple’s stay · February 2026', rating: 5, textType: 'summary', quote: 'A couple described a peaceful stay surrounded by nature, with a bush lunch and breakfast overlooking zebras. They also appreciated how quickly the team helped when they felt uneasy at night.', settingImage: moruMess, locationLabel: 'Asanja Moru, Serengeti', source: 'TripAdvisor', sourceUrl: tripAdvisorMoruUrl},
     ],
     sections: [
       {_key: 'overview', kind: 'overview', image: serengeti},
@@ -177,7 +177,7 @@ export function buildPreviewTrip(introduction?: PageText, relatedBlogs: ArticleC
       {_key: 'related-blogs', kind: 'relatedBlogs', heading: 'From the Asanja journal'},
       {_key: 'related-pages', kind: 'relatedLandingPages', eyebrow: 'Continue the journey'},
       {_key: 'faq', kind: 'faq', heading: 'Good to know', body: previewParagraph('Answers to a few questions you may have before setting off.', 'faq-intro')},
-      {_key: 'reviews', kind: 'reviews', eyebrow: 'Sample testimonials', body: previewParagraph('Illustrative quotes for the client preview. Replace them with approved guest reviews in the CMS.', 'reviews-note')},
+      {_key: 'reviews', kind: 'reviews', eyebrow: 'Guest stories', body: previewParagraph('Summaries of real Asanja Moru reviews, with each guest credited by their TripAdvisor username.', 'reviews-note')},
       {_key: 'booking', kind: 'booking', heading: 'Plan your trip'},
     ],
   }

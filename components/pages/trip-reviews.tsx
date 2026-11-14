@@ -14,11 +14,11 @@ export function TripReviews({items, fallbackImage, preview = false, id}: {items?
   const current = visible[Math.min(activeIndex, visible.length - 1)]
   const photo = current.settingImage?.asset?.url ? current.settingImage : fallbackImage
   const source = visible.find((item) => item.source?.toLowerCase().includes('tripadvisor') && safeExternalHref(item.sourceUrl))
-  const reviewLink = source ? safeExternalHref(source.sourceUrl) : preview ? 'https://www.tripadvisor.com/Search?geo=6&q=asanja&ssrc=h' : null
+  const reviewLink = source ? safeExternalHref(source.sourceUrl) : null
   const rated = visible.filter((item) => typeof item.rating === 'number')
   const averageRating = rated.length ? rated.reduce((sum, item) => sum + item.rating!, 0) / rated.length : null
-  const showFiveStars = preview || (averageRating !== null && averageRating >= 4.5)
-  const ratingCaption = preview ? 'Rated excellent by guests on TripAdvisor' : source ? 'Guest stories shared on TripAdvisor' : 'Stories from Asanja travellers'
+  const showFiveStars = averageRating !== null && averageRating >= 4.5
+  const ratingCaption = source ? 'Guest experiences at Asanja Moru, shared on TripAdvisor' : 'Stories from Asanja travellers'
   const move = (direction: number) => setActiveIndex((index) => (index + direction + visible.length) % visible.length)
 
   return <section className="trip-stories" id={id} aria-label="Guest stories">
@@ -31,7 +31,9 @@ export function TripReviews({items, fallbackImage, preview = false, id}: {items?
           {current.locationLabel ? <span className="trip-story-location"><Image src="/figma-trip-review/green-location.svg" width={13} height={18} alt="" />{current.locationLabel}</span> : null}
         </div>
         <div className="trip-story-content">
-          <div className="trip-story-quote"><span aria-hidden="true">“</span><blockquote><p className={current.mobileQuote ? 'trip-story-desktop-quote' : undefined}>{current.quote}</p>{current.mobileQuote ? <p className="trip-story-mobile-quote">{current.mobileQuote}</p> : null}</blockquote></div>
+          {current.textType === 'summary'
+            ? <div className="trip-story-summary"><span>Review summary</span><p>{current.quote}</p>{safeExternalHref(current.sourceUrl) ? <a href={safeExternalHref(current.sourceUrl)!} target="_blank" rel="noopener noreferrer">View the TripAdvisor listing ↗</a> : null}</div>
+            : <div className="trip-story-quote"><span aria-hidden="true">“</span><blockquote><p className={current.mobileQuote ? 'trip-story-desktop-quote' : undefined}>{current.quote}</p>{current.mobileQuote ? <p className="trip-story-mobile-quote">{current.mobileQuote}</p> : null}</blockquote></div>}
           <div className="trip-story-attribution">
             {current.image?.asset?.url ? <PageImage image={current.image} sizes="52px" /> : <span className="trip-story-initials" aria-hidden="true">{current.name.split(' ').map((part) => part[0]).join('').slice(0, 2).toUpperCase()}</span>}
             <div><strong>{current.name}</strong>{current.guestDescription || current.country ? <small>{current.guestDescription || current.country}</small> : null}</div>
@@ -43,7 +45,6 @@ export function TripReviews({items, fallbackImage, preview = false, id}: {items?
         </div>
       </div>
       {reviewLink ? <a className="trip-stories-link" href={reviewLink} target="_blank" rel="noopener noreferrer">Read more reviews on TripAdvisor<Image src="/figma-trip-review/green-tripadvisor.svg" width={110} height={17} alt="TripAdvisor" /></a> : null}
-      {preview ? <p className="trip-stories-preview-note">Design preview: replace the example stories with approved guest reviews in Sanity.</p> : null}
     </div>
   </section>
 }

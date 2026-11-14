@@ -27,7 +27,7 @@ export type PageSeo = {
 
 export type PageMedia = {_key: string; kind: 'photo' | 'video'; image?: SanityImage; caption?: string; videoUrl?: string}
 export type FAQ = {_key: string; question: string; answer?: PageText; plainAnswer?: string}
-export type Review = {_key: string; name: string; country?: string; guestDescription?: string; quote: string; mobileQuote?: string; rating?: number; source?: string; sourceUrl?: string; visitDate?: string; image?: SanityImage; settingImage?: SanityImage; locationLabel?: string}
+export type Review = {_key: string; name: string; country?: string; guestDescription?: string; quote: string; textType?: 'quote' | 'summary'; mobileQuote?: string; rating?: number; source?: string; sourceUrl?: string; visitDate?: string; image?: SanityImage; settingImage?: SanityImage; locationLabel?: string}
 
 export type RouteStop = {_key: string; name: string; dayLabel?: string; description?: string; coordinates?: GeoPoint; destination?: PageCard | null}
 export type ItineraryDay = {_key: string; dayNumber: number; title: string; description?: PageText; destination?: PageCard | null; accommodation?: PageCard | null; activities?: string[]; meals?: string[]; notes?: string; image?: SanityImage}

@@ -15,7 +15,6 @@ export async function BlogShell({children, className = ''}: {children: ReactNode
 
   return (
     <div className={`sanity-blog asanja-shared-shell ${className}`}>
-      <link rel="stylesheet" href="/asanja-shared-header.css" />
       <a className="skip-link" href="#main-content">Skip to content</a>
       <AsanjaHeader cmsCampLinks={cmsCampLinks} cmsSafariLinks={cmsSafariLinks} />
       <main id="main-content">{children}</main>

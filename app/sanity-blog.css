@@ -185,12 +185,22 @@
   position: sticky;
   top: 0;
   z-index: 100;
+  display: block;
   min-height: 80px;
-  padding: 20px clamp(0px, 2.25vw, 30px);
+  padding: 20px 0;
   background: #f3f0ec;
   color: #515159;
 }
 
+.asanja-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
 .asanja-header-logo img {width: 200px;}
 .asanja-header-actions {gap: 50px;}
 .asanja-quote-link {
@@ -402,7 +412,7 @@ body:has(.asanja-menu-panel:target) {overflow: hidden;}
 }
 
 @media (max-width: 1024px) {
-  .asanja-site-header {padding-inline: 30px;}
+  .asanja-header-inner {padding-inline: 30px;}
   .asanja-menu-panel {grid-template-columns: 50% 50%;}
   .asanja-menu-visual {display: none;}
   .asanja-menu-brand {padding: 35px;}
@@ -413,13 +423,16 @@ body:has(.asanja-menu-panel:target) {overflow: hidden;}
 @media (max-width: 767px) {
   .asanja-site-header {
     position: relative;
+    padding: 20px 0;
+  }
+  .asanja-header-inner {
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
-    padding: 20px 15px;
+    padding-inline: 15px;
   }
   .asanja-header-logo {width: 100%; justify-content: center;}
-  .asanja-header-logo img {width: 180px;}
+  .asanja-header-logo img {width: 200px;}
   .asanja-header-actions {justify-content: center; gap: 40px;}
   .asanja-quote-link {min-width: 154px; min-height: 36px;}
   .asanja-menu-panel {grid-template-columns: 1fr; grid-template-rows: 14vh minmax(0, 1fr); overflow-y: auto;}

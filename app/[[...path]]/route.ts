@@ -1,8 +1,5 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { renderAsanjaHeaderMarkup } from '../../lib/asanja-header-markup';
-import { getCampMenuItems } from '../../sanity/camp-data';
-import { getSafariTripMenuItems } from '../../sanity/page-data';
 import { findPublishedArticleRedirect } from '../../sanity/legacy-redirect';
 import { renderLegacyBlogIndex } from '../../sanity/legacy-blog-index';
 import { renderLegacySafariIndex } from '../../sanity/legacy-safari-index';
@@ -84,27 +81,6 @@ function safeRoutePath(parts: string[]) {
   return clean;
 }
 
-async function renderWithSharedHeader(html: string, currentPath: string) {
-  const [cmsCampLinks, cmsSafariLinks] = await Promise.all([
-    getCampMenuItems().catch(() => []),
-    getSafariTripMenuItems().catch(() => []),
-  ]);
-  const header = renderAsanjaHeaderMarkup({
-    cmsCampLinks,
-    cmsSafariLinks,
-    currentPath,
-  });
-  const headerPattern = /<header\b[^>]*data-elementor-type=["']header["'][\s\S]*?<\/header>/i;
-  const stylesheet = '<link rel="stylesheet" href="/asanja-shared-header.css" />';
-  const withStyles = html.includes('/asanja-shared-header.css')
-    ? html
-    : html.replace('</head>', `\t${stylesheet}\n</head>`);
-
-  return headerPattern.test(withStyles)
-    ? withStyles.replace(headerPattern, header)
-    : withStyles.replace(/<body\b[^>]*>/i, (body) => `${body}\n${header}`);
-}
-
 export async function GET(request: Request, context: RouteContext) {
   const params = await context.params;
   const parts = safeRoutePath(params.path ?? []);
@@ -142,12 +118,11 @@ export async function GET(request: Request, context: RouteContext) {
   try {
     const html = await readFile(filePath, 'utf8');
     const routePath = parts.join('/');
-    const renderedHtml = routePath === 'blogs'
+    const responseHtml = routePath === 'blogs'
       ? await renderLegacyBlogIndex(html, request.url)
       : routePath === 'safaris'
         ? await renderLegacySafariIndex(html)
         : html;
-    const responseHtml = await renderWithSharedHeader(renderedHtml, `/${routePath}${routePath ? '/' : ''}`);
     return new Response(responseHtml, {
       headers: {
         'Content-Type': 'text/html; charset=utf-8',

@@ -4,10 +4,14 @@ import {AsanjaMenu} from './asanja-menu'
 import {NewsletterSignup} from './newsletter-signup'
 import {footerGroups} from './asanja-site-data'
 import {getCampMenuItems} from '../../sanity/camp-data'
+import {getSafariTripMenuItems} from '../../sanity/page-data'
 import '../../app/sanity-blog.css'
 
 export async function BlogShell({children, className = ''}: {children: ReactNode; className?: string}) {
-  const cmsCampLinks = await getCampMenuItems().catch(() => [])
+  const [cmsCampLinks, cmsSafariLinks] = await Promise.all([
+    getCampMenuItems().catch(() => []),
+    getSafariTripMenuItems().catch(() => []),
+  ])
 
   return (
     <div className={`sanity-blog asanja-shared-shell ${className}`}>
@@ -18,7 +22,7 @@ export async function BlogShell({children, className = ''}: {children: ReactNode
         </Link>
         <div className="asanja-header-actions">
           <Link className="asanja-quote-link" href="/plan-my-stay/">Request a quote</Link>
-          <AsanjaMenu cmsCampLinks={cmsCampLinks} />
+          <AsanjaMenu cmsCampLinks={cmsCampLinks} cmsSafariLinks={cmsSafariLinks} />
         </div>
       </header>
       <main id="main-content">{children}</main>

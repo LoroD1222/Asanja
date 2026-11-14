@@ -89,6 +89,11 @@ export const automaticTripsQuery = defineQuery(`
     | order(_updatedAt desc)[0...6]{${cardFields}}
 `)
 
+export const safariTripMenuQuery = defineQuery(`
+  *[_type == "safariTrip" && defined(slug.current) && publicationStatus != "hidden" && !(_id in path("drafts.**"))]
+    | order(featured desc, title asc){"label": title, "href": "/safaris/" + slug.current + "/"}
+`)
+
 export const pageSitemapQuery = defineQuery(`
   *[_type in ["safariTrip", "seoLandingPage", "destination", "camp"] && defined(slug.current) && publicationStatus != "hidden" && seo.noIndex != true && isSample != true && !(_id in path("drafts.**"))]{
     _id, _type, "slug": slug.current, _updatedAt

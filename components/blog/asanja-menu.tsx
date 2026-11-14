@@ -11,11 +11,14 @@ function isCurrentPath(pathname: string, href: string) {
 
 type CmsCampLink = {label: string; href: string}
 
-export function AsanjaMenu({cmsCampLinks = []}: {cmsCampLinks?: CmsCampLink[]}) {
+export function AsanjaMenu({cmsCampLinks = [], cmsSafariLinks = []}: {cmsCampLinks?: CmsCampLink[]; cmsSafariLinks?: CmsCampLink[]}) {
   const pathname = usePathname()
   const allCampLinks = [...campLinks, ...cmsCampLinks].filter((item, index, items) => items.findIndex(({href}) => href === item.href) === index)
-  const menuLinks = siteMenuLinks.map((item) => item.href === '/camps-and-lodges/' ? {...item, children: allCampLinks} : item)
-  const campsCurrent = allCampLinks.some(({href}) => isCurrentPath(pathname, href)) || isCurrentPath(pathname, '/camps-and-lodges/')
+  const menuLinks = siteMenuLinks.map((item) => {
+    if (item.href === '/camps-and-lodges/') return {...item, children: allCampLinks}
+    if (item.href === '/safaris/' && cmsSafariLinks.length) return {...item, children: cmsSafariLinks}
+    return item
+  })
 
   return <div className="asanja-menu">
     <a className="asanja-menu-button" href="#asanja-menu-panel" aria-label="Open Asanja navigation" aria-controls="asanja-menu-panel">
@@ -37,7 +40,7 @@ export function AsanjaMenu({cmsCampLinks = []}: {cmsCampLinks?: CmsCampLink[]}) 
           <ul className="asanja-menu-list">
             {menuLinks.map((item) => {
               const hasChildren = 'children' in item
-              const current = hasChildren ? campsCurrent : isCurrentPath(pathname, item.href)
+              const current = isCurrentPath(pathname, item.href) || (hasChildren && item.children.some(({href}) => isCurrentPath(pathname, href)))
               return <li key={item.href} className={`${hasChildren ? 'has-children ' : ''}${current ? 'is-current' : ''}`}>
                 <div className="asanja-menu-link-row">
                   <Link href={item.href} aria-current={current ? 'page' : undefined}>{item.label}</Link>

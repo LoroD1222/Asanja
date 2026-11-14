@@ -1,11 +1,12 @@
 import 'server-only'
 import {sanityFetch} from './client'
-import {automaticPageBlogsQuery, automaticTripsQuery, contentPageBySlugQuery, pageSeoBySlugQuery, recentPageBlogsQuery, safariTripBySlugQuery, seoLandingPageBySlugQuery, siteSettingsQuery} from './page-queries'
+import {automaticPageBlogsQuery, automaticTripsQuery, contentPageBySlugQuery, pageSeoBySlugQuery, recentPageBlogsQuery, safariTripBySlugQuery, safariTripMenuQuery, seoLandingPageBySlugQuery, siteSettingsQuery} from './page-queries'
 import type {ContentPage, PageCard, PageKind, SafariTrip, SeoLandingPage} from './page-types'
 import type {ArticleCardData} from './types'
 import {pageHref} from './page-routes'
 
 export const getSafariTrip = (slug: string, stega = true) => sanityFetch<SafariTrip | null>({query: safariTripBySlugQuery, params: {slug}, tags: ['sanity', 'safariTrip', `safariTrip:${slug}`], stega})
+export const getSafariTripMenuItems = () => sanityFetch<Array<{label: string; href: string}>>({query: safariTripMenuQuery, tags: ['sanity', 'safariTrip', 'safariTrip-navigation'], stega: false})
 export const getSeoLandingPage = (slug: string, stega = true) => sanityFetch<SeoLandingPage | null>({query: seoLandingPageBySlugQuery, params: {slug}, tags: ['sanity', 'seoLandingPage', `seoLandingPage:${slug}`], stega})
 export const getContentPage = (type: 'destination' | 'camp', slug: string, stega = true) => sanityFetch<ContentPage | null>({query: contentPageBySlugQuery, params: {type, slug}, tags: ['sanity', type, `${type}:${slug}`], stega})
 export const getPageSeo = (type: PageKind, slug: string) => sanityFetch<Pick<PageCard, '_id' | '_type' | 'title' | 'slug' | 'summary' | 'heroImage'> & {isSample?: boolean; seo?: ContentPage['seo']} | null>({query: pageSeoBySlugQuery, params: {type, slug}, tags: ['sanity', type, `${type}:${slug}`], stega: false})

@@ -9,6 +9,7 @@ export function ItineraryDownload({href, page, tripTitle}: {href: string; page: 
   const [open, setOpen] = useState(false)
   const [sending, setSending] = useState(false)
   const [message, setMessage] = useState('')
+  const downloadArrow = <span aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" focusable="false"><path d="M10 3v13m0 0-5-5m5 5 5-5" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" /></svg></span>
 
   useEffect(() => {
     const controller = new AbortController()
@@ -49,8 +50,8 @@ export function ItineraryDownload({href, page, tripTitle}: {href: string; page: 
 
   return <div className="safari-pdf-download">
     {access === 'ready'
-      ? <a className="safari-pdf-download-trigger" href={href} download>Download illustrated itinerary <span aria-hidden="true">↓</span></a>
-      : <button className="safari-pdf-download-trigger" type="button" disabled={access === 'checking'} aria-expanded={open} onClick={() => setOpen((value) => !value)}>{access === 'checking' ? 'Checking download access…' : 'Get the illustrated itinerary'} <span aria-hidden="true">↓</span></button>}
+      ? <a className="safari-pdf-download-trigger" href={href} download>Download illustrated itinerary {downloadArrow}</a>
+      : <button className="safari-pdf-download-trigger" type="button" disabled={access === 'checking'} aria-expanded={open} onClick={() => setOpen((value) => !value)}>{access === 'checking' ? 'Checking download access…' : 'Get the illustrated itinerary'} {downloadArrow}</button>}
     {access === 'locked' && open ? <form className="safari-pdf-download-form" onSubmit={requestAccess}>
       <h3>Your safari, in your hands</h3>
       <p>Share your details once to download the photo itinerary and route map. We’ll send your request to the Asanja team; this is not a newsletter signup.</p>

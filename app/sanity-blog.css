@@ -380,33 +380,47 @@ body:has(.asanja-menu-panel:target) {overflow: hidden;}
 .asanja-submenu a:hover,
 .asanja-submenu a:focus-visible {background: #b88d60; color: #fff; text-decoration: none;}
 
-.asanja-site-footer {background: transparent; color: #5d5c5f; font-family: Arial, sans-serif; font-size: 14px;}
+.asanja-site-footer {
+  position: relative;
+  padding-top: 73px;
+  overflow: clip;
+  background: #55664c;
+  color: #5d5c5f;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
 .asanja-footer-landscape {
-  height: 120px;
+  position: absolute;
+  inset: 0 0 auto;
+  height: 370px;
   background-image: url('/legacy/wp-content/uploads/2020/08/asanja-ndembo-13-1_20250805120210.webp');
-  background-position: center 58%;
+  background-position: center 68%;
   background-repeat: no-repeat;
   background-size: cover;
 }
 .asanja-footer-main {
-  width: min(1180px, calc(100% - 4rem));
-  margin: -18px auto 0;
+  position: relative;
+  z-index: 1;
+  width: min(1400px, calc(100% - 4rem));
+  margin: 0 auto;
   padding: 0 40px;
-  border-radius: 32px 32px 0 0;
+  border-radius: 40px 40px 0 0;
   background: #f3f0ec;
 }
-.asanja-footer-top {padding: 40px 0;}
+.asanja-footer-top {padding: 40px 0 32px;}
 .asanja-footer-logo {width: 180px;}
 .asanja-newsletter {gap: 30px;}
 .asanja-newsletter h2 {font-family: Commissioner, Arial, sans-serif; font-size: 16px; letter-spacing: .13em;}
-.asanja-newsletter input {width: clamp(200px, 24vw, 285px); min-height: 39px;}
+.asanja-newsletter input {width: clamp(220px, 24vw, 302px); min-height: 39px;}
 .asanja-newsletter button {min-height: 39px;}
-.asanja-footer-links {padding: 30px 0 40px;}
+.asanja-footer-links {padding: 30px 0 43px;}
 .asanja-footer-links h2 {color: #46464d; font-family: Commissioner, Arial, sans-serif; font-size: 16px; font-weight: 500; letter-spacing: .12em;}
 .asanja-footer-links a {color: #5d5c5f; font-size: 14px; line-height: 1.75;}
 .asanja-footer-bottom {
-  min-height: 115px;
-  padding: 20px max(30px, calc((100vw - 1180px) / 2));
+  position: relative;
+  z-index: 1;
+  min-height: 136px;
+  padding: 20px max(30px, calc((100vw - 1400px) / 2));
   background: #55664c;
   color: #f3f0ec;
 }
@@ -417,7 +431,9 @@ body:has(.asanja-menu-panel:target) {overflow: hidden;}
   .asanja-menu-visual {display: none;}
   .asanja-menu-brand {padding: 35px;}
   .asanja-menu-navigation {padding-inline: 50px;}
-  .asanja-footer-main {width: calc(100% - 3.75rem);}
+  .asanja-site-footer {padding-top: 56px;}
+  .asanja-footer-landscape {height: 320px;}
+  .asanja-footer-main {width: calc(100% - 3.75rem); padding-inline: 32px;}
 }
 
 @media (max-width: 767px) {
@@ -447,7 +463,8 @@ body:has(.asanja-menu-panel:target) {overflow: hidden;}
   .asanja-menu-link-row > a {font-size: 24px;}
   .asanja-submenu {gap: 2px; padding-top: 8px;}
   .asanja-submenu a {font-size: 10px;}
-  .asanja-footer-landscape {height: 150px; background-position: center;}
+  .asanja-site-footer {padding-top: 48px;}
+  .asanja-footer-landscape {height: 280px; background-position: center 65%;}
   .asanja-footer-main {width: calc(100% - 30px); padding: 0 25px; border-radius: 28px 28px 0 0;}
   .asanja-footer-top {align-items: center; padding: 32px 0 27px;}
   .asanja-footer-top > a {align-self: center;}
@@ -466,7 +483,9 @@ body:has(.asanja-menu-panel:target) {overflow: hidden;}
 
 /* Keep the shared footer usable at phone widths without squeezing the form or credits. */
 @media (max-width: 600px) {
-  .asanja-footer-main {width: 100%; padding-inline: 20px; border-radius: 24px 24px 0 0;}
+  .asanja-site-footer {padding-top: 36px;}
+  .asanja-footer-landscape {height: 230px;}
+  .asanja-footer-main {width: calc(100% - 20px); padding-inline: 20px; border-radius: 24px 24px 0 0;}
   .asanja-footer-top {gap: 1.5rem;}
   .asanja-newsletter {min-width: 0; gap: 1rem;}
   .asanja-newsletter form {display:grid;grid-template-columns:minmax(0,1fr);gap:.65rem;min-width:0;}

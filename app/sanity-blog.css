@@ -382,7 +382,7 @@ body:has(.asanja-menu-panel:target) {overflow: hidden;}
 
 .asanja-site-footer {
   position: relative;
-  margin-top: 120px;
+  margin-top: 0;
   padding-top: 120px;
   overflow: clip;
   background: #55664c;
@@ -438,7 +438,7 @@ body:has(.asanja-menu-panel:target) {overflow: hidden;}
   .asanja-menu-visual {display: none;}
   .asanja-menu-brand {padding: 35px;}
   .asanja-menu-navigation {padding-inline: 50px;}
-  .asanja-site-footer {margin-top: 60px; padding-top: 150px;}
+  .asanja-site-footer {margin-top: 0; padding-top: 150px;}
   .asanja-footer-landscape {inset-block-end: 141px; background-position: bottom center;}
   .asanja-footer-main {width: 100%; padding-inline: 40px;}
   .asanja-footer-top {align-items: flex-start; flex-direction: row; gap: 15px;}
@@ -481,7 +481,7 @@ body:has(.asanja-menu-panel:target) {overflow: hidden;}
   .asanja-menu-link-row > a {font-size: 24px;}
   .asanja-submenu {gap: 2px; padding-top: 8px;}
   .asanja-submenu a {font-size: 10px;}
-  .asanja-site-footer {margin-top: 30px; padding-top: 120px;}
+  .asanja-site-footer {margin-top: 0; padding-top: 120px;}
   .asanja-footer-landscape {inset-block-end: 236px; background-position: bottom center;}
   .asanja-footer-main {width: 100%; padding: 0 40px; border-radius: 40px 40px 0 0;}
   .asanja-footer-top {align-items: flex-start; flex-direction: column; gap: 30px; padding: 40px 0 30px;}

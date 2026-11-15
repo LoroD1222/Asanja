@@ -9,23 +9,23 @@ function escapeHtml(value: string) {
 }
 
 const styles = `<style id="sanity-safari-catalog-styles">
-  .sanity-safari-catalog{padding:clamp(52px,7vw,100px) 24px;background:#f7f3ef;color:#303b31}
+  .sanity-safari-catalog{padding:clamp(52px,7vw,100px) 24px;background:#f7f3ef;color:#303b31;font-family:Raleway,Arial,sans-serif}
   .sanity-safari-catalog-inner{max-width:1220px;margin:0 auto}
-  .sanity-safari-catalog-eyebrow{margin:0 0 12px;color:#a47545;font:700 11px/1.4 Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase}
-  .sanity-safari-catalog h2{margin:0 0 14px;color:#303b31;font:400 clamp(36px,5vw,64px)/1.08 Georgia,serif}
-  .sanity-safari-catalog-intro{max-width:650px;margin:0 0 32px;color:#4f5b50;font:400 17px/1.65 Arial,sans-serif}
+  .sanity-safari-catalog-eyebrow{margin:0 0 12px;color:#a47545;font:600 12px/1.4 Commissioner,Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase}
+  .sanity-safari-catalog h2{margin:0 0 14px;color:#303b31;font:400 clamp(36px,5vw,64px)/1.08 'Castoro Titling',Georgia,serif}
+  .sanity-safari-catalog-intro{max-width:700px;margin:0 0 32px;color:#435044;font:400 17px/1.7 Raleway,Arial,sans-serif}
   .sanity-safari-catalog-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
   .sanity-safari-catalog-card{min-width:0;background:#fff;border:1px solid #ded9d1}
   .sanity-safari-catalog-image{display:block;aspect-ratio:1.5;overflow:hidden;background:#e3e0d7}
   .sanity-safari-catalog-image img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s}
   .sanity-safari-catalog-card:hover img{transform:scale(1.04)}
   .sanity-safari-catalog-copy{padding:24px}
-  .sanity-safari-catalog-meta{display:block;margin-bottom:10px;color:#986d42;font:700 11px/1.4 Arial,sans-serif;letter-spacing:.11em;text-transform:uppercase}
-  .sanity-safari-catalog h3{margin:0 0 12px;color:#303b31;font:400 clamp(24px,2.2vw,32px)/1.2 Georgia,serif}
+  .sanity-safari-catalog-meta{display:block;margin-bottom:10px;color:#986d42;font:600 11px/1.4 Commissioner,Arial,sans-serif;letter-spacing:.11em;text-transform:uppercase}
+  .sanity-safari-catalog h3{margin:0 0 12px;color:#303b31;font:400 clamp(24px,2.2vw,32px)/1.2 Commissioner,Arial,sans-serif}
   .sanity-safari-catalog h3 a{color:inherit;text-decoration:none}
   .sanity-safari-catalog h3 a:hover,.sanity-safari-catalog h3 a:focus-visible{text-decoration:underline}
-  .sanity-safari-catalog-copy p{margin:0 0 22px;color:#536154;font:400 14px/1.6 Arial,sans-serif}
-  .sanity-safari-catalog-link{display:inline-block;color:#4c6345!important;border-bottom:1px solid currentColor;padding-bottom:4px;font:700 12px/1.4 Arial,sans-serif;letter-spacing:.09em;text-decoration:none;text-transform:uppercase}
+  .sanity-safari-catalog-copy p{margin:0 0 22px;color:#435044;font:400 15px/1.65 Raleway,Arial,sans-serif}
+  .sanity-safari-catalog-link{display:inline-block;color:#4c6345!important;border-bottom:1px solid currentColor;padding-bottom:4px;font:600 12px/1.4 Commissioner,Arial,sans-serif;letter-spacing:.09em;text-decoration:none;text-transform:uppercase}
   .sanity-safari-catalog-link:hover,.sanity-safari-catalog-link:focus-visible{color:#986d42!important}
   @media(max-width:900px){.sanity-safari-catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
   @media(max-width:600px){.sanity-safari-catalog{padding:50px 16px}.sanity-safari-catalog-grid{grid-template-columns:1fr;gap:16px}.sanity-safari-catalog-copy{padding:20px}.sanity-safari-catalog-intro{font-size:15px}}
@@ -51,7 +51,9 @@ export async function renderLegacySafariIndex(html: string) {
   }).join('')
   if (!cards) return html
 
-  const marker = '<div class="elementor-element elementor-element-4cc9398'
+  // Keep the original rich-text introduction directly beneath the hero, then
+  // place the Sanity-powered journeys before the legacy park and promo sections.
+  const marker = '<div class="elementor-element elementor-element-47b222d'
   const insertAt = html.indexOf(marker)
   if (insertAt < 0) return html
   const section = `<section class="sanity-safari-catalog" aria-labelledby="sanity-safari-catalog-title"><div class="sanity-safari-catalog-inner"><p class="sanity-safari-catalog-eyebrow">Explore Asanja journeys</p><h2 id="sanity-safari-catalog-title">Safari itineraries</h2><p class="sanity-safari-catalog-intro">Discover our private Tanzania journeys. Each itinerary can be shaped around your dates and interests.</p><div class="sanity-safari-catalog-grid">${cards}</div></div></section>`

@@ -535,10 +535,10 @@
   .safari-trip-page .trip-plan-choice button{font-size:.94rem}
 }
 
-/* Match the typography of the migrated Asanja site: Castoro Titling for
-   display headings, Commissioner for smaller headings, and Raleway for copy. */
+/* Castoro Regular shares the site's display-family character while retaining
+   normal lowercase glyphs for the requested Title Case headings. */
 .safari-page{font-family:var(--asanja-body-font),Raleway,Arial,sans-serif}
-.safari-page :is(h1,h2){font-family:'Asanja Castoro','Castoro Titling',Georgia,serif!important;letter-spacing:.01em}
+.safari-page :is(h1,h2){font-family:var(--asanja-heading-font),Castoro,Georgia,serif!important;letter-spacing:.01em}
 .safari-page :is(h3,h4,h5,h6){font-family:var(--asanja-ui-font),Commissioner,Arial,sans-serif!important}
 .safari-page :is(h1,h2,h3,h4,h5,h6){text-transform:capitalize!important}
 .safari-page :is(p,li,dt,dd,span,small,a,button,label,legend,input,select,textarea),

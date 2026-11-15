@@ -390,9 +390,9 @@ body:has(.asanja-menu-panel:target) {overflow: hidden;}
 }
 .asanja-footer-main {
   width: min(1180px, calc(100% - 4rem));
-  margin: -1px auto 0;
+  margin: -18px auto 0;
   padding: 0 40px;
-  border-radius: 40px 40px 0 0;
+  border-radius: 32px 32px 0 0;
   background: #f3f0ec;
 }
 .asanja-footer-top {padding: 40px 0;}

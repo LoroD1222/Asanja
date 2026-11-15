@@ -158,7 +158,7 @@
 .trip-plan-form .safari-form-status{color:#344632}
 
 /* Guest stories follow the supplied desktop and mobile Figma compositions. */
-.safari-trip-page .trip-stories{margin-inline:calc(50% - 50vw);padding:92px 0 66px;background:#fbf7ee;color:#111;font-family:AsanjaPoppins,Arial,sans-serif;scroll-margin-top:75px}
+.safari-trip-page .trip-stories{margin-inline:calc(50% - 50vw);padding:92px 0 66px;background:#f7f2ef;color:#111;font-family:AsanjaPoppins,Arial,sans-serif;scroll-margin-top:75px}
 .trip-stories-inner{width:min(1240px,calc(100% - 3rem));margin:auto}
 .trip-stories-title{display:flex;align-items:center;gap:24px}
 .trip-stories-title>span{height:1px;flex:1;background:#00000030}
@@ -313,8 +313,10 @@
 .safari-trip-page .safari-section-relatedTrips .safari-editorial-card-visual{height:clamp(340px,35vw,440px)}
 
 /* Journal cards stay editorial even when an article has no featured image. */
-.safari-trip-page .safari-blogs .article-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1rem,2vw,1.5rem)}
+.safari-trip-page .safari-blogs .article-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1rem,2vw,1.5rem)}
 .safari-trip-page .safari-blogs .article-grid:has(>.article-card:only-child){grid-template-columns:minmax(0,620px);justify-content:center}
+.safari-trip-page .safari-blogs .article-grid:has(>.article-card:nth-child(2):last-child){grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:950px){.safari-trip-page .safari-blogs .article-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .safari-trip-page .safari-blogs .article-card{display:flex;flex-direction:column;min-width:0;overflow:hidden;background:#f7f2ef;border-radius:4px}
 .safari-trip-page .safari-blogs .article-card-image{aspect-ratio:16/10;border:0}
 .safari-trip-page .safari-blogs .article-card-image img{display:block}
@@ -561,3 +563,21 @@
 .safari-trip-editorial-introduction .safari-prose blockquote{margin:1.8em 0;padding:0;background:none;border:0;color:#52634f;font-style:italic}
 .safari-trip-editorial-introduction .safari-prose > :last-child{margin-bottom:0}
 @media(max-width:650px){.safari-trip-editorial-introduction{width:calc(100% - 2rem);padding:3.5rem 0 1.5rem}.safari-trip-editorial-introduction .safari-prose{font-size:1rem;line-height:1.75}.safari-trip-editorial-introduction .safari-prose :is(h2,h3,h4){margin-top:1.65em}}
+
+/* Match the parent site's straight-edged calls to action. Keep circular carousel
+   controls and informational badges distinct from these buttons. */
+.safari-trip-page .safari-hero-actions a,
+.safari-trip-page .trip-plan-pill,
+.safari-trip-page .trip-plan-choice button,
+.safari-trip-page .safari-itinerary-tools button,
+.safari-trip-page .safari-pdf-download-trigger,
+.safari-trip-page .safari-trip-closing-content>a{border-radius:0}
+.safari-trip-page .safari-hero-actions a span,
+.safari-trip-page .safari-hero-actions a:first-child span,
+.safari-trip-page .trip-plan-pill>span,
+.safari-trip-page .safari-pdf-download-trigger span,
+.safari-trip-page .safari-trip-closing-content>a span{width:auto;height:auto;border-radius:0;background:transparent;color:inherit}
+.safari-trip-page .safari-hero-actions a,
+.safari-trip-page .trip-plan-pill,
+.safari-trip-page .safari-pdf-download-trigger,
+.safari-trip-page .safari-trip-closing-content>a{padding-right:18px}

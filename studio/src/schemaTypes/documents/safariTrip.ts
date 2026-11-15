@@ -24,7 +24,6 @@ export const safariTrip = defineType({
     defineField({name: 'title', title: 'Safari name', type: 'string', group: 'overview', validation: (rule) => rule.required()}),
     defineField({name: 'slug', title: 'URL slug', type: 'slug', group: 'overview', options: {source: 'title', maxLength: 96}, validation: (rule) => rule.required().custom(validateUniqueSlug)}),
     defineField({name: 'summary', title: 'Short description', type: 'text', rows: 3, group: 'overview', validation: (rule) => rule.required().max(280)}),
-    defineField({name: 'editorialIntroduction', title: 'Rich text below hero', type: 'pageRichText', group: 'overview', description: 'Optional editorial content shown immediately below the hero on this trip page. Start with a Heading 2, then use Heading 3 or 4 for subsections. Leave empty to hide the section.'}),
     defineField({name: 'introduction', title: 'Full introduction', type: 'pageRichText', group: 'overview'}),
     defineField({name: 'durationDays', title: 'Days', type: 'number', group: 'overview', validation: (rule) => rule.required().integer().min(1)}),
     defineField({name: 'durationNights', title: 'Nights', type: 'number', group: 'overview', validation: (rule) => rule.integer().min(0)}),
@@ -36,6 +35,7 @@ export const safariTrip = defineType({
     defineField({name: 'isSample', title: 'Sample itinerary', type: 'boolean', group: 'overview', initialValue: false, description: 'Clearly labels this page as an illustrative sample. It is kept out of search engines and its enquiry form cannot be submitted.'}),
     defineField({name: 'heroEyebrow', title: 'Hero eyebrow', type: 'string', group: 'hero'}),
     defineField({name: 'heroDescription', title: 'Hero description', type: 'pageRichText', group: 'hero', description: 'Rich text below the safari name. Supports contextual links to published CMS pages; the short description is used when this is empty.'}),
+    defineField({name: 'editorialIntroduction', title: 'Rich text below hero', type: 'pageRichText', group: 'hero', description: 'Optional editorial section immediately after the hero, before The journey. Start with Heading 2; use Heading 3 or 4 for subsections. This is separate from the hero description and Full introduction. Leave empty to hide it.'}),
     image('heroImage', 'Main hero image', 'hero'),
     defineField({name: 'highlights', title: 'Safari highlights', type: 'array', group: 'experience', of: [defineArrayMember({type: 'object', fields: [
       defineField({name: 'title', title: 'Highlight', type: 'string', validation: (rule) => rule.required()}),

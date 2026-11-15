@@ -538,7 +538,7 @@
 /* Match the typography of the migrated Asanja site: Castoro Titling for
    display headings, Commissioner for smaller headings, and Raleway for copy. */
 .safari-page{font-family:var(--asanja-body-font),Raleway,Arial,sans-serif}
-.safari-page :is(h1,h2){font-family:'Asanja Castoro','Castoro Titling',Georgia,serif!important;letter-spacing:.01em}
+.safari-page :is(h1,h2){font-family:'Asanja Castoro','Castoro Titling',Georgia,serif!important;letter-spacing:.01em;text-transform:uppercase}
 .safari-page :is(h3,h4,h5,h6){font-family:var(--asanja-ui-font),Commissioner,Arial,sans-serif!important}
 .safari-page :is(p,li,dt,dd,span,small,a,button,label,legend,input,select,textarea),
 .safari-page .safari-prose{font-family:var(--asanja-body-font),Raleway,Arial,sans-serif!important}

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import {ArticleList} from '../blog/article-list'
 import type {ArticleCardData} from '../../sanity/types'
-import type {FAQ, PageCard, Review} from '../../sanity/page-types'
+import type {FAQ, PageCard, PageText, Review} from '../../sanity/page-types'
 import {pageHref, safeExternalHref} from '../../sanity/page-routes'
 import {CardGrid} from './content-card'
 import {PageImage} from './page-image'
@@ -16,9 +16,9 @@ export function RelatedCards({title, eyebrow, items, label}: {title: string; eye
   return visible.length ? <section className="safari-section"><SectionHeading eyebrow={eyebrow} title={title} /><CardGrid items={visible} label={label} /></section> : null
 }
 
-export function RelatedBlogs({title, eyebrow, articles, automatic = false, id}: {title: string; eyebrow?: string; articles?: ArticleCardData[]; automatic?: boolean; id?: string}) {
+export function RelatedBlogs({title, eyebrow, body, articles, automatic = false, id}: {title: string; eyebrow?: string; body?: PageText; articles?: ArticleCardData[]; automatic?: boolean; id?: string}) {
   const visible = (articles || []).filter((article) => article?._id && article.slug)
-  return visible.length ? <section id={id} className={'safari-section safari-blogs' + (automatic ? ' is-automatic' : '')}><SectionHeading eyebrow={eyebrow || 'Asanja journal'} title={title} /><ArticleList articles={visible} /></section> : null
+  return visible.length ? <section id={id} className={'safari-section safari-blogs' + (automatic ? ' is-automatic' : '')}><SectionHeading eyebrow={eyebrow || 'Asanja journal'} title={title} />{body?.length ? <PortablePageText value={body} /> : null}<ArticleList articles={visible} /></section> : null
 }
 
 export function FAQSection({items}: {items?: FAQ[]}) {

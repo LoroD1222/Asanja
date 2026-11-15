@@ -2,12 +2,13 @@
 
 import {useState} from 'react'
 import Image from 'next/image'
-import type {Review} from '../../sanity/page-types'
+import type {PageText, Review} from '../../sanity/page-types'
 import type {SanityImage} from '../../sanity/types'
 import {safeExternalHref} from '../../sanity/page-routes'
 import {PageImage} from './page-image'
+import {PortablePageText} from './portable-page-text'
 
-export function TripReviews({items, fallbackImage, preview = false, id}: {items?: Review[]; fallbackImage?: SanityImage; preview?: boolean; id: string}) {
+export function TripReviews({items, fallbackImage, preview = false, id, title = 'Guest stories', eyebrow, body}: {items?: Review[]; fallbackImage?: SanityImage; preview?: boolean; id: string; title?: string; eyebrow?: string; body?: PageText}) {
   const visible = (items || []).filter((item) => item.name && item.quote)
   const [activeIndex, setActiveIndex] = useState(0)
   if (!visible.length) return null
@@ -23,9 +24,11 @@ export function TripReviews({items, fallbackImage, preview = false, id}: {items?
   const ratingCaption = source ? 'Guest experiences at Asanja Moru, shared on TripAdvisor' : 'Stories from Asanja travellers'
   const move = (direction: number) => setActiveIndex((index) => (index + direction + visible.length) % visible.length)
 
-  return <section className="trip-stories" id={id} aria-label="Guest stories">
+  return <section className="trip-stories" id={id} aria-label={title}>
     <div className="trip-stories-inner">
-      <div className="trip-stories-title"><span aria-hidden="true" /><h2>Guest stories</h2><span aria-hidden="true" /></div>
+      {eyebrow && eyebrow.toLocaleLowerCase() !== title.toLocaleLowerCase() ? <p className="trip-stories-eyebrow">{eyebrow}</p> : null}
+      <div className="trip-stories-title"><span aria-hidden="true" /><h2>{title}</h2><span aria-hidden="true" /></div>
+      {body?.length ? <div className="trip-stories-introduction"><PortablePageText value={body} /></div> : null}
       <div className="trip-stories-rating">{showFiveStars ? <Image className="trip-stories-stars" src="/figma-trip-review/green-stars.svg" width={142} height={22} alt="" /> : averageRating !== null ? <span className="trip-stories-average">{averageRating.toFixed(1)} / 5</span> : null}<p>{ratingCaption}</p></div>
       <div className="trip-story-card" key={current._key}>
         <div className="trip-story-photo">

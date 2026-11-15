@@ -1,5 +1,16 @@
 import {defineField, defineType} from 'sanity'
 
+const sectionNames: Record<string, string> = {
+  overview: 'The Journey', highlights: 'Safari highlights', itinerary: 'Day-by-day itinerary',
+  route: 'Route map', destinations: 'Destinations', accommodation: 'Accommodation',
+  wildlife: 'Wildlife and activities', gallery: 'Gallery', pricing: 'Pricing and quote',
+  inclusions: 'What is covered', season: 'Best time to visit', travel: 'Travel information',
+  relatedTrips: 'Related trips', relatedBlogs: 'Journal stories',
+  relatedLandingPages: 'Related guides', faq: 'Questions and answers',
+  reviews: 'Guest reviews', booking: 'Booking enquiry', editorial: 'Custom editorial content',
+}
+const imageSections = new Set(['overview', 'highlights', 'wildlife', 'season', 'editorial'])
+
 export const tripSection = defineType({
   name: 'tripSection', title: 'Safari trip section', type: 'object',
   fields: [
@@ -15,10 +26,10 @@ export const tripSection = defineType({
       {title: 'Guest reviews', value: 'reviews'}, {title: 'Booking inquiry', value: 'booking'},
       {title: 'Custom editorial content', value: 'editorial'},
     ]}}),
-    defineField({name: 'eyebrow', title: 'Small heading override', type: 'string'}),
-    defineField({name: 'heading', title: 'Heading override', type: 'string'}),
-    defineField({name: 'body', title: 'Section introduction', type: 'pageRichText'}),
-    defineField({name: 'image', title: 'Image', type: 'image', options: {hotspot: true}, fields: [defineField({name: 'alt', title: 'Alternative text', type: 'string'})]}),
+    defineField({name: 'eyebrow', title: 'Small label above heading', type: 'string', description: 'Optional. Leave blank to use the page default.', hidden: ({parent, value}) => parent?.kind === 'booking' && !value}),
+    defineField({name: 'heading', title: 'Main heading on page', type: 'string', description: 'Optional. Leave blank to use the default heading for this section.'}),
+    defineField({name: 'body', title: 'Introductory rich text for this section', type: 'pageRichText', description: 'Optional text below this section heading. For The Journey, this replaces The Journey section text in the first tab.'}),
+    defineField({name: 'image', title: 'Section image', type: 'image', description: 'Used for The Journey, Highlights, Wildlife, Best time or Custom editorial sections.', hidden: ({parent, value}) => !value && !imageSections.has(String(parent?.kind || '')), options: {hotspot: true}, fields: [defineField({name: 'alt', title: 'Alternative text', type: 'string'})]}),
   ],
-  preview: {select: {title: 'heading', kind: 'kind', media: 'image'}, prepare: ({title, kind, media}) => ({title: title || kind || 'Trip section', subtitle: kind, media})},
+  preview: {select: {title: 'heading', kind: 'kind', media: 'image'}, prepare: ({title, kind, media}) => ({title: title || sectionNames[kind] || 'Trip section', subtitle: kind ? `Page section · ${sectionNames[kind] || kind}` : 'Choose a section', media})},
 })

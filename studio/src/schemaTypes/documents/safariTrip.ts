@@ -12,19 +12,19 @@ const references = (name: string, title: string, type: string, group = 'related'
 export const safariTrip = defineType({
   name: 'safariTrip', title: 'Safari trip', type: 'document', icon: CalendarIcon,
   groups: [
-    {name: 'overview', title: 'Overview', default: true}, {name: 'hero', title: 'Hero'},
-    {name: 'itinerary', title: 'Itinerary and route'}, {name: 'experience', title: 'Experience'},
+    {name: 'overview', title: 'The Journey & trip facts', default: true}, {name: 'hero', title: 'Hero & below-hero text'},
+    {name: 'itinerary', title: 'Day-by-day & route'}, {name: 'experience', title: 'Highlights & experiences'},
     {name: 'gallery', title: 'Gallery'}, {name: 'pricing', title: 'Pricing'},
-    {name: 'related', title: 'Related content'}, {name: 'sections', title: 'Page order'},
-    {name: 'booking', title: 'Booking'}, {name: 'seo', title: 'SEO and publishing'},
+    {name: 'related', title: 'Related content'}, {name: 'sections', title: 'Page sections & headings'},
+    {name: 'booking', title: 'Enquiry form'}, {name: 'seo', title: 'SEO and publishing'},
   ],
   initialValue: {publicationStatus: 'public', currency: 'USD', automaticBlogsEnabled: true, automaticBlogsLimit: 3,
     sections: ['overview','highlights','itinerary','route','destinations','accommodation','wildlife','gallery','pricing','inclusions','season','travel','relatedTrips','relatedBlogs','relatedLandingPages','faq','reviews','booking'].map((kind) => ({_type: 'tripSection', _key: kind, kind}))},
   fields: [
     defineField({name: 'title', title: 'Safari name', type: 'string', group: 'overview', validation: (rule) => rule.required()}),
     defineField({name: 'slug', title: 'URL slug', type: 'slug', group: 'overview', options: {source: 'title', maxLength: 96}, validation: (rule) => rule.required().custom(validateUniqueSlug)}),
-    defineField({name: 'summary', title: 'Short description', type: 'text', rows: 3, group: 'overview', validation: (rule) => rule.required().max(280)}),
-    defineField({name: 'introduction', title: 'Full introduction', type: 'pageRichText', group: 'overview'}),
+    defineField({name: 'summary', title: 'Short description (hero fallback)', type: 'text', rows: 3, group: 'overview', description: 'Shown below the safari name in the hero when the Hero description field is empty. Also used for listings and SEO fallbacks.', validation: (rule) => rule.required().max(280)}),
+    defineField({name: 'introduction', title: 'The Journey section text', type: 'pageRichText', group: 'overview', description: 'The main introduction beside the journey image. If the Overview row in Page sections & headings has its own Section introduction, that text takes priority.'}),
     defineField({name: 'durationDays', title: 'Days', type: 'number', group: 'overview', validation: (rule) => rule.required().integer().min(1)}),
     defineField({name: 'durationNights', title: 'Nights', type: 'number', group: 'overview', validation: (rule) => rule.integer().min(0)}),
     defineField({name: 'category', title: 'Safari category', type: 'string', group: 'overview', options: {list: ['Wildlife','Family','Honeymoon','Luxury','Adventure','Migration','Photography','Safari and beach']}}),
@@ -34,8 +34,8 @@ export const safariTrip = defineType({
     defineField({name: 'featured', title: 'Featured safari', type: 'boolean', group: 'overview', initialValue: false}),
     defineField({name: 'isSample', title: 'Sample itinerary', type: 'boolean', group: 'overview', initialValue: false, description: 'Clearly labels this page as an illustrative sample. It is kept out of search engines and its enquiry form cannot be submitted.'}),
     defineField({name: 'heroEyebrow', title: 'Hero eyebrow', type: 'string', group: 'hero'}),
-    defineField({name: 'heroDescription', title: 'Hero description', type: 'pageRichText', group: 'hero', description: 'Rich text below the safari name. Supports contextual links to published CMS pages; the short description is used when this is empty.'}),
-    defineField({name: 'editorialIntroduction', title: 'Rich text below hero', type: 'pageRichText', group: 'hero', description: 'Optional editorial section immediately after the hero, before The journey. Start with Heading 2; use Heading 3 or 4 for subsections. This is separate from the hero description and Full introduction. Leave empty to hide it.'}),
+    defineField({name: 'heroDescription', title: 'Hero description', type: 'pageRichText', group: 'hero', description: 'Appears on the hero, below the safari name. The short description in The Journey & trip facts is used if this is empty.'}),
+    defineField({name: 'editorialIntroduction', title: 'Rich text directly below hero', type: 'pageRichText', group: 'hero', description: 'Optional SEO/editorial content immediately after the hero, before The Journey. Start with Heading 2; use Heading 3 or 4 for subsections. Leave empty to hide it.'}),
     image('heroImage', 'Main hero image', 'hero'),
     defineField({name: 'highlights', title: 'Safari highlights', type: 'array', group: 'experience', of: [defineArrayMember({type: 'object', fields: [
       defineField({name: 'title', title: 'Highlight', type: 'string', validation: (rule) => rule.required()}),
@@ -75,12 +75,12 @@ export const safariTrip = defineType({
     defineField({name: 'automaticBlogsLimit', title: 'Maximum automatic blogs', type: 'number', group: 'related', initialValue: 3, hidden: ({document}) => document?.automaticBlogsEnabled === false, validation: (rule) => rule.integer().min(1).max(9)}),
     defineField({name: 'faqs', title: 'Frequently asked questions', type: 'array', group: 'experience', of: [defineArrayMember({type: 'faqItem'})]}),
     defineField({name: 'reviews', title: 'Verified guest reviews', type: 'array', group: 'experience', of: [defineArrayMember({type: 'guestReview'})]}),
-    defineField({name: 'sections', title: 'Page section order', type: 'array', group: 'sections', description: 'Drag sections to change their order. Add custom editorial sections as needed.', of: [defineArrayMember({type: 'tripSection'})], validation: (rule) => rule.custom((sections) => {
+    defineField({name: 'sections', title: 'Page order, headings and section images', type: 'array', group: 'sections', description: 'Each row matches a section on the safari page. Open a row to edit its small heading, main heading, introductory rich text or image; drag rows to reorder. The main content (days, highlights, reviews and so on) is edited in the matching tab above.', of: [defineArrayMember({type: 'tripSection'})], validation: (rule) => rule.custom((sections) => {
       const kinds = ((sections || []) as Array<{kind?: string}>).map((section) => section?.kind).filter((kind): kind is string => Boolean(kind) && kind !== 'editorial')
       return new Set(kinds).size === kinds.length || 'Each structured section can appear once. Add multiple custom editorial sections if needed.'
     })}),
-    defineField({name: 'bookingHeading', title: 'Booking heading', type: 'string', group: 'booking'}),
-    defineField({name: 'bookingText', title: 'Booking introduction', type: 'pageRichText', group: 'booking'}),
+    defineField({name: 'bookingHeading', title: 'Enquiry section heading', type: 'string', group: 'booking', description: 'The heading beside the enquiry form. A heading entered in the Booking enquiry row under Page sections & headings takes priority.'}),
+    defineField({name: 'bookingText', title: 'Enquiry section introduction', type: 'pageRichText', group: 'booking', description: 'Text beside the enquiry form. An introduction entered in the Booking enquiry row under Page sections & headings takes priority.'}),
     defineField({name: 'publicationStatus', title: 'Visibility after publishing', type: 'string', group: 'seo', options: {layout: 'radio', list: [{title: 'Public', value: 'public'}, {title: 'Hidden', value: 'hidden'}]}, initialValue: 'public', validation: (rule) => rule.required()}),
     defineField({name: 'seo', title: 'SEO and social sharing', type: 'seo', group: 'seo'}),
   ],

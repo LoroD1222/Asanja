@@ -979,10 +979,92 @@
     }
   }
 
+  function initializeStickyHeaders() {
+    const desktop = window.matchMedia('(min-width: 1025px)');
+
+    for (const header of document.querySelectorAll('.sticky-header[data-settings*="sticky"]')) {
+      if (!(header instanceof HTMLElement) || header.dataset.asanjaStickyReady) continue;
+      const settings = elementSettings(header);
+      if (settings.sticky !== 'top' || !settings.sticky_on?.includes('desktop')) continue;
+
+      header.dataset.asanjaStickyReady = 'true';
+      const spacer = document.createElement('div');
+      spacer.className = 'elementor-sticky__spacer asanja-sticky-spacer';
+      spacer.setAttribute('aria-hidden', 'true');
+      spacer.hidden = true;
+      header.after(spacer);
+
+      let threshold = 0;
+      let frame = 0;
+
+      function deactivate() {
+        spacer.hidden = true;
+        spacer.style.removeProperty('height');
+        header.classList.remove('elementor-sticky--active', 'elementor-sticky--effects');
+        header.style.removeProperty('position');
+        header.style.removeProperty('top');
+        header.style.removeProperty('left');
+        header.style.removeProperty('width');
+        header.style.removeProperty('margin-top');
+      }
+
+      function measure() {
+        const wasActive = header.classList.contains('elementor-sticky--active');
+        if (wasActive) deactivate();
+        threshold = header.getBoundingClientRect().top + window.scrollY
+          + Number(settings.sticky_effects_offset || 0);
+      }
+
+      function render() {
+        frame = 0;
+        if (!desktop.matches) {
+          deactivate();
+          return;
+        }
+
+        const active = window.scrollY > threshold;
+        if (!active) {
+          deactivate();
+          return;
+        }
+
+        if (!header.classList.contains('elementor-sticky--active')) {
+          const rect = header.getBoundingClientRect();
+          spacer.hidden = false;
+          spacer.style.height = `${rect.height}px`;
+          header.style.position = 'fixed';
+          header.style.top = `${Number(settings.sticky_offset || 0)}px`;
+          header.style.left = `${rect.left}px`;
+          header.style.width = `${rect.width}px`;
+          header.style.marginTop = '0';
+          header.classList.add('elementor-sticky--active', 'elementor-sticky--effects');
+        }
+      }
+
+      function requestRender() {
+        if (frame) return;
+        frame = window.requestAnimationFrame(render);
+      }
+
+      measure();
+      render();
+      window.addEventListener('scroll', requestRender, { passive: true });
+      window.addEventListener('resize', () => {
+        measure();
+        requestRender();
+      }, { passive: true });
+      desktop.addEventListener?.('change', () => {
+        measure();
+        requestRender();
+      });
+    }
+  }
+
   function initializeHomepageRuntime() {
     prepareLazyBackgrounds();
     initializeEntranceAnimations();
     initializeMotionEffects();
+    initializeStickyHeaders();
     initializePopupNavigation();
     injectEwasiCamp();
     injectSanityCamps();

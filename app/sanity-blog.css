@@ -387,14 +387,16 @@ body:has(.asanja-menu-panel:target) {overflow: hidden;}
   overflow: clip;
   background: #55664c;
   color: #5d5c5f;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
+  font-family: var(--asanja-body-font), Raleway, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
 }
 .asanja-footer-landscape {
   position: absolute;
   inset: 0 0 136px;
   background-image: url('/legacy/wp-content/uploads/2020/08/asanja-ndembo-13-1_20250805120210.webp');
-  background-position: center 68%;
+  background-position: left -1485px;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -407,30 +409,143 @@ body:has(.asanja-menu-panel:target) {overflow: hidden;}
   border-radius: 40px 40px 0 0;
   background: #f3f0ec;
 }
-.asanja-footer-top {gap: 15px; padding: 40px 0 30px;}
+.asanja-footer-top {align-items: stretch; gap: 15px; padding: 40px 0 30px;}
 .asanja-footer-top > a {flex: 0 0 50%;}
 .asanja-footer-logo {width: 180px;}
-.asanja-newsletter {flex: 0 0 48%; gap: 30px;}
-.asanja-newsletter h2 {font-family: Commissioner, Arial, sans-serif; font-size: 16px; letter-spacing: .13em;}
-.asanja-newsletter input {width: clamp(220px, 24vw, 302px); min-height: 39px;}
-.asanja-newsletter button {min-height: 39px;}
+.asanja-newsletter {flex: 0 0 48%; flex-wrap: nowrap; gap: 30px;}
+.asanja-newsletter h2 {font-family: var(--asanja-ui-font), Commissioner, Arial, sans-serif; font-size: 19px; font-weight: 300; line-height: 24px; letter-spacing: 2.2px; text-align: end;}
+.asanja-newsletter h2 {flex: 0 0 29%;}
+.asanja-newsletter form {flex: 0 0 64%; gap: 10px; min-width: 0;}
+.asanja-newsletter input {flex: 1 1 75%; width: auto; min-width: 0; min-height: 40px; padding: 8px 16px; font-family: var(--asanja-body-font), Raleway, Arial, sans-serif; font-size: 15px; line-height: 22px;}
+.asanja-newsletter button {flex: 0 0 23%; min-width: 0; min-height: 40px; padding: 3px 15px 0; font-family: "Asanja Castoro", Arial, sans-serif; font-size: 15px; letter-spacing: .3px;}
 .asanja-footer-links {
   grid-template-columns: 13% 11% 21% 20%;
   justify-content: space-between;
-  padding: 30px 0 43px;
+  padding: 30px 0 40px;
 }
-.asanja-footer-links h2 {color: #46464d; font-family: Commissioner, Arial, sans-serif; font-size: 16px; font-weight: 500; letter-spacing: .12em;}
-.asanja-footer-links a {color: #5d5c5f; font-size: 14px; line-height: 1.6;}
+.asanja-footer-links h2 {margin-bottom: 15px; color: #515159; font-family: var(--asanja-ui-font), Commissioner, Arial, sans-serif; font-size: 19px; font-weight: 300; line-height: 24px; letter-spacing: 2.2px;}
+.asanja-footer-links a {color: #7a7a7a; font-size: 15px; line-height: 1.5;}
 .asanja-footer-socials {gap: 30px;}
-.asanja-footer-socials a {width: auto; height: 24px;}
+.asanja-footer-socials a {width: 25px; height: 25px;}
+.asanja-footer-socials svg {width: 25px; height: 25px;}
 .asanja-footer-bottom {
   position: relative;
   z-index: 1;
   min-height: 136px;
-  padding: 20px max(30px, calc((100vw - 1400px) / 2));
+  gap: clamp(24px, 1.9vw, 36px);
+  padding: 20px max(0px, calc((100vw - 1400px) / 2));
   background: #55664c;
   color: #f3f0ec;
 }
+.asanja-footer-bottom img {width: 100px; height: 77px;}
+.asanja-whatsapp-widget, .asanja-whatsapp-widget * {box-sizing: border-box;}
+.asanja-whatsapp {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  z-index: 999999999;
+  display: block;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #7a7a7a;
+  font-family: Arial, Helvetica, sans-serif;
+  cursor: pointer;
+}
+.asanja-whatsapp__label {
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 7px);
+  display: block;
+  width: 156px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  background: #f5f7f9;
+  color: #43474e;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -.03em;
+  white-space: nowrap;
+  transform: translateY(-50%);
+  transition: opacity 400ms, visibility 400ms, transform 400ms;
+}
+.asanja-whatsapp__icon {
+  position: relative;
+  display: grid;
+  width: 56px;
+  height: 56px;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #2db742;
+  color: #fff;
+  box-shadow: 0 6px 8px 2px rgb(0 0 0 / 14%);
+}
+.asanja-whatsapp__icon svg {width: 30px; height: 30px; transition: opacity 400ms, transform 400ms;}
+.asanja-whatsapp__icon::after {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  content: "×";
+  font: 300 28px/1 Arial, Helvetica, sans-serif;
+  opacity: 0;
+  transform: scale(0) rotate(-360deg);
+  transition: opacity 400ms, transform 400ms;
+}
+.asanja-whatsapp.is-active .asanja-whatsapp__label {opacity: 0; visibility: hidden; transform: translateY(15px);}
+.asanja-whatsapp.is-active .asanja-whatsapp__icon svg {opacity: 0; transform: scale(0) rotate(360deg);}
+.asanja-whatsapp.is-active .asanja-whatsapp__icon::after {opacity: 1; transform: scale(1) rotate(0);}
+.asanja-whatsapp:focus-visible {outline: 2px solid #2db742; outline-offset: 3px;}
+.asanja-whatsapp-panel {
+  position: fixed;
+  right: 30px;
+  bottom: 102px;
+  z-index: 999999998;
+  width: 351px;
+  max-width: calc(100% - 50px);
+  overflow: hidden;
+  border-radius: 5px 5px 8px 8px;
+  box-shadow: 0 10px 10px 4px rgb(0 0 0 / 4%);
+  font-family: Arial, Helvetica, sans-serif;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(50px);
+  transition: opacity 400ms, visibility 400ms, transform 400ms, box-shadow 200ms;
+}
+.asanja-whatsapp-panel.is-active {opacity: 1; visibility: visible; transform: translateY(0);}
+.asanja-whatsapp-panel:hover, .asanja-whatsapp-panel:focus-within {box-shadow: 0 10px 10px 4px rgb(32 32 37 / 23%);}
+.asanja-whatsapp-panel__heading {position: relative; min-height: 103px; padding: 15px 43px 17px 74px; background: #2db742; color: #d9ebc6;}
+.asanja-whatsapp-panel__mark {position: absolute; top: 20px; left: 23px; width: 33px; height: 33px; color: #fff;}
+.asanja-whatsapp-panel__mark svg, .asanja-whatsapp-panel__avatar svg {display: block; width: 100%; height: 100%;}
+.asanja-whatsapp-panel__title {min-height: 24px; padding-top: 2px; color: #fff; font-size: 18px; line-height: 24px;}
+.asanja-whatsapp-panel__intro {min-height: 20px; padding-top: 4px; color: #d9ebc6; font-size: 12px; line-height: 20px;}
+.asanja-whatsapp-panel__content {padding: 13px 20px 21px 19px; background: #fff; text-align: left;}
+.asanja-whatsapp-panel__notice {padding: 0 3px; color: #a5abb7; font-size: 11px; font-weight: 500;}
+.asanja-whatsapp-panel__item {margin-top: 14px;}
+.asanja-whatsapp-panel__link {
+  position: relative;
+  display: table;
+  width: 100%;
+  min-height: 73px;
+  padding: 13px 40px 12px 74px;
+  border-left: 2px solid #2db742;
+  border-radius: 2px 4px;
+  background: #f5f7f9;
+  color: #7a7a7a;
+  text-decoration: none;
+  transition: background-color 200ms, box-shadow 200ms;
+}
+.asanja-whatsapp-panel__link:hover, .asanja-whatsapp-panel__link:focus-visible {background: #fff; box-shadow: 0 7px 15px 1px rgb(55 62 70 / 7%);}
+.asanja-whatsapp-panel__avatar {position: absolute; top: 12px; left: 12px; width: 48px; height: 48px; color: #55cd6c;}
+.asanja-whatsapp-panel__text {display: table-cell; height: 48px; min-height: 48px; vertical-align: middle;}
+.asanja-whatsapp-panel__name {color: #363c47; font-size: 14px; line-height: 1.188;}
+.asanja-whatsapp-panel__duty {display: block; padding-top: 2px; color: #989b9f; font-size: 11px; line-height: 1.125;}
+.asanja-whatsapp-panel__link::after {position: absolute; top: 26px; right: 14px; width: 20px; height: 20px; border-radius: 50%; background: #2db742; color: #fff; content: "›"; font: 700 19px/18px Arial, Helvetica, sans-serif; text-align: center;}
 
 @media (max-width: 1024px) {
   .asanja-header-inner {padding-inline: 30px;}
@@ -499,6 +614,11 @@ body:has(.asanja-menu-panel:target) {overflow: hidden;}
   .asanja-footer-bottom {flex-direction: column; align-items: center; gap: 30px; min-height: 236px; padding: 30px 15px; text-align: center;}
   .asanja-footer-bottom img {width: 100px; height: 77px;}
   .asanja-footer-bottom p {line-height: 1.6;}
+  .asanja-whatsapp-panel {right: 16px; bottom: 82px; width: calc(100vw - 32px); max-width: 351px; max-height: calc(100dvh - 106px); overflow-y: auto;}
+  .asanja-whatsapp {right: 16px; bottom: 16px; width: 52px; height: 52px;}
+  .asanja-whatsapp__icon {width: 52px; height: 52px;}
+  .asanja-whatsapp__label {right: calc(100% + 8px); width: auto; padding: 7px 10px; font-size: 11px;}
+  .asanja-whatsapp.is-label-hidden .asanja-whatsapp__label {opacity: 0; visibility: hidden; pointer-events: none; transform: translate(8px, -50%);}
 }
 
 @media (prefers-reduced-motion: reduce) {

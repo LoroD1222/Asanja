@@ -11,7 +11,7 @@ const seoFields = `seo{..., openGraphImage${imageFields}}`
 
 export const safariTripBySlugQuery = defineQuery(`
   *[_type == "safariTrip" && slug.current == $slug && (${publicPage} || $includeDrafts == true)][0]{
-    ${cardFields}, isSample, heroEyebrow, heroDescription[]{${textFields}}, introduction[]{${textFields}},
+    ${cardFields}, isSample, heroEyebrow, heroDescription[]{${textFields}}, editorialIntroduction[]{${textFields}}, introduction[]{${textFields}},
     travelStyle, startLocation, endLocation, featured, highlights[]{_key, title, description},
     itinerary[]{_key, dayNumber, title, description[]{${textFields}},
       "destination": destination->{${cardFields}}, "accommodation": accommodation->{${cardFields}},

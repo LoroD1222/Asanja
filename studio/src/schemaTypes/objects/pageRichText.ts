@@ -16,7 +16,7 @@ export const pageRichText = defineType({
   }),
   of: [defineArrayMember({
     type: 'block',
-    styles: [{title: 'Paragraph', value: 'normal'}, {title: 'Heading 2', value: 'h2'}, {title: 'Heading 3', value: 'h3'}, {title: 'Quote', value: 'blockquote'}],
+    styles: [{title: 'Paragraph', value: 'normal'}, {title: 'Heading 2', value: 'h2'}, {title: 'Heading 3', value: 'h3'}, {title: 'Heading 4', value: 'h4'}, {title: 'Quote', value: 'blockquote'}],
     lists: [{title: 'Bullet list', value: 'bullet'}, {title: 'Numbered list', value: 'number'}],
     marks: {
       decorators: [{title: 'Strong', value: 'strong'}, {title: 'Emphasis', value: 'em'}],

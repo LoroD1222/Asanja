@@ -42,6 +42,11 @@ export function buildPreviewTrip(introduction?: PageText, relatedBlogs: ArticleC
     durationDays: 13, durationNights: 12, travelStyle: 'Private',
     startLocation: 'Arusha', endLocation: 'Dar es Salaam', heroImage: hero,
     heroDescription: previewParagraph('From Tarangire’s ancient baobabs to the Serengeti plains and wild Ruaha, discover Tanzania on a private journey shaped around you.', 'hero-description'),
+    editorialIntroduction: [
+      {_type: 'block', _key: 'editorial-heading', style: 'h2', markDefs: [], children: [{_type: 'span', _key: 'editorial-heading-text', text: 'A Safari Shaped Around You', marks: []}]},
+      ...previewParagraph('Travel from Tanzania’s baobab country to the open Serengeti plains and the quieter wilderness of Ruaha. Each landscape has its own rhythm, and your private journey leaves room to experience it fully.', 'editorial-paragraph-one'),
+      ...previewParagraph('With a dedicated guide and thoughtfully chosen stays, the route can be tailored to the wildlife, places and moments that matter most to you.', 'editorial-paragraph-two'),
+    ],
     introduction: introduction || previewParagraph('Explore the changing landscapes of northern and southern Tanzania, with private guiding, remarkable wildlife areas and time to unwind in the bush.', 'intro-copy'),
     highlights: [
       {_key: 'drives', title: 'Explore at your own pace', description: 'Private game drives in a dedicated 4×4 leave room to pause for the wildlife, landscapes and moments that catch your eye.'},

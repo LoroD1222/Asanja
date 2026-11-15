@@ -546,3 +546,18 @@
 .safari-page .safari-prose{color:#3f4c41}
 .safari-page .safari-section-heading h2{line-height:1.15}
 .safari-trip-page .safari-page-opening .safari-section{padding-top:clamp(3rem,5vw,5rem)}
+
+.safari-trip-editorial-introduction{width:min(860px,calc(100% - 3rem));margin:0 auto;padding:clamp(3.75rem,6vw,6rem) 0 clamp(1.5rem,3vw,3rem)}
+.safari-trip-editorial-introduction .safari-prose{max-width:none;color:#3f4c41;font-size:clamp(1rem,1.25vw,1.12rem);line-height:1.85}
+.safari-trip-editorial-introduction .safari-prose :is(h2,h3,h4){margin:2.1em 0 .6em;color:#2e3c31;font-weight:400;line-height:1.2}
+.safari-trip-editorial-introduction .safari-prose > :first-child{margin-top:0}
+.safari-trip-editorial-introduction .safari-prose h2{font-size:clamp(2.35rem,4vw,3.75rem)}
+.safari-trip-editorial-introduction .safari-prose h3{font-size:clamp(1.45rem,2.3vw,2rem)}
+.safari-trip-editorial-introduction .safari-prose h4{font-size:clamp(1.16rem,1.7vw,1.45rem)}
+.safari-trip-editorial-introduction .safari-prose p{margin:0 0 1.25em}
+.safari-trip-editorial-introduction .safari-prose :is(ul,ol){margin:0 0 1.5em;padding-left:1.5em}
+.safari-trip-editorial-introduction .safari-prose li{padding-left:.25em;margin:.3em 0}
+.safari-trip-editorial-introduction .safari-prose li::marker{color:#68785e}
+.safari-trip-editorial-introduction .safari-prose blockquote{margin:1.8em 0;padding:0;background:none;border:0;color:#52634f;font-style:italic}
+.safari-trip-editorial-introduction .safari-prose > :last-child{margin-bottom:0}
+@media(max-width:650px){.safari-trip-editorial-introduction{width:calc(100% - 2rem);padding:3.5rem 0 1.5rem}.safari-trip-editorial-introduction .safari-prose{font-size:1rem;line-height:1.75}.safari-trip-editorial-introduction .safari-prose :is(h2,h3,h4){margin-top:1.65em}}

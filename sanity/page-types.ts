@@ -37,7 +37,7 @@ export type TripSection = {_key: string; kind: 'overview' | 'highlights' | 'itin
 
 export type SafariTrip = PageCard & {
   isSample?: boolean;
-  heroEyebrow?: string; heroDescription?: PageText; introduction?: PageText; durationDays: number; durationNights?: number
+  heroEyebrow?: string; heroDescription?: PageText; editorialIntroduction?: PageText; introduction?: PageText; durationDays: number; durationNights?: number
   travelStyle?: string; startLocation?: string; endLocation?: string; featured?: boolean; highlights?: Array<{_key: string; title: string; description?: string}>
   itinerary?: ItineraryDay[]; routeStops?: RouteStop[]; relatedDestinations?: PageCard[]; relatedCamps?: PageCard[]
   wildlife?: PageText; activities?: string[]; bestTime?: PageText; bestMonths?: string[]; gallery?: PageMedia[]

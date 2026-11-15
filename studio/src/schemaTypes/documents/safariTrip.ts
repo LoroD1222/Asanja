@@ -24,6 +24,7 @@ export const safariTrip = defineType({
     defineField({name: 'title', title: 'Safari name', type: 'string', group: 'overview', validation: (rule) => rule.required()}),
     defineField({name: 'slug', title: 'URL slug', type: 'slug', group: 'overview', options: {source: 'title', maxLength: 96}, validation: (rule) => rule.required().custom(validateUniqueSlug)}),
     defineField({name: 'summary', title: 'Short description', type: 'text', rows: 3, group: 'overview', validation: (rule) => rule.required().max(280)}),
+    defineField({name: 'editorialIntroduction', title: 'Rich text below hero', type: 'pageRichText', group: 'overview', description: 'Optional editorial content shown immediately below the hero on this trip page. Start with a Heading 2, then use Heading 3 or 4 for subsections. Leave empty to hide the section.'}),
     defineField({name: 'introduction', title: 'Full introduction', type: 'pageRichText', group: 'overview'}),
     defineField({name: 'durationDays', title: 'Days', type: 'number', group: 'overview', validation: (rule) => rule.required().integer().min(1)}),
     defineField({name: 'durationNights', title: 'Nights', type: 'number', group: 'overview', validation: (rule) => rule.integer().min(0)}),

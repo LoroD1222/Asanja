@@ -4,7 +4,7 @@
 .heroShade{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(29,36,28,.08),rgba(27,32,25,.34))}
 .heroContent{display:flex;flex-direction:column;align-items:center;width:min(1040px,calc(100% - 3rem));padding:5rem 0 2rem;text-align:center;animation:campHeroContent .9s .2s cubic-bezier(.2,.65,.3,1) both}
 .hero h1{max-width:920px;margin:0;color:#fff;font:600 clamp(3rem,5.4vw,5.2rem)/1.03 AsanjaPoppins,Arial,sans-serif;letter-spacing:.015em;text-transform:uppercase;text-wrap:balance}
-.scrollCue{display:block;width:40px;height:57px;margin-top:clamp(2.5rem,7vh,6rem);transition:transform .25s,filter .25s}
+.scrollCue{display:block;width:40px;height:57px;margin-top:clamp(5rem,12vh,9rem);transition:transform .25s,filter .25s}
 .scrollCue img{display:block;width:40px;height:57px}
 .scrollCue:hover,.scrollCue:focus-visible{filter:drop-shadow(0 4px 8px rgba(0,0,0,.22));transform:translateY(5px)}
 .eyebrow{margin:0 0 1rem;color:var(--camp-sand);font:500 .76rem/1.4 AsanjaPoppins,Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase}
@@ -53,5 +53,5 @@
   .narrow,.storyImage,.storyCopy,.amenitiesIntro,.amenities>:last-child,.locationMedia,.locationCard,.bookingContent{animation:campReveal linear both;animation-timeline:view();animation-range:entry 8% cover 30%}
 }
 @media(max-width:900px){.hero{min-height:72svh}.story,.amenities,.location{grid-template-columns:1fr}.storyImage{min-height:55vw}.amenities{margin:0 1.5rem}.location{min-height:0}.locationMedia{width:100%;min-height:0}.locationCard{position:relative;margin-top:-3.5rem;margin-right:1.5rem;margin-left:1.5rem;min-height:0}}
-@media(max-width:560px){.hero{min-height:70svh}.hero h1{font-size:clamp(2.55rem,11vw,3.65rem)}.heroContent{padding-top:3rem}.scrollCue{margin-top:2rem}.introduction,.gallery,.amenities,.booking{padding-top:4.5rem;padding-bottom:4.5rem}.story{gap:2rem;padding:1rem 1rem 4.5rem}.storyImage{min-height:76vw}.storyCopy{padding:1.5rem .5rem 0}.story h2,.amenities h2,.location h2{font-size:clamp(2.25rem,10vw,3.25rem)}.amenities{margin:0 1rem}.location{gap:0;padding:2rem 0 4rem}.locationMedia{aspect-ratio:4/3}.locationCard{margin:-1.5rem 1rem 0;padding:2rem 1.35rem}.related{width:calc(100% - 2rem)}}
+@media(max-width:560px){.hero{min-height:70svh}.hero h1{font-size:clamp(2.55rem,11vw,3.65rem)}.heroContent{padding-top:3rem}.scrollCue{margin-top:4rem}.introduction,.gallery,.amenities,.booking{padding-top:4.5rem;padding-bottom:4.5rem}.story{gap:2rem;padding:1rem 1rem 4.5rem}.storyImage{min-height:76vw}.storyCopy{padding:1.5rem .5rem 0}.story h2,.amenities h2,.location h2{font-size:clamp(2.25rem,10vw,3.25rem)}.amenities{margin:0 1rem}.location{gap:0;padding:2rem 0 4rem}.locationMedia{aspect-ratio:4/3}.locationCard{margin:-1.5rem 1rem 0;padding:2rem 1.35rem}.related{width:calc(100% - 2rem)}}
 @media(prefers-reduced-motion:reduce){.heroImage,.heroContent,.narrow,.storyImage,.storyCopy,.amenitiesIntro,.amenities>:last-child,.locationMedia,.locationCard,.bookingContent{animation:none}.scrollCue{transition:none}}

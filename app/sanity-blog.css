@@ -298,8 +298,12 @@ body:has(.asanja-menu-panel:target) {overflow: hidden;}
   text-transform: uppercase;
   transition: color .2s ease, background .2s ease;
 }
-.asanja-menu-booking:hover,
-.asanja-menu-booking:focus-visible {background: #55664c; color: #fff;}
+.asanja-menu-panel .asanja-menu-booking:hover,
+.asanja-menu-panel .asanja-menu-booking:focus-visible {
+  background: #55664c;
+  color: #fff;
+  text-decoration: none;
+}
 
 .asanja-menu-navigation {
   position: relative;

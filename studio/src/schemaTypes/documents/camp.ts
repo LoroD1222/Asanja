@@ -22,7 +22,20 @@ export const camp = defineType({
     defineField({name: 'heroEyebrow', title: 'Hero heading', type: 'string', group: 'overview', description: 'Large text over the hero image. Leave empty to use “Welcome to [camp name]”.'}),
     defineField({name: 'tagline', title: 'Introduction eyebrow', type: 'string', group: 'overview', description: 'Short uppercase line above the camp name in the introduction.'}),
     defineField({name: 'summary', title: 'Short description', type: 'text', rows: 3, group: 'overview'}),
-    defineField({name: 'description', title: 'Full description', type: 'pageRichText', group: 'overview'}),
+    defineField({
+      name: 'description',
+      title: 'Introduction',
+      type: 'pageRichText',
+      group: 'overview',
+      description: 'Short introductory paragraphs shown below the camp name. Put titled sections in Camp story instead.',
+      validation: (rule) => rule.custom((value) => {
+        const hasHeading = Array.isArray(value) && value.some((block) => {
+          if (!block || typeof block !== 'object' || !('_type' in block) || !('style' in block)) return false
+          return block._type === 'block' && /^h[1-6]$/.test(String(block.style || ''))
+        })
+        return hasHeading ? 'Move headings into the Camp story fields so the introduction does not duplicate page sections.' : true
+      }).warning(),
+    }),
     defineField({name: 'location', title: 'Location', type: 'string', group: 'location'}),
     defineField({name: 'destination', title: 'Destination', type: 'reference', group: 'location', to: [{type: 'destination'}], validation: (rule) => rule.custom((value, context) => validatePublishedReferences(value ? [value] : [], context))}),
     defineField({name: 'category', title: 'Accommodation category', type: 'string', group: 'overview', options: {list: ['Camping','Midrange','Luxury','Ultra-luxury','Mobile camp']}}),

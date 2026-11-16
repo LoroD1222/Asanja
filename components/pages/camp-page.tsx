@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import {BlogShell} from '../blog/blog-shell'
 import type {CampPage} from '../../sanity/camp-types'
-import type {PageMedia} from '../../sanity/page-types'
+import type {PageMedia, PageText} from '../../sanity/page-types'
 import {RelatedBlogs, RelatedCards} from './page-sections'
 import {PageImage} from './page-image'
 import {PortablePageText} from './portable-page-text'
@@ -11,6 +11,21 @@ import styles from './camp-page.module.css'
 
 function photoAt(items: PageMedia[] | undefined, index: number) {
   return (items || []).filter((item) => item.kind === 'photo' && item.image?.asset?.url)[index]?.image
+}
+
+function introductionText(value: PageText | undefined) {
+  if (!value?.length) return value
+
+  const isHeading = (block: PageText[number]) =>
+    block._type === 'block' && /^h[1-6]$/.test(typeof block.style === 'string' ? block.style : '')
+
+  if (!value.some(isHeading)) return value
+
+  const start = value.findIndex((block) => block._type === 'block' && (!block.style || block.style === 'normal'))
+  if (start === -1) return undefined
+
+  const nextHeading = value.slice(start + 1).findIndex(isHeading)
+  return nextHeading === -1 ? value.slice(start) : value.slice(start, start + nextHeading + 1)
 }
 
 export function CampPageView({page}: {page: CampPage}) {
@@ -22,6 +37,7 @@ export function CampPageView({page}: {page: CampPage}) {
   const facilities = (page.facilities || []).filter(Boolean)
   const locationName = page.location || page.destination?.title
   const heroTitle = page.heroEyebrow || `Welcome to ${page.title}`
+  const introduction = introductionText(page.description)
 
   return <BlogShell className="camp-site">
     <article className={styles.page}>
@@ -40,7 +56,7 @@ export function CampPageView({page}: {page: CampPage}) {
         <div className={styles.narrow}>
           <p className={styles.eyebrow}>{page.tagline || locationName || 'An Asanja wilderness sanctuary'}</p>
           <h2>{page.title}</h2>
-          {page.description?.length ? <PortablePageText value={page.description} /> : page.summary ? <p className={styles.lead}>{page.summary}</p> : null}
+          {introduction?.length ? <PortablePageText value={introduction} /> : page.summary ? <p className={styles.lead}>{page.summary}</p> : null}
         </div>
       </section>
 

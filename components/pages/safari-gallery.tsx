@@ -47,7 +47,7 @@ export function SafariGallery({items}: {items?: PageMedia[]}) {
       <div className={`safari-gallery safari-gallery--${visibleMedia.length}`} role="group" aria-label={`Safari photo and video gallery, ${media.length} items`}>
         {visibleMedia.map((item, index) => <button className="safari-gallery-item" key={item._key} type="button" onClick={() => setActive(index)} aria-label={`Open ${item.kind === 'video' ? 'video' : 'photo'} ${index + 1} of ${media.length}${item.caption ? `: ${item.caption}` : ''}`}>
           <span className="safari-gallery-media">
-            {item.image?.asset?.url ? <Image src={item.image.asset.url} alt={item.image.alt || item.caption || ''} fill sizes={index === 0 ? '(max-width: 800px) calc(100vw - 2rem), 50vw' : '(max-width: 650px) 45vw, (max-width: 800px) 50vw, 25vw'} quality={78} /> : <span className="safari-video-placeholder">Safari film</span>}
+            {item.image?.asset?.url ? <Image src={item.image.asset.url} alt={item.image.alt || item.caption || ''} fill sizes={index === 0 ? '(max-width: 800px) calc(100vw - 2rem), 50vw' : '(max-width: 650px) 45vw, (max-width: 800px) 50vw, 25vw'} quality={75} /> : <span className="safari-video-placeholder">Safari film</span>}
             {item.kind === 'video' ? <span className="safari-play" aria-hidden="true">▶</span> : null}
           </span>
           <span className="safari-gallery-caption">

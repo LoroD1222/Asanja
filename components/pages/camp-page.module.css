@@ -1,8 +1,8 @@
 .page{--camp-ink:#515159;--camp-green:#55664c;--camp-sand:#bd9061;--camp-cream:#f3f0ec;color:var(--camp-ink);overflow:hidden;background:#fff}
 .hero{position:relative;display:grid;place-items:center;min-height:calc(100svh - 80px);isolation:isolate;background:#394437;color:#fff}
-.heroImage{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover}
+.heroImage{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;animation:campHeroImage 1.45s cubic-bezier(.2,.65,.3,1) both}
 .heroShade{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(29,36,28,.08),rgba(27,32,25,.34))}
-.heroContent{display:flex;flex-direction:column;align-items:center;width:min(1040px,calc(100% - 3rem));padding:5rem 0 2rem;text-align:center}
+.heroContent{display:flex;flex-direction:column;align-items:center;width:min(1040px,calc(100% - 3rem));padding:5rem 0 2rem;text-align:center;animation:campHeroContent .9s .2s cubic-bezier(.2,.65,.3,1) both}
 .hero h1{max-width:920px;margin:0;color:#fff;font:600 clamp(3rem,5.4vw,5.2rem)/1.03 AsanjaPoppins,Arial,sans-serif;letter-spacing:.015em;text-transform:uppercase;text-wrap:balance}
 .scrollCue{display:grid;place-items:center;width:44px;height:44px;margin-top:clamp(3rem,8vh,7rem);border:1px solid #fff;border-radius:50%;color:#fff!important;font:300 1.7rem/1 Arial,sans-serif;transition:transform .2s,background .2s}
 .scrollCue:hover,.scrollCue:focus-visible{background:#fff;color:var(--camp-green)!important;transform:translateY(4px)}
@@ -51,6 +51,12 @@
 .booking :global(.safari-prose p){margin:0 0 1rem}
 .bookingContent>a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;margin-top:2rem;padding:.7rem 1.35rem;border:1px solid var(--camp-sand);background:var(--camp-sand);color:#fff!important;font:600 .7rem AsanjaPoppins,Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;transition:background .2s,color .2s}
 .bookingContent>a:hover,.bookingContent>a:focus-visible{background:transparent;color:var(--camp-sand)!important}
+@keyframes campHeroImage{from{opacity:.5;transform:scale(1.045)}to{opacity:1;transform:scale(1)}}
+@keyframes campHeroContent{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes campReveal{from{opacity:0;transform:translateY(38px)}to{opacity:1;transform:translateY(0)}}
+@supports (animation-timeline:view()){
+  .narrow,.storyImage,.storyCopy,.sectionHeading,.amenitiesIntro,.facilityList,.locationMedia,.locationCard,.bookingContent{animation:campReveal linear both;animation-timeline:view();animation-range:entry 8% cover 30%}
+}
 @media(max-width:900px){.hero{min-height:72svh}.story,.amenities,.location{grid-template-columns:1fr}.storyImage{min-height:55vw}.facilityList{grid-template-columns:1fr}.facilityList li:nth-child(odd){border-right:0}.location{min-height:0}.locationMedia{height:56vw;min-height:360px}.locationCard{margin-top:-5rem;margin-right:1.5rem;margin-left:1.5rem;position:relative}}
 @media(max-width:560px){.hero{min-height:70svh}.hero h1{font-size:clamp(2.55rem,11vw,3.65rem)}.heroContent{padding-top:3rem}.scrollCue{margin-top:2.5rem}.introduction,.gallery,.amenities,.booking{padding-top:4.5rem;padding-bottom:4.5rem}.story{gap:2rem;padding:1rem 1rem 4.5rem}.storyImage{min-height:76vw}.storyCopy{padding:1.5rem .5rem 0}.story h2,.amenities h2,.location h2{font-size:clamp(2.25rem,10vw,3.25rem)}.facilityList li{grid-template-columns:34px minmax(0,1fr);min-height:76px;padding:.85rem 0}.location{gap:0;padding:0 0 4rem}.locationMedia{height:76vw;min-height:310px}.locationCard{margin:-2.5rem 1rem 0;padding:2rem 1.35rem}.related{width:calc(100% - 2rem)}}
-@media(prefers-reduced-motion:reduce){.scrollCue{transition:none}}
+@media(prefers-reduced-motion:reduce){.heroImage,.heroContent,.narrow,.storyImage,.storyCopy,.sectionHeading,.amenitiesIntro,.facilityList,.locationMedia,.locationCard,.bookingContent{animation:none}.scrollCue{transition:none}}

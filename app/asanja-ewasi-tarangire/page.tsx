@@ -1,16 +1,17 @@
 import type {Metadata} from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
-import {BlogShell} from '../../components/blog/blog-shell'
-import {PageImage} from '../../components/pages/page-image'
-import {getPublishedCampBookingImage} from '../../sanity/camp-data'
-import styles from './ewasi.module.css'
+import {CampPageView} from '../../components/pages/camp-page'
+import {getCampPage, getCampSeo} from '../../sanity/camp-data'
+import type {CampPage} from '../../sanity/camp-types'
+import type {PageMedia, PageText} from '../../sanity/page-types'
+import {pageMetadata} from '../../sanity/page-seo'
+import type {SanityImage} from '../../sanity/types'
 
+const slug = 'asanja-ewasi-tarangire'
 const title = 'Asanja Ewasi Tarangire'
 const description = 'Opening in 2027 in Tarangire National Park, Asanja Ewasi is an intimate 10-room luxury safari camp with private plunge pools and personalised Asanja hospitality.'
 const canonical = 'https://asanjaafrica.com/asanja-ewasi-tarangire/'
 
-export const metadata: Metadata = {
+const fallbackMetadata: Metadata = {
   title,
   description,
   alternates: {canonical},
@@ -25,37 +26,152 @@ export const metadata: Metadata = {
   twitter: {card: 'summary_large_image', title, description, images: ['/camps/asanja-ewasi-tarangire/ewasi-safari-002-social.webp']},
 }
 
-const facts = [
-  {index: '01', value: '2027', label: 'Opening in Tarangire National Park'},
-  {index: '02', value: '10', label: 'Rooms, including one family unit'},
-  {index: '03', value: '30 min', label: 'From Kuro Airstrip'},
-  {index: '04', value: 'Private', label: 'Plunge pool for every room'},
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getCampSeo(slug).catch(() => null)
+  return page ? pageMetadata(page, `/${slug}/`) : fallbackMetadata
+}
+
+function image(url: string, alt: string, width = 2560, height = 1441): SanityImage {
+  return {_type: 'image', alt, asset: {url, metadata: {dimensions: {width, height}}}}
+}
+
+function paragraphs(values: string[]): PageText {
+  return values.map((value, index) => ({
+    _key: `paragraph-${index + 1}`,
+    _type: 'block',
+    style: 'normal',
+    markDefs: [],
+    children: [{_key: `span-${index + 1}`, _type: 'span', marks: [], text: value}],
+  }))
+}
+
+const heroImage = image(
+  '/camps/asanja-ewasi-tarangire/ewasi-safari-002.webp',
+  'Asanja Ewasi luxury suite and private plunge pool in Tarangire National Park',
+)
+
+const gallery: PageMedia[] = [
+  {
+    _key: 'ewasi-gallery-1',
+    kind: 'photo',
+    caption: 'A private suite shaped by the Tarangire landscape',
+    image: image('/camps/asanja-ewasi-tarangire/ewasi-safari-001.webp', 'Spacious Asanja Ewasi suite with a four-poster bed and open wilderness views'),
+  },
+  {
+    _key: 'ewasi-gallery-2',
+    kind: 'photo',
+    caption: 'Contemporary comfort, rooted in Tanzania',
+    image: heroImage,
+  },
+  {
+    _key: 'ewasi-gallery-3',
+    kind: 'photo',
+    caption: 'Quiet interiors overlooking the wild',
+    image: image('/camps/asanja-ewasi-tarangire/ewasi-safari-001-social.webp', 'Interior of an Asanja Ewasi guest suite in Tarangire', 1920, 1081),
+  },
+  {
+    _key: 'ewasi-gallery-4',
+    kind: 'photo',
+    caption: 'A private plunge pool beneath the Tarangire sky',
+    image: image('/camps/asanja-ewasi-tarangire/ewasi-safari-002-social.webp', 'Private suite and plunge pool at Asanja Ewasi Tarangire', 1920, 1081),
+  },
 ]
 
-const experiences = [
-  {label: 'Guided nature walks', href: '/experiences/'},
-  {label: 'Sundowner experiences', href: '/experiences/'},
-  {label: 'Night game drives', href: '/experiences/'},
-  {label: 'Immersive bush activities', href: '/experiences/'},
-]
-
-const gallery = [
-  {src: '/camps/asanja-ewasi-tarangire/ewasi-safari-001.webp', alt: 'Spacious Asanja Ewasi suite with a four-poster bed and open wilderness views', width: 2560, height: 1441},
-  {src: '/camps/asanja-ewasi-tarangire/ewasi-safari-002.webp', alt: 'Asanja Ewasi suite exterior with a private plunge pool', width: 2560, height: 1441},
-  {src: '/camps/asanja-ewasi-tarangire/ewasi-safari-001-social.webp', alt: 'Interior of an Asanja Ewasi guest suite in Tarangire', width: 1920, height: 1081},
-  {src: '/camps/asanja-ewasi-tarangire/ewasi-safari-002-social.webp', alt: 'Private suite and plunge pool at Asanja Ewasi Tarangire', width: 1920, height: 1081},
-]
+const ewasiFallback: CampPage = {
+  _id: 'asanja-ewasi-tarangire-fallback',
+  _type: 'camp',
+  slug,
+  publicationStatus: 'public',
+  title,
+  summary: description,
+  category: 'Luxury safari camp',
+  location: 'Tarangire National Park',
+  heroImage,
+  heroEyebrow: 'Welcome to Asanja Ewasi Tarangire',
+  tagline: 'Tarangire National Park · Opening 2027',
+  description: paragraphs([
+    'Opening in 2027 within Tarangire National Park, Asanja Ewasi will feature 10 rooms, including one family unit.',
+    '“Ewasi,” a place in Tarangire and a Maa word meaning “plain ground,” reflects the camp’s deep connection to the land and its rich heritage.',
+    'Guests will discover the unique wonders of Tarangire, from vast plains dotted with ancient baobabs and immense elephant herds to seasonal migrations and the rare sight of tree-climbing pythons, all while enjoying Asanja’s signature personalised hospitality.',
+  ]),
+  storyHeading: 'A story written by the land',
+  storyImage: gallery[0].image,
+  storyPoints: [
+    {
+      _key: 'heritage',
+      title: 'Cultural heritage',
+      description: 'The name “Ewasi,” derived from a Maa word meaning “plain ground,” reflects the camp’s strong connection to the land, its people and the rich cultural heritage of northern Tanzania.',
+    },
+    {
+      _key: 'design',
+      title: 'Intimate luxury',
+      description: 'Ten private suites, including one family unit, pair private plunge pools and sweeping wilderness views with contemporary comfort and authentic Tanzanian influences.',
+    },
+    {
+      _key: 'encounters',
+      title: 'Beyond the drive',
+      description: 'Guided nature walks, sundowners, night game drives and immersive bush activities reveal Tarangire from a more intimate perspective.',
+    },
+  ],
+  amenitiesIntroduction: paragraphs([
+    'Thoughtfully positioned for privacy and sweeping views, every suite is supported by personalised Asanja hospitality in the heart of Tarangire National Park.',
+  ]),
+  facilities: [
+    '10 private suites',
+    'One family unit',
+    'Private plunge pools',
+    '30 minutes from Kuro Airstrip',
+    'Guided nature walks',
+    'Sundowner experiences',
+    'Night game drives',
+    'Immersive bush activities',
+  ],
+  gallery,
+  locationImage: gallery[3].image,
+  locationDescription: paragraphs([
+    'Nestled within Tarangire National Park, just a 30-minute drive from Kuro Airstrip, Asanja Ewasi looks across vast plains dotted with ancient baobabs and traversed by immense elephant herds.',
+    'From camp, guests may witness giraffes, zebras, predators and seasonal wildlife migrations moving through the surrounding wilderness.',
+  ]),
+  bookingImage: image(
+    '/legacy/wp-content/uploads/2026/09/Photo-29-11-2025-03-58-52-1-scaled.webp',
+    'Elephant herd crossing the misty plains beneath acacia trees',
+    2560,
+    1707,
+  ),
+  bookingHeading: 'Plan your Tarangire stay',
+  bookingText: paragraphs([
+    'Let our safari specialists create a personalised journey around your stay at Asanja Ewasi, from the first game drive to your final Tarangire sunset.',
+  ]),
+  bookingButtonLabel: 'Plan your stay',
+}
 
 export default async function AsanjaEwasiTarangirePage() {
-  const bookingImage = await getPublishedCampBookingImage('asanja-ewasi-tarangire').catch(() => null)
+  const publishedPage = await getCampPage(slug).catch(() => null)
+  const page: CampPage = publishedPage ? {
+    ...ewasiFallback,
+    ...publishedPage,
+    heroImage: publishedPage.heroImage?.asset?.url ? publishedPage.heroImage : ewasiFallback.heroImage,
+    description: publishedPage.description?.length ? publishedPage.description : ewasiFallback.description,
+    storyImage: publishedPage.storyImage?.asset?.url ? publishedPage.storyImage : ewasiFallback.storyImage,
+    storyPoints: publishedPage.storyPoints?.length ? publishedPage.storyPoints : ewasiFallback.storyPoints,
+    amenitiesIntroduction: publishedPage.amenitiesIntroduction?.length ? publishedPage.amenitiesIntroduction : ewasiFallback.amenitiesIntroduction,
+    facilities: publishedPage.facilities?.length ? publishedPage.facilities : ewasiFallback.facilities,
+    gallery: publishedPage.gallery?.length ? publishedPage.gallery : ewasiFallback.gallery,
+    locationImage: publishedPage.locationImage?.asset?.url ? publishedPage.locationImage : ewasiFallback.locationImage,
+    locationDescription: publishedPage.locationDescription?.length ? publishedPage.locationDescription : ewasiFallback.locationDescription,
+    bookingImage: publishedPage.bookingImage?.asset?.url ? publishedPage.bookingImage : ewasiFallback.bookingImage,
+    bookingText: publishedPage.bookingText?.length ? publishedPage.bookingText : ewasiFallback.bookingText,
+  } : ewasiFallback
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'LodgingBusiness',
-    name: title,
-    description,
+    name: page.title,
+    description: page.summary || description,
     url: canonical,
-    image: gallery.map((image) => new URL(image.src, canonical).toString()),
-    address: { '@type': 'PostalAddress', addressLocality: 'Tarangire National Park', addressCountry: 'TZ' },
+    image: (page.gallery || gallery)
+      .filter((item) => item.kind === 'photo' && item.image?.asset?.url)
+      .map((item) => new URL(item.image!.asset!.url!, canonical).toString()),
+    address: {'@type': 'PostalAddress', addressLocality: page.location || 'Tarangire National Park', addressCountry: 'TZ'},
     numberOfRooms: 10,
     amenityFeature: [
       {'@type': 'LocationFeatureSpecification', name: 'Private plunge pool', value: true},
@@ -63,125 +179,8 @@ export default async function AsanjaEwasiTarangirePage() {
     ],
   }
 
-  return <BlogShell>
-    <article className={styles.page}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(structuredData).replace(/</g, '\\u003c')}} />
-
-      <header className={styles.hero}>
-        <Image src="/camps/asanja-ewasi-tarangire/ewasi-safari-002.webp" alt="Asanja Ewasi luxury suite and plunge pool in Tarangire National Park" fill priority sizes="100vw" />
-        <div className={styles.heroShade} />
-        <div className={styles.heroContent}>
-          <p>Opening 2027 · Tarangire National Park</p>
-          <h1>Asanja Ewasi<br />Tarangire</h1>
-          <span>A new expression of open hearts and wild spirits</span>
-          <Link href="/plan-my-stay/">Plan your stay</Link>
-        </div>
-      </header>
-
-      <section className={styles.introduction}>
-        <div>
-          <p className={styles.eyebrow}>The spirit of the plains</p>
-          <h2>Rooted in Tarangire</h2>
-        </div>
-        <div className={styles.lead}>
-          <p>Opening in 2027 within Tarangire National Park, Asanja Ewasi will feature 10 rooms, including one family unit.</p>
-          <p>“Ewasi,” a place in Tarangire and a Maa word meaning “plain ground,” reflects the camp’s deep connection to the land and its rich heritage.</p>
-          <p>Guests will discover the unique wonders of Tarangire, from vast plains dotted with ancient baobabs and immense elephant herds to seasonal migrations and the rare sight of tree-climbing pythons, all while enjoying Asanja’s signature personalised hospitality.</p>
-        </div>
-      </section>
-
-      <section className={styles.facts} aria-labelledby="ewasi-facts-title">
-        <div className={styles.factsIntroduction}>
-          <p className={styles.eyebrow}>Ewasi at a glance</p>
-          <h2 id="ewasi-facts-title">An intimate retreat shaped by the plains</h2>
-          <p>Thoughtfully scaled, quietly luxurious and deeply connected to Tarangire.</p>
-        </div>
-        <div className={styles.factsGrid}>
-          {facts.map((fact) => <div className={styles.fact} key={fact.label}>
-            <span className={styles.factIndex}>{fact.index}</span>
-            <strong>{fact.value}</strong>
-            <span className={styles.factLabel}>{fact.label}</span>
-          </div>)}
-        </div>
-      </section>
-
-      <section className={styles.split}>
-        <div className={styles.imageFrame}>
-          <Image src="/camps/asanja-ewasi-tarangire/ewasi-safari-001.webp" alt="Asanja Ewasi guest suite with a four-poster bed and wilderness views" fill sizes="(max-width: 800px) 100vw, 55vw" />
-        </div>
-        <div className={styles.copy}>
-          <p className={styles.eyebrow}>Asanja Ewasi Tarangire</p>
-          <h2>Intimate luxury in the heart of the wild</h2>
-          <p>Nestled within the heart of Tarangire National Park, just a 30-minute drive from Kuro Airstrip, Asanja Ewasi will open in 2027, offering an exclusive safari experience that combines luxury, authenticity, and a deep connection to the surrounding wilderness.</p>
-        </div>
-      </section>
-
-      <section className={styles.heritage}>
-        <p className={styles.eyebrow}>Cultural heritage</p>
-        <h2>A name born from the land</h2>
-        <p>The name “Ewasi,” derived from a Maa word meaning “plain ground,” reflects the camp’s strong connection to the land, its people, and the rich cultural heritage of northern Tanzania.</p>
-      </section>
-
-      <section className={`${styles.split} ${styles.splitReverse}`}>
-        <div className={styles.copy}>
-          <p className={styles.eyebrow}>Storytelling through design</p>
-          <h2>Privacy, exclusivity and a sense of place</h2>
-          <p>Designed for privacy and exclusivity, the camp will feature 10 luxurious rooms, including one family unit, each with its own private plunge pool. Thoughtfully positioned to maximise privacy and sweeping views of the surrounding wilderness, the camp offers personalised service and an intimate atmosphere in the heart of Tarangire National Park.</p>
-          <p>Every room has been carefully designed to blend contemporary luxury with authentic Tanzanian influences, creating elegant spaces that celebrate the landscapes, cultures, and stories of the land and its people.</p>
-        </div>
-        <div className={styles.imageFrame}>
-          <Image src="/camps/asanja-ewasi-tarangire/ewasi-safari-002-social.webp" alt="Asanja Ewasi private suite and plunge pool surrounded by Tarangire wilderness" fill sizes="(max-width: 800px) 100vw, 55vw" />
-        </div>
-      </section>
-
-      <section className={styles.encounters}>
-        <div>
-          <p className={styles.eyebrow}>Beyond the drive</p>
-          <h2>Unforgettable encounters</h2>
-          <p>Guests can experience the unique wonders of Tarangire, from immense elephant herds and iconic baobab-dotted plains to seasonal wildlife migrations and the rare sighting of tree-climbing pythons. From camp, it is not uncommon to witness giraffes, zebras, predators, and other wildlife passing through the surrounding wilderness.</p>
-          <p>Asanja Ewasi offers more than traditional game drives. Guests can further connect with the wilderness through experiences that reveal Tarangire from a new perspective.</p>
-        </div>
-        <ul>{experiences.map((experience) => <li key={experience.label}>
-          <Link href={experience.href} aria-label={`${experience.label} — explore Asanja experiences`}>
-            <span aria-hidden="true">↗</span>
-            {experience.label}
-          </Link>
-        </li>)}</ul>
-      </section>
-
-      <section className={styles.gallery} aria-labelledby="ewasi-gallery-title">
-        <div className={styles.galleryHeading}><p className={styles.eyebrow}>A first look</p><h2 id="ewasi-gallery-title">Asanja Ewasi</h2></div>
-        <div className={styles.galleryGrid}>
-          {gallery.map((image, index) => <figure key={image.src} className={index < 2 ? styles.galleryWide : undefined}>
-            <Image src={image.src} alt={image.alt} width={image.width} height={image.height} sizes={index < 2 ? '(max-width: 800px) 100vw, 50vw' : '(max-width: 800px) 100vw, 25vw'} />
-          </figure>)}
-        </div>
-      </section>
-
-      <section className={styles.cta} aria-label="Plan your Asanja safari">
-        {bookingImage?.asset?.url
-          ? <PageImage image={bookingImage} className={styles.ctaImage} sizes="100vw" />
-          : <Image
-              className={styles.ctaImage}
-              src="/legacy/wp-content/uploads/2026/09/Photo-29-11-2025-03-58-52-1-scaled.webp"
-              alt="Elephant herd crossing the misty plains beneath acacia trees"
-              fill
-              sizes="100vw"
-            />}
-        <div className={styles.ctaWash} />
-        <div className={styles.ctaContent}>
-          <Image
-            className={styles.ctaLogo}
-            src="/legacy/wp-content/uploads/2024/04/asanja_logo_with_slogan_dark-03.svg"
-            alt="Asanja — Open Hearts and Wild Spirits"
-            width={430}
-            height={108}
-          />
-          <Link href="/plan-my-stay/">
-            <span>Plan your stay</span>
-          </Link>
-        </div>
-      </section>
-    </article>
-  </BlogShell>
+  return <>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(structuredData).replace(/</g, '\\u003c')}} />
+    <CampPageView page={page} />
+  </>
 }

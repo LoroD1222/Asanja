@@ -69,12 +69,6 @@ const gallery: PageMedia[] = [
     caption: 'Quiet interiors overlooking the wild',
     image: image('/camps/asanja-ewasi-tarangire/ewasi-safari-001-social.webp', 'Interior of an Asanja Ewasi guest suite in Tarangire', 1920, 1081),
   },
-  {
-    _key: 'ewasi-gallery-4',
-    kind: 'photo',
-    caption: 'A private plunge pool beneath the Tarangire sky',
-    image: image('/camps/asanja-ewasi-tarangire/ewasi-safari-002-social.webp', 'Private suite and plunge pool at Asanja Ewasi Tarangire', 1920, 1081),
-  },
 ]
 
 const ewasiFallback: CampPage = {
@@ -127,7 +121,7 @@ const ewasiFallback: CampPage = {
     'Immersive bush activities',
   ],
   gallery,
-  locationImage: gallery[3].image,
+  locationImage: heroImage,
   locationDescription: paragraphs([
     'Nestled within Tarangire National Park, just a 30-minute drive from Kuro Airstrip, Asanja Ewasi looks across vast plains dotted with ancient baobabs and traversed by immense elephant herds.',
     'From camp, guests may witness giraffes, zebras, predators and seasonal wildlife migrations moving through the surrounding wilderness.',

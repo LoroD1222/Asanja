@@ -1,8 +1,9 @@
 'use client'
 
 import Image from 'next/image'
-import {useCallback, useRef, useState} from 'react'
+import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import type {PageMedia} from '../../sanity/page-types'
+import type {SanityImage} from '../../sanity/types'
 import styles from './camp-carousels.module.css'
 
 function nearestSlide(track: HTMLDivElement) {
@@ -92,6 +93,51 @@ export function CampGalleryCarousel({items}: {items?: PageMedia[]}) {
       </figure>)}
     </div>
     <CarouselControls active={carousel.active} count={photos.length} label="gallery" move={carousel.move} goTo={carousel.goTo} />
+  </div>
+}
+
+export function CampLocationCarousel({images, label}: {images: SanityImage[]; label: string}) {
+  const slides = useMemo(() => images.filter((image, index, all) => {
+    const url = image.asset?.url
+    return Boolean(url) && all.findIndex((candidate) => candidate.asset?.url === url) === index
+  }), [images])
+  const [active, setActive] = useState(0)
+
+  useEffect(() => {
+    if (slides.length < 2 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const interval = window.setInterval(() => setActive((current) => (current + 1) % slides.length), 5200)
+    return () => window.clearInterval(interval)
+  }, [slides.length])
+
+  if (!slides.length) return null
+
+  const move = (direction: -1 | 1) => setActive((current) => (current + direction + slides.length) % slides.length)
+
+  return <div className={styles.locationCarousel} role="region" aria-roledescription="carousel" aria-label={`${label} location gallery`}>
+    {slides.map((image, index) => <Image
+      key={image.asset!.url}
+      src={image.asset!.url!}
+      alt={image.alt || `${label} location view ${index + 1}`}
+      fill
+      sizes="(max-width: 900px) 100vw, 50vw"
+      quality={75}
+      className={index === active ? styles.locationImageActive : styles.locationImage}
+      aria-hidden={index !== active}
+    />)}
+    {slides.length > 1 ? <>
+      <button type="button" className={`${styles.locationArrow} ${styles.locationArrowPrevious}`} onClick={() => move(-1)} aria-label="Previous location image">‹</button>
+      <button type="button" className={`${styles.locationArrow} ${styles.locationArrowNext}`} onClick={() => move(1)} aria-label="Next location image">›</button>
+      <div className={styles.locationDots} role="group" aria-label="Location images">
+        {slides.map((image, index) => <button
+          key={image.asset!.url}
+          type="button"
+          className={index === active ? styles.locationDotActive : styles.locationDot}
+          onClick={() => setActive(index)}
+          aria-label={`Show location image ${index + 1} of ${slides.length}`}
+          aria-current={index === active ? 'true' : undefined}
+        />)}
+      </div>
+    </> : null}
   </div>
 }
 

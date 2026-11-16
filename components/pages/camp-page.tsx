@@ -6,7 +6,7 @@ import type {PageMedia} from '../../sanity/page-types'
 import {RelatedBlogs, RelatedCards} from './page-sections'
 import {PageImage} from './page-image'
 import {PortablePageText} from './portable-page-text'
-import {CampAmenitiesCarousel, CampGalleryCarousel} from './camp-carousels'
+import {CampAmenitiesCarousel, CampGalleryCarousel, CampLocationCarousel} from './camp-carousels'
 import styles from './camp-page.module.css'
 
 function photoAt(items: PageMedia[] | undefined, index: number) {
@@ -16,6 +16,8 @@ function photoAt(items: PageMedia[] | undefined, index: number) {
 export function CampPageView({page}: {page: CampPage}) {
   const storyImage = page.storyImage || photoAt(page.gallery, 0) || page.heroImage
   const locationImage = page.locationImage || photoAt(page.gallery, 1) || page.heroImage
+  const locationImages = [locationImage, ...(page.gallery || []).map((item) => item.image)]
+    .filter((image): image is NonNullable<typeof locationImage> => Boolean(image?.asset?.url))
   const storyPoints = (page.storyPoints || []).filter((point) => point.title)
   const facilities = (page.facilities || []).filter(Boolean)
   const locationName = page.location || page.destination?.title
@@ -68,7 +70,7 @@ export function CampPageView({page}: {page: CampPage}) {
       </section> : null}
 
       {(locationImage?.asset?.url || locationName || page.locationDescription?.length) ? <section className={styles.location} aria-labelledby="camp-location-heading">
-        <div className={styles.locationMedia}>{locationImage?.asset?.url ? <PageImage image={locationImage} sizes="(max-width: 900px) 100vw, 46vw" /> : null}</div>
+        <div className={styles.locationMedia}>{locationImages.length ? <CampLocationCarousel images={locationImages} label={page.title} /> : null}</div>
         <div className={styles.locationCard}>
           <p className={styles.eyebrow}>Location</p>
           <h2 id="camp-location-heading">{locationName || 'In the heart of the wild'}</h2>

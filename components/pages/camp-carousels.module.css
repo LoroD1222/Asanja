@@ -19,6 +19,15 @@
 .amenitySlide svg{width:46px;height:46px;overflow:visible;fill:none;stroke:#515159;stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round}
 .amenitySlide strong{max-width:170px;color:#515159;font:400 .9rem/1.4 AsanjaPoppins,Arial,sans-serif;text-transform:uppercase}
 .amenitiesShell .controls{margin-top:0}
+.locationCarousel{position:relative;width:100%;height:100%;min-height:100%;overflow:hidden;background:#3d4a3c}
+.locationImage,.locationImageActive{object-fit:cover;opacity:0;transform:scale(1.025);transition:opacity .85s ease,transform 5.8s ease}
+.locationImageActive{opacity:1;transform:scale(1)}
+.locationArrow{position:absolute;top:50%;z-index:2;display:grid;place-items:center;width:42px;height:42px;padding:0;border:1px solid rgba(255,255,255,.72);border-radius:50%;background:rgba(39,49,38,.28);color:#fff;font:300 1.8rem/1 Arial,sans-serif;cursor:pointer;transform:translateY(-50%);transition:background .2s,transform .2s}
+.locationArrow:hover,.locationArrow:focus-visible{background:rgba(39,49,38,.68);transform:translateY(-50%) scale(1.05)}
+.locationArrowPrevious{left:1rem}.locationArrowNext{right:1rem}
+.locationDots{position:absolute;right:0;bottom:1rem;left:0;z-index:2;display:flex;gap:7px;align-items:center;justify-content:center}
+.locationDot,.locationDotActive{width:7px;height:7px;padding:0;border:1px solid #fff;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.22)}
+.locationDotActive{background:#fff;transform:scale(1.15)}
 @media(max-width:900px){.gallerySlide{flex-basis:68vw}.amenitySlide{flex-basis:50%}}
-@media(max-width:560px){.galleryTrack{gap:8px}.gallerySlide{flex-basis:88vw;aspect-ratio:4/3}.gallerySlide figcaption{font-size:.85rem}.amenitySlide{flex-basis:100%;min-height:150px}.controls{grid-template-columns:40px minmax(0,1fr) 40px}.dot,.activeDot{width:7px;height:7px}}
-@media(prefers-reduced-motion:reduce){.galleryTrack,.amenitiesTrack{scroll-behavior:auto}.gallerySlide img,.dot,.activeDot,.arrow{transition:none}}
+@media(max-width:560px){.galleryTrack{gap:8px}.gallerySlide{flex-basis:88vw;aspect-ratio:4/3}.gallerySlide figcaption{font-size:.85rem}.amenitySlide{flex-basis:100%;min-height:150px}.controls{grid-template-columns:40px minmax(0,1fr) 40px}.dot,.activeDot{width:7px;height:7px}.locationArrow{width:38px;height:38px}.locationArrowPrevious{left:.75rem}.locationArrowNext{right:.75rem}}
+@media(prefers-reduced-motion:reduce){.galleryTrack,.amenitiesTrack{scroll-behavior:auto}.gallerySlide img,.dot,.activeDot,.arrow,.locationImage,.locationImageActive,.locationArrow{transition:none}}

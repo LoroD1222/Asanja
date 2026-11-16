@@ -1,11 +1,12 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import {BlogShell} from '../blog/blog-shell'
 import type {CampPage} from '../../sanity/camp-types'
 import type {PageMedia} from '../../sanity/page-types'
 import {RelatedBlogs, RelatedCards} from './page-sections'
 import {PageImage} from './page-image'
 import {PortablePageText} from './portable-page-text'
-import {SafariGallery} from './safari-gallery'
+import {CampAmenitiesCarousel, CampGalleryCarousel} from './camp-carousels'
 import styles from './camp-page.module.css'
 
 function photoAt(items: PageMedia[] | undefined, index: number) {
@@ -28,7 +29,7 @@ export function CampPageView({page}: {page: CampPage}) {
         <div className={styles.heroContent}>
           <h1>{heroTitle}</h1>
           <a href="#camp-introduction" className={styles.scrollCue} aria-label={`Discover ${page.title}`}>
-            <span aria-hidden="true">↓</span>
+            <Image src="/legacy/wp-content/uploads/2024/05/icon_banner_arrow.svg" alt="" width={40} height={57} aria-hidden="true" />
           </a>
         </div>
       </header>
@@ -53,12 +54,8 @@ export function CampPageView({page}: {page: CampPage}) {
         </div>
       </section> : null}
 
-      {page.gallery?.length ? <section className={styles.gallery} aria-labelledby="camp-gallery-heading">
-        <div className={styles.sectionHeading}>
-          <p className={styles.eyebrow}>Inside the camp</p>
-          <h2 id="camp-gallery-heading">A closer look</h2>
-        </div>
-        <SafariGallery items={page.gallery} />
+      {page.gallery?.length ? <section className={styles.gallery} aria-label={`${page.title} gallery`}>
+        <CampGalleryCarousel items={page.gallery} />
       </section> : null}
 
       {facilities.length ? <section className={styles.amenities} aria-labelledby="camp-amenities-heading">
@@ -67,10 +64,7 @@ export function CampPageView({page}: {page: CampPage}) {
           <h2 id="camp-amenities-heading">Included in your stay</h2>
           {page.amenitiesIntroduction?.length ? <PortablePageText value={page.amenitiesIntroduction} /> : <p>Thoughtful comforts and attentive Asanja hospitality make every stay feel effortless.</p>}
         </div>
-        <ol className={styles.facilityList}>{facilities.map((facility, index) => <li key={facility}>
-          <span>{String(index + 1).padStart(2, '0')}</span>
-          <strong>{facility}</strong>
-        </li>)}</ol>
+        <CampAmenitiesCarousel facilities={facilities} />
       </section> : null}
 
       {(locationImage?.asset?.url || locationName || page.locationDescription?.length) ? <section className={styles.location} aria-labelledby="camp-location-heading">
@@ -89,10 +83,6 @@ export function CampPageView({page}: {page: CampPage}) {
       </div> : null}
 
       <section className={styles.booking}>
-        {page.bookingImage?.asset?.url ? <>
-          <PageImage image={page.bookingImage} className={styles.bookingImage} sizes="100vw" />
-          <div className={styles.bookingWash} />
-        </> : null}
         <div className={styles.bookingContent}>
           <p className={styles.eyebrow}>Stay with us</p>
           <h2>{page.bookingHeading || 'Make a booking'}</h2>

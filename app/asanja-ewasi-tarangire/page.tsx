@@ -138,11 +138,11 @@ const ewasiFallback: CampPage = {
     2560,
     1707,
   ),
-  bookingHeading: 'Plan your Tarangire stay',
+  bookingHeading: 'Make a booking',
   bookingText: paragraphs([
-    'Let our safari specialists create a personalised journey around your stay at Asanja Ewasi, from the first game drive to your final Tarangire sunset.',
+    'Craft your dream Tanzanian adventure with Asanja. Our safari specialists are eager to discuss your desires and curate a personalised itinerary that reflects your vision. Contact us today to embark on an unforgettable journey – where luxury meets wilderness and memories are made forever.',
   ]),
-  bookingButtonLabel: 'Plan your stay',
+  bookingButtonLabel: 'Make a booking',
 }
 
 export default async function AsanjaEwasiTarangirePage() {

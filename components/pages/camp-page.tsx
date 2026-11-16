@@ -61,7 +61,7 @@ export function CampPageView({page}: {page: CampPage}) {
       </section>
 
       {(storyImage?.asset?.url || page.storyHeading || storyPoints.length) ? <section className={styles.story} aria-labelledby="camp-story-heading">
-        <div className={styles.storyImage}>{storyImage?.asset?.url ? <PageImage image={storyImage} sizes="(max-width: 900px) 100vw, 48vw" /> : null}</div>
+        <div className={styles.storyImage}>{storyImage?.asset?.url ? <PageImage image={storyImage} quality={90} sizes="(max-width: 900px) 100vw, 620px" /> : null}</div>
         <div className={styles.storyCopy}>
           <p className={styles.eyebrow}>About {page.title}</p>
           <h2 id="camp-story-heading">{page.storyHeading || 'Discover a landscape of luxury'}</h2>

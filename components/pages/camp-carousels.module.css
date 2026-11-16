@@ -15,8 +15,12 @@
 .arrow{display:grid;place-items:center;width:36px;height:36px;padding:0;border:0;background:transparent;color:#8c8c8c;font:300 2rem/1 Arial,sans-serif;cursor:pointer;transition:color .2s,transform .2s}
 .arrow:hover,.arrow:focus-visible{color:#55664c;transform:scale(1.08)}
 .amenitiesTrack{gap:0}
-.amenitySlide{display:flex;flex:0 0 25%;flex-direction:column;align-items:center;justify-content:flex-start;gap:1.5rem;min-height:170px;padding:1rem 1.25rem;scroll-snap-align:start;text-align:center}
-.amenitySlide svg{width:46px;height:46px;overflow:visible;fill:none;stroke:#515159;stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round}
+.amenitySlide{display:flex;flex:0 0 25%;flex-direction:column;align-items:center;justify-content:flex-start;gap:1.25rem;min-height:185px;padding:.5rem 1.25rem 1rem;scroll-snap-align:start;text-align:center}
+.amenityIcon{position:relative;display:grid;place-items:center;width:72px;height:72px;color:#55664c;transition:color .25s,transform .25s}
+.amenityIcon::after{position:absolute;bottom:0;left:50%;width:28px;height:1px;background:#bd9061;content:'';transform:translateX(-50%);transition:width .25s}
+.amenitySlide:hover .amenityIcon{color:#bd9061;transform:translateY(-2px)}
+.amenitySlide:hover .amenityIcon::after{width:42px}
+.amenitySlide svg{width:58px;height:58px;overflow:visible;fill:none;stroke:currentColor;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round}
 .amenitySlide strong{max-width:170px;color:#515159;font:400 .9rem/1.4 AsanjaPoppins,Arial,sans-serif;text-transform:uppercase}
 .amenitiesShell .controls{margin-top:0}
 .locationCarousel{position:relative;width:100%;height:100%;min-height:100%;overflow:hidden;background:#3d4a3c}
@@ -30,4 +34,4 @@
 .locationDotActive{background:#fff;transform:scale(1.15)}
 @media(max-width:900px){.gallerySlide{flex-basis:68vw}.amenitySlide{flex-basis:50%}}
 @media(max-width:560px){.galleryTrack{gap:8px}.gallerySlide{flex-basis:88vw;aspect-ratio:4/3}.gallerySlide figcaption{font-size:.85rem}.amenitySlide{flex-basis:100%;min-height:150px}.controls{grid-template-columns:40px minmax(0,1fr) 40px}.dot,.activeDot{width:7px;height:7px}.locationArrow{width:38px;height:38px}.locationArrowPrevious{left:.75rem}.locationArrowNext{right:.75rem}}
-@media(prefers-reduced-motion:reduce){.galleryTrack,.amenitiesTrack{scroll-behavior:auto}.gallerySlide img,.dot,.activeDot,.arrow,.locationImage,.locationImageActive,.locationArrow{transition:none}}
+@media(prefers-reduced-motion:reduce){.galleryTrack,.amenitiesTrack{scroll-behavior:auto}.gallerySlide img,.dot,.activeDot,.arrow,.locationImage,.locationImageActive,.locationArrow,.amenityIcon,.amenityIcon::after{transition:none}}

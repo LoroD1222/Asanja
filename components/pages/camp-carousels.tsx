@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import {useCallback, useEffect, useMemo, useRef, useState, type ReactNode} from 'react'
 import type {PageMedia} from '../../sanity/page-types'
 import type {SanityImage} from '../../sanity/types'
 import styles from './camp-carousels.module.css'
@@ -141,18 +141,58 @@ export function CampLocationCarousel({images, label}: {images: SanityImage[]; la
   </div>
 }
 
-function AmenityIcon({index}: {index: number}) {
-  const icons = [
-    <><path d="M5 18v-7h14v7M7 11V8h10v3M4 18h16" /></>,
-    <><circle cx="9" cy="8" r="2.5"/><circle cx="16" cy="9" r="2"/><path d="M4 19c.3-4 2-6 5-6s4.7 2 5 6M14 14c3 0 5 1.8 5 5"/></>,
-    <><path d="M7 4v11M12 4v11M7 8h5M4 16c1.5 0 1.5 1.5 3 1.5S8.5 16 10 16s1.5 1.5 3 1.5 1.5-1.5 3-1.5 1.5 1.5 3 1.5"/></>,
-    <><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></>,
-    <><path d="M9 4c1 3 1 5-1 7l-3 3c-1 1-.5 3 1 3h4l3-4M15 5c-.5 3 0 5 2 7l2 2c1 1 .5 3-1 3h-3"/></>,
-    <><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></>,
-    <><path d="M19 15a7 7 0 0 1-10-10 8 8 0 1 0 10 10Z"/><path d="M17 4v3M15.5 5.5h3"/></>,
-    <><circle cx="8" cy="13" r="4"/><circle cx="16" cy="13" r="4"/><path d="M12 13h0M4 13l2-7h3l3 7M20 13l-2-7h-3l-3 7"/></>,
-  ]
-  return <svg viewBox="0 0 24 24" aria-hidden="true">{icons[index % icons.length]}</svg>
+function AmenityIcon({facility, index}: {facility: string; index: number}) {
+  const label = facility.toLowerCase()
+  let icon: ReactNode
+
+  if (label.includes('suite') || label.includes('room')) {
+    icon = <>
+      <path d="M10 40V11m28 29V11M8 11h32M14 11v9m20-9v9" />
+      <path d="M13 34v-9h22v9M13 29h22M17 25v-4h14v4M7 40h34" />
+    </>
+  } else if (label.includes('family')) {
+    icon = <>
+      <circle cx="24" cy="15" r="5" /><circle cx="12.5" cy="20" r="3.5" /><circle cx="35.5" cy="20" r="3.5" />
+      <path d="M15 38c.5-8 3.5-12 9-12s8.5 4 9 12M5.5 38c.4-6 2.8-9 7-9 2 0 3.8.8 5 2.2M42.5 38c-.4-6-2.8-9-7-9-2 0-3.8.8-5 2.2" />
+    </>
+  } else if (label.includes('pool') || label.includes('plunge')) {
+    icon = <>
+      <path d="M13 9v23m10-23v23M13 17h10M13 24h10" />
+      <path d="M5 34c3 0 3 3 6 3s3-3 6-3 3 3 6 3 3-3 6-3 3 3 6 3 3-3 8-3M5 41c3 0 3 3 6 3s3-3 6-3 3 3 6 3 3-3 6-3 3 3 6 3 3-3 8-3" />
+    </>
+  } else if (label.includes('airstrip') || label.includes('minute')) {
+    icon = <>
+      <circle cx="24" cy="24" r="19" /><path d="M24 13v11l7 5" />
+      <path d="M8 9l5 1m-4 4 4-.2" />
+      <path d="M35 12l-7 2-5-5-2 1 2 6-7 3-4-2-1 1 4 5 8-1 6 8 2-1-2-9 8-4c2-1 3-2 2-3-.6-1.2-2-1.5-4-1Z" />
+    </>
+  } else if (label.includes('walk')) {
+    icon = <>
+      <path d="M19 7c4 5 4 10 1 15l-4 6c-1.8 2.8-5.7 1.2-5.2-2l1.1-7.2C12.6 13.8 14.8 9.8 19 7Z" />
+      <path d="M31 21c4 4 5.2 8.5 3.7 13.5l-1.8 5.8c-.9 3-5.1 2.8-5.8-.1l-1.5-6.6C24.5 28.7 26.2 24.2 31 21Z" />
+      <circle cx="11" cy="11" r="2" /><circle cx="14" cy="7" r="1.7" /><circle cx="18" cy="5" r="1.5" />
+      <circle cx="28" cy="14" r="1.8" /><circle cx="33" cy="13" r="1.6" /><circle cx="37" cy="15" r="1.4" />
+    </>
+  } else if (label.includes('sundowner')) {
+    icon = <>
+      <path d="M5 34h38M9 40h30M17 34a7 7 0 0 1 14 0" />
+      <path d="M24 8v5M11.5 13.5l3.5 3.5M36.5 13.5 33 17M7 25h5m24 0h5" />
+      <path d="M19 23h10l-2 9h-6l-2-9Zm5-7v7" />
+    </>
+  } else if (label.includes('night') || label.includes('drive')) {
+    icon = <>
+      <path d="M35 14a8 8 0 0 1-10-10 9 9 0 1 0 10 10Z" />
+      <path d="M7 34v-7l4-8h20l5 8v7M7 28h29M13 34h17M10 34v5m23-5v5" />
+      <circle cx="13" cy="28" r="2" /><circle cx="30" cy="28" r="2" />
+    </>
+  } else {
+    icon = <>
+      <circle cx="15" cy="30" r="7" /><circle cx="33" cy="30" r="7" /><path d="M22 30h4M8 30l4-15h6l6 15M40 30l-4-15h-6l-6 15" />
+      <path d="M24 15v-7m0 0-3 4m3-4 3 4" />
+    </>
+  }
+
+  return <span className={styles.amenityIcon} data-icon={index + 1}><svg viewBox="0 0 48 48" aria-hidden="true">{icon}</svg></span>
 }
 
 export function CampAmenitiesCarousel({facilities}: {facilities: string[]}) {
@@ -169,7 +209,7 @@ export function CampAmenitiesCarousel({facilities}: {facilities: string[]}) {
       tabIndex={0}
     >
       {facilities.map((facility, index) => <div className={styles.amenitySlide} key={facility}>
-        <AmenityIcon index={index} />
+        <AmenityIcon facility={facility} index={index} />
         <strong>{facility}</strong>
       </div>)}
     </div>

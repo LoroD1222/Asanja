@@ -46,3 +46,10 @@
 		url('/legacy/wp-content/uploads/2024/04/CastoroTitling-Regular.ttf') format('truetype');
 }
 /* End Custom Fonts CSS */
+.elementor-9 .elementor-element.ewasi-home-card-media:not(.elementor-motion-effects-element-type-background),
+.elementor-9 .elementor-element.ewasi-home-card-media > .elementor-motion-effects-container > .elementor-motion-effects-layer {
+	background-image: url('/camps/asanja-ewasi-tarangire/ewasi-safari-002.webp') !important;
+	background-position: center center !important;
+	background-repeat: no-repeat !important;
+	background-size: cover !important;
+}

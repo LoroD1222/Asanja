@@ -71,6 +71,27 @@ const gallery: PageMedia[] = [
   },
 ]
 
+const locationGallery: SanityImage[] = [
+  image(
+    '/legacy/wp-content/uploads/2025/07/safaris-tarangire-lion-and-baobab_20250723124034.webp',
+    'A lion resting beneath an ancient baobab in Tarangire National Park',
+    1800,
+    1200,
+  ),
+  image(
+    '/legacy/wp-content/uploads/2025/08/Elephants-Ash.webp',
+    'An elephant herd and calf crossing the open Tarangire plains',
+    1800,
+    1012,
+  ),
+  image(
+    '/legacy/wp-content/uploads/2025/10/Elephant-2.webp',
+    'A tusked elephant walking through Tarangire grassland',
+    886,
+    664,
+  ),
+]
+
 const ewasiFallback: CampPage = {
   _id: 'asanja-ewasi-tarangire-fallback',
   _type: 'camp',
@@ -122,6 +143,7 @@ const ewasiFallback: CampPage = {
   ],
   gallery,
   locationImage: heroImage,
+  locationGallery,
   locationDescription: paragraphs([
     'Nestled within Tarangire National Park, just a 30-minute drive from Kuro Airstrip, Asanja Ewasi looks across vast plains dotted with ancient baobabs and traversed by immense elephant herds.',
     'From camp, guests may witness giraffes, zebras, predators and seasonal wildlife migrations moving through the surrounding wilderness.',
@@ -152,6 +174,7 @@ export default async function AsanjaEwasiTarangirePage() {
     facilities: publishedPage.facilities?.length ? publishedPage.facilities : ewasiFallback.facilities,
     gallery: publishedPage.gallery?.length ? publishedPage.gallery : ewasiFallback.gallery,
     locationImage: publishedPage.locationImage?.asset?.url ? publishedPage.locationImage : ewasiFallback.locationImage,
+    locationGallery: publishedPage.locationGallery?.length ? publishedPage.locationGallery : ewasiFallback.locationGallery,
     locationDescription: publishedPage.locationDescription?.length ? publishedPage.locationDescription : ewasiFallback.locationDescription,
     bookingImage: publishedPage.bookingImage?.asset?.url ? publishedPage.bookingImage : ewasiFallback.bookingImage,
     bookingText: publishedPage.bookingText?.length ? publishedPage.bookingText : ewasiFallback.bookingText,

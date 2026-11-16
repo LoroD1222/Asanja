@@ -21,6 +21,7 @@ export type CampPage = PageCard & {
   bookingImage?: SanityImage
   locationDescription?: PageText
   locationImage?: SanityImage
+  locationGallery?: SanityImage[]
   destination?: PageCard | null
   bookingHeading?: string
   bookingText?: PageText

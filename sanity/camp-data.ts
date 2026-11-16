@@ -25,6 +25,7 @@ export const campBySlugQuery = defineQuery(`
     bookingImage${imageFields},
     locationDescription[]{${textFields}},
     locationImage${imageFields},
+    locationGallery[]${imageFields},
     "destination": destination->{${cardFields}},
     bookingHeading,
     bookingText[]{${textFields}},

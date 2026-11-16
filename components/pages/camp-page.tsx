@@ -31,7 +31,14 @@ function introductionText(value: PageText | undefined) {
 export function CampPageView({page}: {page: CampPage}) {
   const storyImage = page.storyImage || photoAt(page.gallery, 0) || page.heroImage
   const locationImage = page.locationImage || photoAt(page.gallery, 1) || page.heroImage
-  const locationImages = [locationImage, ...(page.gallery || []).map((item) => item.image)]
+  const locationImages = [
+    locationImage,
+    ...(page.locationGallery || []),
+    page.heroImage,
+    page.storyImage,
+    ...(page.gallery || []).map((item) => item.image),
+    page.bookingImage,
+  ]
     .filter((image): image is NonNullable<typeof locationImage> => Boolean(image?.asset?.url))
   const storyPoints = (page.storyPoints || []).filter((point) => point.title)
   const facilities = (page.facilities || []).filter(Boolean)

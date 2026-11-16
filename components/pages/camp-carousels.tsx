@@ -181,9 +181,11 @@ function AmenityIcon({facility, index}: {facility: string; index: number}) {
     </>
   } else if (label.includes('night') || label.includes('drive')) {
     icon = <>
-      <path d="M35 14a8 8 0 0 1-10-10 9 9 0 1 0 10 10Z" />
-      <path d="M7 34v-7l4-8h20l5 8v7M7 28h29M13 34h17M10 34v5m23-5v5" />
-      <circle cx="13" cy="28" r="2" /><circle cx="30" cy="28" r="2" />
+      <path d="M34 13a7 7 0 0 1-8.5-8.5A8 8 0 1 0 34 13Z" />
+      <path d="M39 5v5m-2.5-2.5h5M13 9v4m-2-2h4" />
+      <path d="M7 35v-8l5-8h18l7 8v8M10 27h25M15 19v-4h12v4M17 27l2-5h7l4 5M12 35h20" />
+      <circle cx="12" cy="35" r="3" /><circle cx="32" cy="35" r="3" />
+      <path d="M7 31H4m36 0h-3" />
     </>
   } else {
     icon = <>

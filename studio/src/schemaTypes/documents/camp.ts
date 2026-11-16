@@ -45,6 +45,18 @@ export const camp = defineType({
     defineField({name: 'coordinates', title: 'Geographic coordinates', type: 'geopoint', group: 'location'}),
     defineField({name: 'locationDescription', title: 'Location description', type: 'pageRichText', group: 'location'}),
     defineField({name: 'locationImage', title: 'Location image', type: 'image', group: 'location', description: imageUploadGuidance, options: {hotspot: true}, validation: imageOptimizationWarning, fields: [defineField({name: 'alt', title: 'Alternative text', type: 'string'})]}),
+    defineField({
+      name: 'locationGallery',
+      title: 'Location gallery',
+      type: 'array',
+      group: 'location',
+      description: 'Additional landscape and wildlife photographs shown in the location carousel.',
+      of: [defineArrayMember({
+        type: 'image',
+        options: {hotspot: true},
+        fields: [defineField({name: 'alt', title: 'Alternative text', type: 'string'})],
+      })],
+    }),
     defineField({name: 'heroImage', title: 'Featured image', type: 'image', group: 'media', description: imageUploadGuidance, options: {hotspot: true}, validation: imageOptimizationWarning, fields: [defineField({name: 'alt', title: 'Alternative text', type: 'string', validation: (rule) => rule.warning('Add descriptive alternative text for accessibility and SEO.')})]}),
     defineField({name: 'storyHeading', title: 'Story heading', type: 'string', group: 'story'}),
     defineField({name: 'storyImage', title: 'Story image', type: 'image', group: 'story', description: imageUploadGuidance, options: {hotspot: true}, validation: imageOptimizationWarning, fields: [defineField({name: 'alt', title: 'Alternative text', type: 'string'})]}),

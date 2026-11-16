@@ -20,7 +20,7 @@
 .amenityIcon::after{position:absolute;bottom:0;left:50%;width:28px;height:1px;background:#bd9061;content:'';transform:translateX(-50%);transition:width .25s}
 .amenitySlide:hover .amenityIcon{color:#bd9061;transform:translateY(-2px)}
 .amenitySlide:hover .amenityIcon::after{width:42px}
-.amenitySlide svg{width:58px;height:58px;overflow:visible;fill:none;stroke:currentColor;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round}
+.amenitySlide svg{width:60px;height:60px;overflow:visible;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .amenitySlide strong{max-width:170px;color:#515159;font:400 .9rem/1.4 AsanjaPoppins,Arial,sans-serif;text-transform:uppercase}
 .amenitiesShell .controls{margin-top:0}
 .locationCarousel{position:relative;width:100%;height:100%;min-height:100%;overflow:hidden;background:#3d4a3c}

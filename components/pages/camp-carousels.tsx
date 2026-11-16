@@ -147,37 +147,38 @@ function AmenityIcon({facility, index}: {facility: string; index: number}) {
 
   if (label.includes('suite') || label.includes('room')) {
     icon = <>
-      <path d="M10 40V11m28 29V11M8 11h32M14 11v9m20-9v9" />
-      <path d="M13 34v-9h22v9M13 29h22M17 25v-4h14v4M7 40h34" />
+      <path d="M8 40V20c0-2.2 1.8-4 4-4h24c2.2 0 4 1.8 4 4v20M8 29h32M6 40h36M11 40v3m26-3v3" />
+      <rect x="12" y="21" width="11" height="6" rx="2" />
+      <rect x="25" y="21" width="11" height="6" rx="2" />
     </>
   } else if (label.includes('family')) {
     icon = <>
-      <circle cx="24" cy="15" r="5" /><circle cx="12.5" cy="20" r="3.5" /><circle cx="35.5" cy="20" r="3.5" />
-      <path d="M15 38c.5-8 3.5-12 9-12s8.5 4 9 12M5.5 38c.4-6 2.8-9 7-9 2 0 3.8.8 5 2.2M42.5 38c-.4-6-2.8-9-7-9-2 0-3.8.8-5 2.2" />
+      <path d="M6 16 24 5l18 11M9 14v28h30V14" />
+      <circle cx="16" cy="22" r="4" /><circle cx="32" cy="22" r="4" /><circle cx="24" cy="27" r="3" />
+      <path d="M10 38c.4-6.2 2.4-9 6-9 2.7 0 4.5 1.6 5.3 4.8M38 38c-.4-6.2-2.4-9-6-9-2.7 0-4.5 1.6-5.3 4.8M19 39c.3-5 2-7.5 5-7.5s4.7 2.5 5 7.5" />
     </>
   } else if (label.includes('pool') || label.includes('plunge')) {
     icon = <>
-      <path d="M13 9v23m10-23v23M13 17h10M13 24h10" />
-      <path d="M5 34c3 0 3 3 6 3s3-3 6-3 3 3 6 3 3-3 6-3 3 3 6 3 3-3 8-3M5 41c3 0 3 3 6 3s3-3 6-3 3 3 6 3 3-3 6-3 3 3 6 3 3-3 8-3" />
+      <path d="M13 7v27m11-27v27M13 15h11M13 23h11" />
+      <path d="M4 34c3.3 0 3.3 3 6.6 3s3.3-3 6.6-3 3.3 3 6.6 3 3.3-3 6.6-3 3.3 3 6.6 3 3.3-3 6.6-3M4 42c3.3 0 3.3 3 6.6 3s3.3-3 6.6-3 3.3 3 6.6 3 3.3-3 6.6-3 3.3 3 6.6 3 3.3-3 6.6-3" />
     </>
   } else if (label.includes('airstrip') || label.includes('minute')) {
     icon = <>
-      <circle cx="24" cy="24" r="19" /><path d="M24 13v11l7 5" />
-      <path d="M8 9l5 1m-4 4 4-.2" />
-      <path d="M35 12l-7 2-5-5-2 1 2 6-7 3-4-2-1 1 4 5 8-1 6 8 2-1-2-9 8-4c2-1 3-2 2-3-.6-1.2-2-1.5-4-1Z" />
+      <circle cx="13" cy="30" r="10" /><path d="M13 24v6l4 3M13 17v3m-13 10h3m10 10v3" />
+      <path d="M36 5c1.2 0 2 1 2 2.3v9.2l6 4v3l-6-1.8V32l3 2v2l-5-1-5 1v-2l3-2V21.7l-6 1.8v-3l6-4V7.3C34 6 34.8 5 36 5Z" />
     </>
   } else if (label.includes('walk')) {
     icon = <>
-      <path d="M19 7c4 5 4 10 1 15l-4 6c-1.8 2.8-5.7 1.2-5.2-2l1.1-7.2C12.6 13.8 14.8 9.8 19 7Z" />
-      <path d="M31 21c4 4 5.2 8.5 3.7 13.5l-1.8 5.8c-.9 3-5.1 2.8-5.8-.1l-1.5-6.6C24.5 28.7 26.2 24.2 31 21Z" />
-      <circle cx="11" cy="11" r="2" /><circle cx="14" cy="7" r="1.7" /><circle cx="18" cy="5" r="1.5" />
-      <circle cx="28" cy="14" r="1.8" /><circle cx="33" cy="13" r="1.6" /><circle cx="37" cy="15" r="1.4" />
+      <circle cx="23" cy="8" r="3.5" />
+      <path d="m22 13-7 9 7 5-5 12M22 14l7 8 7 2M22 27l9 5 4 8M15 22l-6 5M38 18l2 25M5 43h38" />
+      <path d="M31 10c5-4 9-2 10 2-4 2-7 2-10-2Z" />
     </>
   } else if (label.includes('sundowner')) {
     icon = <>
-      <path d="M5 34h38M9 40h30M17 34a7 7 0 0 1 14 0" />
-      <path d="M24 8v5M11.5 13.5l3.5 3.5M36.5 13.5 33 17M7 25h5m24 0h5" />
-      <path d="M19 23h10l-2 9h-6l-2-9Zm5-7v7" />
+      <path d="M4 34h40M8 41h32M10 34a10 10 0 0 1 20 0" />
+      <path d="M20 8v6M7 14l4 4M33 14l-4 4M3 27h6m22 0h5" />
+      <path d="M32 21h11l-5.5 7v9M33 41h9M37.5 28l-3-4" />
+      <circle cx="34" cy="22" r="2.5" />
     </>
   } else if (label.includes('night') || label.includes('drive')) {
     icon = <>
@@ -189,8 +190,9 @@ function AmenityIcon({facility, index}: {facility: string; index: number}) {
     </>
   } else {
     icon = <>
-      <circle cx="15" cy="30" r="7" /><circle cx="33" cy="30" r="7" /><path d="M22 30h4M8 30l4-15h6l6 15M40 30l-4-15h-6l-6 15" />
-      <path d="M24 15v-7m0 0-3 4m3-4 3 4" />
+      <circle cx="14" cy="34" r="8" /><circle cx="34" cy="34" r="8" />
+      <path d="M6 34l5-19h7l6 19 6-19h7l5 19M18 20h12M21 28h6" />
+      <path d="M24 15V7m0 0-4 4m4-4 4 4" />
     </>
   }
 

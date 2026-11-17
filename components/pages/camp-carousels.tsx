@@ -43,10 +43,11 @@ function useCarousel(length: number) {
   return {active, goTo, move, onScroll, track}
 }
 
-function CarouselControls({active, count, label, move, goTo}: {
+function CarouselControls({active, count, label, unit = 'slide', move, goTo}: {
   active: number
   count: number
   label: string
+  unit?: 'slide' | 'group'
   move: (direction: -1 | 1) => void
   goTo: (index: number) => void
 }) {
@@ -58,7 +59,7 @@ function CarouselControls({active, count, label, move, goTo}: {
         type="button"
         className={index === active ? styles.activeDot : styles.dot}
         onClick={() => goTo(index)}
-        aria-label={`Show ${label} slide ${index + 1} of ${count}`}
+        aria-label={`Show ${label} ${unit} ${index + 1} of ${count}`}
         aria-current={index === active ? 'true' : undefined}
       />)}
     </div>
@@ -208,7 +209,36 @@ function AmenityIcon({facility, index}: {facility: string; index: number}) {
 
 export function CampAmenitiesCarousel({facilities}: {facilities: string[]}) {
   const carousel = useCarousel(facilities.length)
+  const [visibleCount, setVisibleCount] = useState(4)
+
+  useEffect(() => {
+    const track = carousel.track.current
+    if (!track) return
+
+    const updateVisibleCount = () => {
+      const firstSlide = track.firstElementChild as HTMLElement | null
+      if (!firstSlide) return
+      const slideWidth = firstSlide.getBoundingClientRect().width
+      if (slideWidth) setVisibleCount(Math.max(1, Math.min(facilities.length, Math.round(track.clientWidth / slideWidth))))
+    }
+
+    updateVisibleCount()
+    const observer = new ResizeObserver(updateVisibleCount)
+    observer.observe(track)
+    return () => observer.disconnect()
+  }, [carousel.track, facilities.length])
+
   if (!facilities.length) return null
+
+  const maxStart = Math.max(0, facilities.length - visibleCount)
+  const pageStarts = Array.from(
+    {length: Math.ceil(facilities.length / visibleCount)},
+    (_, index) => Math.min(index * visibleCount, maxStart),
+  )
+  const activePage = pageStarts.reduce((nearest, start, index) =>
+    Math.abs(start - carousel.active) < Math.abs(pageStarts[nearest] - carousel.active) ? index : nearest, 0)
+  const goToPage = (index: number) => carousel.goTo(pageStarts[index])
+  const movePage = (direction: -1 | 1) => goToPage((activePage + direction + pageStarts.length) % pageStarts.length)
 
   return <div className={styles.amenitiesShell}>
     <div
@@ -224,6 +254,6 @@ export function CampAmenitiesCarousel({facilities}: {facilities: string[]}) {
         <strong>{facility}</strong>
       </div>)}
     </div>
-    <CarouselControls active={carousel.active} count={facilities.length} label="amenities" move={carousel.move} goTo={carousel.goTo} />
+    {pageStarts.length > 1 ? <CarouselControls active={activePage} count={pageStarts.length} label="amenities" unit="group" move={movePage} goTo={goToPage} /> : null}
   </div>
 }

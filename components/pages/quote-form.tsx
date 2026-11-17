@@ -67,7 +67,7 @@ export function QuoteForm({tripTitle, slug, durationDays, durationNights, curren
         <li><span>2</span><div><strong>Get your itinerary within 24 hours</strong><small>Tailored to you, by email or WhatsApp.</small></div></li>
         <li><span>3</span><div><strong>Book and pack</strong><small>We’ll take care of everything from the airstrip onwards.</small></div></li>
       </ol>
-      {whatsapp ? <a className="trip-plan-pill" href={whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp us <span aria-hidden="true">↗</span></a> : null}
+      {whatsapp ? <a className="trip-plan-pill" href={whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp us</a> : null}
       <p className="trip-plan-agent">Booking through an agent? We work with travel agents worldwide.</p>
     </div>
     <form className="trip-plan-form" onSubmit={submit}>
@@ -82,7 +82,7 @@ export function QuoteForm({tripTitle, slug, durationDays, durationNights, curren
         </div>
         {campChoices.length ? <fieldset className="trip-plan-choice"><legend>Which camps interest you?</legend><div>{campChoices.map((camp) => <button type="button" key={camp} aria-pressed={selectedCamps.includes(camp)} onClick={() => toggle(camp, selectedCamps, setSelectedCamps)}>{camp}</button>)}</div></fieldset> : null}
         <fieldset className="trip-plan-choice"><legend>What’s the occasion?</legend><div>{occasions.map((occasion) => <button type="button" key={occasion} aria-pressed={selectedOccasions.includes(occasion)} onClick={() => toggle(occasion, selectedOccasions, setSelectedOccasions)}>{occasion}</button>)}</div></fieldset>
-        <div className="trip-plan-actions"><button className="trip-plan-pill" type="submit">Continue <span aria-hidden="true">↗</span></button></div>
+        <div className="trip-plan-actions"><button className="trip-plan-pill" type="submit">Continue</button></div>
       </> : <>
         <p className="trip-plan-step-note">A few details and we can shape the right journey for you.</p>
         <div className="trip-plan-fields">
@@ -96,7 +96,7 @@ export function QuoteForm({tripTitle, slug, durationDays, durationNights, curren
         {experiences.length ? <fieldset className="trip-plan-choice"><legend>Optional experiences</legend><div>{experiences.map((experience) => <button type="button" key={experience._key} aria-pressed={selectedExtras.includes(experience._key)} onClick={() => toggle(experience._key, selectedExtras, setSelectedExtras)}>{experience.name}</button>)}</div></fieldset> : null}
         {option ? <p className="trip-plan-estimate" aria-live="polite">{amount === null ? 'We’ll prepare a tailored price for your dates.' : `Indicative total: ${new Intl.NumberFormat('en-US', {style: 'currency', currency, maximumFractionDigits: 0}).format(amount)}. Final rate confirmed by Asanja Africa.`}</p> : null}
         {demonstration ? <p className="trip-plan-step-note">{sample ? 'This itinerary is an illustrative sample. Use the live trip planner to ask about a confirmed safari.' : 'This is a layout preview; use the live trip planner to send an enquiry.'}</p> : null}
-        <div className="trip-plan-actions trip-plan-actions-final"><button type="button" className="trip-plan-back" onClick={() => setStep(1)}>← Back</button>{demonstration ? <a className="trip-plan-pill" href="/plan-my-stay/">Open live trip planner <span aria-hidden="true">↗</span></a> : <button className="trip-plan-pill" type="submit" disabled={sending}>{sending ? 'Sending…' : 'Send my plans'} <span aria-hidden="true">↗</span></button>}</div>
+        <div className="trip-plan-actions trip-plan-actions-final"><button type="button" className="trip-plan-back" onClick={() => setStep(1)}>← Back</button>{demonstration ? <a className="trip-plan-pill" href="/plan-my-stay/">Open live trip planner</a> : <button className="trip-plan-pill" type="submit" disabled={sending}>{sending ? 'Sending…' : 'Send my plans'}</button>}</div>
       </>}
       <input name="website" tabIndex={-1} autoComplete="off" className="safari-honeypot" aria-hidden="true" />
       {status ? <p className="safari-form-status" role="status">{status}</p> : null}

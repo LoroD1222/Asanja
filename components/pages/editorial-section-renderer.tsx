@@ -25,7 +25,7 @@ export function EditorialSectionRenderer({section, page}: {section: EditorialSec
     {cards ? <CardGrid items={cards} label={section.kind === 'trips' ? 'Safari trip' : section.kind === 'landingPages' ? 'Safari guide' : undefined} /> : null}
     {section.kind === 'faq' ? <FAQSection items={section.faqs} /> : null}
     {section.kind === 'testimonials' ? <ReviewSection items={section.testimonials} /> : null}
-    {section.kind === 'cta' && actionHref(section.ctaUrl) ? <a className="safari-action" href={actionHref(section.ctaUrl)!}>{section.ctaLabel || 'Learn more'} ↗</a> : null}
+    {section.kind === 'cta' && actionHref(section.ctaUrl) ? <a className="safari-action" href={actionHref(section.ctaUrl)!}>{section.ctaLabel || 'Learn more'}</a> : null}
     {section.kind === 'download' && section.documentUrl ? <a className="safari-action" href={section.documentUrl} download>Download document ↓</a> : null}
   </section>
 }

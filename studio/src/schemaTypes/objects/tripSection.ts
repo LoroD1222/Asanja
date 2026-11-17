@@ -1,4 +1,5 @@
 import {defineField, defineType} from 'sanity'
+import {imageOptimizationWarning, imageUploadGuidance} from '../imageOptimization'
 
 const sectionNames: Record<string, string> = {
   overview: 'The Journey', highlights: 'Safari highlights', itinerary: 'Day-by-day itinerary',
@@ -29,7 +30,7 @@ export const tripSection = defineType({
     defineField({name: 'eyebrow', title: 'Small label above heading', type: 'string', description: 'Optional. Leave blank to use the page default.', hidden: ({parent, value}) => parent?.kind === 'booking' && !value}),
     defineField({name: 'heading', title: 'Main heading on page', type: 'string', description: 'Optional. Leave blank to use the default heading for this section.'}),
     defineField({name: 'body', title: 'Introductory rich text for this section', type: 'pageRichText', description: 'Optional text below this section heading. For The Journey, this replaces The Journey section text in the first tab.'}),
-    defineField({name: 'image', title: 'Section image', type: 'image', description: 'Used for The Journey, Highlights, Wildlife, Best time or Custom editorial sections.', hidden: ({parent, value}) => !value && !imageSections.has(String(parent?.kind || '')), options: {hotspot: true}, fields: [defineField({name: 'alt', title: 'Alternative text', type: 'string'})]}),
+    defineField({name: 'image', title: 'Section image', type: 'image', description: `Used for The Journey, Highlights, Wildlife, Best time or Custom editorial sections. ${imageUploadGuidance}`, hidden: ({parent, value}) => !value && !imageSections.has(String(parent?.kind || '')), options: {hotspot: true}, validation: imageOptimizationWarning, fields: [defineField({name: 'alt', title: 'Alternative text', type: 'string'})]}),
   ],
   preview: {select: {title: 'heading', kind: 'kind', media: 'image'}, prepare: ({title, kind, media}) => ({title: title || sectionNames[kind] || 'Trip section', subtitle: kind ? `Page section · ${sectionNames[kind] || kind}` : 'Choose a section', media})},
 })

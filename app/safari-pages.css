@@ -567,20 +567,31 @@
 .safari-trip-editorial-introduction .safari-prose > :last-child{margin-bottom:0}
 @media(max-width:650px){.safari-trip-editorial-introduction{width:calc(100% - 2rem);padding:3.5rem 0 1.5rem}.safari-trip-editorial-introduction .safari-prose{font-size:1rem;line-height:1.75}.safari-trip-editorial-introduction .safari-prose :is(h2,h3,h4){margin-top:1.65em}}
 
-/* Match the parent site's straight-edged calls to action. Keep circular carousel
-   controls and informational badges distinct from these buttons. */
-.safari-trip-page .safari-hero-actions a,
-.safari-trip-page .trip-plan-pill,
-.safari-trip-page .trip-plan-choice button,
-.safari-trip-page .safari-itinerary-tools button,
-.safari-trip-page .safari-pdf-download-trigger,
-.safari-trip-page .safari-trip-closing-content>a{border-radius:0}
-.safari-trip-page .safari-hero-actions a span,
-.safari-trip-page .safari-hero-actions a:first-child span,
-.safari-trip-page .trip-plan-pill>span,
-.safari-trip-page .safari-pdf-download-trigger span,
-.safari-trip-page .safari-trip-closing-content>a span{width:auto;height:auto;border-radius:0;background:transparent;color:inherit}
+/* Canonical Asanja calls to action: square, restrained and typographic. Keep
+   selector chips, carousel controls and disclosure controls visually distinct. */
 .safari-trip-page .safari-hero-actions a,
 .safari-trip-page .trip-plan-pill,
 .safari-trip-page .safari-pdf-download-trigger,
-.safari-trip-page .safari-trip-closing-content>a{padding-right:18px}
+.safari-trip-page .safari-pdf-download-bottom button,
+.safari-trip-page .safari-trip-closing-content>a,
+.safari-page .safari-action,
+.safari-page .safari-closing a{
+  justify-content:center;
+  gap:0;
+  width:auto;
+  min-height:48px;
+  padding:14px 20px 12px;
+  border-radius:0;
+  font-family:var(--asanja-ui-font),Commissioner,Arial,sans-serif!important;
+  font-size:13px;
+  font-weight:400;
+  letter-spacing:.08em;
+  line-height:1;
+  text-transform:uppercase;
+}
+.safari-trip-page .safari-hero-actions a:hover,
+.safari-trip-page .trip-plan-pill:hover,
+.safari-trip-page .trip-plan-pill:focus-visible,
+.safari-trip-page .safari-pdf-download-trigger:hover,
+.safari-trip-page .safari-pdf-download-trigger:focus-visible,
+.safari-page .safari-trip-closing-content>a:hover{transform:none}

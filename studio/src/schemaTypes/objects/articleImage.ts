@@ -1,10 +1,13 @@
 import {defineField, defineType} from 'sanity'
+import {imageOptimizationWarning, imageUploadGuidance} from '../imageOptimization'
 
 export const articleImage = defineType({
   name: 'articleImage',
   title: 'Article image',
   type: 'image',
+  description: imageUploadGuidance,
   options: {hotspot: true},
+  validation: imageOptimizationWarning,
   fields: [
     defineField({
       name: 'alt',

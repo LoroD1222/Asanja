@@ -9,7 +9,6 @@ export function ItineraryDownload({href, page, tripTitle}: {href: string; page: 
   const [open, setOpen] = useState(false)
   const [sending, setSending] = useState(false)
   const [message, setMessage] = useState('')
-  const downloadArrow = <span aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" focusable="false"><path d="M10 3v13m0 0-5-5m5 5 5-5" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" /></svg></span>
 
   useEffect(() => {
     const controller = new AbortController()
@@ -50,8 +49,8 @@ export function ItineraryDownload({href, page, tripTitle}: {href: string; page: 
 
   return <div className="safari-pdf-download">
     {access === 'ready'
-      ? <a className="safari-pdf-download-trigger" href={href} download>Download illustrated itinerary {downloadArrow}</a>
-      : <button className="safari-pdf-download-trigger" type="button" disabled={access === 'checking'} aria-expanded={open} onClick={() => setOpen((value) => !value)}>{access === 'checking' ? 'Checking download access…' : 'Get the illustrated itinerary'} {downloadArrow}</button>}
+      ? <a className="safari-pdf-download-trigger" href={href} download>Download illustrated itinerary</a>
+      : <button className="safari-pdf-download-trigger" type="button" disabled={access === 'checking'} aria-expanded={open} onClick={() => setOpen((value) => !value)}>{access === 'checking' ? 'Checking download access…' : 'Get the illustrated itinerary'}</button>}
     {access === 'locked' && open ? <form className="safari-pdf-download-form" onSubmit={requestAccess}>
       <h3>Your safari, in your hands</h3>
       <p>Share your details once to download the photo itinerary and route map. We’ll send your request to the Asanja team; this is not a newsletter signup.</p>
@@ -61,7 +60,7 @@ export function ItineraryDownload({href, page, tripTitle}: {href: string; page: 
         <label>Phone or WhatsApp <span>(optional)</span><input name="phone" type="tel" maxLength={50} autoComplete="tel" /></label>
       </div>
       <input className="safari-honeypot" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" />
-      <div className="safari-pdf-download-bottom"><small>Your details are used for this enquiry. See our <a href="/privacy-policy/">privacy policy</a>.</small><button type="submit" disabled={sending}>{sending ? 'Preparing…' : 'Unlock PDF'} <span aria-hidden="true">↗</span></button></div>
+      <div className="safari-pdf-download-bottom"><small>Your details are used for this enquiry. See our <a href="/privacy-policy/">privacy policy</a>.</small><button type="submit" disabled={sending}>{sending ? 'Preparing…' : 'Unlock PDF'}</button></div>
     </form> : null}
     {message ? <p className="safari-pdf-download-status" role="status">{message}</p> : null}
   </div>

@@ -25,6 +25,6 @@ export function SeoLandingPageView({page, automaticBlogs}: {page: SeoLandingPage
       {!usedKinds.has('blogs') ? <RelatedBlogs title="Selected stories for this journey" eyebrow="Handpicked from the journal" articles={page.relatedBlogs} /> : null}
       <RelatedBlogs title="More from the journal" eyebrow="Automatically recommended" articles={automaticBlogs} automatic />
     </div>
-    <section className="safari-closing"><p className="safari-kicker">Make it yours</p><h2>Let us help you plan your Tanzania journey.</h2><a href="/make-a-booking/">Plan your safari ↗</a></section>
+    <section className="safari-closing"><p className="safari-kicker">Make it yours</p><h2>Let us help you plan your Tanzania journey.</h2><a href="/make-a-booking/">Plan your safari</a></section>
   </article></BlogShell>
 }

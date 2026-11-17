@@ -1,6 +1,7 @@
 import {DocumentIcon} from '@sanity/icons/Document'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {validatePublishedReferences, validateUniqueSlug} from '../referenceValidation'
+import {imageOptimizationWarning, imageUploadGuidance} from '../imageOptimization'
 
 const related = (name: string, title: string, type: string) => defineField({name, title, type: 'array', group: 'relationships', of: [defineArrayMember({type: 'reference', to: [{type}]})], validation: (rule) => rule.unique().custom(validatePublishedReferences)})
 
@@ -13,7 +14,7 @@ export const seoLandingPage = defineType({
     defineField({name: 'slug', title: 'URL slug', type: 'slug', group: 'hero', options: {source: 'title', maxLength: 96}, validation: (rule) => rule.required().custom(validateUniqueSlug)}),
     defineField({name: 'eyebrow', title: 'Hero eyebrow', type: 'string', group: 'hero'}),
     defineField({name: 'summary', title: 'Short introduction', type: 'text', rows: 3, group: 'hero'}),
-    defineField({name: 'heroImage', title: 'Hero image', type: 'image', group: 'hero', options: {hotspot: true}, fields: [defineField({name: 'alt', title: 'Alternative text', type: 'string', validation: (rule) => rule.required().warning('Describe the image.')})]}),
+    defineField({name: 'heroImage', title: 'Hero image', type: 'image', group: 'hero', description: imageUploadGuidance, options: {hotspot: true}, validation: imageOptimizationWarning, fields: [defineField({name: 'alt', title: 'Alternative text', type: 'string', validation: (rule) => rule.required().warning('Describe the image.')})]}),
     defineField({name: 'introduction', title: 'Full introduction', type: 'pageRichText', group: 'hero'}),
     defineField({name: 'sections', title: 'Reorderable page sections', type: 'array', group: 'content', of: [defineArrayMember({type: 'pageSection'})]}),
     related('relatedBlogs', 'Manually selected blogs', 'article'),

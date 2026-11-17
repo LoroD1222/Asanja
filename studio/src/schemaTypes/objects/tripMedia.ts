@@ -1,10 +1,11 @@
 import {defineField, defineType} from 'sanity'
+import {imageOptimizationWarning, imageUploadGuidance} from '../imageOptimization'
 
 export const tripMedia = defineType({
   name: 'tripMedia', title: 'Photo or video', type: 'object',
   fields: [
     defineField({name: 'kind', title: 'Media type', type: 'string', options: {layout: 'radio', list: ['photo', 'video']}, initialValue: 'photo', validation: (rule) => rule.required()}),
-    defineField({name: 'image', title: 'Photo or video poster', type: 'image', options: {hotspot: true}, fields: [defineField({name: 'alt', title: 'Alternative text', type: 'string'})]}),
+    defineField({name: 'image', title: 'Photo or video poster', type: 'image', description: imageUploadGuidance, options: {hotspot: true}, validation: imageOptimizationWarning, fields: [defineField({name: 'alt', title: 'Alternative text', type: 'string'})]}),
     defineField({name: 'caption', title: 'Caption', type: 'string'}),
     defineField({name: 'videoUrl', title: 'YouTube or Vimeo URL', type: 'url', hidden: ({parent}) => parent?.kind !== 'video', validation: (rule) => rule.uri({scheme: ['https']})}),
   ],

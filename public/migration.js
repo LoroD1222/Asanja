@@ -683,9 +683,9 @@
       link.href = ewasiHref;
       link.innerHTML = `
         <span class="asanja-ewasi-camp-link__icon" aria-hidden="true">
-          <svg viewBox="0 0 48 48"><path d="M6 33c5-8 11-12 18-12s13 4 18 12"/><path d="M8 37h32"/><path d="M24 10v11"/></svg>
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5.7 13.2a3.2 3.2 0 0 1-.5-6.4A3.6 3.6 0 0 1 11 4.6 3.7 3.7 0 0 1 17.8 6a3.6 3.6 0 0 1 1.1-.2 3.5 3.5 0 0 1 .7 6.9H5.7Z"/><path d="M9.7 13.2c.7 3 .5 5.5-1 8.1h6.6c-1.5-2.6-1.7-5.1-1-8.1M10.2 15.3c-1.4-.3-2.4-1.1-3.1-2.1m6.7 2.1c1.4-.3 2.4-1.1 3.1-2.1"/></svg>
         </span>
-        <span class="asanja-ewasi-camp-link__label">Ewasi Tarangire</span>`;
+        <h6 class="asanja-ewasi-camp-link__label">Ewasi Tarangire</h6>`;
       campLinks.append(link);
     }
 

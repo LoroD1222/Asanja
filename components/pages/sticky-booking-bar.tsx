@@ -32,6 +32,6 @@ export function StickyBookingBar({title, whatsapp, preview = false}: {title: str
 
   return <div className={`safari-sticky${visible ? ' is-visible' : ''}`}>
     <span>{title}</span>
-    <div><a href="#booking">{preview ? 'View quote form ↗' : 'Plan this safari ↗'}</a>{whatsapp ? <a href={whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp</a> : null}</div>
+    <div><a href="#booking">{preview ? 'View quote form' : 'Plan this safari'}</a>{whatsapp ? <a href={whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp</a> : null}</div>
   </div>
 }

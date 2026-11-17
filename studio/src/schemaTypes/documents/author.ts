@@ -1,5 +1,6 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {UserIcon} from '@sanity/icons/User'
+import {imageOptimizationWarning, imageUploadGuidance} from '../imageOptimization'
 
 export const author = defineType({
   name: 'author',
@@ -14,7 +15,9 @@ export const author = defineType({
       name: 'image',
       title: 'Portrait',
       type: 'image',
+      description: imageUploadGuidance,
       options: {hotspot: true},
+      validation: imageOptimizationWarning,
       fields: [defineField({name: 'alt', title: 'Alternative text', type: 'string'})],
     }),
     defineField({name: 'wordpressId', title: 'WordPress author ID', type: 'number', readOnly: true}),

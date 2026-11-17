@@ -1,5 +1,6 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {validatePublishedReferences} from '../referenceValidation'
+import {imageOptimizationWarning, imageUploadGuidance} from '../imageOptimization'
 
 export const pageSection = defineType({
   name: 'pageSection', title: 'Editorial page section', type: 'object',
@@ -17,7 +18,7 @@ export const pageSection = defineType({
     defineField({name: 'eyebrow', title: 'Small heading', type: 'string'}),
     defineField({name: 'heading', title: 'Section heading', type: 'string'}),
     defineField({name: 'body', title: 'Rich text', type: 'pageRichText', description: 'Highlight text to add contextual links to CMS pages.'}),
-    defineField({name: 'image', title: 'Section image', type: 'image', options: {hotspot: true}, fields: [defineField({name: 'alt', title: 'Alternative text', type: 'string'}), defineField({name: 'caption', title: 'Caption', type: 'string'})]}),
+    defineField({name: 'image', title: 'Section image', type: 'image', description: imageUploadGuidance, options: {hotspot: true}, validation: imageOptimizationWarning, fields: [defineField({name: 'alt', title: 'Alternative text', type: 'string'}), defineField({name: 'caption', title: 'Caption', type: 'string'})]}),
     defineField({name: 'highlights', title: 'Highlights', type: 'array', hidden: ({parent}) => parent?.kind !== 'highlights', of: [defineArrayMember({type: 'object', fields: [defineField({name: 'title', title: 'Title', type: 'string'}), defineField({name: 'description', title: 'Description', type: 'text', rows: 2})], preview: {select: {title: 'title'}}})]}),
     defineField({name: 'statistics', title: 'Statistics', type: 'array', hidden: ({parent}) => parent?.kind !== 'statistics', of: [defineArrayMember({type: 'object', fields: [defineField({name: 'value', title: 'Value', type: 'string'}), defineField({name: 'label', title: 'Label', type: 'string'})], preview: {select: {title: 'value', subtitle: 'label'}}})]}),
     defineField({name: 'media', title: 'Gallery items', type: 'array', hidden: ({parent}) => parent?.kind !== 'gallery', of: [defineArrayMember({type: 'tripMedia'})]}),

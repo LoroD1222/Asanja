@@ -65,14 +65,7 @@ const gallery: PageMedia[] = [
   },
 ]
 
-const locationGallery: SanityImage[] = [
-  image(
-    '/legacy/wp-content/uploads/2025/08/Elephants-Ash.webp',
-    'An elephant herd and calf crossing the open Tarangire plains',
-    1800,
-    1012,
-  ),
-]
+const locationGallery: SanityImage[] = [gallery[0].image!]
 
 const ewasiFallback: CampPage = {
   _id: 'asanja-ewasi-tarangire-fallback',
@@ -91,7 +84,7 @@ const ewasiFallback: CampPage = {
     '“Ewasi,” a place in Tarangire and a Maa word meaning “plain ground,” reflects the camp’s deep connection to the land and its rich heritage.',
     'Guests will discover the unique wonders of Tarangire, from vast plains dotted with ancient baobabs and immense elephant herds to seasonal migrations and the rare sight of tree-climbing pythons, all while enjoying Asanja’s signature personalised hospitality.',
   ]),
-  storyHeading: 'A story written by the land',
+  storyHeading: 'A Story Written By The Land',
   storyImage: gallery[0].image,
   storyPoints: [
     {
@@ -124,12 +117,7 @@ const ewasiFallback: CampPage = {
     'Immersive bush activities',
   ],
   gallery,
-  locationImage: image(
-    '/legacy/wp-content/uploads/2025/07/safaris-tarangire-lion-and-baobab_20250723124034.webp',
-    'A lion resting beneath an ancient baobab in Tarangire National Park',
-    1800,
-    1200,
-  ),
+  locationImage: heroImage,
   locationGallery,
   locationDescription: paragraphs([
     'Nestled within Tarangire National Park, just a 30-minute drive from Kuro Airstrip, Asanja Ewasi looks across vast plains dotted with ancient baobabs and traversed by immense elephant herds.',

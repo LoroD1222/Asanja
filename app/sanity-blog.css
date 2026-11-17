@@ -400,7 +400,7 @@ body:has(.asanja-menu-panel:target) {overflow: hidden;}
   position: absolute;
   inset: 0 0 136px;
   background-image: url('/legacy/wp-content/uploads/2020/08/asanja-ndembo-13-1_20250805120210.webp');
-  background-position: left -1485px;
+  background-position: bottom center;
   background-repeat: no-repeat;
   background-size: cover;
 }

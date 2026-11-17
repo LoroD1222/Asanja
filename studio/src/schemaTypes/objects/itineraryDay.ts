@@ -1,5 +1,6 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {validatePublishedReferences} from '../referenceValidation'
+import {imageOptimizationWarning, imageUploadGuidance} from '../imageOptimization'
 
 export const itineraryDay = defineType({
   name: 'itineraryDay', title: 'Itinerary day', type: 'object',
@@ -12,7 +13,7 @@ export const itineraryDay = defineType({
     defineField({name: 'activities', title: 'Activities', type: 'array', of: [defineArrayMember({type: 'string'})]}),
     defineField({name: 'meals', title: 'Meals', type: 'array', of: [defineArrayMember({type: 'string', options: {list: ['Breakfast', 'Lunch', 'Dinner']}})]}),
     defineField({name: 'notes', title: 'Optional notes', type: 'text', rows: 2}),
-    defineField({name: 'image', title: 'Day image', type: 'image', options: {hotspot: true}, fields: [defineField({name: 'alt', title: 'Alternative text', type: 'string'})]}),
+    defineField({name: 'image', title: 'Day image', type: 'image', description: imageUploadGuidance, options: {hotspot: true}, validation: imageOptimizationWarning, fields: [defineField({name: 'alt', title: 'Alternative text', type: 'string'})]}),
   ],
   preview: {select: {title: 'title', day: 'dayNumber', media: 'image'}, prepare: ({title, day, media}) => ({title: `Day ${day || '?'} — ${title || 'Untitled'}`, media})},
 })

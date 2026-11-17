@@ -1,5 +1,6 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {DocumentTextIcon} from '@sanity/icons/DocumentText'
+import {imageOptimizationWarning, imageUploadGuidance} from '../imageOptimization'
 
 export const article = defineType({
   name: 'article',
@@ -43,7 +44,9 @@ export const article = defineType({
       title: 'Featured image',
       type: 'image',
       group: 'content',
+      description: imageUploadGuidance,
       options: {hotspot: true},
+      validation: imageOptimizationWarning,
       fields: [
         defineField({
           name: 'alt',
@@ -98,14 +101,15 @@ export const article = defineType({
     }),
     defineField({
       name: 'editorialStatus',
-      title: 'Editorial status',
+      title: 'Article status',
       type: 'string',
       group: 'workflow',
+      description: 'Internal planning only. All articles stay together in the main Articles list.',
       options: {
         layout: 'radio',
         list: [
           {title: 'Draft', value: 'draft'},
-          {title: 'Awaiting review', value: 'review'},
+          {title: 'Needs review', value: 'review'},
           {title: 'Approved', value: 'approved'},
           {title: 'Scheduled', value: 'scheduled'},
         ],

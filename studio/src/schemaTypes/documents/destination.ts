@@ -1,6 +1,7 @@
 import {EarthGlobeIcon} from '@sanity/icons/EarthGlobe'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {validatePublishedReferences, validateUniqueSlug} from '../referenceValidation'
+import {imageOptimizationWarning, imageUploadGuidance} from '../imageOptimization'
 
 export const destination = defineType({
   name: 'destination', title: 'Destination', type: 'document', icon: EarthGlobeIcon,
@@ -16,7 +17,7 @@ export const destination = defineType({
     defineField({name: 'wildlife', title: 'Wildlife information', type: 'pageRichText', group: 'overview'}),
     defineField({name: 'bestTime', title: 'Best time to visit', type: 'pageRichText', group: 'overview'}),
     defineField({name: 'activities', title: 'Activities', type: 'array', group: 'overview', of: [defineArrayMember({type: 'string'})]}),
-    defineField({name: 'heroImage', title: 'Featured image', type: 'image', group: 'media', options: {hotspot: true}, fields: [defineField({name: 'alt', title: 'Alternative text', type: 'string'})]}),
+    defineField({name: 'heroImage', title: 'Featured image', type: 'image', group: 'media', description: imageUploadGuidance, options: {hotspot: true}, validation: imageOptimizationWarning, fields: [defineField({name: 'alt', title: 'Alternative text', type: 'string'})]}),
     defineField({name: 'gallery', title: 'Gallery', type: 'array', group: 'media', of: [defineArrayMember({type: 'tripMedia'})]}),
     defineField({name: 'relatedCamps', title: 'Related camps', type: 'array', group: 'related', of: [defineArrayMember({type: 'reference', to: [{type: 'camp'}]})], validation: (rule) => rule.unique().custom(validatePublishedReferences)}),
     defineField({name: 'relatedSafariTrips', title: 'Related safari trips', type: 'array', group: 'related', of: [defineArrayMember({type: 'reference', to: [{type: 'safariTrip'}]})], validation: (rule) => rule.unique().custom(validatePublishedReferences)}),

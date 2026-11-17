@@ -1,4 +1,5 @@
 import {defineField, defineType} from 'sanity'
+import {imageOptimizationWarning, imageUploadGuidance} from '../imageOptimization'
 
 export const seo = defineType({
   name: 'seo',
@@ -41,7 +42,9 @@ export const seo = defineType({
       name: 'openGraphImage',
       title: 'Open Graph image',
       type: 'image',
+      description: imageUploadGuidance,
       options: {hotspot: true},
+      validation: imageOptimizationWarning,
       fields: [
         defineField({
           name: 'alt',

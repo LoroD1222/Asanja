@@ -43,10 +43,11 @@ function useCarousel(length: number) {
   return {active, goTo, move, onScroll, track}
 }
 
-function CarouselControls({active, count, label, move, goTo}: {
+function CarouselControls({active, count, label, unit = 'slide', move, goTo}: {
   active: number
   count: number
   label: string
+  unit?: 'slide' | 'group'
   move: (direction: -1 | 1) => void
   goTo: (index: number) => void
 }) {
@@ -58,7 +59,7 @@ function CarouselControls({active, count, label, move, goTo}: {
         type="button"
         className={index === active ? styles.activeDot : styles.dot}
         onClick={() => goTo(index)}
-        aria-label={`Show ${label} slide ${index + 1} of ${count}`}
+        aria-label={`Show ${label} ${unit} ${index + 1} of ${count}`}
         aria-current={index === active ? 'true' : undefined}
       />)}
     </div>
@@ -187,11 +188,10 @@ function AmenityIcon({facility, index}: {facility: string; index: number}) {
     </>
   } else if (label.includes('night') || label.includes('drive')) {
     icon = <>
-      <path d="M34 13a7 7 0 0 1-8.5-8.5A8 8 0 1 0 34 13Z" />
-      <path d="M39 5v5m-2.5-2.5h5M13 9v4m-2-2h4" />
-      <path d="M7 35v-8l5-8h18l7 8v8M10 27h25M15 19v-4h12v4M17 27l2-5h7l4 5M12 35h20" />
-      <circle cx="12" cy="35" r="3" /><circle cx="32" cy="35" r="3" />
-      <path d="M7 31H4m36 0h-3" />
+      <path d="M33 4a8 8 0 1 0 9 11 9 9 0 0 1-9-11Z" />
+      <path d="M14 22h20l4 10H10l4-10ZM18 22v-5h12v5" />
+      <path d="M8 32h32v6H8z" />
+      <circle cx="15" cy="38" r="3" /><circle cx="33" cy="38" r="3" />
     </>
   } else if (label.includes('bush') || label.includes('activit')) {
     icon = <>
@@ -209,7 +209,36 @@ function AmenityIcon({facility, index}: {facility: string; index: number}) {
 
 export function CampAmenitiesCarousel({facilities}: {facilities: string[]}) {
   const carousel = useCarousel(facilities.length)
+  const [visibleCount, setVisibleCount] = useState(4)
+
+  useEffect(() => {
+    const track = carousel.track.current
+    if (!track) return
+
+    const updateVisibleCount = () => {
+      const firstSlide = track.firstElementChild as HTMLElement | null
+      if (!firstSlide) return
+      const slideWidth = firstSlide.getBoundingClientRect().width
+      if (slideWidth) setVisibleCount(Math.max(1, Math.min(facilities.length, Math.round(track.clientWidth / slideWidth))))
+    }
+
+    updateVisibleCount()
+    const observer = new ResizeObserver(updateVisibleCount)
+    observer.observe(track)
+    return () => observer.disconnect()
+  }, [carousel.track, facilities.length])
+
   if (!facilities.length) return null
+
+  const maxStart = Math.max(0, facilities.length - visibleCount)
+  const pageStarts = Array.from(
+    {length: Math.ceil(facilities.length / visibleCount)},
+    (_, index) => Math.min(index * visibleCount, maxStart),
+  )
+  const activePage = pageStarts.reduce((nearest, start, index) =>
+    Math.abs(start - carousel.active) < Math.abs(pageStarts[nearest] - carousel.active) ? index : nearest, 0)
+  const goToPage = (index: number) => carousel.goTo(pageStarts[index])
+  const movePage = (direction: -1 | 1) => goToPage((activePage + direction + pageStarts.length) % pageStarts.length)
 
   return <div className={styles.amenitiesShell}>
     <div
@@ -225,6 +254,6 @@ export function CampAmenitiesCarousel({facilities}: {facilities: string[]}) {
         <strong>{facility}</strong>
       </div>)}
     </div>
-    <CarouselControls active={carousel.active} count={facilities.length} label="amenities" move={carousel.move} goTo={carousel.goTo} />
+    {pageStarts.length > 1 ? <CarouselControls active={activePage} count={pageStarts.length} label="amenities" unit="group" move={movePage} goTo={goToPage} /> : null}
   </div>
 }

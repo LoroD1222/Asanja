@@ -16,22 +16,30 @@
 .eyebrow {margin: 0 0 1rem; color: var(--reviews-gold); font-family: var(--asanja-ui-font), sans-serif; font-size: .76rem; font-weight: 600; letter-spacing: .24em; line-height: 1.5; text-transform: uppercase;}
 .hero h1 {max-width: 850px; margin: 0; font-family: var(--asanja-heading-font), Georgia, serif; font-size: clamp(4rem, 7.5vw, 7.8rem); font-weight: 400; letter-spacing: -.025em; line-height: .91; text-transform: uppercase;}
 .heroCopy > p:not(.eyebrow) {max-width: 620px; margin: 1.6rem 0 2rem; font-size: clamp(.95rem, 1.3vw, 1.18rem); line-height: 1.7;}
-.heroCopy > a {display: inline-flex; align-items: center; gap: .9rem; min-height: 48px; padding: .7rem 1.3rem; border: 1px solid rgb(255 255 255 / .75); font-family: var(--asanja-ui-font), sans-serif; font-size: .76rem; letter-spacing: .12em; text-transform: uppercase; transition: background .2s ease, color .2s ease;}
+.heroCopy > a {display: inline-flex; align-items: center; justify-content: center; gap: 1.1rem; min-height: 50px; padding: .75rem 1.45rem; border: 1px solid rgb(255 255 255 / .75); font-family: var(--asanja-ui-font), sans-serif; font-size: .74rem; letter-spacing: .11em; line-height: 1; text-transform: uppercase; transition: background .2s ease, color .2s ease;}
 .heroCopy > a:hover, .heroCopy > a:focus-visible {background: #fff; color: var(--reviews-green);}
+.ctaArrow {display: grid; place-items: center; width: 24px; height: 24px; border: 1px solid currentColor; border-radius: 50%; font-size: .9rem; line-height: 1;}
 
 .introduction {display: grid; grid-template-columns: minmax(0, 1fr) minmax(340px, .8fr); gap: clamp(3rem, 8vw, 9rem); align-items: end; width: min(1440px, calc(100% - 8rem)); margin: 0 auto; padding: clamp(6rem, 10vw, 10rem) 0 clamp(4rem, 7vw, 7rem);}
 .introduction h2, .closing h2 {margin: 0; font-family: var(--asanja-heading-font), Georgia, serif; font-size: clamp(3rem, 5.1vw, 5.5rem); font-weight: 400; letter-spacing: -.025em; line-height: .98; text-transform: uppercase;}
 .introduction > p {max-width: 650px; margin: 0 0 .7rem; color: #77777b; font-size: clamp(.98rem, 1.2vw, 1.12rem); line-height: 1.85;}
 
-.summary {display: grid; grid-template-columns: 1fr 1fr 1.35fr; width: min(1440px, calc(100% - 8rem)); margin: 0 auto 4rem; border-top: 1px solid #d8d5cf; border-bottom: 1px solid #d8d5cf;}
-.summary > div {display: grid; grid-template-columns: auto 1fr; align-items: center; column-gap: 1rem; min-height: 150px; padding: 1.8rem clamp(1.2rem, 3vw, 3rem); border-right: 1px solid #d8d5cf;}
-.summary strong {grid-row: 1 / 3; font-family: var(--asanja-heading-font), Georgia, serif; font-size: clamp(3rem, 4vw, 4.7rem); font-weight: 400; line-height: 1;}
-.summary span:not(.summaryStars) {align-self: end; font-family: var(--asanja-ui-font), sans-serif; font-size: .82rem; letter-spacing: .12em; text-transform: uppercase;}
-.summary small {align-self: start; color: #858584; font-size: .77rem;}
-.summaryStars {align-self: end; color: #e48221; font-size: 1rem; letter-spacing: .12em;}
-.summary > a {display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.8rem clamp(1.5rem, 3vw, 3rem); background: var(--reviews-green); color: #fff; font-family: var(--asanja-ui-font), sans-serif; font-size: .8rem; letter-spacing: .11em; text-transform: uppercase; transition: background .2s ease;}
-.summary > a:hover, .summary > a:focus-visible {background: #3f5038;}
-.summary > a span {font-size: 1.5rem;}
+.summary {display: grid; grid-template-columns: .92fr 1.08fr; gap: clamp(3rem, 7vw, 8rem); width: min(1440px, calc(100% - 8rem)); margin: 0 auto clamp(5rem, 8vw, 8rem); padding: clamp(2.5rem, 5vw, 5rem); border-radius: 32px; background: var(--reviews-green); color: #fff; box-shadow: 0 28px 70px rgb(46 55 41 / .12);}
+.summaryLead {display: flex; flex-direction: column; align-items: flex-start; justify-content: center; min-width: 0;}
+.summaryKicker {margin: 0 0 1.2rem; color: #dcb98e; font-family: var(--asanja-ui-font), sans-serif; font-size: .73rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;}
+.summaryScore {display: flex; align-items: center; gap: 1.3rem;}
+.summaryScore strong {font-family: var(--asanja-heading-font), Georgia, serif; font-size: clamp(4.5rem, 7vw, 7rem); font-weight: 400; line-height: .9;}
+.summaryScore span {color: #f0b15f; font-size: clamp(1.05rem, 1.6vw, 1.45rem); letter-spacing: .12em;}
+.summaryLead > p:not(.summaryKicker) {margin: 1.3rem 0 1.8rem; color: rgb(255 255 255 / .78); font-size: .9rem; line-height: 1.65;}
+.summaryLead > p b {color: #fff; font-weight: 600;}
+.summaryLead > a {display: inline-flex; align-items: center; gap: .75rem; padding-bottom: .35rem; border-bottom: 1px solid rgb(255 255 255 / .65); font-family: var(--asanja-ui-font), sans-serif; font-size: .76rem; letter-spacing: .1em; text-transform: uppercase;}
+.summaryLead > a:hover, .summaryLead > a:focus-visible {border-bottom-color: #fff;}
+.breakdown {display: grid; align-content: center; gap: 1rem; min-width: 0; padding-left: clamp(2rem, 4vw, 5rem); border-left: 1px solid rgb(255 255 255 / .22);}
+.breakdown > div {display: grid; grid-template-columns: 72px minmax(90px, 1fr) 38px; gap: 1rem; align-items: center;}
+.breakdown span {font-size: .78rem;}
+.breakdown i {display: block; height: 5px; overflow: hidden; border-radius: 999px; background: rgb(255 255 255 / .17);}
+.breakdown i b {display: block; height: 100%; min-width: 4px; border-radius: inherit; background: #dcb98e;}
+.breakdown strong {font-size: .78rem; font-weight: 500; text-align: right;}
 
 .cards {display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.1rem, 2vw, 2rem); width: min(1520px, calc(100% - 5rem)); margin: 0 auto; padding: 1rem 0 clamp(7rem, 10vw, 11rem);}
 .card {display: flex; flex-direction: column; min-width: 0; overflow: hidden; border: 1px solid #d8d6d1; border-radius: 32px; background: #fbfaf8;}
@@ -57,9 +65,8 @@
 @media (max-width: 1050px) {
   .heroCopy, .introduction, .summary {width: min(100% - 4rem, 1440px);}
   .cards {grid-template-columns: repeat(2, minmax(0, 1fr)); width: min(100% - 3rem, 1000px);}
-  .card:last-child {grid-column: 1 / -1; width: calc(50% - .55rem); justify-self: center;}
-  .summary {grid-template-columns: 1fr 1fr;}
-  .summary > a {grid-column: 1 / -1; min-height: 88px;}
+  .summary {gap: 3rem;}
+  .breakdown {padding-left: 3rem;}
 }
 
 @media (max-width: 760px) {
@@ -70,11 +77,14 @@
   .heroCopy > p:not(.eyebrow) {font-size: .92rem;}
   .introduction {grid-template-columns: 1fr; gap: 2rem; width: calc(100% - 2rem); padding: 5rem 0 3.5rem;}
   .introduction h2, .closing h2 {font-size: clamp(2.8rem, 13vw, 4rem);}
-  .summary {grid-template-columns: 1fr; width: calc(100% - 2rem); margin-bottom: 2rem;}
-  .summary > div {min-height: 118px; border-right: 0; border-bottom: 1px solid #d8d5cf;}
-  .summary > a {grid-column: auto; min-height: 78px;}
+  .summary {grid-template-columns: 1fr; gap: 2.5rem; width: calc(100% - 2rem); margin-bottom: 4rem; padding: 2rem 1.3rem; border-radius: 24px;}
+  .summaryScore {align-items: flex-end; gap: .8rem;}
+  .summaryScore strong {font-size: 4.6rem;}
+  .summaryScore span {padding-bottom: .45rem; font-size: .95rem;}
+  .summaryLead > p:not(.summaryKicker) {font-size: .82rem;}
+  .breakdown {gap: .85rem; padding: 2rem 0 0; border-top: 1px solid rgb(255 255 255 / .22); border-left: 0;}
+  .breakdown > div {grid-template-columns: 64px minmax(75px, 1fr) 32px; gap: .7rem;}
   .cards {grid-template-columns: 1fr; gap: 1.2rem; width: calc(100% - 1.5rem); padding-bottom: 6rem;}
-  .card:last-child {grid-column: auto; width: auto;}
   .card {border-radius: 24px;}
   .cardImage {margin: 10px 10px 0; border-radius: 17px;}
   .cardBody {padding: 1.6rem 1.35rem 2rem;}

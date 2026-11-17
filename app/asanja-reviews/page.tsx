@@ -7,39 +7,82 @@ const tripadvisorUrl = 'https://www.tripadvisor.com/Search?geo=6&q=asanja&ssrc=h
 
 const reviews = [
   {
-    name: 'Jonas D',
-    date: 'Sep 2026',
-    published: '2026-09-01',
-    detail: 'Couples',
-    quote: 'Victor spots animals as if it’s the easiest thing in the world! We saw an incredible variety of wildlife and even managed to see the complete Big Five.',
+    name: 'Regine F',
+    date: 'Oct 2026',
+    published: '2026-10-01',
+    detail: 'Austria · Travelled with friends',
+    quote: 'Regine describes a flawless stay at Asanja Moru and strongly recommends the camp.',
+    image: '/legacy/wp-content/uploads/2025/07/camps-asanja-moru-couple_20250709163233.webp',
+    imageAlt: 'Guests enjoying a welcome drink at Asanja Moru camp',
+    rating: 5,
+    reviewUrl: 'https://www.tripadvisor.com/ShowUserReviews-g293751-d1997580-r1082930616-Asanja_Moru-Serengeti_National_Park.html',
+  },
+  {
+    name: 'Meike H',
+    date: 'Oct 2026',
+    published: '2026-10-01',
+    detail: 'Couple · Translated from German',
+    quote: 'Meike loved the Serengeti setting, the tented experience, the food and the exceptionally friendly team.',
+    image: '/legacy/wp-content/uploads/2025/07/camps-asanja-moru-tent_20250709164250.webp',
+    imageAlt: 'Private tent and veranda overlooking the Serengeti at Asanja Moru',
+    rating: 5,
+    reviewUrl: 'https://www.tripadvisor.com/ShowUserReviews-g293751-d1997580-r1082267929-Asanja_Moru-Serengeti_National_Park.html',
+  },
+  {
+    name: 'Olivier S',
+    date: 'Oct 2026',
+    published: '2026-10-01',
+    detail: 'Travelled with family',
+    quote: 'Olivier highlights the remarkable Serengeti views and the kindness of the Asanja Moru staff.',
+    image: '/legacy/wp-content/uploads/2025/07/camps-asanja-moru-kopjes_20250722164924.webp',
+    imageAlt: 'Rocky kopjes and open wilderness surrounding Asanja Moru',
+    rating: 5,
+    reviewUrl: 'https://www.tripadvisor.com/ShowUserReviews-g293751-d1997580-r1081256198-Asanja_Moru-Serengeti_National_Park.html',
+  },
+  {
+    name: 'A_KevH',
+    date: 'Aug 2026',
+    published: '2026-08-01',
+    detail: 'Rickmansworth, United Kingdom · Family',
+    quote: 'A memorable sunset, phenomenal location, welcoming staff and excellent food made this a trip of a lifetime.',
+    image: '/legacy/wp-content/uploads/2024/04/menu-reviews_20250711104945.webp',
+    imageAlt: 'Asanja guests raising a toast during a Serengeti sunset',
+    rating: 5,
+    reviewUrl: 'https://www.tripadvisor.com/ShowUserReviews-g293751-d1997580-r1071651124-Asanja_Moru-Serengeti_National_Park.html',
+  },
+  {
+    name: 'Gajapati DSDeb',
+    date: 'Jun 2026',
+    published: '2026-06-01',
+    detail: 'Bhubaneswar, India · Friends',
+    quote: 'The secluded setting, abundant wildlife and expert guides made this an uncrowded Serengeti safari to remember.',
     image: '/legacy/wp-content/uploads/2025/10/Asanja-Game-drives-.webp',
-    imageAlt: 'Asanja safari vehicle watching a pride of lions on the Serengeti plains',
-    rating: 5,
+    imageAlt: 'Asanja game-drive vehicle beside a pride of lions in the Serengeti',
+    rating: 4,
+    reviewUrl: 'https://www.tripadvisor.com/ShowUserReviews-g293751-d1997580-r1069720374-Asanja_Moru-Serengeti_National_Park.html',
   },
   {
-    name: 'Roar H',
-    date: 'Jul 2026',
-    published: '2026-07-01',
-    detail: 'Couples · Translated from Norwegian',
-    quote: 'Saw the big 5 animals several times. Stayed in a tent 2 nights. Elephants 20 meters from the camp and the zebra that went through the camp.',
+    name: 'Mischi M',
+    date: 'Apr 2026',
+    published: '2026-04-01',
+    detail: 'Family · Translated from German',
+    quote: 'Mischi praises the well-equipped tents, beautiful views and the unforgettable sight of elephants near camp in the morning.',
     image: '/legacy/wp-content/uploads/2025/08/Elephants-Ash.webp',
-    imageAlt: 'Elephant family walking together across the African savannah',
+    imageAlt: 'An elephant family crossing the open Serengeti grassland',
     rating: 5,
-  },
-  {
-    name: 'Philippa H',
-    date: 'Sep 2025',
-    published: '2025-09-01',
-    detail: 'Riverdale, Australia',
-    quote: 'Hearing lions roaring through the night was a cool experience. Our chef cooked fabulous meals and our guide was knowledgeable.',
-    image: '/legacy/wp-content/uploads/2025/07/Experiences-Header-gamedrive.webp',
-    imageAlt: 'Asanja safari vehicle crossing a river beside a pod of hippos',
-    rating: 5,
+    reviewUrl: `${tripadvisorUrl}#REVIEWS`,
   },
 ] as const
 
-const totalReviews = reviews.length
-const averageRating = reviews.reduce((sum, review) => sum + review.rating, 0) / totalReviews
+const totalReviews = 404
+const averageRating = 4.9
+const ratingBreakdown = [
+  {label: 'Excellent', count: 370},
+  {label: 'Good', count: 24},
+  {label: 'Average', count: 4},
+  {label: 'Poor', count: 3},
+  {label: 'Terrible', count: 3},
+] as const
 
 export const metadata: Metadata = {
   title: 'Asanja Reviews | Guest Experiences and Safari Testimonials',
@@ -93,7 +136,7 @@ export default function AsanjaReviewsPage() {
           <p className={styles.eyebrow}>Open hearts. Wild spirits.</p>
           <h1>Stories from<br />our guests</h1>
           <p>Real moments, remarkable wildlife and the warm Asanja hospitality our travellers remember long after returning home.</p>
-          <a href="#guest-reviews">Read the reviews <span aria-hidden="true">↓</span></a>
+          <a href="#guest-reviews">Explore guest stories <span className={styles.ctaArrow} aria-hidden="true">↓</span></a>
         </div>
       </header>
 
@@ -105,13 +148,23 @@ export default function AsanjaReviewsPage() {
         <p>Wondering what it’s really like to stay with Asanja Africa? These guest stories share the wildlife encounters, personal service and small details that made their Tanzanian safaris unforgettable.</p>
       </section>
 
-      <section className={styles.summary} aria-label="Review summary">
-        <div><strong>{averageRating.toFixed(1)}</strong><span aria-label={`${averageRating.toFixed(1)} out of 5 stars`} className={styles.summaryStars}>★★★★★</span><small>Average rating</small></div>
-        <div><strong>{totalReviews}</strong><span>guest reviews</span><small>Published on this page</small></div>
-        <a href={tripadvisorUrl} target="_blank" rel="noopener noreferrer">See Asanja on Tripadvisor <span aria-hidden="true">↗</span></a>
+      <section className={styles.summary} aria-label="Asanja Moru Tripadvisor review summary">
+        <div className={styles.summaryLead}>
+          <p className={styles.summaryKicker}>Asanja Moru on Tripadvisor</p>
+          <div className={styles.summaryScore}><strong>{averageRating.toFixed(1)}</strong><span aria-label={`${averageRating.toFixed(1)} out of 5 stars`}>★★★★★</span></div>
+          <p><b>{totalReviews} traveller reviews</b> · Tripadvisor data checked November 2026</p>
+          <a href={tripadvisorUrl} target="_blank" rel="noopener noreferrer">Read all {totalReviews} reviews <span aria-hidden="true">↗</span></a>
+        </div>
+        <div className={styles.breakdown} aria-label="Rating breakdown">
+          {ratingBreakdown.map((item) => <div key={item.label}>
+            <span>{item.label}</span>
+            <i><b style={{width: `${(item.count / totalReviews) * 100}%`}} /></i>
+            <strong>{item.count}</strong>
+          </div>)}
+        </div>
       </section>
 
-      <section className={styles.cards} aria-label={`${totalReviews} guest reviews`}>
+      <section className={styles.cards} aria-label={`${reviews.length} featured Tripadvisor reviews`}>
         {reviews.map((review) => <article className={styles.card} key={review.name}>
           <div className={styles.cardImage}>
             <Image src={review.image} alt={review.imageAlt} fill sizes="(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 33vw" />
@@ -123,7 +176,7 @@ export default function AsanjaReviewsPage() {
               <strong>{review.name}</strong>
               <span>{review.detail} · {review.date}</span>
             </div>
-            <a href={tripadvisorUrl} target="_blank" rel="noopener noreferrer">Explore Asanja on Tripadvisor <span aria-hidden="true">→</span></a>
+            <a href={review.reviewUrl} target="_blank" rel="noopener noreferrer">Read this review on Tripadvisor <span aria-hidden="true">→</span></a>
           </div>
         </article>)}
       </section>

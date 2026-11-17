@@ -566,7 +566,6 @@
 .safari-trip-editorial-introduction .safari-prose blockquote{margin:1.8em 0;padding:0;background:none;border:0;color:#52634f;font-style:italic}
 .safari-trip-editorial-introduction .safari-prose > :last-child{margin-bottom:0}
 @media(max-width:650px){.safari-trip-editorial-introduction{width:calc(100% - 2rem);padding:3.5rem 0 1.5rem}.safari-trip-editorial-introduction .safari-prose{font-size:1rem;line-height:1.75}.safari-trip-editorial-introduction .safari-prose :is(h2,h3,h4){margin-top:1.65em}}
-
 /* Canonical Asanja calls to action: square, restrained and typographic. Keep
    selector chips, carousel controls and disclosure controls visually distinct. */
 .safari-trip-page .safari-hero-actions a,

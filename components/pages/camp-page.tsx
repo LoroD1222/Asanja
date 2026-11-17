@@ -30,16 +30,10 @@ function introductionText(value: PageText | undefined) {
 
 export function CampPageView({page}: {page: CampPage}) {
   const storyImage = page.storyImage || photoAt(page.gallery, 0) || page.heroImage
-  const locationImage = page.locationImage || photoAt(page.gallery, 1) || page.heroImage
-  const locationImages = [
-    locationImage,
-    ...(page.locationGallery || []),
-    page.heroImage,
-    page.storyImage,
-    ...(page.gallery || []).map((item) => item.image),
-    page.bookingImage,
-  ]
-    .filter((image): image is NonNullable<typeof locationImage> => Boolean(image?.asset?.url))
+  const locationImages = [page.locationImage, ...(page.locationGallery || [])]
+    .filter((image): image is NonNullable<CampPage['locationImage']> => Boolean(image?.asset?.url))
+  if (!locationImages.length && page.heroImage?.asset?.url) locationImages.push(page.heroImage)
+  const locationImage = locationImages[0]
   const storyPoints = (page.storyPoints || []).filter((point) => point.title)
   const facilities = (page.facilities || []).filter(Boolean)
   const locationName = page.location || page.destination?.title
@@ -68,7 +62,7 @@ export function CampPageView({page}: {page: CampPage}) {
       </section>
 
       {(storyImage?.asset?.url || page.storyHeading || storyPoints.length) ? <section className={styles.story} aria-labelledby="camp-story-heading">
-        <div className={styles.storyImage}>{storyImage?.asset?.url ? <PageImage image={storyImage} quality={90} sizes="(max-width: 900px) 100vw, 620px" /> : null}</div>
+        <div className={styles.storyImage}>{storyImage?.asset?.url ? <PageImage image={storyImage} quality={90} sizes="100vw" /> : null}</div>
         <div className={styles.storyCopy}>
           <p className={styles.eyebrow}>About {page.title}</p>
           <h2 id="camp-story-heading">{page.storyHeading || 'Discover a landscape of luxury'}</h2>

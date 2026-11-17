@@ -70,8 +70,13 @@ export function CampGalleryCarousel({items}: {items?: PageMedia[]}) {
   const photos = (items || []).filter((item) => item.kind === 'photo' && item.image?.asset?.url)
   const carousel = useCarousel(photos.length)
   if (!photos.length) return null
+  const photoSizes = photos.length === 1
+    ? '100vw'
+    : photos.length === 2
+      ? '(max-width: 600px) 88vw, (max-width: 900px) 68vw, 50vw'
+      : '(max-width: 600px) 88vw, (max-width: 900px) 68vw, 34vw'
 
-  return <div className={styles.galleryShell}>
+  return <div className={styles.galleryShell} data-photo-count={photos.length}>
     <div
       className={styles.galleryTrack}
       ref={carousel.track}
@@ -85,14 +90,14 @@ export function CampGalleryCarousel({items}: {items?: PageMedia[]}) {
           src={item.image!.asset!.url!}
           alt={item.image?.alt || item.caption || ''}
           fill
-          sizes="(max-width: 600px) 88vw, (max-width: 900px) 68vw, 34vw"
-          quality={75}
+          sizes={photoSizes}
+          quality={90}
         />
         {item.caption ? <figcaption>{item.caption}</figcaption> : null}
         <span className={styles.slideNumber} aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
       </figure>)}
     </div>
-    <CarouselControls active={carousel.active} count={photos.length} label="gallery" move={carousel.move} goTo={carousel.goTo} />
+    {photos.length > 1 ? <CarouselControls active={carousel.active} count={photos.length} label="gallery" move={carousel.move} goTo={carousel.goTo} /> : null}
   </div>
 }
 
@@ -120,7 +125,7 @@ export function CampLocationCarousel({images, label}: {images: SanityImage[]; la
       alt={image.alt || `${label} location view ${index + 1}`}
       fill
       sizes="(max-width: 900px) 100vw, 50vw"
-      quality={75}
+      quality={90}
       className={index === active ? styles.locationImageActive : styles.locationImage}
       aria-hidden={index !== active}
     />)}
@@ -164,8 +169,8 @@ function AmenityIcon({facility, index}: {facility: string; index: number}) {
     </>
   } else if (label.includes('airstrip') || label.includes('minute')) {
     icon = <>
-      <circle cx="13" cy="30" r="10" /><path d="M13 24v6l4 3M13 17v3m-13 10h3m10 10v3" />
-      <path d="M36 5c1.2 0 2 1 2 2.3v9.2l6 4v3l-6-1.8V32l3 2v2l-5-1-5 1v-2l3-2V21.7l-6 1.8v-3l6-4V7.3C34 6 34.8 5 36 5Z" />
+      <circle cx="24" cy="24" r="18" />
+      <path d="M24 12v12l8 5M24 6v3M42 24h-3M24 42v-3M6 24h3" />
     </>
   } else if (label.includes('walk')) {
     icon = <>
@@ -188,11 +193,14 @@ function AmenityIcon({facility, index}: {facility: string; index: number}) {
       <circle cx="12" cy="35" r="3" /><circle cx="32" cy="35" r="3" />
       <path d="M7 31H4m36 0h-3" />
     </>
+  } else if (label.includes('bush') || label.includes('activit')) {
+    icon = <>
+      <circle cx="13" cy="32" r="8" /><circle cx="35" cy="32" r="8" />
+      <path d="m5 29 5-17h7l5 17M26 29l5-17h7l5 17M20 24h8M13 12V8m22 4V8" />
+    </>
   } else {
     icon = <>
-      <circle cx="14" cy="34" r="8" /><circle cx="34" cy="34" r="8" />
-      <path d="M6 34l5-19h7l6 19 6-19h7l5 19M18 20h12M21 28h6" />
-      <path d="M24 15V7m0 0-4 4m4-4 4 4" />
+      <path d="M24 42V24M24 32C12 32 7 24 7 13c10 0 17 6 17 19ZM24 28c0-10 6-17 17-18 0 11-5 18-17 18Z" />
     </>
   }
 

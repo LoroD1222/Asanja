@@ -63,32 +63,14 @@ const gallery: PageMedia[] = [
     caption: 'Contemporary comfort, rooted in Tanzania',
     image: heroImage,
   },
-  {
-    _key: 'ewasi-gallery-3',
-    kind: 'photo',
-    caption: 'Quiet interiors overlooking the wild',
-    image: image('/camps/asanja-ewasi-tarangire/ewasi-safari-001-social.webp', 'Interior of an Asanja Ewasi guest suite in Tarangire', 1920, 1081),
-  },
 ]
 
 const locationGallery: SanityImage[] = [
-  image(
-    '/legacy/wp-content/uploads/2025/07/safaris-tarangire-lion-and-baobab_20250723124034.webp',
-    'A lion resting beneath an ancient baobab in Tarangire National Park',
-    1800,
-    1200,
-  ),
   image(
     '/legacy/wp-content/uploads/2025/08/Elephants-Ash.webp',
     'An elephant herd and calf crossing the open Tarangire plains',
     1800,
     1012,
-  ),
-  image(
-    '/legacy/wp-content/uploads/2025/10/Elephant-2.webp',
-    'A tusked elephant walking through Tarangire grassland',
-    886,
-    664,
   ),
 ]
 
@@ -142,7 +124,12 @@ const ewasiFallback: CampPage = {
     'Immersive bush activities',
   ],
   gallery,
-  locationImage: heroImage,
+  locationImage: image(
+    '/legacy/wp-content/uploads/2025/07/safaris-tarangire-lion-and-baobab_20250723124034.webp',
+    'A lion resting beneath an ancient baobab in Tarangire National Park',
+    1800,
+    1200,
+  ),
   locationGallery,
   locationDescription: paragraphs([
     'Nestled within Tarangire National Park, just a 30-minute drive from Kuro Airstrip, Asanja Ewasi looks across vast plains dotted with ancient baobabs and traversed by immense elephant herds.',

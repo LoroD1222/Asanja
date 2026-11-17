@@ -91,7 +91,7 @@ const ewasiFallback: CampPage = {
     '“Ewasi,” a place in Tarangire and a Maa word meaning “plain ground,” reflects the camp’s deep connection to the land and its rich heritage.',
     'Guests will discover the unique wonders of Tarangire, from vast plains dotted with ancient baobabs and immense elephant herds to seasonal migrations and the rare sight of tree-climbing pythons, all while enjoying Asanja’s signature personalised hospitality.',
   ]),
-  storyHeading: 'A story written by the land',
+  storyHeading: 'A Story Written By The Land',
   storyImage: gallery[0].image,
   storyPoints: [
     {

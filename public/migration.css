@@ -531,6 +531,13 @@ body.page-id-2749 .elementor-element.elementor-element-d79dcd7 {
   background-position: bottom center !important;
 }
 
+/* The homepage CTA used a negative bottom margin to pull the footer artwork
+   upward. That overlap covered most of the final planning button. */
+body.page-id-9 .elementor-element.elementor-element-ffa5228 {
+  --margin-bottom: 0px;
+  margin-bottom: 0 !important;
+}
+
 /* The exported homepage buttons use unequal top and bottom padding. Flex
    centering keeps every label optically centred without changing its width. */
 body.home .elementor-button {

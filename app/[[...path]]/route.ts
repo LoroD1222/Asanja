@@ -130,7 +130,7 @@ export async function GET(request: Request, context: RouteContext) {
         "/legacy/wp-content/uploads/elementor/css/post-11.css'",
         "/legacy/wp-content/uploads/elementor/css/post-11.css?buttons=20261117-square'",
       )
-      .replaceAll('href="/migration.css"', 'href="/migration.css?design=20261117-square"');
+      .replaceAll('href="/migration.css"', 'href="/migration.css?design=20261117-cta"');
     return new Response(versionedHtml, {
       headers: {
         'Content-Type': 'text/html; charset=utf-8',

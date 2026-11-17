@@ -125,10 +125,12 @@ export async function GET(request: Request, context: RouteContext) {
         : html;
     // The legacy Elementor stylesheet is served as immutable, so a versioned URL
     // ensures existing visitors receive button-style corrections on deployment.
-    const versionedHtml = responseHtml.replaceAll(
-      "/legacy/wp-content/uploads/elementor/css/post-11.css'",
-      "/legacy/wp-content/uploads/elementor/css/post-11.css?buttons=20261117'",
-    );
+    const versionedHtml = responseHtml
+      .replaceAll(
+        "/legacy/wp-content/uploads/elementor/css/post-11.css'",
+        "/legacy/wp-content/uploads/elementor/css/post-11.css?buttons=20261117-square'",
+      )
+      .replaceAll('href="/migration.css"', 'href="/migration.css?design=20261117-square"');
     return new Response(versionedHtml, {
       headers: {
         'Content-Type': 'text/html; charset=utf-8',

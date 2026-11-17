@@ -1,5 +1,6 @@
 .safari-site{--safari-ink:#303b31;--safari-moss:#596c52;--safari-clay:#b98b56;--safari-cream:#f5f2ee;--safari-line:#d9d4cb;color:var(--safari-ink)}
 .safari-page{padding-bottom:64px;overflow:clip}
+.safari-page.safari-landing-page{padding-bottom:0}
 .safari-page.safari-trip-page{padding-bottom:0}
 .safari-page a{color:inherit}
 .safari-kicker{display:block;color:var(--safari-clay);font-size:.69rem;font-weight:700;letter-spacing:.17em;text-transform:uppercase;margin:0 0 1rem}
@@ -565,3 +566,21 @@
 .safari-trip-editorial-introduction .safari-prose blockquote{margin:1.8em 0;padding:0;background:none;border:0;color:#52634f;font-style:italic}
 .safari-trip-editorial-introduction .safari-prose > :last-child{margin-bottom:0}
 @media(max-width:650px){.safari-trip-editorial-introduction{width:calc(100% - 2rem);padding:3.5rem 0 1.5rem}.safari-trip-editorial-introduction .safari-prose{font-size:1rem;line-height:1.75}.safari-trip-editorial-introduction .safari-prose :is(h2,h3,h4){margin-top:1.65em}}
+
+/* Match the parent site's straight-edged calls to action. Keep circular carousel
+   controls and informational badges distinct from these buttons. */
+.safari-trip-page .safari-hero-actions a,
+.safari-trip-page .trip-plan-pill,
+.safari-trip-page .trip-plan-choice button,
+.safari-trip-page .safari-itinerary-tools button,
+.safari-trip-page .safari-pdf-download-trigger,
+.safari-trip-page .safari-trip-closing-content>a{border-radius:0}
+.safari-trip-page .safari-hero-actions a span,
+.safari-trip-page .safari-hero-actions a:first-child span,
+.safari-trip-page .trip-plan-pill>span,
+.safari-trip-page .safari-pdf-download-trigger span,
+.safari-trip-page .safari-trip-closing-content>a span{width:auto;height:auto;border-radius:0;background:transparent;color:inherit}
+.safari-trip-page .safari-hero-actions a,
+.safari-trip-page .trip-plan-pill,
+.safari-trip-page .safari-pdf-download-trigger,
+.safari-trip-page .safari-trip-closing-content>a{padding-right:18px}

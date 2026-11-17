@@ -123,13 +123,7 @@ export async function GET(request: Request, context: RouteContext) {
       : routePath === 'safaris'
         ? await renderLegacySafariIndex(html)
         : html;
-    // The legacy Elementor stylesheet is served as immutable, so a versioned URL
-    // ensures existing visitors receive button-style corrections on deployment.
-    const versionedHtml = responseHtml.replaceAll(
-      "/legacy/wp-content/uploads/elementor/css/post-11.css'",
-      "/legacy/wp-content/uploads/elementor/css/post-11.css?buttons=20261117'",
-    );
-    return new Response(versionedHtml, {
+    return new Response(responseHtml, {
       headers: {
         'Content-Type': 'text/html; charset=utf-8',
         'Cache-Control': 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400',

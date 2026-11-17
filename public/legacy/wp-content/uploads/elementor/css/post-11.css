@@ -211,23 +211,3 @@ right: -55%;
 		url('/legacy/wp-content/uploads/2024/04/CastoroTitling-Regular.ttf') format('truetype');
 }
 /* End Custom Fonts CSS */
-
-/* Keep button labels optically centered, including when the hover arrow appears. */
-.elementor-kit-11 .elementor-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 20px;
-    border-radius: 999px;
-}
-
-.elementor-kit-11 .elementor-button:hover,
-.elementor-kit-11 .elementor-button:focus-visible {
-    padding: 12px 44px;
-    border-radius: 999px;
-}
-
-.elementor-kit-11 .elementor-button .elementor-button-content-wrapper {
-    align-items: center;
-    justify-content: center;
-}

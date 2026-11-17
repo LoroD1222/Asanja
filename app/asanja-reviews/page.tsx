@@ -136,7 +136,7 @@ export default function AsanjaReviewsPage() {
           <p className={styles.eyebrow}>Open hearts. Wild spirits.</p>
           <h1>Stories from<br />our guests</h1>
           <p>Real moments, remarkable wildlife and the warm Asanja hospitality our travellers remember long after returning home.</p>
-          <a href="#guest-reviews">Explore guest stories <span className={styles.ctaArrow} aria-hidden="true">↓</span></a>
+          <a href="#guest-reviews">Explore guest stories</a>
         </div>
       </header>
 

@@ -1,6 +1,7 @@
 import type {Metadata} from 'next'
 import Image from 'next/image'
 import {BlogShell} from '../../components/blog/blog-shell'
+import {campLinks} from '../../components/blog/asanja-site-data'
 import styles from './reviews.module.css'
 
 const tripadvisorUrl = 'https://www.tripadvisor.com/Hotel_Review-g293751-d1997580-Reviews-Asanja_Moru-Serengeti_National_Park.html'
@@ -134,7 +135,7 @@ export default function AsanjaReviewsPage() {
         <div className={styles.heroShade} />
         <div className={styles.heroCopy}>
           <p className={styles.eyebrow}>Open hearts. Wild spirits.</p>
-          <h1>Stories from<br />our guests</h1>
+          <h1><span>Stories from</span><span>our guests</span></h1>
           <p>Real moments, remarkable wildlife and the warm Asanja hospitality our travellers remember long after returning home.</p>
           <a href="#guest-reviews">Explore guest stories</a>
         </div>
@@ -146,6 +147,21 @@ export default function AsanjaReviewsPage() {
           <h2 id="reviews-heading">Guest experiences,<br />told firsthand</h2>
         </div>
         <p>Wondering what it’s really like to stay with Asanja Africa? These guest stories share the wildlife encounters, personal service and small details that made their Tanzanian safaris unforgettable.</p>
+      </section>
+
+      <section className={styles.campCollection} aria-labelledby="camp-collection-heading">
+        <div className={styles.campCollectionCopy}>
+          <p className={styles.eyebrow}>Six camps. One Asanja welcome.</p>
+          <h2 id="camp-collection-heading">Explore every<br />Asanja stay</h2>
+          <p>From the Serengeti and Grumeti to Ruaha and Tarangire, discover the full collection behind our guests’ stories.</p>
+        </div>
+        <nav className={styles.campLinks} aria-label="Explore Asanja’s six camps">
+          {campLinks.map((camp, index) => <a href={camp.href} key={camp.href}>
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <strong>{camp.label}</strong>
+            <i aria-hidden="true">↗</i>
+          </a>)}
+        </nav>
       </section>
 
       <section className={styles.summary} aria-label="Asanja Moru Tripadvisor review summary">

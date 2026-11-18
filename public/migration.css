@@ -559,6 +559,39 @@ body.home .elementor-button-content-wrapper {
   min-height: inherit;
 }
 
+/* Keep the camps-and-lodges closing CTA fully inside its cream section.
+   The exported Elementor layout had no bottom padding, leaving the button
+   clipped against the footer artwork. */
+body.page-id-1074 .elementor-element.elementor-element-8b77518 {
+  --padding-bottom: clamp(64px, 6vw, 88px);
+  padding-bottom: clamp(64px, 6vw, 88px) !important;
+}
+
+body.page-id-1074 .elementor-element.elementor-element-2b9d0cb .elementor-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 176px;
+  min-height: 44px;
+  padding: 0 24px !important;
+  line-height: 1.1;
+  text-align: center;
+}
+
+body.page-id-1074 .elementor-element.elementor-element-2b9d0cb .elementor-button-content-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: inherit;
+}
+
+@media (max-width: 767px) {
+  body.page-id-1074 .elementor-element.elementor-element-8b77518 {
+    --padding-bottom: 52px;
+    padding-bottom: 52px !important;
+  }
+}
+
 .asanja-trip-planner {
   display: grid;
   grid-template-columns: minmax(300px, .86fr) minmax(560px, 1.14fr);

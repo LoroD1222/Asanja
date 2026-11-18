@@ -3,7 +3,7 @@ import Image from 'next/image'
 import {BlogShell} from '../../components/blog/blog-shell'
 import styles from './reviews.module.css'
 
-const tripadvisorUrl = 'https://www.tripadvisor.com/Search?geo=6&q=asanja&ssrc=h'
+const tripadvisorUrl = 'https://www.tripadvisor.com/Hotel_Review-g293751-d1997580-Reviews-Asanja_Moru-Serengeti_National_Park.html'
 
 const reviews = [
   {

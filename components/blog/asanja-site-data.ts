@@ -30,14 +30,14 @@ export const siteMenuLinks = [
     image: '/legacy/wp-content/uploads/2024/04/menu-masaai-visit_20250724093647.webp',
   },
   {
+    label: 'Blogs',
+    href: '/blogs/',
+    image: '/legacy/wp-content/uploads/2025/07/faq-asanja-header_20250711100340.webp',
+  },
+  {
     label: 'Asanja Reviews',
     href: '/asanja-reviews/',
     image: '/legacy/wp-content/uploads/2024/04/menu-reviews_20250711104945.webp',
-  },
-  {
-    label: 'Journal',
-    href: '/blogs/',
-    image: '/legacy/wp-content/uploads/2025/07/faq-asanja-header_20250711100340.webp',
   },
   {
     label: 'FAQs',

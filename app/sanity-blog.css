@@ -282,7 +282,7 @@
 }
 .asanja-menu-brand > a:first-child {display: block; width: min(72%, 235px);}
 .asanja-menu-brand img {display: block; width: 100%; height: auto;}
-.asanja-menu-booking {
+.asanja-menu-panel a.asanja-menu-booking {
   display: inline-flex;
   align-items: center;
   justify-content: center;

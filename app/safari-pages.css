@@ -77,11 +77,6 @@
 .safari-trip-closing-content>a:focus-visible{outline:3px solid #303b31;outline-offset:4px}
 @media(max-width:650px){.safari-trip-closing{height:400px}.safari-trip-closing-scene img{object-position:center 38%}.safari-trip-closing-content{bottom:13%;gap:18px}.safari-trip-closing-logo{width:min(300px,76vw)}.safari-page .safari-trip-closing-content>a{width:210px;min-height:48px;font-size:14px}.safari-trip-closing-content>a span{width:30px;height:30px;font-size:19px}}
 
-/* This sample itinerary already ends with a full-width elephant scene. Avoid
-   stacking the footer landscape directly beneath it on this page only. */
-.safari-site--single-footer-image .asanja-site-footer{padding-top:0}
-.safari-site--single-footer-image .asanja-footer-landscape{display:none}
-
 .safari-sticky{position:fixed;z-index:30;bottom:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.75rem clamp(1rem,5vw,5rem);background:#2f382e;color:#fff;box-shadow:0 -6px 28px #0002;font-size:.83rem}.safari-sticky>div{display:flex;gap:.6rem}.safari-sticky a{display:inline-flex;align-items:center;padding:.6rem 1rem;background:#b98b56;color:#fff!important;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase}.safari-sticky a+a{background:transparent;border:1px solid #a9b6a6}
 .safari-landing-hero{display:grid;grid-template-columns:.9fr 1.1fr;min-height:620px;background:var(--safari-cream)}.safari-landing-hero>div{display:flex;flex-direction:column;justify-content:center;padding:clamp(3rem,8vw,7rem)}.safari-landing-hero h1{color:var(--safari-ink)}.safari-landing-hero>div>p:not(.safari-kicker){max-width:550px;margin:1.5rem 0 0;color:#677064;font:400 1.2rem/1.6 Georgia,serif}.safari-landing-hero>img{width:100%;height:100%;object-fit:cover}.safari-landing-intro{max-width:850px}.safari-location{display:block;margin-top:1.5rem;color:#98734d;font-size:.7rem;letter-spacing:.13em;text-transform:uppercase}
 @media(max-width:980px){.safari-hero{min-height:650px}.safari-route{grid-template-columns:1fr}.safari-route-map{min-height:420px}.safari-route-list ol{display:grid;grid-template-columns:1fr 1fr;gap:0 1rem}.safari-card-grid,.safari-pricing-grid,.safari-reviews{grid-template-columns:repeat(2,minmax(0,1fr))}.safari-quote-grid{grid-template-columns:repeat(2,1fr)}.safari-landing-hero{min-height:520px}}

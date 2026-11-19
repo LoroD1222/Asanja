@@ -164,9 +164,9 @@ export default function AsanjaReviewsPage() {
         </nav>
       </section>
 
-      <section className={styles.summary} aria-label="Asanja Moru Tripadvisor review summary">
+      <section className={styles.summary} aria-label="Asanja Africa Tripadvisor review summary">
         <div className={styles.summaryLead}>
-          <p className={styles.summaryKicker}>Asanja Moru on Tripadvisor</p>
+          <p className={styles.summaryKicker}>Asanja Africa on Tripadvisor</p>
           <div className={styles.summaryScore}><strong>{averageRating.toFixed(1)}</strong><span aria-label={`${averageRating.toFixed(1)} out of 5 stars`}>★★★★★</span></div>
           <p><b>{totalReviews} traveller reviews</b> · Tripadvisor data checked November 2026</p>
           <a href={tripadvisorUrl} target="_blank" rel="noopener noreferrer">Read all {totalReviews} reviews <span aria-hidden="true">↗</span></a>

@@ -511,6 +511,11 @@ body.page-id-2749 .elementor-element.elementor-element-66a375d {
   transform: none;
 }
 
+/* Give the contact card a clean finish before the footer landscape begins. */
+body.page-id-33 .elementor-33 .elementor-element.elementor-element-41197d9 {
+  --padding-bottom: clamp(60px, 6vw, 90px);
+}
+
 body.page-id-2749 .elementor-element.elementor-element-12eb906 {
   --padding-top: 80px;
   --padding-bottom: 80px;
@@ -901,6 +906,10 @@ body.page-id-9 .elementor-element.elementor-element-65d6d4a {
 }
 
 @media (max-width: 767px) {
+  body.page-id-33 .elementor-33 .elementor-element.elementor-element-41197d9 {
+    --padding-bottom: 42px;
+  }
+
   body.page-id-2749 .elementor-element.elementor-element-12eb906 {
     --padding-top: 45px;
     --padding-bottom: 45px;

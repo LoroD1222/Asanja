@@ -206,12 +206,13 @@
 .asanja-quote-link {
   min-width: 174px;
   min-height: 38px;
-  padding: 7px 18px 5px;
+  padding: 0 18px;
   border-color: #55664c;
   color: #515159;
   font-family: Commissioner, Arial, sans-serif;
   font-size: 13px;
   letter-spacing: .025em;
+  line-height: 1;
 }
 
 .asanja-menu {position: static;}

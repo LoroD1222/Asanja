@@ -12,11 +12,9 @@ export type CmsMenuLink = {label: string; href: string}
 
 export function AsanjaMenu({
   cmsCampLinks = [],
-  cmsSafariLinks = [],
   currentPath = '',
 }: {
   cmsCampLinks?: CmsMenuLink[]
-  cmsSafariLinks?: CmsMenuLink[]
   currentPath?: string
 }) {
   const pathname = currentPath
@@ -27,7 +25,6 @@ export function AsanjaMenu({
   const allCampLinks = [...campLinks, ...cmsCampLinks].filter((item, index, items) => items.findIndex(({href}) => href === item.href) === index)
   const menuLinks = siteMenuLinks.map((item) => {
     if (item.href === '/camps-and-lodges/') return {...item, children: allCampLinks}
-    if (item.href === '/safaris/' && cmsSafariLinks.length) return {...item, children: cmsSafariLinks}
     return item
   })
 

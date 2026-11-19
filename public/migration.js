@@ -752,9 +752,29 @@
 
   function enhancePopupMenus(popup) {
     const currentPath = `${window.location.pathname.replace(/\/+$/, '')}/`;
+    const canonicalMenuOrder = [
+      '/about/',
+      '/camps-and-lodges/',
+      '/safaris/',
+      '/experiences/',
+      '/blogs/',
+      '/asanja-reviews/',
+      '/faqs/',
+      '/contact/',
+    ];
 
     popup.querySelectorAll('.elementor-nav-menu').forEach((menu, menuIndex) => {
       const topLevelItems = [...menu.children].filter((child) => child.matches('li.menu-item'));
+      const safariItem = topLevelItems.find((item) => (
+        item.querySelector(':scope > a')?.getAttribute('href') === '/safaris/'
+      ));
+      const safariLink = safariItem?.querySelector(':scope > a');
+      safariItem?.querySelector(':scope > .sub-menu')?.remove();
+      safariItem?.querySelector(':scope > .asanja-submenu-toggle')?.remove();
+      safariItem?.classList.remove('menu-item-has-children', 'asanja-submenu-open');
+      safariLink?.removeAttribute('aria-haspopup');
+      safariLink?.removeAttribute('aria-expanded');
+
       const experiencesItem = topLevelItems.find((item) => (
         item.querySelector(':scope > a')?.getAttribute('href') === '/experiences/'
       ));
@@ -777,8 +797,18 @@
         if (!experiencesItem) menu.append(blogsItem);
       }
 
+      const blogsLink = blogsItem.querySelector(':scope > a');
+      if (blogsLink) blogsLink.textContent = 'Blogs';
+
+      const normalizedItems = [...menu.children].filter((child) => child.matches('li.menu-item'));
+      canonicalMenuOrder.forEach((href) => {
+        const item = normalizedItems.find((candidate) => (
+          candidate.querySelector(':scope > a')?.getAttribute('href') === href
+        ));
+        if (item) menu.append(item);
+      });
+
       if (currentPath.startsWith('/blogs/')) {
-        const blogsLink = blogsItem.querySelector(':scope > a');
         blogsItem.classList.add('current-menu-item', 'current_page_item');
         blogsLink?.classList.add('elementor-item-active');
         blogsLink?.setAttribute('aria-current', 'page');

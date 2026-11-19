@@ -2,11 +2,9 @@ import {AsanjaMenu, type CmsMenuLink} from './asanja-menu'
 
 export function AsanjaHeader({
   cmsCampLinks = [],
-  cmsSafariLinks = [],
   currentPath = '',
 }: {
   cmsCampLinks?: CmsMenuLink[]
-  cmsSafariLinks?: CmsMenuLink[]
   currentPath?: string
 }) {
   return (
@@ -17,7 +15,7 @@ export function AsanjaHeader({
         </a>
         <div className="asanja-header-actions">
           <a className="asanja-quote-link" href="/plan-my-stay/">Request a quote</a>
-          <AsanjaMenu cmsCampLinks={cmsCampLinks} cmsSafariLinks={cmsSafariLinks} currentPath={currentPath} />
+          <AsanjaMenu cmsCampLinks={cmsCampLinks} currentPath={currentPath} />
         </div>
       </div>
     </header>

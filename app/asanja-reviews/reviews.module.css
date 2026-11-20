@@ -26,18 +26,6 @@
 .introduction h2, .closing h2 {margin: 0; font-family: var(--asanja-heading-font), Castoro, Georgia, serif; font-size: clamp(3rem, 5.1vw, 5.5rem); font-weight: 400; letter-spacing: 0; line-height: .98; text-transform: uppercase;}
 .introduction > p {max-width: 650px; margin: 0 0 .7rem; color: #77777b; font-size: clamp(.98rem, 1.2vw, 1.12rem); line-height: 1.85;}
 
-.campCollection {display: grid; grid-template-columns: minmax(280px, .72fr) minmax(0, 1.28fr); gap: clamp(3rem, 8vw, 9rem); width: min(1440px, calc(100% - 8rem)); margin: 0 auto clamp(5rem, 8vw, 8rem); padding: clamp(2.7rem, 5vw, 5rem); border: 1px solid #d8d4ce; background: #f9f7f3;}
-.campCollectionCopy {align-self: center;}
-.campCollectionCopy h2 {margin: 0; font-family: var(--asanja-heading-font), Castoro, Georgia, serif; font-size: clamp(2.7rem, 4.2vw, 4.8rem); font-weight: 400; line-height: .98; text-transform: uppercase;}
-.campCollectionCopy > p:last-child {max-width: 440px; margin: 1.5rem 0 0; color: #77777b; font-size: .98rem; line-height: 1.75;}
-.campLinks {display: grid; align-content: center; border-top: 1px solid #d8d4ce;}
-.campLinks a {display: grid; grid-template-columns: 42px minmax(0, 1fr) 24px; gap: 1rem; align-items: center; min-height: 62px; border-bottom: 1px solid #d8d4ce; color: var(--reviews-ink); transition: color .2s ease, padding .2s ease;}
-.campLinks a:hover, .campLinks a:focus-visible {padding-left: .55rem; color: var(--reviews-green);}
-.campLinks a:focus-visible {outline: 2px solid var(--reviews-green); outline-offset: 3px;}
-.campLinks span {color: var(--reviews-gold); font-family: var(--asanja-ui-font), sans-serif; font-size: .7rem; letter-spacing: .13em;}
-.campLinks strong {font-family: var(--asanja-ui-font), sans-serif; font-size: clamp(.86rem, 1.1vw, 1.02rem); font-weight: 500; letter-spacing: .06em; text-transform: uppercase;}
-.campLinks i {font-style: normal; text-align: right;}
-
 .summary {display: grid; grid-template-columns: .92fr 1.08fr; gap: clamp(3rem, 7vw, 8rem); width: min(1440px, calc(100% - 8rem)); margin: 0 auto clamp(5rem, 8vw, 8rem); padding: clamp(2.5rem, 5vw, 5rem); border-radius: 32px; background: var(--reviews-green); color: #fff; box-shadow: 0 28px 70px rgb(46 55 41 / .12);}
 .summaryLead {display: flex; flex-direction: column; align-items: flex-start; justify-content: center; min-width: 0;}
 .summaryKicker {margin: 0 0 1.2rem; color: #dcb98e; font-family: var(--asanja-ui-font), sans-serif; font-size: .73rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;}
@@ -46,16 +34,28 @@
 .summaryScore span {color: #f0b15f; font-size: clamp(1.05rem, 1.6vw, 1.45rem); letter-spacing: .12em;}
 .summaryLead > p:not(.summaryKicker) {margin: 1.3rem 0 1.8rem; color: rgb(255 255 255 / .78); font-size: .9rem; line-height: 1.65;}
 .summaryLead > p b {color: #fff; font-weight: 600;}
-.summaryLead > a {display: inline-flex; align-items: center; gap: .75rem; padding-bottom: .35rem; border-bottom: 1px solid rgb(255 255 255 / .65); font-family: var(--asanja-ui-font), sans-serif; font-size: .76rem; letter-spacing: .1em; text-transform: uppercase;}
-.summaryLead > a:hover, .summaryLead > a:focus-visible {border-bottom-color: #fff;}
-.breakdown {display: grid; align-content: center; gap: 1rem; min-width: 0; padding-left: clamp(2rem, 4vw, 5rem); border-left: 1px solid rgb(255 255 255 / .22);}
-.breakdown > div {display: grid; grid-template-columns: 72px minmax(90px, 1fr) 38px; gap: 1rem; align-items: center;}
-.breakdown span {font-size: .78rem;}
-.breakdown i {display: block; height: 5px; overflow: hidden; border-radius: 999px; background: rgb(255 255 255 / .17);}
-.breakdown i b {display: block; height: 100%; min-width: 4px; border-radius: inherit; background: #dcb98e;}
-.breakdown strong {font-size: .78rem; font-weight: 500; text-align: right;}
+.propertyRatings {display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-content: center; min-width: 0; border-top: 1px solid rgb(255 255 255 / .22); border-left: 1px solid rgb(255 255 255 / .22);}
+.propertyRatings a {display: grid; grid-template-columns: 1fr auto; gap: .45rem 1rem; align-content: center; min-height: 112px; padding: 1.2rem 1.5rem; border-right: 1px solid rgb(255 255 255 / .22); border-bottom: 1px solid rgb(255 255 255 / .22); transition: background .2s ease;}
+.propertyRatings a:hover, .propertyRatings a:focus-visible {background: rgb(255 255 255 / .08);}
+.propertyRatings a:focus-visible {outline: 2px solid #fff; outline-offset: -4px;}
+.propertyRatings span {font-family: var(--asanja-ui-font), sans-serif; font-size: .74rem; letter-spacing: .08em; line-height: 1.45; text-transform: uppercase;}
+.propertyRatings strong {font-size: .95rem; font-weight: 500; white-space: nowrap;}
+.propertyRatings strong i {color: #f0b15f; font-style: normal;}
+.propertyRatings small {grid-column: 1 / -1; color: rgb(255 255 255 / .65); font-size: .7rem;}
 
-.cards {display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.1rem, 2vw, 2rem); width: min(1520px, calc(100% - 5rem)); margin: 0 auto; padding: 1rem 0 clamp(7rem, 10vw, 11rem);}
+.reviewSections {display: grid;}
+.campReviews {width: min(1520px, calc(100% - 5rem)); margin: 0 auto; padding: clamp(4.5rem, 8vw, 8rem) 0; border-top: 1px solid #d5d1ca; scroll-margin-top: 104px;}
+.campHeading {display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2rem; align-items: end; margin-bottom: clamp(2rem, 4vw, 3.7rem);}
+.campHeading > div:first-child > span {display: block; margin-bottom: .8rem; color: var(--reviews-gold); font-family: var(--asanja-ui-font), sans-serif; font-size: .7rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;}
+.campHeading h2 {max-width: 900px; margin: 0; font-family: var(--asanja-heading-font), Castoro, Georgia, serif; font-size: clamp(2.8rem, 5vw, 5.4rem); font-weight: 400; line-height: .98; text-transform: uppercase;}
+.campMeta {display: grid; justify-items: end; gap: 1rem; padding-bottom: .35rem;}
+.campMeta p {display: flex; align-items: baseline; gap: .75rem; margin: 0;}
+.campMeta p strong {font-family: var(--asanja-heading-font), Castoro, Georgia, serif; font-size: 2.4rem; font-weight: 400; line-height: 1;}
+.campMeta p span {color: #e48221; font-size: .8rem; letter-spacing: .08em;}
+.campMeta p small {color: #76767b; font-size: .74rem;}
+.campMeta > a, .campLink {padding-bottom: .3rem; border-bottom: 1px solid #9f9a91; font-family: var(--asanja-ui-font), sans-serif; font-size: .72rem; letter-spacing: .09em; text-transform: uppercase;}
+.campMeta > a:hover, .campMeta > a:focus-visible, .campLink:hover, .campLink:focus-visible {border-bottom-color: var(--reviews-green); color: var(--reviews-green);}
+.cards {display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.1rem, 2vw, 2rem);}
 .card {display: flex; flex-direction: column; min-width: 0; overflow: hidden; border: 1px solid #d8d6d1; border-radius: 32px; background: #fbfaf8;}
 .cardImage {position: relative; aspect-ratio: 1.62; margin: 16px 16px 0; overflow: hidden; border-radius: 24px; background: #ddd7cf;}
 .cardImage img {object-fit: cover; transition: transform .7s ease;}
@@ -63,12 +63,24 @@
 .card:hover .cardImage img {transform: scale(1.035);}
 .cardBody {display: flex; flex: 1; flex-direction: column; padding: clamp(1.7rem, 2.5vw, 2.6rem) clamp(1.4rem, 2.3vw, 2.35rem) clamp(2rem, 2.8vw, 2.8rem);}
 .stars {color: #e48221; font-size: 1.35rem; letter-spacing: .12em;}
-.card blockquote {flex: 1; margin: 1.6rem 0 2rem; color: #161616; font-size: clamp(1.05rem, 1.35vw, 1.34rem); font-style: normal; font-weight: 500; line-height: 1.55;}
+.reviewLabel {margin-top: 1.1rem; color: #8a8278; font-family: var(--asanja-ui-font), sans-serif; font-size: .62rem; font-weight: 600; letter-spacing: .13em; text-transform: uppercase;}
+.reviewText {flex: 1; margin: .65rem 0 2rem; color: #161616; font-size: clamp(1.05rem, 1.35vw, 1.34rem); font-weight: 500; line-height: 1.55;}
 .reviewer {display: grid; gap: .3rem; margin-bottom: 1.6rem;}
 .reviewer strong {color: #181818; font-size: 1rem;}
 .reviewer span {color: #777; font-size: .82rem; line-height: 1.5;}
 .cardBody > a {width: fit-content; color: #9b5d28; font-size: .78rem; font-weight: 600; line-height: 1.5;}
 .cardBody > a:hover, .cardBody > a:focus-visible {text-decoration: underline; text-underline-offset: .24em;}
+.campLink {display: block; width: fit-content; margin: 2.2rem 0 0 auto;}
+
+.pendingCamp {padding-bottom: clamp(5rem, 9vw, 9rem);}
+.pendingStory {display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(320px, .8fr); min-height: 480px; overflow: hidden; border: 1px solid #d8d6d1; background: #fbfaf8;}
+.pendingImage {position: relative; min-height: 480px;}
+.pendingImage img {object-fit: cover;}
+.pendingStory > div:last-child {display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: clamp(2.2rem, 5vw, 5rem);}
+.pendingStory h3 {max-width: 520px; margin: 0; font-family: var(--asanja-heading-font), Castoro, Georgia, serif; font-size: clamp(2rem, 3.2vw, 3.6rem); font-weight: 400; line-height: 1.05; text-transform: uppercase;}
+.pendingStory > div:last-child > p:not(.eyebrow) {max-width: 510px; margin: 1.4rem 0 2rem; color: #77777b; line-height: 1.75;}
+.pendingStory a {display: inline-flex; align-items: center; justify-content: center; height: 44px; padding: 0 20px; border: 1px solid var(--reviews-green); color: var(--reviews-green); font-family: var(--asanja-ui-font), sans-serif; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; transition: background .2s ease, color .2s ease;}
+.pendingStory a:hover, .pendingStory a:focus-visible {background: var(--reviews-green); color: #fff;}
 
 .closing {padding: clamp(6rem, 10vw, 10rem) 2rem; background: var(--reviews-green); color: #fff; text-align: center;}
 .closing .eyebrow {color: #dcb98e;}
@@ -77,11 +89,12 @@
 .closing > a:hover, .closing > a:focus-visible {background: #fff; color: var(--reviews-green);}
 
 @media (max-width: 1050px) {
-  .heroCopy, .introduction, .campCollection, .summary {width: min(100% - 4rem, 1440px);}
-  .campCollection {grid-template-columns: minmax(250px, .7fr) minmax(0, 1.3fr); gap: 3rem;}
-  .cards {grid-template-columns: repeat(2, minmax(0, 1fr)); width: min(100% - 3rem, 1000px);}
+  .heroCopy, .introduction, .summary {width: min(100% - 4rem, 1440px);}
+  .campReviews {width: min(100% - 3rem, 1000px);}
+  .cards {grid-template-columns: repeat(2, minmax(0, 1fr));}
+  .cards .card:last-child {grid-column: 1 / -1; width: calc(50% - .55rem);}
   .summary {gap: 3rem;}
-  .breakdown {padding-left: 3rem;}
+  .pendingStory {grid-template-columns: 1fr 1fr;}
 }
 
 @media (max-width: 760px) {
@@ -93,22 +106,26 @@
   .heroCopy > a {font-size: 13px;}
   .introduction {grid-template-columns: 1fr; gap: 2rem; width: calc(100% - 2rem); padding: 5rem 0 3.5rem;}
   .introduction h2, .closing h2 {font-size: clamp(2.8rem, 13vw, 4rem);}
-  .campCollection {grid-template-columns: 1fr; gap: 2.5rem; width: calc(100% - 2rem); margin-bottom: 4rem; padding: 2.2rem 1.3rem;}
-  .campCollectionCopy h2 {font-size: clamp(2.55rem, 12vw, 3.6rem);}
-  .campLinks a {grid-template-columns: 34px minmax(0, 1fr) 20px; min-height: 58px;}
-  .campLinks strong {font-size: .78rem; line-height: 1.4;}
   .summary {grid-template-columns: 1fr; gap: 2.5rem; width: calc(100% - 2rem); margin-bottom: 4rem; padding: 2rem 1.3rem; border-radius: 24px;}
   .summaryScore {align-items: flex-end; gap: .8rem;}
   .summaryScore strong {font-size: 4.6rem;}
   .summaryScore span {padding-bottom: .45rem; font-size: .95rem;}
   .summaryLead > p:not(.summaryKicker) {font-size: .82rem;}
-  .breakdown {gap: .85rem; padding: 2rem 0 0; border-top: 1px solid rgb(255 255 255 / .22); border-left: 0;}
-  .breakdown > div {grid-template-columns: 64px minmax(75px, 1fr) 32px; gap: .7rem;}
-  .cards {grid-template-columns: 1fr; gap: 1.2rem; width: calc(100% - 1.5rem); padding-bottom: 6rem;}
+  .propertyRatings {grid-template-columns: 1fr; border-left: 0;}
+  .propertyRatings a {min-height: 84px; padding-inline: .8rem; border-right: 0;}
+  .campReviews {width: calc(100% - 1.5rem); padding: 4rem 0;}
+  .campHeading {grid-template-columns: 1fr; gap: 1.5rem; align-items: start;}
+  .campHeading h2 {font-size: clamp(2.45rem, 11.5vw, 3.7rem);}
+  .campMeta {justify-items: start;}
+  .cards {grid-template-columns: 1fr; gap: 1.2rem;}
+  .cards .card:last-child {grid-column: auto; width: auto;}
   .card {border-radius: 24px;}
   .cardImage {margin: 10px 10px 0; border-radius: 17px;}
   .cardBody {padding: 1.6rem 1.35rem 2rem;}
-  .card blockquote {font-size: 1.06rem;}
+  .reviewText {font-size: 1.06rem;}
+  .pendingStory {grid-template-columns: 1fr; min-height: 0;}
+  .pendingImage {min-height: 310px;}
+  .pendingStory > div:last-child {padding: 2.2rem 1.35rem 2.6rem;}
   .closing {padding-inline: 1rem;}
 }
 

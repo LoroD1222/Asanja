@@ -1,4 +1,5 @@
-html,body{font-family:var(--asanja-body-font),Raleway,Arial,sans-serif}
+:root{--asanja-ui-font:var(--asanja-body-font);--asanja-heading-font:var(--asanja-body-font)}
+html,body{font-family:var(--asanja-body-font),Arial,sans-serif}
 button,input,select,textarea{font:inherit}
 .safari-site{--safari-ink:#303b31;--safari-moss:#596c52;--safari-clay:#b98b56;--safari-cream:#f5f2ee;--safari-line:#d9d4cb;color:var(--safari-ink)}
 .safari-page{padding-bottom:64px;overflow:clip}
@@ -114,11 +115,6 @@ button,input,select,textarea{font:inherit}
 .safari-preview-placeholder p{max-width:670px;margin:.55rem 0 0;font-size:.9rem;line-height:1.65;color:#667066}
 .safari-price-on-request{max-width:650px;padding:1.4rem 1.6rem;background:#f5f2ee;color:#576357;font:400 1.15rem/1.6 Georgia,serif}
 @media(max-width:650px){.safari-preview-placeholder{padding:1.25rem;gap:.8rem}.safari-preview-placeholder strong{font-size:1.25rem}}
-
-@font-face{font-family:AsanjaMarcellus;src:url('/figma-trip-review/marcellus.ttf') format('truetype');font-display:swap}
-@font-face{font-family:AsanjaPoppins;src:url('/figma-trip-review/poppins-regular.ttf') format('truetype');font-weight:400;font-display:swap}
-@font-face{font-family:AsanjaPoppins;src:url('/figma-trip-review/poppins-medium.ttf') format('truetype');font-weight:500;font-display:swap}
-@font-face{font-family:AsanjaPoppins;src:url('/figma-trip-review/poppins-semibold.ttf') format('truetype');font-weight:600;font-display:swap}
 
 /* Figma-inspired trip planning panel. The form remains data-driven and functional. */
 .safari-trip-page .safari-section-booking{margin-inline:calc(50% - 50vw);padding:0;border:0;background:#f7f2ef;scroll-margin-top:75px}
@@ -597,3 +593,7 @@ button,input,select,textarea{font:inherit}
 .safari-trip-page .safari-pdf-download-trigger:hover,
 .safari-trip-page .safari-pdf-download-trigger:focus-visible,
 .safari-page .safari-trip-closing-content>a:hover{transform:none}
+
+/* The homepage Raleway face is the single text font across every React and
+   Sanity route. Genuine icon-font glyphs can opt out with the data attribute. */
+:root body :is(h1,h2,h3,h4,h5,h6,p,a,button,input,select,textarea,label,legend,li,dt,dd,blockquote,figcaption,caption,th,td,summary,small,strong,b,span):not([data-asanja-icon-font]){font-family:var(--asanja-body-font),Arial,sans-serif!important}

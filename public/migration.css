@@ -7,26 +7,22 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: "Asanja Commissioner";
-  src: url("/fonts/commissioner-latin.woff2") format("woff2");
-  font-style: normal;
-  font-weight: 400 700;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Asanja Castoro";
-  src: url("/fonts/castoro-latin.woff2") format("woff2");
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-
 :root {
   --asanja-body-font: "Asanja Raleway";
-  --asanja-ui-font: "Asanja Commissioner";
-  --asanja-heading-font: "Asanja Castoro";
+  --asanja-ui-font: "Asanja Raleway";
+  --asanja-heading-font: "Asanja Raleway";
+}
+
+body {
+  font-family: var(--asanja-body-font), Arial, sans-serif;
+}
+
+body :where(h1, h2, h3, h4, h5, h6, p, a, button, input, select, textarea, label, li, dt, dd, blockquote, figcaption, caption, th, td, summary, small, strong, b, span),
+body .elementor-heading-title,
+body .elementor-button,
+body .elementor-nav-menu a,
+body .elementor-widget-text-editor {
+  font-family: var(--asanja-body-font), Arial, sans-serif !important;
 }
 
 button,
@@ -41,29 +37,6 @@ svg,
 video,
 iframe {
   max-width: 100%;
-}
-
-/*
- * Match the typography that is actually rendered by the live WordPress
- * site. Its Castoro Titling display face fails to resolve, so the browser
- * shows the declared sans-serif fallback. The archived copy has a valid
- * local file which otherwise changes display headings to a serif face.
- */
-body .elementor-heading-title,
-body .elementor-button,
-body .elementor-nav-menu a {
-  font-family: Arial, Helvetica, sans-serif !important;
-}
-
-/* Commissioner does resolve on the live homepage for secondary headings,
- * controls and navigation; only its Castoro display face falls back. */
-body.page-id-9 h3.elementor-heading-title,
-body.page-id-9 h4.elementor-heading-title,
-body.page-id-9 h5.elementor-heading-title,
-body.page-id-9 h6.elementor-heading-title,
-body.page-id-9 .elementor-button,
-body.page-id-9 .elementor-nav-menu a {
-  font-family: Commissioner, sans-serif !important;
 }
 
 /* Swiper normally writes this width during initialization. The archived
@@ -90,7 +63,7 @@ body.page-id-9 .elementor-widget-n-carousel {
   width: 56px;
   height: 56px;
   color: #7a7a7a;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--asanja-body-font), Arial, sans-serif;
   text-decoration: none;
   cursor: pointer;
 }
@@ -171,7 +144,7 @@ body.page-id-9 .elementor-widget-n-carousel {
   overflow: hidden;
   border-radius: 5px 5px 8px 8px;
   box-shadow: 0 10px 10px 4px rgb(0 0 0 / 4%);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--asanja-body-font), Arial, sans-serif;
   opacity: 0;
   visibility: hidden;
   transform: translateY(50px);
@@ -361,7 +334,7 @@ body.page-id-9 .elementor-widget-n-carousel {
  */
 body.elementor-kit-11 h2.asanja-visual-h1 {
   color: var(--e-global-color-secondary);
-  font-family: "Castoro Titling", sans-serif;
+  font-family: var(--asanja-body-font), Arial, sans-serif;
   font-size: 72px;
   font-weight: 600;
   text-transform: uppercase;
@@ -369,7 +342,7 @@ body.elementor-kit-11 h2.asanja-visual-h1 {
 
 body.elementor-kit-11 h1.asanja-visual-h2 {
   color: var(--e-global-color-d5351c3);
-  font-family: "Castoro Titling", sans-serif;
+  font-family: var(--asanja-body-font), Arial, sans-serif;
   font-size: 46px;
   font-weight: 400;
   font-style: normal;
@@ -378,7 +351,7 @@ body.elementor-kit-11 h1.asanja-visual-h2 {
 
 body.elementor-kit-11 h1.asanja-visual-h4 {
   color: var(--e-global-color-d5351c3);
-  font-family: Commissioner, sans-serif;
+  font-family: var(--asanja-body-font), Arial, sans-serif;
   font-size: 29px;
   font-weight: 300;
   text-transform: uppercase;
@@ -386,7 +359,7 @@ body.elementor-kit-11 h1.asanja-visual-h4 {
 
 body.elementor-kit-11 h2.asanja-visual-h6 {
   color: var(--e-global-color-d5351c3);
-  font-family: Commissioner, sans-serif;
+  font-family: var(--asanja-body-font), Arial, sans-serif;
   font-size: 19px;
   font-weight: 300;
   line-height: 24px;
@@ -1053,7 +1026,7 @@ body.page-id-9 .elementor-element.elementor-element-65d6d4a {
 /* Keep the itinerary titles visually identical after their SEO heading upgrade. */
 body.single-asanja_safaris .elementor-2090 h1.elementor-heading-title {
   color: #515159;
-  font-family: Commissioner, sans-serif;
+  font-family: var(--asanja-body-font), Arial, sans-serif;
   font-size: 29px;
   font-weight: 300;
   line-height: 29px;
@@ -1062,7 +1035,7 @@ body.single-asanja_safaris .elementor-2090 h1.elementor-heading-title {
 
 body.single-asanja_safaris .elementor-2090 h2.elementor-heading-title {
   color: #515159;
-  font-family: Commissioner, sans-serif;
+  font-family: var(--asanja-body-font), Arial, sans-serif;
   font-size: 19px;
   font-weight: 300;
   line-height: 24px;
@@ -1713,4 +1686,10 @@ body.dialog-body.dialog-lightbox-body {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* Match the homepage typography everywhere, including exported Elementor
+   pages. Genuine icon-font glyphs can opt out with the data attribute. */
+:root body :is(h1, h2, h3, h4, h5, h6, p, a, button, input, select, textarea, label, legend, li, dt, dd, blockquote, figcaption, caption, th, td, summary, small, strong, b, span):not([data-asanja-icon-font]) {
+  font-family: var(--asanja-body-font), Arial, sans-serif !important;
 }

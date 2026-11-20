@@ -1,3 +1,5 @@
+html,body{font-family:var(--asanja-body-font),Raleway,Arial,sans-serif}
+button,input,select,textarea{font:inherit}
 .safari-site{--safari-ink:#303b31;--safari-moss:#596c52;--safari-clay:#b98b56;--safari-cream:#f5f2ee;--safari-line:#d9d4cb;color:var(--safari-ink)}
 .safari-page{padding-bottom:64px;overflow:clip}
 .safari-page.safari-landing-page{padding-bottom:0}

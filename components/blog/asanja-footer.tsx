@@ -72,7 +72,7 @@ export async function AsanjaFooter() {
         </div>
         <div className="asanja-footer-bottom">
           <img src="/legacy/wp-content/uploads/2020/08/Asanja-web-badge-04.svg" alt="" width={82} height={64} loading="lazy" />
-          <div><p>© {new Date().getFullYear()} Asanja Africa. All Rights Reserved. &nbsp;|&nbsp; Created with Love by <a href="https://asanjaafrica.com/" target="_blank" rel="noopener noreferrer">ASANJA</a></p><Link href="/privacy-policy/">Privacy Policy</Link></div>
+          <div><p>© {new Date().getFullYear()} Asanja Africa. All Rights Reserved. &nbsp;|&nbsp; Created with Love by <Link href="/">ASANJA</Link></p><Link href="/privacy-policy/">Privacy Policy</Link></div>
         </div>
       </footer>
       <AsanjaWhatsApp />

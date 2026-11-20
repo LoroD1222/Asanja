@@ -7,7 +7,7 @@
   --asanja-line: #d4cec5;
 }
 
-.sanity-blog {min-height: 100vh; color: var(--asanja-ink); background: #fff; font-family: Arial, Helvetica, sans-serif; font-weight: 300; line-height: 1.65;}
+.sanity-blog {min-height: 100vh; color: var(--asanja-ink); background: #fff; font-family: var(--asanja-body-font), Raleway, Arial, sans-serif; font-weight: 300; line-height: 1.65;}
 .sanity-blog *, .sanity-blog *::before, .sanity-blog *::after {box-sizing: border-box;}
 .sanity-blog a {color: inherit; text-decoration: none;}
 .skip-link {position: fixed; z-index: 100; left: 1rem; top: 1rem; transform: translateY(-200%); padding: .7rem 1rem; background: #fff; border: 1px solid var(--asanja-deep);}
@@ -22,7 +22,7 @@
 .outline-button:hover, .outline-button:focus-visible {color: #fff; background: var(--asanja-green);}
 .blog-hero {padding: clamp(5rem, 10vw, 9rem) 1.5rem; text-align: center; background: var(--asanja-cream);}
 .blog-hero .eyebrow {justify-content: center;}
-.blog-hero h1, .article-hero h1, .taxonomy-hero h1 {max-width: 980px; margin: .5rem auto 1.2rem; color: var(--asanja-ink); font-family: Georgia, 'Times New Roman', serif; font-size: clamp(2.75rem, 6.5vw, 6rem); font-weight: 400; line-height: .98; letter-spacing: -.025em;}
+.blog-hero h1, .article-hero h1, .taxonomy-hero h1 {max-width: 980px; margin: .5rem auto 1.2rem; color: var(--asanja-ink); font-family: var(--asanja-heading-font), Castoro, Georgia, serif; font-size: clamp(2.75rem, 6.5vw, 6rem); font-weight: 400; line-height: .98; letter-spacing: -.025em;}
 .blog-hero p, .taxonomy-hero p {max-width: 680px; margin: 0 auto; color: #7a7878;}
 .eyebrow {display: flex; flex-wrap: wrap; gap: .45rem .8rem; color: var(--asanja-sand); font-size: .69rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase;}
 .journal-content {width: min(1240px, calc(100% - 3rem)); margin: 0 auto; padding: clamp(4rem, 7vw, 7rem) 0;}
@@ -33,11 +33,11 @@
 .article-card:hover .article-card-image img {transform: scale(1.035);}
 .article-card-placeholder {display: block; width: 100%; height: 100%; background: linear-gradient(135deg, #e8e3dc, #f5f2ee);}
 .article-card-content {padding: 1.5rem .15rem 0;}
-.article-card h2 {margin: .65rem 0 .8rem; color: var(--asanja-deep); font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.45rem, 2.2vw, 2rem); font-weight: 400; line-height: 1.15;}
+.article-card h2 {margin: .65rem 0 .8rem; color: var(--asanja-deep); font-family: var(--asanja-heading-font), Castoro, Georgia, serif; font-size: clamp(1.45rem, 2.2vw, 2rem); font-weight: 400; line-height: 1.15;}
 .article-card p {margin: 0 0 1rem; color: #777; font-size: .9rem;}
 .article-meta {display: flex; flex-wrap: wrap; gap: .4rem 1rem; padding-top: 1rem; border-top: 1px solid var(--asanja-line); color: #8b8884; font-size: .72rem; letter-spacing: .06em; text-transform: uppercase;}
 .empty-state {padding: 4rem 1.5rem; text-align: center; border: 1px solid var(--asanja-line); background: var(--asanja-cream);}
-.empty-state h2 {margin: 0 0 .5rem; font-family: Georgia, serif; font-size: 2rem; font-weight: 400;}
+.empty-state h2 {margin: 0 0 .5rem; font-family: var(--asanja-heading-font), Castoro, Georgia, serif; font-size: 2rem; font-weight: 400;}
 .pagination {display: flex; justify-content: center; gap: .8rem; margin-top: 4rem;}
 .pagination a {padding: .7rem 1.1rem; border: 1px solid var(--asanja-green); font-size: .75rem; text-transform: uppercase;}
 .article-hero, .taxonomy-hero {padding: clamp(4.5rem, 9vw, 8rem) 1.5rem; text-align: center; background: var(--asanja-cream);}
@@ -48,8 +48,8 @@
 .article-featured img {display: block; width: 100%; max-height: 760px; object-fit: cover;}
 .article-featured figcaption, .article-inline-image figcaption {padding-top: .55rem; color: #817d79; font-size: .76rem;}
 .article-layout {width: min(900px, calc(100% - 3rem)); margin: 0 auto; padding: clamp(3.5rem, 7vw, 7rem) 0;}
-.article-body {color: #565656; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.05rem, 1.7vw, 1.25rem); line-height: 1.85;}
-.article-body h2, .article-body h3, .article-body h4 {color: var(--asanja-deep); font-weight: 400; line-height: 1.2;}
+.article-body {color: #565656; font-family: var(--asanja-body-font), Raleway, Arial, sans-serif; font-size: clamp(1.05rem, 1.7vw, 1.25rem); line-height: 1.85;}
+.article-body h2, .article-body h3, .article-body h4 {color: var(--asanja-deep); font-family: var(--asanja-heading-font), Castoro, Georgia, serif; font-weight: 400; line-height: 1.2;}
 .article-body h2 {margin: 2.6em 0 .8em; font-size: clamp(2rem, 4vw, 3.2rem);}
 .article-body h3 {margin: 2.1em 0 .7em; font-size: clamp(1.55rem, 3vw, 2.25rem);}
 .article-body h4 {margin: 1.8em 0 .6em; font-size: 1.35rem;}
@@ -58,14 +58,14 @@
 .article-inline-image {margin: 3rem 0;}
 .article-inline-image img {width: 100%; height: auto;}
 .article-table-scroll {margin: 2.5rem 0; overflow-x: auto;}
-.article-table-scroll table {width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; font-size: .9rem;}
-.article-table-scroll caption {padding: .5rem; font-family: Georgia, serif; font-size: 1.15rem; text-align: left;}
+.article-table-scroll table {width: 100%; border-collapse: collapse; font-family: var(--asanja-body-font), Raleway, Arial, sans-serif; font-size: .9rem;}
+.article-table-scroll caption {padding: .5rem; font-family: var(--asanja-heading-font), Castoro, Georgia, serif; font-size: 1.15rem; text-align: left;}
 .article-table-scroll th, .article-table-scroll td {padding: .75rem; border: 1px solid var(--asanja-line); text-align: left;}
 .article-taxonomy {display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--asanja-line);}
 .article-taxonomy a {padding: .35rem .75rem; border: 1px solid var(--asanja-line); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase;}
 .related {padding: clamp(4rem, 7vw, 7rem) 0; background: var(--asanja-cream);}
 .related-inner {width: min(1240px, calc(100% - 3rem)); margin: auto;}
-.related-title {margin: 0 0 2.5rem; color: var(--asanja-deep); font-family: Georgia, serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 400; text-align: center;}
+.related-title {margin: 0 0 2.5rem; color: var(--asanja-deep); font-family: var(--asanja-heading-font), Castoro, Georgia, serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 400; text-align: center;}
 .blog-footer {display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 2rem 4rem; padding: clamp(3rem, 6vw, 6rem) clamp(1.5rem, 5vw, 5rem) 2rem; background: var(--asanja-green); color: #f7f4ef;}
 .blog-footer img {filter: brightness(0) invert(1); max-width: 210px; height: auto;}
 .blog-footer h2 {margin: 0 0 1rem; font-size: .8rem; font-weight: 400; letter-spacing: .16em; text-transform: uppercase;}
@@ -173,14 +173,6 @@
 /* Canonical site chrome. The migrated WordPress routes already use this
    composition; the React/Sanity routes use the same dimensions, imagery and
    navigation hierarchy here so moving between route types is seamless. */
-@font-face {
-  font-family: "Asanja Castoro";
-  src: url('/legacy/wp-content/uploads/2024/04/castorotitling-regular-webfont.woff2') format('woff2');
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-
 .asanja-site-header {
   position: sticky;
   top: 0;
@@ -209,7 +201,7 @@
   padding: 0 18px;
   border-color: #55664c;
   color: #515159;
-  font-family: Commissioner, Arial, sans-serif;
+  font-family: var(--asanja-ui-font), Commissioner, Arial, sans-serif;
   font-size: 13px;
   letter-spacing: .025em;
   line-height: 1;
@@ -289,12 +281,13 @@
   justify-content: center;
   min-width: 160px;
   min-height: 39px;
-  padding: 8px 17px 6px;
+  padding: 0 17px;
   border: 1px solid #55664c;
   color: #515159;
-  font-family: Commissioner, Arial, sans-serif;
+  font-family: var(--asanja-ui-font), Commissioner, Arial, sans-serif;
   font-size: 13px;
   letter-spacing: .02em;
+  line-height: 1;
   text-transform: uppercase;
   transition: color .2s ease, background .2s ease;
 }
@@ -342,19 +335,20 @@
 
 .asanja-menu-list,
 .asanja-submenu {margin: 0; padding: 0; list-style: none;}
-.asanja-menu-list > li {margin: 0 0 clamp(18px, 2.7vh, 32px);}
-.asanja-menu-list > li:last-child {margin-bottom: 0;}
+.asanja-menu-list {display: flex; flex-direction: column; gap: clamp(18px, 2.7vh, 32px);}
+.asanja-menu-list > li {margin: 0;}
 .asanja-menu-link-row {display: flex; align-items: center; gap: 12px;}
 .asanja-menu-link-row > a {
   padding: 0;
   border: 0;
   color: #7a7a7a;
-  font-family: "Asanja Castoro", Georgia, serif;
+  font-family: var(--asanja-heading-font), Castoro, Georgia, serif;
   font-size: clamp(22px, 1.85vw, 29px);
   font-weight: 400;
   letter-spacing: -.02em;
   line-height: 1.12;
   text-transform: uppercase;
+  white-space: nowrap;
   transition: color .2s ease;
 }
 .asanja-menu-list > li:hover .asanja-menu-link-row > a,
@@ -393,7 +387,7 @@
   padding: 3px 8px;
   border: 0;
   color: #515159;
-  font-family: Arial, sans-serif;
+  font-family: var(--asanja-ui-font), Commissioner, Arial, sans-serif;
   font-size: 11px;
   letter-spacing: .01em;
   line-height: 1.35;
@@ -440,13 +434,14 @@
 .asanja-newsletter h2 {flex: 0 0 29%;}
 .asanja-newsletter form {flex: 0 0 64%; gap: 10px; min-width: 0;}
 .asanja-newsletter input {flex: 1 1 75%; width: auto; min-width: 0; min-height: 40px; padding: 8px 16px; font-family: var(--asanja-body-font), Raleway, Arial, sans-serif; font-size: 15px; line-height: 22px;}
-.asanja-newsletter button {flex: 0 0 23%; min-width: 0; min-height: 40px; padding: 3px 15px 0; font-family: "Asanja Castoro", Arial, sans-serif; font-size: 15px; letter-spacing: .3px;}
+.asanja-newsletter button {flex: 0 0 23%; min-width: 0; min-height: 40px; padding: 0 15px; font-family: var(--asanja-heading-font), Castoro, Georgia, serif; font-size: 15px; line-height: 1; letter-spacing: .3px;}
 .asanja-footer-links {
   grid-template-columns: 13% 11% 21% 20%;
   justify-content: space-between;
   padding: 30px 0 40px;
 }
-.asanja-footer-links h2 {margin-bottom: 15px; color: #515159; font-family: var(--asanja-ui-font), Commissioner, Arial, sans-serif; font-size: 19px; font-weight: 300; line-height: 24px; letter-spacing: 2.2px;}
+.asanja-footer-links > div {display: flex; flex-direction: column; align-items: flex-start; gap: 6px;}
+.asanja-footer-links h2 {margin: 0 0 9px; color: #515159; font-family: var(--asanja-ui-font), Commissioner, Arial, sans-serif; font-size: 19px; font-weight: 300; line-height: 24px; letter-spacing: 2.2px;}
 .asanja-footer-links a {color: #7a7a7a; font-size: 15px; line-height: 1.5;}
 .asanja-footer-socials {gap: 30px;}
 .asanja-footer-socials a {width: 25px; height: 25px;}
@@ -616,7 +611,7 @@
   .asanja-menu-booking {display: none;}
   .asanja-menu-navigation {align-items: flex-start; min-height: 86vh; padding: 55px 28px 35px; overflow: visible;}
   .asanja-menu-close {width: 54px; height: 54px;}
-  .asanja-menu-list > li {margin-bottom: 14px;}
+  .asanja-menu-list {gap: 14px;}
   .asanja-menu-link-row > a {font-size: 24px;}
   .asanja-submenu-toggle {width: 42px; height: 42px;}
   .asanja-submenu {gap: 2px; padding-top: 8px;}

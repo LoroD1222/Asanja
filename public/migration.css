@@ -29,6 +29,13 @@
   --asanja-heading-font: "Asanja Castoro";
 }
 
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
 img,
 svg,
 video,
@@ -534,6 +541,26 @@ body.page-id-2749 .elementor-element.elementor-element-d79dcd7 {
   --margin-top: 0px;
   margin-top: 0 !important;
   background-position: bottom center !important;
+}
+
+/* Keep the footer columns on one shared rhythm instead of inheriting
+   different widget margins from each exported Elementor list. */
+.elementor-location-footer .elementor-icon-list-items {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+}
+
+.elementor-location-footer .elementor-icon-list-item {
+  margin: 0 !important;
+  line-height: 1.5;
+}
+
+.elementor-location-footer .elementor-icon-list-item a,
+.elementor-location-footer .elementor-icon-list-text {
+  line-height: inherit;
 }
 
 /* The homepage CTA used a negative bottom margin to pull the footer artwork
@@ -1424,6 +1451,35 @@ body.dialog-body.dialog-lightbox-body {
   display: block !important;
 }
 
+/* One container gap controls the full-screen menu. This prevents the active
+   state, injected items and whitespace from changing the vertical rhythm. */
+#elementor-popup-modal-1529 .menu-items-column .elementor-nav-menu--main > ul {
+  display: flex !important;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(18px, 2.7vh, 32px);
+}
+
+#elementor-popup-modal-1529 .menu-items-column .elementor-nav-menu--main > ul > li > a {
+  padding: 0 !important;
+  font-weight: 400 !important;
+  line-height: 1.12 !important;
+  white-space: nowrap;
+}
+
+#elementor-popup-modal-1529 .menu-items-column .elementor-nav-menu--main > ul > li {
+  margin: 0 !important;
+}
+
+#elementor-popup-modal-1529 .elementor-element-a3382f7 .elementor-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 41px;
+  padding: 0 18px !important;
+  line-height: 1;
+}
+
 #elementor-popup-modal-1529 .menu-item-has-children {
   position: relative;
   display: grid !important;
@@ -1492,7 +1548,8 @@ body.dialog-body.dialog-lightbox-body {
 #elementor-popup-modal-1529 .mob-menu .menu-item-has-children.asanja-submenu-open > .sub-menu {
   grid-column: 1 / -1;
   position: static !important;
-  display: block !important;
+  display: grid !important;
+  gap: 5px;
   width: 100% !important;
   margin: 10px 0 0 !important;
 }
@@ -1573,6 +1630,12 @@ body.dialog-body.dialog-lightbox-body {
     opacity: 1 !important;
     visibility: visible !important;
     transform: none !important;
+  }
+
+  #elementor-popup-modal-1529 .mob-menu .elementor-nav-menu {
+    display: flex !important;
+    flex-direction: column;
+    gap: 0;
   }
 
   #elementor-popup-modal-1529 .mob-menu .elementor-nav-menu > li {

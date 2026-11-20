@@ -4,9 +4,9 @@ import {VisualEditing} from 'next-sanity/visual-editing'
 import localFont from 'next/font/local'
 import './safari-pages.css'
 
-const asanjaBodyFont = localFont({src: '../public/fonts/raleway-latin.woff2', weight: '400 700', display: 'swap', variable: '--asanja-body-font'})
-const asanjaUiFont = localFont({src: '../public/fonts/commissioner-latin.woff2', weight: '400 700', display: 'swap', variable: '--asanja-ui-font'})
-const asanjaHeadingFont = localFont({src: '../public/fonts/castoro-latin.woff2', weight: '400', display: 'swap', variable: '--asanja-heading-font'})
+const asanjaBodyFont = localFont({src: '../public/fonts/raleway-latin.woff2', weight: '400 700', display: 'swap', preload: true, fallback: ['Arial'], adjustFontFallback: 'Arial', variable: '--asanja-body-font'})
+const asanjaUiFont = localFont({src: '../public/fonts/commissioner-latin.woff2', weight: '400 700', display: 'swap', preload: true, fallback: ['Arial'], adjustFontFallback: 'Arial', variable: '--asanja-ui-font'})
+const asanjaHeadingFont = localFont({src: '../public/fonts/castoro-latin.woff2', weight: '400', display: 'swap', preload: true, fallback: ['Georgia'], adjustFontFallback: 'Times New Roman', variable: '--asanja-heading-font'})
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://asanjaafrica.com'),

@@ -1805,3 +1805,8 @@ body.dialog-body.dialog-lightbox-body {
 :root body :is(h1, h2, h3, h4, h5, h6, p, a, button, input, select, textarea, label, legend, li, dt, dd, blockquote, figcaption, caption, th, td, summary, small, strong, b, span):not([data-asanja-icon-font]) {
   font-family: var(--asanja-body-font), Arial, sans-serif !important;
 }
+
+/* Let the FAQ content finish cleanly before the shared footer artwork. */
+body.page-id-2747 .elementor-2747 .elementor-element.elementor-element-4b524da {
+  --padding-bottom: clamp(32px, 4vw, 60px) !important;
+}

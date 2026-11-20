@@ -1168,6 +1168,24 @@ body.single-asanja_safaris .elementor-2090 h2.elementor-heading-title {
     display: none;
   }
 
+  body.page-id-1076 .elementor-1076 .elementor-element.elementor-element-6b7a1c9 {
+    --padding-bottom: 32px !important;
+  }
+
+  body.page-id-1076 .elementor-element-2a2126c,
+  body.page-id-1076 .elementor-element-2a2126c > .elementor-widget-container,
+  body.page-id-1076 .elementor-element-2a2126c .elementor-button-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  body.page-id-1076 .elementor-element-2a2126c .elementor-button {
+    width: auto;
+    min-height: 46px;
+    padding: 13px 26px;
+  }
+
 }
 
 /* Elementor's archived runtime no longer initializes on a modern Next.js

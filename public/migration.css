@@ -1188,6 +1188,12 @@ body.single-asanja_safaris .elementor-2090 h2.elementor-heading-title {
 
 }
 
+/* Keep the final safari CTA visually separate from the footer artwork on
+ * every breakpoint instead of letting its button sit on the section edge. */
+body.page-id-1076 .elementor-1076 .elementor-element.elementor-element-6b7a1c9 {
+  --padding-bottom: clamp(32px, 4vw, 60px) !important;
+}
+
 /* Elementor's archived runtime no longer initializes on a modern Next.js
  * response. These fallbacks preserve its original carousel layout and motion. */
 .asanja-carousel-fallback {

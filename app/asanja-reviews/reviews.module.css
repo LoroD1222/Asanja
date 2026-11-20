@@ -15,7 +15,7 @@
 .heroShade {position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgb(17 23 15 / .78) 0%, rgb(17 23 15 / .4) 45%, rgb(17 23 15 / .08) 75%), linear-gradient(0deg, rgb(17 23 15 / .34), transparent 55%);}
 .heroCopy {display: flex; flex-direction: column; justify-content: center; width: min(1440px, calc(100% - 8rem)); min-height: inherit; margin: 0 auto; padding: clamp(5.5rem, 11vh, 8rem) 0 clamp(4.5rem, 8vh, 6rem); color: #fff;}
 .eyebrow {margin: 0 0 1rem; color: var(--reviews-gold); font-family: var(--asanja-ui-font), sans-serif; font-size: .76rem; font-weight: 600; letter-spacing: .24em; line-height: 1.5; text-transform: uppercase;}
-.hero h1 {margin: 0; font-family: var(--asanja-heading-font), Castoro, Georgia, serif; font-size: clamp(3.9rem, 6.4vw, 7rem); font-weight: 400; letter-spacing: 0; line-height: .92; text-transform: uppercase;}
+.hero h1 {max-width: 920px; margin: 0; font: 400 clamp(3rem, 5.4vw, 5.2rem)/1.03 var(--asanja-heading-font), Castoro, Georgia, serif; letter-spacing: 0; text-transform: capitalize; text-wrap: balance;}
 .hero h1 span {display: block; width: fit-content; white-space: nowrap;}
 .heroCopy > p:not(.eyebrow) {max-width: 620px; margin: 1.6rem 0 2rem; font-size: clamp(.95rem, 1.3vw, 1.18rem); line-height: 1.7;}
 .heroCopy > a {display: inline-flex; align-items: center; justify-content: center; width: fit-content; height: 44px; margin: 0; padding: 0 20px; border: 1px solid #f3f0ec; border-radius: 0; background: transparent; color: #f3f0ec; font-family: var(--asanja-ui-font), Commissioner, Arial, sans-serif; font-size: 13px; font-weight: 400; letter-spacing: .08em; line-height: 1; text-transform: uppercase; transition: background .2s ease, color .2s ease;}
@@ -72,16 +72,6 @@
 .cardBody > a:hover, .cardBody > a:focus-visible {text-decoration: underline; text-underline-offset: .24em;}
 .campLink {display: block; width: fit-content; margin: 2.2rem 0 0 auto;}
 
-.pendingCamp {padding-bottom: clamp(5rem, 9vw, 9rem);}
-.pendingStory {display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(320px, .8fr); min-height: 480px; overflow: hidden; border: 1px solid #d8d6d1; background: #fbfaf8;}
-.pendingImage {position: relative; min-height: 480px;}
-.pendingImage img {object-fit: cover;}
-.pendingStory > div:last-child {display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: clamp(2.2rem, 5vw, 5rem);}
-.pendingStory h3 {max-width: 520px; margin: 0; font-family: var(--asanja-heading-font), Castoro, Georgia, serif; font-size: clamp(2rem, 3.2vw, 3.6rem); font-weight: 400; line-height: 1.05; text-transform: uppercase;}
-.pendingStory > div:last-child > p:not(.eyebrow) {max-width: 510px; margin: 1.4rem 0 2rem; color: #77777b; line-height: 1.75;}
-.pendingStory a {display: inline-flex; align-items: center; justify-content: center; height: 44px; padding: 0 20px; border: 1px solid var(--reviews-green); color: var(--reviews-green); font-family: var(--asanja-ui-font), sans-serif; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; transition: background .2s ease, color .2s ease;}
-.pendingStory a:hover, .pendingStory a:focus-visible {background: var(--reviews-green); color: #fff;}
-
 .closing {padding: clamp(6rem, 10vw, 10rem) 2rem; background: var(--reviews-green); color: #fff; text-align: center;}
 .closing .eyebrow {color: #dcb98e;}
 .closing h2 {font-size: clamp(3rem, 5.7vw, 6.3rem);}
@@ -94,14 +84,13 @@
   .cards {grid-template-columns: repeat(2, minmax(0, 1fr));}
   .cards .card:last-child {grid-column: 1 / -1; width: calc(50% - .55rem);}
   .summary {gap: 3rem;}
-  .pendingStory {grid-template-columns: 1fr 1fr;}
 }
 
 @media (max-width: 760px) {
   .hero {min-height: 700px;}
   .heroShade {background: linear-gradient(0deg, rgb(17 23 15 / .8) 0%, rgb(17 23 15 / .22) 75%);}
   .heroCopy {width: calc(100% - 2rem); padding: 5.5rem 0 4.5rem;}
-  .hero h1 {font-size: clamp(2.25rem, 10.8vw, 3.6rem);}
+  .hero h1 {font-size: clamp(2.55rem, 11vw, 3.65rem);}
   .heroCopy > p:not(.eyebrow) {font-size: .92rem;}
   .heroCopy > a {font-size: 13px;}
   .introduction {grid-template-columns: 1fr; gap: 2rem; width: calc(100% - 2rem); padding: 5rem 0 3.5rem;}
@@ -123,9 +112,6 @@
   .cardImage {margin: 10px 10px 0; border-radius: 17px;}
   .cardBody {padding: 1.6rem 1.35rem 2rem;}
   .reviewText {font-size: 1.06rem;}
-  .pendingStory {grid-template-columns: 1fr; min-height: 0;}
-  .pendingImage {min-height: 310px;}
-  .pendingStory > div:last-child {padding: 2.2rem 1.35rem 2.6rem;}
   .closing {padding-inline: 1rem;}
 }
 

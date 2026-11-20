@@ -192,29 +192,6 @@ const reviewedCamps: readonly ReviewedCamp[] = [
   },
 ] as const
 
-const upcomingCamps = [
-  {
-    id: 'asanja-under-the-stars',
-    name: 'Asanja Under the Stars',
-    location: 'Serengeti National Park',
-    campUrl: '/asanja-under-the-stars/',
-    image: '/legacy/wp-content/uploads/2025/07/camps-asanja-under-the-stars-evening-tent_20250710122519.webp',
-    imageAlt: 'An illuminated Asanja Under the Stars tent in the Serengeti',
-    title: 'A dedicated review listing is not available yet',
-    copy: 'Tripadvisor does not currently show a separate listing for this experience. We’ll add verified guest stories here when they become available.',
-  },
-  {
-    id: 'asanja-ewasi',
-    name: 'Asanja Ewasi, Tarangire',
-    location: 'Opening in 2027',
-    campUrl: '/asanja-ewasi-tarangire/',
-    image: '/camps/asanja-ewasi-tarangire/ewasi-safari-002.webp',
-    imageAlt: 'Asanja Ewasi suite and private plunge pool in Tarangire',
-    title: 'Guest reviews will follow after opening',
-    copy: 'Asanja Ewasi is scheduled to open in 2027, so there are no genuine Tripadvisor stays to feature yet. Explore the camp preview in the meantime.',
-  },
-] as const
-
 const totalReviews = reviewedCamps.reduce((total, camp) => total + camp.reviewCount, 0)
 const averageRating = reviewedCamps.reduce((total, camp) => total + camp.rating * camp.reviewCount, 0) / totalReviews
 
@@ -342,25 +319,6 @@ export default function AsanjaReviewsPage() {
           <a className={styles.campLink} href={camp.campUrl}>Explore {camp.name} <span aria-hidden="true">↗</span></a>
         </section>)}
 
-        {upcomingCamps.map((camp, index) => <section className={`${styles.campReviews} ${styles.pendingCamp}`} id={camp.id} aria-labelledby={`${camp.id}-heading`} key={camp.id}>
-          <header className={styles.campHeading}>
-            <div>
-              <span>{String(reviewedCamps.length + index + 1).padStart(2, '0')} · {camp.location}</span>
-              <h2 id={`${camp.id}-heading`}>{camp.name}</h2>
-            </div>
-          </header>
-          <div className={styles.pendingStory}>
-            <div className={styles.pendingImage}>
-              <Image src={camp.image} alt={camp.imageAlt} fill sizes="(max-width: 760px) 100vw, 55vw" />
-            </div>
-            <div>
-              <p className={styles.eyebrow}>Verified stories only</p>
-              <h3>{camp.title}</h3>
-              <p>{camp.copy}</p>
-              <a href={camp.campUrl}>Explore the camp <span aria-hidden="true">↗</span></a>
-            </div>
-          </div>
-        </section>)}
       </div>
 
       <section className={styles.closing}>

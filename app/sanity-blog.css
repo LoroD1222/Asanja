@@ -90,6 +90,8 @@
   .journal-content, .related-inner {width: min(100% - 2rem, 1240px);}
   .article-grid {grid-template-columns: 1fr;}
   .article-layout, .article-featured {width: min(100% - 2rem, 900px);}
+  .article-featured {aspect-ratio: 4 / 3; overflow: hidden;}
+  .article-featured img {width: 100%; height: 100%; max-height: none; object-fit: cover; object-position: center;}
   .blog-footer {grid-template-columns: 1fr 1fr; gap: 2rem 1.5rem;}
   .blog-footer > div:first-child {grid-column: 1 / -1;}
 }

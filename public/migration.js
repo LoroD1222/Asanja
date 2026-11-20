@@ -246,6 +246,14 @@
       originalSlides.forEach((slide, slideIndex) => {
         slide.classList.toggle('asanja-slide-active', slideIndex === index);
       });
+      if (widget.dataset.id === 'ba568ea' && window.matchMedia('(max-width: 767px)').matches) {
+        // Safari cards contain different amounts of copy. Without an explicit
+        // mobile stage height, the flex track adopts the tallest card and
+        // leaves a large empty patterned area below every shorter card.
+        carousel.style.height = `${Math.ceil(targetSlide.getBoundingClientRect().height)}px`;
+      } else if (widget.dataset.id === 'ba568ea') {
+        carousel.style.removeProperty('height');
+      }
       updateAccessibility();
     }
 

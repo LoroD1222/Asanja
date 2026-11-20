@@ -1080,6 +1080,94 @@ body.single-asanja_safaris .elementor-2090 h2.elementor-heading-title {
     overflow-wrap: anywhere;
   }
 
+  /* The archived safari carousel uses outside arrows, which narrowed the
+   * mobile mask while its cards kept a desktop inner width. Keep every layer
+   * on the phone viewport and overlay one compact next control on the image. */
+  body.page-id-1076 {
+    overflow-x: hidden;
+  }
+
+  body.page-id-1076 .elementor-element-ba568ea,
+  body.page-id-1076 .elementor-element-ba568ea > .elementor-widget-container,
+  body.page-id-1076 .elementor-element-ba568ea .elementor-loop-container,
+  body.page-id-1076 .elementor-element-ba568ea .swiper-wrapper,
+  body.page-id-1076 .elementor-element-ba568ea .swiper-slide,
+  body.page-id-1076 .elementor-element-393c754,
+  body.page-id-1076 .elementor-element-393c754 > .e-con-inner,
+  body.page-id-1076 .elementor-element-fe7a94a,
+  body.page-id-1076 .elementor-element-2a1bc7b {
+    box-sizing: border-box;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  body.page-id-1076 .elementor-element-ba568ea .elementor-loop-container {
+    overflow: hidden;
+    transition: height 300ms ease;
+  }
+
+  body.page-id-1076 .elementor-element-ba568ea .swiper-wrapper {
+    align-items: flex-start;
+  }
+
+  body.page-id-1076 .elementor-element-ba568ea .swiper-slide,
+  body.page-id-1076 .elementor-element-ba568ea .swiper-slide > .elementor-element {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  body.page-id-1076 .elementor-element-393c754 {
+    --width: 100%;
+    --min-height: 0px;
+    --align-items: stretch;
+  }
+
+  body.page-id-1076 .elementor-element-393c754 > .e-con-inner {
+    align-items: stretch;
+    margin: 0;
+  }
+
+  body.page-id-1076 .elementor-element-fe7a94a {
+    --width: 100%;
+    --min-height: clamp(300px, 92vw, 350px);
+    flex: 0 0 auto;
+  }
+
+  body.page-id-1076 .elementor-element-2a1bc7b {
+    --width: 100%;
+    --padding-top: 24px;
+    --padding-right: 20px;
+    --padding-bottom: 24px;
+    --padding-left: 20px;
+  }
+
+  body.page-id-1076 .elementor-element-438652a .elementor-heading-title {
+    font-size: clamp(28px, 8vw, 36px) !important;
+    line-height: 1.08 !important;
+    overflow-wrap: anywhere;
+  }
+
+  body.page-id-1076 .elementor-element-6962102,
+  body.page-id-1076 .elementor-element-6962102 p,
+  body.page-id-1076 .elementor-element-08572a9,
+  body.page-id-1076 .elementor-element-08572a9 li {
+    overflow-wrap: anywhere;
+  }
+
+  body.page-id-1076 .elementor-element-ba568ea .elementor-swiper-button-next {
+    top: min(310px, 78vw) !important;
+    right: 12px !important;
+    width: 44px;
+    height: 44px;
+    font-size: 44px;
+    transform: translateY(-50%) !important;
+  }
+
+  body.page-id-1076 .elementor-element-ba568ea .elementor-swiper-button-prev {
+    display: none;
+  }
+
 }
 
 /* Elementor's archived runtime no longer initializes on a modern Next.js

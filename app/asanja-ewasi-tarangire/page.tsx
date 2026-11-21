@@ -8,7 +8,7 @@ import type {SanityImage} from '../../sanity/types'
 
 const slug = 'asanja-ewasi-tarangire'
 const title = 'Asanja Ewasi Tarangire'
-const description = 'Opening in 2027 in Tarangire National Park, Asanja Ewasi is an intimate 10-room luxury safari camp with private plunge pools and personalised Asanja hospitality.'
+const description = 'Opening in 2027 in Tarangire National Park, Asanja Ewasi is an intimate eight-room luxury safari camp, including one three-bedroom family room, with private plunge pools and personalised Asanja hospitality.'
 const canonical = 'https://asanjaafrica.com/asanja-ewasi-tarangire/'
 
 const fallbackMetadata: Metadata = {
@@ -80,7 +80,7 @@ const ewasiFallback: CampPage = {
   heroEyebrow: 'Welcome to Asanja Ewasi Tarangire',
   tagline: 'Tarangire National Park · Opening 2027',
   description: paragraphs([
-    'Opening in 2027 within Tarangire National Park, Asanja Ewasi will feature 10 rooms, including one family unit.',
+    'Opening in 2027 within Tarangire National Park, Asanja Ewasi will feature eight rooms, including one three-bedroom family room.',
     '“Ewasi,” a place in Tarangire and a Maa word meaning “plain ground,” reflects the camp’s deep connection to the land and its rich heritage.',
     'Guests will discover the unique wonders of Tarangire, from vast plains dotted with ancient baobabs and immense elephant herds to seasonal migrations and the rare sight of tree-climbing pythons, all while enjoying Asanja’s signature personalised hospitality.',
   ]),
@@ -95,7 +95,7 @@ const ewasiFallback: CampPage = {
     {
       _key: 'design',
       title: 'Intimate luxury',
-      description: 'Ten private suites, including one family unit, pair private plunge pools and sweeping wilderness views with contemporary comfort and authentic Tanzanian influences.',
+      description: 'Eight rooms, including one three-bedroom family room, pair private plunge pools and sweeping wilderness views with contemporary comfort and authentic Tanzanian influences.',
     },
     {
       _key: 'encounters',
@@ -107,8 +107,8 @@ const ewasiFallback: CampPage = {
     'Thoughtfully positioned for privacy and sweeping views, every suite is supported by personalised Asanja hospitality in the heart of Tarangire National Park.',
   ]),
   facilities: [
-    '10 private suites',
-    'One family unit',
+    '8 rooms',
+    'One three-bedroom family room',
     'Private plunge pools',
     '30 minutes from Kuro Airstrip',
     'Guided nature walks',
@@ -164,10 +164,10 @@ export default async function AsanjaEwasiTarangirePage() {
       .filter((item) => item.kind === 'photo' && item.image?.asset?.url)
       .map((item) => new URL(item.image!.asset!.url!, canonical).toString()),
     address: {'@type': 'PostalAddress', addressLocality: page.location || 'Tarangire National Park', addressCountry: 'TZ'},
-    numberOfRooms: 10,
+    numberOfRooms: 8,
     amenityFeature: [
       {'@type': 'LocationFeatureSpecification', name: 'Private plunge pool', value: true},
-      {'@type': 'LocationFeatureSpecification', name: 'Family unit', value: true},
+      {'@type': 'LocationFeatureSpecification', name: 'Three-bedroom family room', value: true},
     ],
   }
 

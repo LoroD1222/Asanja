@@ -711,7 +711,7 @@
         <div class="asanja-ewasi-collection-copy">
           <span>Opening in 2027</span>
           <h3>Asanja Ewasi Tarangire</h3>
-          <p>Ten private rooms in the heart of Tarangire, where contemporary luxury, Maa heritage and the vast baobab plains meet.</p>
+          <p>Eight rooms, including one three-bedroom family room, in the heart of Tarangire, where contemporary luxury, Maa heritage and the vast baobab plains meet.</p>
           <a href="${ewasiHref}">Discover</a>
         </div>
         <div class="asanja-ewasi-collection-image" role="img" aria-label="Asanja Ewasi suite with private plunge pool"></div>
